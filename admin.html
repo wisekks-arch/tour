@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>관리자 센터 - 투어이지(TourEasy)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -26,12 +26,12 @@
     }
   </script>
 </head>
-<body class="bg-slate-100 flex flex-col min-h-screen">
+<body class="bg-slate-100 flex flex-col min-h-screen w-full overflow-x-hidden m-0 p-0 text-slate-800 antialiased">
   
   <!-- Global Navbar -->
-  <div id="navbar-root"></div>
+  <div id="navbar-root" class="w-full"></div>
 
-  <main class="flex-grow pb-24">
+  <main class="flex-grow pb-24 w-full overflow-x-hidden">
     <!-- Admin Header -->
     <div class="bg-slate-900 text-white py-8 border-b border-slate-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

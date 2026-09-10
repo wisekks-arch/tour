@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>투어이지(TourEasy) - 당신의 가장 완벽한 여행 플래너</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,12 +28,12 @@
     }
   </script>
 </head>
-<body class="bg-slate-50 flex flex-col min-h-screen">
+<body class="bg-slate-50 flex flex-col min-h-screen w-full overflow-x-hidden m-0 p-0 text-slate-800 antialiased">
   
   <!-- Global Navbar -->
-  <div id="navbar-root"></div>
+  <div id="navbar-root" class="w-full"></div>
 
-  <main class="flex-grow">
+  <main class="flex-grow w-full overflow-x-hidden">
     <!-- Hero Section -->
     <!-- Hero Section -->
     <section class="relative min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] flex items-center justify-center bg-slate-900 overflow-hidden">

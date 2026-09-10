@@ -38,11 +38,11 @@
     {
         "id":  "usr-1788236092470",
         "email":  "kks@do-best.co.kr",
-        "password":  "#wises7337",
         "name":  "김길동",
         "phone":  "010-8754-9373",
         "role":  "MEMBER",
-        "createdAt":  "2026-09-01T13:14:52"
+        "createdAt":  "2026-09-01T13:14:52",
+        "password":  "#wisesoo7337"
     },
     {
         "id":  "usr-1789004661526",
@@ -52,5 +52,32 @@
         "phone":  "01087549373",
         "role":  "MEMBER",
         "createdAt":  "2026-09-10T10:44:21"
+    },
+    {
+        "id":  "usr-1789018325160",
+        "email":  "baba9026@naver.com",
+        "password":  "!q1234567890",
+        "name":  "이태웅",
+        "phone":  "01024748940",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-10T14:32:05"
+    },
+    {
+        "id":  "usr-1789019270799",
+        "email":  "kstwalra@naver.com",
+        "password":  "kson1234!@",
+        "name":  "손태완",
+        "phone":  "01025539672",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-10T14:47:50"
+    },
+    {
+        "id":  "usr-1789021736064",
+        "email":  "biz.junsangpark@gmail.com",
+        "password":  "ZZNwg8xJRu2MGP6!",
+        "name":  "박준상",
+        "phone":  "01012345678",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-10T15:28:56"
     }
 ]

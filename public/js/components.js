@@ -91,20 +91,20 @@ function renderNavbar(activeKey = '') {
   `;
 
   navContainer.innerHTML = `
-    <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 transition-all duration-300">
-      <!-- Top banner for customer inquiry -->
-      <div class="bg-gradient-to-r from-sky-700 via-sky-600 to-teal-600 text-white text-xs py-1.5 px-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-          <div class="flex items-center gap-4">
+    <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 transition-all duration-300 w-full">
+      <!-- 1. DESKTOP ONLY: Top banner for customer inquiry -->
+      <div class="hidden md:block bg-gradient-to-r from-sky-700 via-sky-600 to-teal-600 text-white text-xs py-1.5 px-4 w-full overflow-hidden">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+          <div class="flex items-center gap-4 overflow-hidden">
             <span class="flex items-center gap-1 font-medium whitespace-nowrap"><i data-lucide="phone-call" class="w-3.5 h-3.5 shrink-0"></i> 고객센터: 1588-7799</span>
-            <span class="hidden sm:inline text-sky-100">|</span>
-            <span class="hidden sm:inline text-sky-100">평일 09:00 ~ 18:00 (주말/공휴일 긴급상담 지원)</span>
+            <span class="text-sky-100">|</span>
+            <span class="text-sky-100">평일 09:00 ~ 18:00 (주말/공휴일 긴급상담 지원)</span>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-3 shrink-0">
             ${topAuthHtml}
-            <span class="text-sky-200 hidden sm:inline">•</span>
-            <a href="contact.html" class="hidden sm:inline hover:underline whitespace-nowrap">1:1 맞춤상담</a>
-            <span class="text-sky-200 hidden sm:inline">•</span>
+            <span class="text-sky-200">•</span>
+            <a href="contact.html" class="hover:underline whitespace-nowrap">1:1 맞춤상담</a>
+            <span class="text-sky-200">•</span>
             <a href="packages.html?earlyBird=true" class="hover:underline text-amber-200 font-semibold flex items-center gap-1 whitespace-nowrap">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 shrink-0"></i> 특가
             </a>
@@ -112,8 +112,8 @@ function renderNavbar(activeKey = '') {
         </div>
       </div>
 
-      <!-- Main Navigation -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- 2. DESKTOP ONLY: Main Desktop Navbar -->
+      <div class="hidden md:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="flex justify-between items-center h-20">
           <!-- Logo -->
           <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
@@ -127,39 +127,86 @@ function renderNavbar(activeKey = '') {
           </a>
 
           <!-- Desktop Menu -->
-          <nav class="hidden md:flex items-center gap-8">
+          <nav class="flex items-center gap-8">
             ${linkHtml}
           </nav>
 
-          <!-- Action Buttons -->
-          <div class="hidden lg:flex items-center gap-3 shrink-0">
+          <!-- Desktop Action Buttons -->
+          <div class="flex items-center gap-3 shrink-0">
             ${desktopAuthButtons}
             <a href="packages.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-semibold text-xs shadow-md shadow-sky-500/20 transition whitespace-nowrap">
               <i data-lucide="compass" class="w-4 h-4 shrink-0"></i> 여행지 둘러보기
             </a>
           </div>
+        </div>
+      </div>
 
-          <!-- Mobile Hamburger Menu Button -->
-          <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition" aria-label="메뉴 열기">
-            <i data-lucide="menu" class="w-6 h-6"></i>
+      <!-- 3. MOBILE ONLY: Ultra-Compact Slim Header (Height 56px) -->
+      <div class="md:hidden px-3.5 py-2.5 flex items-center justify-between w-full">
+        <!-- Mobile Logo -->
+        <a href="index.html" class="flex items-center gap-2 group shrink-0">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-sky-600 to-teal-400 flex items-center justify-center text-white shadow-sm shadow-sky-500/30">
+            <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-lg font-black tracking-tight text-slate-900">투어<span class="text-sky-600">이지</span></span>
+            <span class="block text-[8px] uppercase font-bold tracking-widest text-slate-400 -mt-1">TourEasy</span>
+          </div>
+        </a>
+
+        <!-- Mobile Quick Action Icons -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <a href="packages.html" class="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl transition" aria-label="상품 검색">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </a>
+          ${currentUser ? `
+            <div class="px-2 py-1 bg-sky-50 text-sky-700 border border-sky-200/80 rounded-lg text-[11px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="truncate max-w-[50px]">${currentUser.name}</span>
+            </div>
+          ` : `
+            <button onclick="window.openAuthModal('login')" class="px-2.5 py-1 text-[11px] font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 rounded-lg border border-sky-200 transition">
+              로그인
+            </button>
+          `}
+          <button id="mobile-menu-btn" class="w-8 h-8 flex items-center justify-center text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition" aria-label="메뉴 열기">
+            <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
       </div>
 
-      <!-- Mobile Dropdown Menu -->
-      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 px-4 pt-3 pb-6 space-y-3 shadow-xl">
+      <!-- 4. MOBILE ONLY: Slide Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/98 backdrop-blur-md px-4 py-4 space-y-3.5 shadow-2xl w-full animate-fadeIn">
         ${mobileAuthHtml}
-        ${links.map(l => `
-          <a href="${l.href}" class="block px-3 py-2 rounded-lg text-base font-semibold ${activeKey === l.key ? 'bg-sky-50 text-sky-600' : 'text-slate-700 hover:bg-slate-50'}">
-            ${l.label}
+
+        <!-- Quick Categories -->
+        <div class="pt-1">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">인기 여행지</span>
+          <div class="grid grid-cols-4 gap-1.5 text-center text-[11px]">
+            <a href="packages.html?region=동남아" class="p-2 bg-slate-50 hover:bg-sky-50 rounded-xl border border-slate-100 font-bold text-slate-700 hover:text-sky-600 transition">🌴 동남아</a>
+            <a href="packages.html?region=일본/동아시아" class="p-2 bg-slate-50 hover:bg-rose-50 rounded-xl border border-slate-100 font-bold text-slate-700 hover:text-rose-600 transition">🗾 일본</a>
+            <a href="packages.html?region=유럽" class="p-2 bg-slate-50 hover:bg-indigo-50 rounded-xl border border-slate-100 font-bold text-slate-700 hover:text-indigo-600 transition">🏰 유럽</a>
+            <a href="packages.html?theme=허니문" class="p-2 bg-slate-50 hover:bg-pink-50 rounded-xl border border-slate-100 font-bold text-slate-700 hover:text-pink-600 transition">💖 허니문</a>
+          </div>
+        </div>
+
+        <!-- Main Nav Links -->
+        <div class="space-y-1 pt-1 border-t border-slate-100">
+          ${links.map(l => `
+            <a href="${l.href}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold ${activeKey === l.key ? 'bg-sky-50 text-sky-600' : 'text-slate-700 hover:bg-slate-50'}">
+              <span>${l.label}</span>
+              ${l.badge ? `<span class="px-1.5 py-0.5 text-[9px] font-extrabold bg-sky-600 text-white rounded">${l.badge}</span>` : '<i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>'}
+            </a>
+          `).join('')}
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
+          <a href="contact.html" class="w-full text-center py-2.5 rounded-xl border border-sky-300 text-sky-700 font-bold text-xs bg-sky-50/50">
+            1:1 맞춤 견적
           </a>
-        `).join('')}
-        <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
-          <a href="contact.html" class="w-full text-center py-2.5 rounded-xl border border-sky-300 text-sky-700 font-semibold text-sm">
-            1:1 맞춤 견적 상담
-          </a>
-          <a href="packages.html" class="w-full text-center py-2.5 rounded-xl bg-sky-600 text-white font-semibold text-sm">
-            모든 여행 상품 보기
+          <a href="tel:1588-7799" class="w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> 1588-7799
           </a>
         </div>
       </div>
@@ -186,8 +233,9 @@ function renderFooter() {
   if (!footerContainer) return;
 
   footerContainer.innerHTML = `
-    <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- 1. DESKTOP FOOTER (Classic 5-Column Detailed Layout) -->
+    <footer class="hidden md:block bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800 w-full overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           
           <!-- Column 1: Brand -->
@@ -263,6 +311,121 @@ function renderFooter() {
         </div>
       </div>
     </footer>
+
+    <!-- 2. MOBILE ONLY: Compact Modern Footer (Slim Accordion & 2x2 Quick Links) -->
+    <footer class="md:hidden bg-slate-900 text-slate-300 pt-8 pb-24 px-4 border-t border-slate-800 w-full overflow-hidden">
+      <div class="max-w-lg mx-auto space-y-5">
+        
+        <!-- Mobile Brand & Call -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-500 to-teal-400 flex items-center justify-center text-white shadow-md">
+              <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+            </div>
+            <span class="text-lg font-black text-white">투어<span class="text-sky-400">이지</span></span>
+          </div>
+          <a href="tel:1588-7799" class="px-3 py-1.5 bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 border border-sky-400/30 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+            <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> 1588-7799
+          </a>
+        </div>
+
+        <!-- Mobile 2x2 Quick Grid Links -->
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="packages.html" class="p-3 bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-2xl flex items-center gap-2 text-slate-200">
+            <i data-lucide="compass" class="w-4 h-4 text-sky-400"></i>
+            <span class="font-bold">전체 여행상품</span>
+          </a>
+          <a href="contact.html" class="p-3 bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-2xl flex items-center gap-2 text-slate-200">
+            <i data-lucide="message-square" class="w-4 h-4 text-teal-400"></i>
+            <span class="font-bold">1:1 맞춤 견적</span>
+          </a>
+          <a href="contact.html#faq" class="p-3 bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-2xl flex items-center gap-2 text-slate-200">
+            <i data-lucide="help-circle" class="w-4 h-4 text-amber-400"></i>
+            <span class="font-bold">자주 묻는 질문</span>
+          </a>
+          <a href="packages.html?earlyBird=true" class="p-3 bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-2xl flex items-center gap-2 text-slate-200">
+            <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i>
+            <span class="font-bold">얼리버드 특가</span>
+          </a>
+        </div>
+
+        <!-- Business Registration Accordion Toggle -->
+        <div class="pt-2 border-t border-slate-800/80">
+          <button id="btn-toggle-biz-info" class="w-full py-2 flex items-center justify-between text-[11px] font-bold text-slate-400 hover:text-slate-200 transition" onclick="window.toggleMobileBizInfo()">
+            <span>(주)투어이지 사업자 및 영업 보증 정보</span>
+            <i id="icon-biz-arrow" data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200"></i>
+          </button>
+          
+          <div id="mobile-biz-info" class="hidden text-[10px] text-slate-400 space-y-1.5 pt-2 pb-1 leading-relaxed border-t border-slate-800/40">
+            <p>• 대표이사: 김광수 | 사업자등록번호: 120-88-12345</p>
+            <p>• 통신판매업신고: 제2026-서울중구-0987호</p>
+            <p>• 서울특별시 중구 세종대로 110 투어이지 빌딩 8층</p>
+            <p>• 관광사업자 등록: 일반여행업 제2026-000012호</p>
+            <p>• 관광공제영업보증보험 5억원 가입업체</p>
+            <p>• 개인정보보호책임자: 김투어 (help@toureasy.kr)</p>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center text-[10px] text-slate-500 pt-1">
+          &copy; 2026 TourEasy Travel Inc. All rights reserved.
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- 3. MOBILE ONLY: Native App-Style Sticky Bottom Bar (5 Icons) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-2xl px-2 py-1.5 flex justify-around items-center">
+      <a href="index.html" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition ${activeKey === 'home' ? 'text-sky-600' : 'text-slate-500 hover:text-slate-800'}">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span>홈</span>
+      </a>
+      <a href="packages.html" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition ${activeKey === 'packages' ? 'text-sky-600' : 'text-slate-500 hover:text-slate-800'}">
+        <i data-lucide="compass" class="w-5 h-5"></i>
+        <span>상품목록</span>
+      </a>
+      <a href="packages.html?earlyBird=true" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition text-amber-600 hover:text-amber-700">
+        <i data-lucide="sparkles" class="w-5 h-5"></i>
+        <span>특가</span>
+      </a>
+      <a href="contact.html" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition ${activeKey === 'contact' ? 'text-sky-600' : 'text-slate-500 hover:text-slate-800'}">
+        <i data-lucide="message-square" class="w-5 h-5"></i>
+        <span>1:1상담</span>
+      </a>
+      ${currentUser ? `
+        <button onclick="window.logoutUser()" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition text-slate-500 hover:text-rose-600">
+          <i data-lucide="log-out" class="w-5 h-5"></i>
+          <span>로그아웃</span>
+        </button>
+      ` : `
+        <button onclick="window.openAuthModal('login')" class="flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2.5 rounded-xl transition text-slate-500 hover:text-sky-600">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span>로그인</span>
+        </button>
+      `}
+    </div>
+  `;
+
+  // Global helper for mobile business info toggle
+  window.toggleMobileBizInfo = function() {
+    const info = document.getElementById('mobile-biz-info');
+    const icon = document.getElementById('icon-biz-arrow');
+    if (info) {
+      const isHidden = info.classList.contains('hidden');
+      if (isHidden) {
+        info.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        info.classList.add('hidden');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    }
+  };
+
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+}
   `;
 
   if (window.lucide) {
@@ -429,13 +592,13 @@ function renderAuthModal() {
 
   const modal = document.createElement('div');
   modal.id = 'auth-modal';
-  modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs hidden';
+  modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs hidden w-screen max-w-full h-full';
   modal.innerHTML = `
-    <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[92vh]">
+    <div class="relative w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh] my-auto">
       
       <!-- Modal Header & Tabs -->
-      <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 p-6 text-white shrink-0 relative">
-        <button onclick="window.closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition p-1.5 rounded-full hover:bg-white/10" aria-label="닫기">
+      <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 p-5 sm:p-6 text-white shrink-0 relative">
+        <button onclick="window.closeAuthModal()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-slate-400 hover:text-white transition p-1.5 rounded-full hover:bg-white/10" aria-label="닫기">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
         <div class="flex items-center gap-2 mb-2">
