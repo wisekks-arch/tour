@@ -855,16 +855,66 @@
           </div>
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">대표 이미지 URL</label>
-          <input type="url" id="np-thumbnail" value="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+        <!-- Image Selection: Dual mode (PC File Upload or Web URL) -->
+        <div class="space-y-2.5 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+          <div class="flex items-center justify-between">
+            <label class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4 text-sky-600"></i> 대표 썸네일 이미지 등록 <span class="text-rose-500">*</span>
+            </label>
+            <!-- Tab switch: PC File vs Web URL -->
+            <div class="flex bg-slate-200/80 p-0.5 rounded-xl text-[11px] font-bold">
+              <button type="button" id="img-tab-file" onclick="switchImageInputMode('file')" class="px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold">
+                💻 PC 파일 업로드
+              </button>
+              <button type="button" id="img-tab-url" onclick="switchImageInputMode('url')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold">
+                🌐 웹 URL 입력
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode 1: PC File Input Area -->
+          <div id="img-mode-file" class="space-y-2">
+            <label for="np-image-file" class="border-2 border-dashed border-sky-200 hover:border-sky-500 bg-sky-50/50 hover:bg-sky-50 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 cursor-pointer transition group">
+              <div class="w-10 h-10 rounded-2xl bg-white text-sky-600 shadow-sm flex items-center justify-center group-hover:scale-105 transition">
+                <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+              </div>
+              <div class="text-center">
+                <span class="text-xs font-bold text-slate-800 block group-hover:text-sky-600">내 PC에서 이미지 파일 선택 (클릭)</span>
+                <span class="text-[11px] text-slate-400 block mt-0.5">JPG, PNG, WEBP, GIF 이미지 지원 (16:9 권장)</span>
+              </div>
+              <input type="file" id="np-image-file" accept="image/*" onchange="handleNewPackageFileSelect(event)" class="hidden">
+            </label>
+          </div>
+
+          <!-- Mode 2: Web URL Input Area -->
+          <div id="img-mode-url" class="hidden space-y-1">
+            <input type="url" id="np-thumbnail" oninput="handleNewPackageUrlInput(this.value)" value="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-xs focus:border-sky-500 focus:outline-none">
+            <span class="text-[11px] text-slate-400 block pl-1">Unsplash 등 외부 고화질 이미지 URL을 직접 입력하세요.</span>
+          </div>
+
+          <!-- Image Preview Card -->
+          <div id="np-preview-container" class="relative rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-950 aspect-video max-h-48 flex items-center justify-center shadow-inner">
+            <img id="np-preview-img" src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80" alt="Preview" class="w-full h-full object-cover">
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold flex items-center gap-1 shadow-sm">
+              <i data-lucide="eye" class="w-3 h-3 text-teal-400"></i> 대표 이미지 실시간 미리보기
+            </div>
+            <div id="np-file-info" class="absolute bottom-2.5 left-2.5 right-2.5 px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md text-white text-[11px] flex items-center justify-between">
+              <span id="np-file-name" class="truncate max-w-[240px] text-slate-200 font-mono">기본 추천 이미지</span>
+              <button type="button" onclick="clearNewPackageImage()" class="text-rose-400 hover:text-rose-300 font-bold ml-2 shrink-0 cursor-pointer text-xs">
+                초기화
+              </button>
+            </div>
+          </div>
         </div>
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">상품 요약 설명</label>
+          <textarea id="np-summary" rows="3" placeholder="상품에 대한 매력적인 핵심 요약 설명을 작성해주세요." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none"></textarea>
+        </div>
+
         <div class="pt-3 flex gap-3">
-          <button type="button" onclick="closeModal('modal-new-package')" class="flex-1 py-3 bg-slate-100 font-bold rounded-xl text-slate-700">취소</button>
-          <button type="submit" class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md">상품 등록 완료</button>
+          <button type="button" onclick="closeModal('modal-new-package')" class="flex-1 py-3 bg-slate-100 font-bold rounded-xl text-slate-700 hover:bg-slate-200 transition cursor-pointer">취소</button>
+          <button type="submit" class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md transition cursor-pointer">상품 등록 완료</button>
         </div>
       </form>
     </div>
@@ -927,11 +977,88 @@
         window.location.reload();
       });
 
-      // New Package Form
+      // New Package Form Image State & Handlers
+      window.currentNewPackageImage = 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80';
+      window.currentImageMode = 'file';
+
+      window.switchImageInputMode = function(mode) {
+        window.currentImageMode = mode;
+        const btnFile = document.getElementById('img-tab-file');
+        const btnUrl = document.getElementById('img-tab-url');
+        const modeFile = document.getElementById('img-mode-file');
+        const modeUrl = document.getElementById('img-mode-url');
+
+        if (mode === 'file') {
+          if (btnFile) btnFile.className = 'px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold';
+          if (btnUrl) btnUrl.className = 'px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold';
+          if (modeFile) modeFile.classList.remove('hidden');
+          if (modeUrl) modeUrl.classList.add('hidden');
+        } else {
+          if (btnUrl) btnUrl.className = 'px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold';
+          if (btnFile) btnFile.className = 'px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold';
+          if (modeUrl) modeUrl.classList.remove('hidden');
+          if (modeFile) modeFile.classList.add('hidden');
+        }
+        if (window.lucide) lucide.createIcons();
+      };
+
+      window.handleNewPackageFileSelect = function(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+          alert('이미지 파일(JPG, PNG, GIF, WEBP 등)만 등록 가능합니다.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          window.currentNewPackageImage = e.target.result;
+          const previewImg = document.getElementById('np-preview-img');
+          const fileNameEl = document.getElementById('np-file-name');
+          if (previewImg) previewImg.src = window.currentNewPackageImage;
+          if (fileNameEl) {
+            const sizeKb = Math.round(file.size / 1024);
+            fileNameEl.textContent = `💻 ${file.name} (${sizeKb} KB)`;
+          }
+        };
+        reader.readAsDataURL(file);
+      };
+
+      window.handleNewPackageUrlInput = function(val) {
+        const url = (val || '').trim();
+        if (!url) return;
+        window.currentNewPackageImage = url;
+        const previewImg = document.getElementById('np-preview-img');
+        const fileNameEl = document.getElementById('np-file-name');
+        if (previewImg) previewImg.src = url;
+        if (fileNameEl) fileNameEl.textContent = `🌐 ${url.slice(0, 35)}...`;
+      };
+
+      window.clearNewPackageImage = function() {
+        const defaultImg = 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80';
+        window.currentNewPackageImage = defaultImg;
+        const previewImg = document.getElementById('np-preview-img');
+        const fileNameEl = document.getElementById('np-file-name');
+        const fileInput = document.getElementById('np-image-file');
+        const urlInput = document.getElementById('np-thumbnail');
+
+        if (previewImg) previewImg.src = defaultImg;
+        if (fileNameEl) fileNameEl.textContent = '기본 추천 이미지';
+        if (fileInput) fileInput.value = '';
+        if (urlInput) urlInput.value = '';
+      };
+
+      // New Package Form Submit Handler
       document.getElementById('form-new-package').addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const thumbnail = window.currentNewPackageImage || document.getElementById('np-thumbnail')?.value?.trim() || 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80';
+        const summaryVal = document.getElementById('np-summary')?.value?.trim() || '';
+        const titleVal = document.getElementById('np-title').value.trim();
+
         const payload = {
-          title: document.getElementById('np-title').value.trim(),
+          title: titleVal,
           region: document.getElementById('np-region').value,
           country: document.getElementById('np-city').value.split('/')[0]?.trim() || '',
           city: document.getElementById('np-city').value.trim(),
@@ -940,9 +1067,9 @@
           durationDays: parseInt(document.getElementById('np-days').value, 10) || 4,
           price: parseInt(document.getElementById('np-price').value, 10) || 0,
           originalPrice: parseInt(document.getElementById('np-original-price').value, 10) || null,
-          thumbnail: document.getElementById('np-thumbnail').value.trim(),
-          images: [document.getElementById('np-thumbnail').value.trim()],
-          summary: document.getElementById('np-summary').value.trim(),
+          thumbnail: thumbnail,
+          images: [thumbnail],
+          summary: summaryVal || `${titleVal} 프리미엄 패키지 여행 상품입니다.`,
           tags: ["신규특가", "인기추천", "5성급호텔"],
           highlights: ["프리미엄 리조트 숙박", "전용 가이드 및 차량 케어"],
           included: ["왕복 항공권", "호텔 숙박", "전용 차량"],
@@ -955,12 +1082,16 @@
         try {
           const res = await TourAPI.createPackage(payload);
           if (res.success) {
-            showToast('새 여행 상품이 성공적으로 등록되었습니다.');
+            showToast('✅ 새 여행 상품이 성공적으로 등록되었습니다!');
             closeModal('modal-new-package');
+            document.getElementById('form-new-package').reset();
+            window.clearNewPackageImage();
             loadAllAdminData();
+          } else {
+            alert(res.message || '상품 등록에 실패했습니다.');
           }
         } catch (err) {
-          alert('상품 등록 실패');
+          alert('상품 등록 처리 중 오류가 발생했습니다.');
         }
       });
 
