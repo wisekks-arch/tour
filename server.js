@@ -32,7 +32,8 @@ function readJson(filename, defaultValue = []) {
       return defaultValue;
     }
     const data = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(data || '[]');
+    const cleanData = (data || '').replace(/^\uFEFF/, '').trim();
+    return JSON.parse(cleanData || '[]');
   } catch (err) {
     console.error(`Error reading ${filename}:`, err);
     return defaultValue;

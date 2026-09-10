@@ -228,9 +228,11 @@ function renderNavbar(activeKey = '') {
   }
 }
 
-function renderFooter() {
+function renderFooter(activeKey = '') {
   const footerContainer = document.getElementById('footer-root');
   if (!footerContainer) return;
+
+  const currentUser = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
 
   footerContainer.innerHTML = `
     <!-- 1. DESKTOP FOOTER (Classic 5-Column Detailed Layout) -->
@@ -421,12 +423,6 @@ function renderFooter() {
       }
     }
   };
-
-  if (window.lucide) {
-    lucide.createIcons();
-  }
-}
-  `;
 
   if (window.lucide) {
     lucide.createIcons();

@@ -1,315 +1,334 @@
-﻿[
-    {
-        "id":  "BK-20260910-812",
-        "packageId":  "pkg-sea-02",
-        "packageTitle":  "[프라이빗 허니문] 발리 우붓 \u0026 울루와투 럭셔리 독채 풀빌라 4박 6일",
-        "departureDate":  "2026-09-24",
-        "travelerName":  "박준상",
-        "phone":  "01012345678",
-        "email":  "biz.junsangpark@gmail.com",
-        "adults":  2,
-        "children":  1,
-        "totalPrice":  5180000,
-        "options":  {
-                        "insuranceUpgrade":  false,
-                        "singleRoom":  false,
-                        "airportPickup":  false
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-09-10T15:30:09"
+[
+  {
+    "id": "BK-20260910-778",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-24",
+    "travelerName": "김광수",
+    "phone": "01087549373",
+    "email": "kwangsoo-kim@hanmail.net",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 1398000,
+    "options": {
+      "insuranceUpgrade": false,
+      "singleRoom": false,
+      "airportPickup": false
     },
-    {
-        "id":  "BK-20260910-659",
-        "packageId":  "pkg-sea-02",
-        "packageTitle":  "[프라이빗 허니문] 발리 우붓 \u0026 울루와투 럭셔리 독채 풀빌라 4박 6일",
-        "departureDate":  "2027-04-24",
-        "travelerName":  "손태완",
-        "phone":  "01025539672",
-        "email":  "kstwalra@naver.com",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  3780000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "singleRoom":  false,
-                        "airportPickup":  true
-                    },
-        "requests":  "선택 옵션 추가 기능 좋네",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "createdAt":  "2026-09-10T14:50:03",
-        "status":  "접수완료"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-09-10T08:40:58.086Z"
+  },
+  {
+    "id": "BK-20260910-812",
+    "packageId": "pkg-sea-02",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "departureDate": "2026-09-24",
+    "travelerName": "박준상",
+    "phone": "01012345678",
+    "email": "biz.junsangpark@gmail.com",
+    "adults": 2,
+    "children": 1,
+    "totalPrice": 5180000,
+    "options": {
+      "insuranceUpgrade": false,
+      "singleRoom": false,
+      "airportPickup": false
     },
-    {
-        "id":  "BK-20260910-680",
-        "packageId":  "pkg-sea-07",
-        "packageTitle":  "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 \u0026 반딧불 투어 3박 5일",
-        "departureDate":  "2026-09-07",
-        "travelerName":  "김광수",
-        "phone":  "01087549373",
-        "email":  "kwangsoo-kim@hanmail.net",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  1650000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "singleRoom":  true,
-                        "airportPickup":  false
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-09-10T10:47:35"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-09-10T15:30:09"
+  },
+  {
+    "id": "BK-20260910-659",
+    "packageId": "pkg-sea-02",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "departureDate": "2027-04-24",
+    "travelerName": "손태완",
+    "phone": "01025539672",
+    "email": "kstwalra@naver.com",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 3780000,
+    "options": {
+      "insuranceUpgrade": true,
+      "singleRoom": false,
+      "airportPickup": true
     },
-    {
-        "id":  "BK-20260910-969",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "[힐링특가] 베트남 다낭 \u0026 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
-        "departureDate":  "2026-09-24",
-        "travelerName":  "김광수",
-        "phone":  "01087549373",
-        "email":  "kwangsoo-kim@hanmail.net",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  1728000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "singleRoom":  true,
-                        "airportPickup":  true
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "createdAt":  "2026-09-10T10:44:55",
-        "status":  "예약확정"
+    "requests": "선택 옵션 추가 기능 좋네",
+    "paymentMethod": "상담 후 무통장 입금",
+    "createdAt": "2026-09-10T14:50:03",
+    "status": "접수완료"
+  },
+  {
+    "id": "BK-20260910-680",
+    "packageId": "pkg-sea-07",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "departureDate": "2026-09-07",
+    "travelerName": "김광수",
+    "phone": "01087549373",
+    "email": "kwangsoo-kim@hanmail.net",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 1650000,
+    "options": {
+      "insuranceUpgrade": true,
+      "singleRoom": true,
+      "airportPickup": false
     },
-    {
-        "id":  "BK-20260901-632",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "[힐링특가] 베트남 다낭 \u0026 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
-        "departureDate":  "2026-09-05",
-        "travelerName":  "김길동",
-        "phone":  "010-8754-9373",
-        "email":  "kks@do-best.co.kr",
-        "adults":  2,
-        "children":  1,
-        "totalPrice":  1957200,
-        "options":  {
-                        "insuranceUpgrade":  false,
-                        "singleRoom":  false,
-                        "airportPickup":  false
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-09-01T13:27:54"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-09-10T10:47:35"
+  },
+  {
+    "id": "BK-20260910-969",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-24",
+    "travelerName": "김광수",
+    "phone": "01087549373",
+    "email": "kwangsoo-kim@hanmail.net",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 1728000,
+    "options": {
+      "insuranceUpgrade": true,
+      "singleRoom": true,
+      "airportPickup": true
     },
-    {
-        "id":  "BK-20260831-785",
-        "packageId":  "pkg-kr-15",
-        "packageTitle":  "[서해안 황금빛 노을] 태안 안면도 꽃지해변 \u0026 자연휴양림 1박 2일",
-        "departureDate":  "2026-09-14",
-        "travelerName":  "메일 테스트",
-        "phone":  "010-1234-0987",
-        "email":  "kks@do-best.co.kr",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  680000,
-        "options":  {
-                        "insuranceUpgrade":  false,
-                        "singleRoom":  true,
-                        "airportPickup":  true
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-31T17:11:50"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "createdAt": "2026-09-10T10:44:55",
+    "status": "예약확정"
+  },
+  {
+    "id": "BK-20260901-632",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-05",
+    "travelerName": "김길동",
+    "phone": "010-8754-9373",
+    "email": "kks@do-best.co.kr",
+    "adults": 2,
+    "children": 1,
+    "totalPrice": 1957200,
+    "options": {
+      "insuranceUpgrade": false,
+      "singleRoom": false,
+      "airportPickup": false
     },
-    {
-        "id":  "BK-20260831-907",
-        "packageId":  "pkg-jp-07",
-        "packageTitle":  "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 \u0026 마쓰야마성 2박 3일",
-        "departureDate":  "2026-09-19",
-        "travelerName":  "메일 테스트",
-        "phone":  "010-1234-0987",
-        "email":  "kks@do-best.co.kr",
-        "adults":  2,
-        "children":  2,
-        "totalPrice":  2602000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "singleRoom":  true,
-                        "airportPickup":  true
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-31T17:02:35"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-09-01T13:27:54"
+  },
+  {
+    "id": "BK-20260831-785",
+    "packageId": "pkg-kr-15",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "departureDate": "2026-09-14",
+    "travelerName": "메일 테스트",
+    "phone": "010-1234-0987",
+    "email": "kks@do-best.co.kr",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 680000,
+    "options": {
+      "insuranceUpgrade": false,
+      "singleRoom": true,
+      "airportPickup": true
     },
-    {
-        "id":  "BK-20260831-177",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "[힐링특가] 베트남 다낭 \u0026 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
-        "departureDate":  "2026-09-14",
-        "travelerName":  "메일 테스트",
-        "phone":  "010-1234-0987",
-        "email":  "kks@do-best.co.kr",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  1688000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "singleRoom":  true,
-                        "airportPickup":  false
-                    },
-        "requests":  "메일테스트",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-31T16:09:19"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-08-31T17:11:50"
+  },
+  {
+    "id": "BK-20260831-907",
+    "packageId": "pkg-jp-07",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "departureDate": "2026-09-19",
+    "travelerName": "메일 테스트",
+    "phone": "010-1234-0987",
+    "email": "kks@do-best.co.kr",
+    "adults": 2,
+    "children": 2,
+    "totalPrice": 2602000,
+    "options": {
+      "insuranceUpgrade": true,
+      "singleRoom": true,
+      "airportPickup": true
     },
-    {
-        "id":  "BK-20260831-399",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "다낭 4박 5일 힐링",
-        "departureDate":  "2026-10-15",
-        "travelerName":  "홍길동",
-        "phone":  "010-1234-5678",
-        "email":  "hong@test.com",
-        "adults":  2,
-        "children":  1,
-        "totalPrice":  2500000,
-        "options":  {
-
-                    },
-        "requests":  "고층 오션뷰 객실 희망",
-        "paymentMethod":  "상담 후 계좌이체",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-31T15:32:51"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-08-31T17:02:35"
+  },
+  {
+    "id": "BK-20260831-177",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-14",
+    "travelerName": "메일 테스트",
+    "phone": "010-1234-0987",
+    "email": "kks@do-best.co.kr",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 1688000,
+    "options": {
+      "insuranceUpgrade": true,
+      "singleRoom": true,
+      "airportPickup": false
     },
-    {
-        "id":  "BK-20260828-759",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "[힐링특가] 베트남 다낭 \u0026 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
-        "departureDate":  "2026-09-11",
-        "travelerName":  "김여행",
-        "phone":  "01023587533",
-        "email":  "wise1111111@gmail.com",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  1438000,
-        "options":  {
-                        "insuranceUpgrade":  false,
-                        "singleRoom":  false,
-                        "airportPickup":  true
-                    },
-        "requests":  "",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-28T16:15:05"
+    "requests": "메일테스트",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-08-31T16:09:19"
+  },
+  {
+    "id": "BK-20260831-399",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "다낭 4박 5일 힐링",
+    "departureDate": "2026-10-15",
+    "travelerName": "홍길동",
+    "phone": "010-1234-5678",
+    "email": "hong@test.com",
+    "adults": 2,
+    "children": 1,
+    "totalPrice": 2500000,
+    "options": {},
+    "requests": "고층 오션뷰 객실 희망",
+    "paymentMethod": "상담 후 계좌이체",
+    "status": "접수완료",
+    "createdAt": "2026-08-31T15:32:51"
+  },
+  {
+    "id": "BK-20260828-759",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-11",
+    "travelerName": "김여행",
+    "phone": "01023587533",
+    "email": "wise1111111@gmail.com",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 1438000,
+    "options": {
+      "insuranceUpgrade": false,
+      "singleRoom": false,
+      "airportPickup": true
     },
-    {
-        "id":  "BK-20260828-101",
-        "packageId":  "pkg-sea-01",
-        "packageTitle":  "[힐링특가] 베트남 다낭 \u0026 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
-        "departureDate":  "2026-09-15",
-        "travelerName":  "김광수",
-        "phone":  "010-8754-9373",
-        "email":  "wisekks@gmail.com",
-        "adults":  2,
-        "children":  1,
-        "totalPrice":  1897000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "airportPickup":  true,
-                        "singleRoom":  false
-                    },
-        "requests":  "가족 여행입니다. 오션뷰 고층 객실과 금연실 배정 부탁드립니다.",
-        "paymentMethod":  "상담 후 계좌이체",
-        "createdAt":  "2026-08-28T14:20:00.000Z",
-        "status":  "예약확정"
+    "requests": "",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "접수완료",
+    "createdAt": "2026-08-28T16:15:05"
+  },
+  {
+    "id": "BK-20260828-101",
+    "packageId": "pkg-sea-01",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "departureDate": "2026-09-15",
+    "travelerName": "김광수",
+    "phone": "010-8754-9373",
+    "email": "wisekks@gmail.com",
+    "adults": 2,
+    "children": 1,
+    "totalPrice": 1897000,
+    "options": {
+      "insuranceUpgrade": true,
+      "airportPickup": true,
+      "singleRoom": false
     },
-    {
-        "id":  "BK-20260827-204",
-        "packageId":  "pkg-eur-01",
-        "packageTitle":  "[로맨틱 서유럽] 프랑스 \u0026 스위스 \u0026 이탈리아 3국 8박 10일 핵심일주",
-        "departureDate":  "2026-10-02",
-        "travelerName":  "박민지",
-        "phone":  "010-4821-6930",
-        "email":  "minji.park@naver.com",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  7980000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "airportPickup":  false,
-                        "singleRoom":  false
-                    },
-        "requests":  "신혼여행입니다. 융프라우요흐 등반 일정 및 파리 세느강 디너 크루즈 창가석 요청합니다.",
-        "paymentMethod":  "카드 결제 상담",
-        "status":  "상담진행",
-        "createdAt":  "2026-08-27T10:15:00.000Z"
+    "requests": "가족 여행입니다. 오션뷰 고층 객실과 금연실 배정 부탁드립니다.",
+    "paymentMethod": "상담 후 계좌이체",
+    "createdAt": "2026-08-28T14:20:00.000Z",
+    "status": "예약확정"
+  },
+  {
+    "id": "BK-20260827-204",
+    "packageId": "pkg-eur-01",
+    "packageTitle": "[로맨틱 서유럽] 프랑스 & 스위스 & 이탈리아 3국 8박 10일 핵심일주",
+    "departureDate": "2026-10-02",
+    "travelerName": "박민지",
+    "phone": "010-4821-6930",
+    "email": "minji.park@naver.com",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 7980000,
+    "options": {
+      "insuranceUpgrade": true,
+      "airportPickup": false,
+      "singleRoom": false
     },
-    {
-        "id":  "BK-20260826-309",
-        "packageId":  "pkg-jpn-01",
-        "packageTitle":  "[프리미엄 힐링] 홋카이도 삿포로 \u0026 오타루 \u0026 후라노 3박 4일 온천 료칸",
-        "departureDate":  "2026-09-22",
-        "travelerName":  "이현우",
-        "phone":  "010-2345-8765",
-        "email":  "hw.lee@kakao.com",
-        "adults":  4,
-        "children":  0,
-        "totalPrice":  4760000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "airportPickup":  true,
-                        "singleRoom":  false
-                    },
-        "requests":  "부모님 칠순 기념 가족 여행입니다. 전통 료칸 가이세키 정식 식사 룸 배정 요청드립니다.",
-        "paymentMethod":  "상담 후 무통장 입금",
-        "status":  "예약확정",
-        "createdAt":  "2026-08-26T16:40:00.000Z"
+    "requests": "신혼여행입니다. 융프라우요흐 등반 일정 및 파리 세느강 디너 크루즈 창가석 요청합니다.",
+    "paymentMethod": "카드 결제 상담",
+    "status": "상담진행",
+    "createdAt": "2026-08-27T10:15:00.000Z"
+  },
+  {
+    "id": "BK-20260826-309",
+    "packageId": "pkg-jpn-01",
+    "packageTitle": "[프리미엄 힐링] 홋카이도 삿포로 & 오타루 & 후라노 3박 4일 온천 료칸",
+    "departureDate": "2026-09-22",
+    "travelerName": "이현우",
+    "phone": "010-2345-8765",
+    "email": "hw.lee@kakao.com",
+    "adults": 4,
+    "children": 0,
+    "totalPrice": 4760000,
+    "options": {
+      "insuranceUpgrade": true,
+      "airportPickup": true,
+      "singleRoom": false
     },
-    {
-        "id":  "BK-20260825-412",
-        "packageId":  "pkg-sea-02",
-        "packageTitle":  "[프라이빗 허니문] 발리 우붓 \u0026 울루와투 럭셔리 독채 풀빌라 4박 6일",
-        "departureDate":  "2026-10-18",
-        "travelerName":  "최수진",
-        "phone":  "010-7712-3498",
-        "email":  "sujin.choi@gmail.com",
-        "adults":  2,
-        "children":  0,
-        "totalPrice":  3980000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "airportPickup":  true,
-                        "singleRoom":  false
-                    },
-        "requests":  "허니문 웰컴 케이크 및 꽃잎 장식 세팅 부탁드립니다.",
-        "paymentMethod":  "카드 결제 상담",
-        "status":  "접수완료",
-        "createdAt":  "2026-08-25T11:05:00.000Z"
+    "requests": "부모님 칠순 기념 가족 여행입니다. 전통 료칸 가이세키 정식 식사 룸 배정 요청드립니다.",
+    "paymentMethod": "상담 후 무통장 입금",
+    "status": "예약확정",
+    "createdAt": "2026-08-26T16:40:00.000Z"
+  },
+  {
+    "id": "BK-20260825-412",
+    "packageId": "pkg-sea-02",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "departureDate": "2026-10-18",
+    "travelerName": "최수진",
+    "phone": "010-7712-3498",
+    "email": "sujin.choi@gmail.com",
+    "adults": 2,
+    "children": 0,
+    "totalPrice": 3980000,
+    "options": {
+      "insuranceUpgrade": true,
+      "airportPickup": true,
+      "singleRoom": false
     },
-    {
-        "id":  "BK-20260824-523",
-        "packageId":  "pkg-usa-01",
-        "packageTitle":  "[패밀리 파라다이스] 괌 PIC 올인클루시브 슈페리어 플러스 4박 5일",
-        "departureDate":  "2026-09-28",
-        "travelerName":  "정성훈",
-        "phone":  "010-3344-9988",
-        "email":  "sh.jung@daum.net",
-        "adults":  2,
-        "children":  2,
-        "totalPrice":  3860000,
-        "options":  {
-                        "insuranceUpgrade":  true,
-                        "airportPickup":  true,
-                        "singleRoom":  false
-                    },
-        "requests":  "유아용 침대 가드 및 커넥팅 룸 가능 여부 확인 부탁드립니다.",
-        "paymentMethod":  "간편 결제 상담",
-        "status":  "상담진행",
-        "createdAt":  "2026-08-24T09:30:00.000Z"
-    }
+    "requests": "허니문 웰컴 케이크 및 꽃잎 장식 세팅 부탁드립니다.",
+    "paymentMethod": "카드 결제 상담",
+    "status": "접수완료",
+    "createdAt": "2026-08-25T11:05:00.000Z"
+  },
+  {
+    "id": "BK-20260824-523",
+    "packageId": "pkg-usa-01",
+    "packageTitle": "[패밀리 파라다이스] 괌 PIC 올인클루시브 슈페리어 플러스 4박 5일",
+    "departureDate": "2026-09-28",
+    "travelerName": "정성훈",
+    "phone": "010-3344-9988",
+    "email": "sh.jung@daum.net",
+    "adults": 2,
+    "children": 2,
+    "totalPrice": 3860000,
+    "options": {
+      "insuranceUpgrade": true,
+      "airportPickup": true,
+      "singleRoom": false
+    },
+    "requests": "유아용 침대 가드 및 커넥팅 룸 가능 여부 확인 부탁드립니다.",
+    "paymentMethod": "간편 결제 상담",
+    "status": "상담진행",
+    "createdAt": "2026-08-24T09:30:00.000Z"
+  }
 ]
