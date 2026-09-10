@@ -253,7 +253,7 @@ function renderFooter() {
         <!-- Business Registration Info -->
         <div class="pt-8 flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-slate-500 gap-4">
           <div class="space-y-1">
-            <p>(주)투어이지 여행사 | 대표이사: 홍길동 | 사업자등록번호: 120-88-12345 | 통신판매업신고: 제2026-서울중구-0987호</p>
+            <p>(주)투어이지 여행사 | 대표이사: 김광수 | 사업자등록번호: 120-88-12345 | 통신판매업신고: 제2026-서울중구-0987호</p>
             <p>서울특별시 중구 세종대로 110 투어이지 빌딩 8층 | 개인정보보호책임자: 김투어 (help@toureasy.kr)</p>
             <p>관광사업자 등록번호: 일반여행업 제2026-000012호 | 보증보험 5억원 가입업체</p>
           </div>
