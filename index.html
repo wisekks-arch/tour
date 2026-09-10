@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투어이지(TourEasy) - 당신의 가장 완벽한 여행 플래너</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative min-h-[580px] lg:min-h-[640px] flex items-center justify-center bg-slate-900 overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <img 
+        src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" 
+        alt="Travel Hero" 
+        class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+
+      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <!-- Hero Tag -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-sky-300 border border-white/20 text-xs font-semibold uppercase tracking-wider mb-6">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i> 2026 가을·겨울 얼리버드 프로모션 진행 중
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+          일상을 벗어나 떠나는<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-amber-200">가장 완벽하고 안전한 여행</span>
+        </h1>
+        <p class="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
+          엄선된 5성급 호텔, 강제 쇼핑 없는 프라이빗 일정, 24시간 안심 케어로 잊지 못할 추억을 만들어 드립니다.
+        </p>
+
+        <!-- Search Bar Widget -->
+        <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl shadow-2xl border border-white/40 max-w-4xl mx-auto text-left">
+          <form id="hero-search-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
+            
+            <!-- Destination Input -->
+            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
+              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">어디로 떠나시나요?</label>
+              <div class="flex items-center gap-2 mt-1">
+                <i data-lucide="map-pin" class="w-4 h-4 text-sky-600 shrink-0"></i>
+                <input 
+                  type="text" 
+                  id="search-dest" 
+                  placeholder="다낭, 파리, 삿포로, 발리..." 
+                  class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none placeholder-slate-400"
+                />
+              </div>
+            </div>
+
+            <!-- Region Filter -->
+            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
+              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">지역 선택</label>
+              <div class="flex items-center gap-2 mt-1">
+                <i data-lucide="globe" class="w-4 h-4 text-sky-600 shrink-0"></i>
+                <select id="search-region" class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
+                  <option value="전체">모든 지역</option>
+                  <option value="동남아">동남아시아</option>
+                  <option value="유럽">유럽</option>
+                  <option value="일본/동아시아">일본/동아시아</option>
+                  <option value="미주/대양주">미주/대양주/괌</option>
+                  <option value="국내">국내/제주</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Theme Filter -->
+            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
+              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">여행 테마</label>
+              <div class="flex items-center gap-2 mt-1">
+                <i data-lucide="compass" class="w-4 h-4 text-sky-600 shrink-0"></i>
+                <select id="search-theme" class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
+                  <option value="전체">모든 테마</option>
+                  <option value="휴양">휴양 / 힐링</option>
+                  <option value="역사">역사 / 문화 탐방</option>
+                  <option value="온천">온천 / 미식</option>
+                  <option value="허니문">허니문 / 럭셔리</option>
+                  <option value="가족">가족 / 키즈</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Search Button -->
+            <div>
+              <button 
+                type="submit" 
+                class="w-full h-14 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 text-base transition duration-300"
+              >
+                <i data-lucide="search" class="w-5 h-5"></i>
+                <span>여행 검색하기</span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Quick Theme Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-6 text-xs text-slate-300">
+          <span class="text-slate-400 font-medium">추천 검색어:</span>
+          <a href="packages.html?region=동남아" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#다낭 5성급</a>
+          <a href="packages.html?region=유럽" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#서유럽 3국 일주</a>
+          <a href="packages.html?region=일본/동아시아" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#홋카이도 온천료칸</a>
+          <a href="packages.html?theme=허니문" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#발리 풀빌라</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Quick Destination Categories -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        
+        <a href="packages.html?region=동남아" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-2 group-hover:bg-sky-600 group-hover:text-white transition">
+            <i data-lucide="palmtree" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">동남아 휴양</span>
+          <span class="text-slate-400 text-xs">다낭/발리/방콕</span>
+        </a>
+
+        <a href="packages.html?region=유럽" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 group-hover:bg-indigo-600 group-hover:text-white transition">
+            <i data-lucide="landmark" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">유럽 일주</span>
+          <span class="text-slate-400 text-xs">파리/스위스/로마</span>
+        </a>
+
+        <a href="packages.html?region=일본/동아시아" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-2 group-hover:bg-rose-600 group-hover:text-white transition">
+            <i data-lucide="bath" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">일본 온천/미식</span>
+          <span class="text-slate-400 text-xs">삿포로/후쿠오카</span>
+        </a>
+
+        <a href="packages.html?theme=허니문" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center mb-2 group-hover:bg-pink-600 group-hover:text-white transition">
+            <i data-lucide="heart" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">럭셔리 허니문</span>
+          <span class="text-slate-400 text-xs">프라이빗 풀빌라</span>
+        </a>
+
+        <a href="packages.html?region=미주/대양주" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-2 group-hover:bg-teal-600 group-hover:text-white transition">
+            <i data-lucide="sun" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">괌/사이판 가족</span>
+          <span class="text-slate-400 text-xs">올인클루시브 PIC</span>
+        </a>
+
+        <a href="packages.html?region=국내" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2 group-hover:bg-amber-600 group-hover:text-white transition">
+            <i data-lucide="mountain" class="w-6 h-6"></i>
+          </div>
+          <span class="font-bold text-slate-800 text-sm block">국내/제주 힐링</span>
+          <span class="text-slate-400 text-xs">5성급 호캉스</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Best Seller & Featured Packages -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+        <div>
+          <span class="text-sky-600 font-bold text-sm tracking-wider uppercase flex items-center gap-1.5 mb-2">
+            <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i> Best Travel Deals
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            투어이지 추천 베스트 패키지
+          </h2>
+          <p class="text-slate-500 text-sm mt-1">고객 만족도 98% 이상! 가장 사랑받는 인기 여행 코스입니다.</p>
+        </div>
+        <a href="packages.html" class="mt-4 sm:mt-0 inline-flex items-center gap-1.5 font-bold text-sm text-sky-600 hover:text-sky-700">
+          전체 상품 보기 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Packages Grid Container -->
+      <div id="featured-packages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Dynamic cards inserted by JS -->
+      </div>
+    </section>
+
+    <!-- Early Bird Banner Section -->
+    <section class="bg-gradient-to-r from-sky-900 via-slate-900 to-teal-900 py-16 text-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="max-w-2xl">
+          <span class="px-3 py-1 rounded-md bg-amber-400 text-slate-900 text-xs font-black uppercase tracking-wider mb-4 inline-block">
+            SPECIAL BENEFIT
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-4">
+            미리 예약하고 최대 25% 할인 받으세요!
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            출발 45일 전 사전 예약 고객 전원에게 <strong class="text-amber-300">호텔 룸 무료 업그레이드</strong> 및 <strong class="text-amber-300">여행자 보험 1억원 무료 지원</strong> 혜택을 드립니다.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="packages.html?earlyBird=true" class="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-400/20 transition">
+              얼리버드 특가 보러가기
+            </a>
+            <a href="contact.html" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 transition">
+              단체/맞춤 견적 상담하기
+            </a>
+          </div>
+        </div>
+        <div class="w-full lg:w-96 bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 text-slate-100">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-teal-400/20 flex items-center justify-center text-teal-300">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">투어이지 안심 보장제</h4>
+              <p class="text-xs text-slate-300">여행자 보증보험 5억원 가입</p>
+            </div>
+          </div>
+          <ul class="space-y-2.5 text-xs text-slate-200">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-400 shrink-0"></i> 출발 100% 보장 (최소 출발 인원 부담 없음)</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-400 shrink-0"></i> 쇼핑 강요 없는 품격 있는 순수 여행</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-400 shrink-0"></i> 전문 인솔자 및 베테랑 한국어 가이드 동행</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-400 shrink-0"></i> 24시간 해외 긴급 지원 카카오톡 운영</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose TourEasy Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-sky-600 font-bold text-xs uppercase tracking-widest">Why TourEasy?</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+          왜 10만 여행자가 투어이지를 선택할까요?
+        </h2>
+        <p class="text-slate-500 text-sm mt-2">단순한 관광이 아닌, 평생 간직할 감동적인 순간을 디자인합니다.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+            <i data-lucide="award" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-2">검증된 1급/5성급 호텔</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">위치와 청결도, 조식 퀄리티를 직접 실사하고 엄선한 숙소만 제공합니다.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
+            <i data-lucide="smile" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-2">No 옵션 & No 쇼핑</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">강제 옵션과 쇼핑센터 방문 없는 쾌적하고 자유로운 일정을 보장합니다.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+            <i data-lucide="users" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-2">베테랑 전담 가이드</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">풍부한 역사/문화 지식과 친절한 서비스 마인드를 갖춘 전문 가이드가 함께합니다.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+            <i data-lucide="headphones" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-2">24시간 안심 케어</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">항공 지연, 긴급 의료 상황 등 현지 비상 상황 발생 시 24시간 실시간 지원합니다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Real Customer Reviews Section -->
+    <section class="bg-slate-100/70 py-20 border-y border-slate-200/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <span class="text-sky-600 font-bold text-xs uppercase tracking-widest">Real Reviews</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            다녀오신 분들의 생생한 여행 후기
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-3">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <span class="text-slate-800 font-black text-sm ml-1">5.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">"부모님 환갑 기념 다낭 여행 대만족입니다!"</h4>
+              <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                부모님 모시고 가는 거라 걱정이 많았는데, 가이드님이 어르신들 페이스에 맞춰 친절히 챙겨주셔서 정말 감사했습니다. 리조트 뷰도 환상적이었어요!
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+              <span class="font-medium text-slate-700">김*우 고객님 (다낭/호이안 4박5일)</span>
+              <span>2026.08</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-3">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <span class="text-slate-800 font-black text-sm ml-1">5.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">"TGV 타고 이동하니 체력 부담 없는 서유럽 일주"</h4>
+              <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                도시 간 이동을 고속열차로 해서 시간도 아끼고 피로도 덜했습니다. 융프라우요흐 설경과 바티칸 박물관 해설은 평생 잊지 못할 것 같습니다.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+              <span class="font-medium text-slate-700">이*진 고객님 (서유럽 3국 8박10일)</span>
+              <span>2026.07</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 mb-3">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                <span class="text-slate-800 font-black text-sm ml-1">5.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">"홋카이도 게요리 무제한과 노천온천의 낭만"</h4>
+              <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                노보리베츠 유황온천에서 피로 싹 풀고 신선한 털게와 킹크랩 원 없이 먹었습니다. 호텔 위치도 스스키노 중심이라 저녁 자유시간에 맛집 다니기 딱이었어요.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+              <span class="font-medium text-slate-700">박*현 고객님 (홋카이도 3박4일)</span>
+              <span>2026.08</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Consultation CTA Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="bg-gradient-to-tr from-sky-600 to-teal-600 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="max-w-xl">
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-3">
+            원하시는 맞춤 일정이 있으신가요?
+          </h2>
+          <p class="text-sky-100 text-sm leading-relaxed">
+            가족 모임, 동창회, 인센티브 기업 연수 등 원하는 인원과 예산에 맞춰 전문 여행 플래너가 1:1 맞춤 견적서를 무료로 설계해 드립니다.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <a href="contact.html" class="px-6 py-3.5 bg-white hover:bg-slate-100 text-sky-700 font-bold rounded-xl text-center text-sm shadow-md transition">
+            1:1 무료 맞춤 견적 신청
+          </a>
+          <a href="tel:1588-7799" class="px-6 py-3.5 bg-sky-700/60 hover:bg-sky-700 text-white font-bold rounded-xl text-center text-sm border border-sky-400/40 flex items-center justify-center gap-2 transition">
+            <i data-lucide="phone" class="w-4 h-4"></i> 전화 상담 (1588-7799)
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js?v=20260828_3"></script>
+  <script src="js/components.js?v=20260828_3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderNavbar('home');
+      renderFooter();
+
+      // Load Featured Packages
+      const grid = document.getElementById('featured-packages-grid');
+      try {
+        const response = await TourAPI.getPackages();
+        if (response && response.data && response.data.length > 0) {
+          grid.innerHTML = response.data.map(pkg => createPackageCard(pkg)).join('');
+          if (window.lucide) lucide.createIcons();
+        } else {
+          grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">등록된 추천 상품이 없습니다.</div>`;
+        }
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-rose-500 font-semibold">상품을 불러오는 중 오류가 발생했습니다.</div>`;
+      }
+
+      // Hero Search Form Handler
+      const searchForm = document.getElementById('hero-search-form');
+      if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const dest = document.getElementById('search-dest').value.trim();
+          const region = document.getElementById('search-region').value;
+          const theme = document.getElementById('search-theme').value;
+
+          const params = new URLSearchParams();
+          if (dest) params.append('search', dest);
+          if (region && region !== '전체') params.append('region', region);
+          if (theme && theme !== '전체') params.append('theme', theme);
+
+          window.location.href = `packages.html?${params.toString()}`;
+        });
+      }
+    });
+  </script>
+</body>
+</html>

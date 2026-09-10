@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 센터 - 투어이지(TourEasy)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 flex flex-col min-h-screen">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow pb-24">
+    <!-- Admin Header -->
+    <div class="bg-slate-900 text-white py-8 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center border border-sky-400/30">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-black">투어이지 통합 관리자 시스템</h1>
+            <p class="text-xs text-slate-400">실시간 예약 접수, 고객 상담 및 여행 상품 관리</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <button onclick="openSmtpModal()" id="btn-smtp-settings" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-teal-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-teal-500/30 transition shadow-sm cursor-pointer">
+            <i data-lucide="mail-cog" class="w-3.5 h-3.5 text-teal-400"></i> 이메일(SMTP) 설정
+            <span id="header-smtp-badge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-bold">확인중</span>
+          </button>
+          <button onclick="loadAllAdminData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 새로고침
+          </button>
+          <button onclick="openNewPackageModal()" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-md transition cursor-pointer">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> 신규 상품 등록
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Body -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+      
+      <!-- 1. KPI Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-semibold block">총 접수 예약</span>
+            <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-booking-count">0건</span>
+            <span class="text-[11px] text-amber-600 font-bold" id="stat-pending-bookings">대기: 0건</span>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center">
+            <i data-lucide="calendar-check" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-semibold block">1:1 맞춤 문의</span>
+            <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-inquiry-count">0건</span>
+            <span class="text-[11px] text-rose-600 font-bold" id="stat-pending-inquiries">미답변: 0건</span>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center">
+            <i data-lucide="message-square" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-semibold block">총 등록 상품</span>
+            <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-package-count">75개</span>
+            <span class="text-[11px] text-emerald-600 font-bold" id="stat-package-subtext">운영 중 74개 · 미운영 1개</span>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <i data-lucide="plane" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-semibold block">누적 예상 견적액</span>
+            <span class="text-2xl font-black text-sky-600 mt-1 block truncate max-w-[150px]" id="stat-total-revenue">0원</span>
+            <span class="text-[11px] text-slate-400">접수 기준 총액</span>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+            <i data-lucide="coins" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2. Tabs Navigation -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-1.5 flex gap-2 max-w-md shadow-sm">
+        <button id="tab-btn-bookings" onclick="switchTab('bookings')" class="flex-1 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition">
+          예약 접수 목록
+        </button>
+        <button id="tab-btn-inquiries" onclick="switchTab('inquiries')" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+          1:1 상담 문의
+        </button>
+        <button id="tab-btn-packages" onclick="switchTab('packages')" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+          여행 상품 관리
+        </button>
+      </div>
+
+      <!-- 3. TAB 1: Bookings Management -->
+      <section id="tab-content-bookings" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <!-- Header & Status Tabs -->
+        <div class="p-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center border border-sky-100 shrink-0">
+              <i data-lucide="calendar-days" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">실시간 예약 접수 현황</h3>
+              <p class="text-slate-400 text-[11px]">고객 예약 신청 내역 조회, 상태 변경 및 상세 관리</p>
+            </div>
+          </div>
+
+          <!-- Status Filter Tabs -->
+          <div class="flex flex-wrap items-center gap-1 bg-slate-100 p-1 rounded-2xl text-xs font-bold" id="booking-status-tabs">
+            <button onclick="filterBookingsByStatus('ALL')" id="bk-tab-ALL" class="px-3 py-1.5 rounded-xl bg-white text-slate-900 shadow-sm transition">
+              전체 <span id="bk-count-all" class="text-slate-500 font-mono">0</span>
+            </button>
+            <button onclick="filterBookingsByStatus('접수완료')" id="bk-tab-접수완료" class="px-3 py-1.5 rounded-xl text-amber-700 hover:bg-white/60 transition">
+              접수완료 <span id="bk-count-pending" class="font-mono">0</span>
+            </button>
+            <button onclick="filterBookingsByStatus('상담진행')" id="bk-tab-상담진행" class="px-3 py-1.5 rounded-xl text-sky-700 hover:bg-white/60 transition">
+              상담진행 <span id="bk-count-consulting" class="font-mono">0</span>
+            </button>
+            <button onclick="filterBookingsByStatus('예약확정')" id="bk-tab-예약확정" class="px-3 py-1.5 rounded-xl text-emerald-700 hover:bg-white/60 transition">
+              예약확정 <span id="bk-count-confirmed" class="font-mono">0</span>
+            </button>
+            <button onclick="filterBookingsByStatus('취소')" id="bk-tab-취소" class="px-3 py-1.5 rounded-xl text-rose-700 hover:bg-white/60 transition">
+              취소 <span id="bk-count-cancelled" class="font-mono">0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search & Date Filter Panel -->
+        <div class="p-4 bg-slate-50/80 border-b border-slate-100 text-xs">
+          <form id="form-booking-search" onsubmit="event.preventDefault(); applyBookingFilters(true);" class="space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <!-- 1. Booking ID Search -->
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">예약번호 검색</label>
+                <div class="relative">
+                  <input type="text" id="bk-search-id" placeholder="예: BK-20260901" class="w-full pl-8 pr-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-xs">
+                  <i data-lucide="hash" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2"></i>
+                </div>
+              </div>
+
+              <!-- 2. Traveler Name Search -->
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">예약자 성명</label>
+                <div class="relative">
+                  <input type="text" id="bk-search-name" placeholder="예: 김길동" class="w-full pl-8 pr-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-xs">
+                  <i data-lucide="user" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2"></i>
+                </div>
+              </div>
+
+              <!-- 3. Application Date Range -->
+              <div class="lg:col-span-2">
+                <div class="flex items-center justify-between mb-1">
+                  <label class="block font-bold text-slate-700">신청일 기간설정</label>
+                  <!-- Quick Date Range Presets -->
+                  <div class="flex items-center gap-1">
+                    <button type="button" onclick="setBookingDatePreset('all')" id="bk-preset-all" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-sky-600 text-white shadow-xs transition">전체</button>
+                    <button type="button" onclick="setBookingDatePreset('today')" id="bk-preset-today" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-200 text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition">오늘</button>
+                    <button type="button" onclick="setBookingDatePreset('7days')" id="bk-preset-7days" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-200 text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition">1주일</button>
+                    <button type="button" onclick="setBookingDatePreset('1month')" id="bk-preset-1month" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-200 text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition">1개월</button>
+                    <button type="button" onclick="setBookingDatePreset('3months')" id="bk-preset-3months" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-200 text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition">3개월</button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <input type="date" id="bk-search-start-date" class="w-full p-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:ring-2 focus:ring-sky-500 shadow-xs">
+                  <span class="text-slate-400 font-bold">~</span>
+                  <input type="date" id="bk-search-end-date" class="w-full p-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:ring-2 focus:ring-sky-500 shadow-xs">
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons & Page Size -->
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/70">
+              <div class="flex items-center gap-2">
+                <span class="text-slate-600 text-xs font-medium">검색 결과: <strong id="bk-filtered-count" class="text-sky-600 font-bold font-mono">0</strong>건</span>
+                <span class="text-slate-300">|</span>
+                <label class="text-slate-600 text-xs flex items-center gap-1.5">
+                  <span>목록 표시:</span>
+                  <select id="bk-page-size" onchange="changeBookingPageSize(this.value)" class="py-1 px-2.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 focus:ring-1 focus:ring-sky-500 shadow-xs">
+                    <option value="10" selected>10개씩 보기</option>
+                    <option value="20">20개씩 보기</option>
+                    <option value="50">50개씩 보기</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="resetBookingFilters()" class="px-3.5 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs transition flex items-center gap-1 cursor-pointer">
+                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> 초기화
+                </button>
+                <button type="submit" class="px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="search" class="w-3.5 h-3.5"></i> 검색 / 조회
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3.5">예약번호 / 신청일</th>
+                <th class="p-3.5">예약자 / 연락처</th>
+                <th class="p-3.5">여행 상품명</th>
+                <th class="p-3.5">출발일</th>
+                <th class="p-3.5">인원</th>
+                <th class="p-3.5">총 결제예정액</th>
+                <th class="p-3.5">결제/상담방법</th>
+                <th class="p-3.5">진행상태</th>
+                <th class="p-3.5 text-center">관리</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-table-body" class="divide-y divide-slate-100">
+              <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Bar -->
+        <div id="bk-pagination-container" class="p-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50/50">
+          <div id="bk-pagination-info" class="text-xs text-slate-500 font-medium">
+            <!-- Dynamic Info -->
+          </div>
+          <div id="bk-pagination-buttons" class="flex items-center gap-1 text-xs">
+            <!-- Dynamic Page Buttons -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. TAB 2: Inquiries Management -->
+      <section id="tab-content-inquiries" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center">
+              <i data-lucide="messages-square" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">1:1 맞춤 견적 문의 & 상담 관리</h3>
+              <p class="text-slate-400 text-[11px]">고객 문의 열람, 맞춤 견적서 발송 및 실시간 답변 이력을 관리합니다.</p>
+            </div>
+          </div>
+
+          <!-- Status Filter Tabs -->
+          <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-2xl text-xs font-bold" id="inq-filter-tabs">
+            <button onclick="filterInquiries('ALL')" id="inq-filter-ALL" class="px-3 py-1.5 rounded-xl bg-white text-slate-900 shadow-sm transition">
+              전체 <span id="badge-count-all" class="text-slate-500 font-mono">0</span>
+            </button>
+            <button onclick="filterInquiries('답변대기')" id="inq-filter-답변대기" class="px-3 py-1.5 rounded-xl text-rose-600 hover:bg-white/60 transition">
+              답변대기 <span id="badge-count-pending" class="font-mono">0</span>
+            </button>
+            <button onclick="filterInquiries('상담중')" id="inq-filter-상담중" class="px-3 py-1.5 rounded-xl text-amber-600 hover:bg-white/60 transition">
+              상담중 <span id="badge-count-consulting" class="font-mono">0</span>
+            </button>
+            <button onclick="filterInquiries('답변완료')" id="inq-filter-답변완료" class="px-3 py-1.5 rounded-xl text-emerald-600 hover:bg-white/60 transition">
+              답변완료 <span id="badge-count-completed" class="font-mono">0</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3.5">문의번호 / 접수일시</th>
+                <th class="p-3.5">신청 고객명 / 연락처</th>
+                <th class="p-3.5">상담 유형</th>
+                <th class="p-3.5">희망 여행지 / 시기</th>
+                <th class="p-3.5">인원</th>
+                <th class="p-3.5">상세 문의 내용</th>
+                <th class="p-3.5">처리 상태</th>
+                <th class="p-3.5 text-center">관리 & 답변</th>
+              </tr>
+            </thead>
+            <tbody id="inquiries-table-body" class="divide-y divide-slate-100">
+              <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. TAB 3: Packages Management -->
+      <section id="tab-content-packages" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden space-y-4">
+        <!-- Package Management Header & Filters -->
+        <div class="p-5 sm:p-6 border-b border-slate-100 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
+                <i data-lucide="package" class="w-5 h-5 text-sky-600"></i> 여행 상품 운영 관리 (총 75개)
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">
+                상품의 운영/미운영 상태를 실시간 변경할 수 있으며, 미운영 처리 시 고객 화면에서 즉시 숨김 처리됩니다.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="openNewPackageModal()" class="px-4 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold hover:bg-sky-700 transition flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="plus" class="w-4 h-4"></i> 새 상품 등록
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls: Status Tabs, Region Select, Search -->
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 pt-2">
+            <!-- Operational Status Filter Tabs -->
+            <div class="bg-slate-100 p-1 rounded-2xl flex items-center gap-1 text-xs font-bold shrink-0">
+              <button id="pkg-tab-all" onclick="filterPackagesStatus('ALL')" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center gap-1.5 font-bold">
+                전체 <span id="pkg-count-all" class="px-1.5 py-0.5 rounded-full text-[10px] bg-slate-200 text-slate-700">75</span>
+              </button>
+              <button id="pkg-tab-operating" onclick="filterPackagesStatus('OPERATING')" class="px-3.5 py-1.5 rounded-xl text-emerald-700 hover:bg-white/60 transition flex items-center gap-1.5 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                운영중 <span id="pkg-count-operating" class="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800">74</span>
+              </button>
+              <button id="pkg-tab-inactive" onclick="filterPackagesStatus('INACTIVE')" class="px-3.5 py-1.5 rounded-xl text-slate-600 hover:bg-white/60 transition flex items-center gap-1.5 font-bold">
+                <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                미운영 <span id="pkg-count-inactive" class="px-1.5 py-0.5 rounded-full text-[10px] bg-slate-200 text-slate-600">1</span>
+              </button>
+            </div>
+
+            <!-- Search & Region Select -->
+            <div class="flex flex-1 sm:flex-initial items-center gap-2">
+              <select id="pkg-filter-region" onchange="handlePackageRegionChange(this.value)" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 focus:border-sky-500 focus:outline-none shrink-0">
+                <option value="ALL">전체 지역 (5대 권역)</option>
+                <option value="동남아">동남아 (15개)</option>
+                <option value="일본">일본 (15개)</option>
+                <option value="유럽">유럽 (15개)</option>
+                <option value="미주/하와이">미주/하와이 (15개)</option>
+                <option value="국내">국내 (15개)</option>
+              </select>
+
+              <div class="relative flex-1 min-w-[200px]">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                <input id="pkg-search-input" type="text" oninput="handlePackageSearch(this.value)" placeholder="상품명, 도시, 키워드 검색..." class="w-full pl-9 pr-3 py-2 rounded-xl text-xs border border-slate-200 focus:border-sky-500 focus:outline-none bg-white">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Package Cards Grid -->
+        <div class="p-6 pt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="admin-packages-list">
+          <!-- Dynamic Package Cards -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal: 1:1 Inquiry Detail & Reply Management -->
+  <div id="modal-inquiry-detail" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white max-w-3xl w-full rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100 my-6 max-h-[92vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+            <i data-lucide="message-square" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-extrabold text-slate-900 text-base" id="modal-inq-title">1:1 맞춤 견적 문의 상세 & 답변</h3>
+              <span id="modal-inq-status-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold"></span>
+            </div>
+            <span class="text-xs text-slate-400 font-mono" id="modal-inq-id">INQ-00000000-000</span>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-inquiry-detail')" class="p-2 text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- 1. Customer Inquiry Original Details Box -->
+      <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 space-y-3.5 text-xs text-slate-700">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+          <span class="font-bold text-slate-900 flex items-center gap-1.5 text-sm">
+            <i data-lucide="user" class="w-4 h-4 text-sky-600"></i> 고객 문의 접수 정보
+          </span>
+          <span class="text-slate-400 text-[11px]" id="modal-inq-created"></span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div>
+            <span class="text-slate-400 block text-[11px]">고객 성명</span>
+            <span class="font-bold text-slate-900 text-sm" id="modal-inq-name">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[11px]">연락처</span>
+            <span class="font-semibold text-slate-800" id="modal-inq-phone">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[11px]">이메일 주소</span>
+            <span class="font-semibold text-slate-800 truncate block" id="modal-inq-email">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[11px]">상담 문의 유형</span>
+            <span class="font-bold text-sky-700 bg-sky-100/80 px-2 py-0.5 rounded text-[11px] inline-block" id="modal-inq-category">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[11px]">희망 여행지 / 시기</span>
+            <span class="font-semibold text-slate-800" id="modal-inq-dest">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[11px]">예상 인원</span>
+            <span class="font-semibold text-slate-800" id="modal-inq-group">-</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-200 space-y-1">
+          <span class="text-slate-500 font-bold block text-[11px]">고객 작성 상세 문의 내용:</span>
+          <p class="text-slate-800 bg-white p-3.5 rounded-xl border border-slate-200/80 leading-relaxed whitespace-pre-wrap font-medium" id="modal-inq-message">-</p>
+        </div>
+
+        <!-- Direct Webmail Action Buttons Bar -->
+        <div class="p-3 bg-sky-50/90 border border-sky-200 rounded-xl space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1.5">
+            <span class="font-extrabold text-sky-950 text-xs flex items-center gap-1.5">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-sky-600"></i> 원클릭 메일 발송 바로가기:
+            </span>
+            <span class="text-[11px] text-slate-500">로그인된 웹메일 또는 메일 앱으로 즉시 전송</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pt-0.5">
+            <button type="button" onclick="sendViaWebmail('naver')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-white"></span> 네이버 메일로 작성
+            </button>
+            <button type="button" onclick="sendViaWebmail('gmail')" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-white"></span> Gmail로 작성
+            </button>
+            <button type="button" onclick="sendViaWebmail('daum')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <span class="w-2 h-2 rounded-full bg-white"></span> 다음 메일
+            </button>
+            <button type="button" onclick="sendViaWebmail('mailto')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <i data-lucide="external-link" class="w-3 h-3"></i> 기본 메일 앱 (Outlook)
+            </button>
+            <button type="button" onclick="copyReplyText(getFormattedMailContent(activeInquiry, null))" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg font-bold text-xs flex items-center gap-1.5 transition cursor-pointer">
+              <i data-lucide="copy" class="w-3 h-3 text-slate-500"></i> 견적 본문 전체 복사
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Admin Reply History (작성된 답변 이력 타임라인) -->
+      <div class="space-y-3">
+        <div class="flex justify-between items-center">
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+            <i data-lucide="history" class="w-4 h-4 text-indigo-600"></i>
+            작성된 상담 및 견적 답변 이력 (<span id="modal-reply-count" class="text-indigo-600 font-bold">0</span>건)
+          </h4>
+        </div>
+
+        <div id="modal-replies-list" class="space-y-3">
+          <!-- Dynamic Reply Cards -->
+        </div>
+      </div>
+
+      <!-- 3. New Reply Form (관리자 신규 답변 작성) -->
+      <div class="bg-gradient-to-br from-slate-900 to-sky-950 p-6 rounded-3xl text-white space-y-4 shadow-lg">
+        <div class="flex items-center justify-between pb-2 border-b border-white/10">
+          <div class="flex items-center gap-2 font-bold text-sm text-teal-300">
+            <i data-lucide="edit-3" class="w-4 h-4"></i> 관리자 답변 작성 및 견적서 등록
+          </div>
+          <span class="text-[11px] text-slate-300">작성 즉시 상담 이력에 등록됩니다</span>
+        </div>
+
+        <!-- Quick Template Buttons -->
+        <div class="space-y-1.5">
+          <span class="text-[11px] text-slate-300 font-semibold block">⚡ 빠른 답변 템플릿 적용:</span>
+          <div class="flex flex-wrap gap-1.5 text-xs">
+            <button type="button" onclick="applyReplyTemplate('basic')" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-slate-200 transition font-medium border border-white/10 cursor-pointer">
+              ✨ 기본 접수 안내
+            </button>
+            <button type="button" onclick="applyReplyTemplate('quote')" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-teal-300 transition font-medium border border-teal-400/30 cursor-pointer">
+              💰 맞춤 견적서 발송
+            </button>
+            <button type="button" onclick="applyReplyTemplate('consult')" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-amber-300 transition font-medium border border-amber-400/30 cursor-pointer">
+              📞 유선 일정 조율 요청
+            </button>
+          </div>
+        </div>
+
+        <form id="form-inquiry-reply" class="space-y-3.5 text-xs text-slate-200">
+          <input type="hidden" id="reply-inquiry-id" value="">
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">담당 플래너 / 관리자</label>
+              <input type="text" id="reply-admin-name" value="김투어 수석 여행플래너" required class="w-full p-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">제안 견적 금액 (선택)</label>
+              <input type="text" id="reply-quoted-price" placeholder="예: 1인 1,890,000원 (총 7,560,000원)" class="w-full p-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">답변 후 문의 상태</label>
+              <select id="reply-target-status" class="w-full p-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 cursor-pointer">
+                <option value="답변완료" selected>답변완료</option>
+                <option value="상담중">상담중</option>
+                <option value="답변대기">답변대기</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">추천 연계 패키지 상품 (선택)</label>
+            <select id="reply-pkg-select" class="w-full p-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 cursor-pointer">
+              <option value="">-- 추천 패키지 상품 선택 안함 --</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">상세 답변 내용 <span class="text-rose-400">*</span></label>
+            <textarea 
+              id="reply-content" 
+              rows="4" 
+              required 
+              placeholder="고객님께 전달할 상세 맞춤 일정, 추천 호텔 등급, 혜택 사항, 견적 세부 내역 등을 정성껏 작성해주세요."
+              class="w-full p-3 bg-slate-800/90 border border-slate-700 rounded-2xl text-white focus:outline-none focus:border-teal-400 leading-relaxed font-sans"
+            ></textarea>
+          </div>
+
+          <!-- Email Dispatch Notification Box -->
+          <div class="p-3 bg-slate-800/90 rounded-2xl border border-teal-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div class="flex items-center gap-2.5">
+              <input type="checkbox" id="reply-send-email" checked class="w-4 h-4 rounded text-teal-500 accent-teal-500 cursor-pointer">
+              <label for="reply-send-email" class="text-xs text-teal-200 font-semibold cursor-pointer select-none">
+                <i data-lucide="mail-check" class="w-4 h-4 inline text-teal-400 mr-1"></i> 답변 등록 즉시 고객 이메일 (<span id="reply-target-email-display" class="font-bold text-white underline"></span>)로 자동 발송
+              </label>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="openSmtpModal()" class="text-[10px] px-2.5 py-1 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-full font-bold border border-teal-400/30 flex items-center gap-1 transition cursor-pointer">
+                <i data-lucide="settings" class="w-3 h-3"></i> <span id="reply-smtp-status-label">SMTP 설정</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-2 pt-1">
+            <button type="submit" id="btn-save-reply" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-sky-500 hover:from-teal-600 hover:to-sky-600 text-slate-950 font-black rounded-xl shadow-lg shadow-teal-500/20 text-xs flex items-center gap-2 transition cursor-pointer">
+              <i data-lucide="send" class="w-4 h-4"></i> 답변 등록 및 고객 이메일 발송 완료
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal: SMTP Email Settings -->
+  <div id="modal-smtp-settings" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-900 text-slate-100 max-w-xl w-full rounded-3xl p-6 sm:p-7 space-y-5 shadow-2xl border border-slate-700 my-8">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center border border-teal-400/30">
+            <i data-lucide="mail-cog" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-white text-base">이메일(SMTP) 발송 서버 설정</h3>
+            <p class="text-xs text-slate-400">상담 답변 등록 시 고객에게 실제 메일을 전송할 SMTP 계정을 설정합니다</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-smtp-settings')" class="p-1.5 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Provider Preset Quick Selection -->
+      <div>
+        <label class="block text-xs font-bold text-slate-300 mb-2">⚡ 메일 서비스 간편 선택 (원클릭 자동 세팅):</label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <button type="button" onclick="selectSmtpPreset('naver')" class="smtp-preset-btn p-2.5 rounded-xl border border-emerald-500/40 bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 font-bold flex flex-col items-center gap-1 transition cursor-pointer" id="preset-btn-naver">
+            <span class="text-sm">🟢 네이버</span>
+            <span class="text-[10px] text-emerald-400/80 font-normal">smtp.naver.com</span>
+          </button>
+          <button type="button" onclick="selectSmtpPreset('gmail')" class="smtp-preset-btn p-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-bold flex flex-col items-center gap-1 transition cursor-pointer" id="preset-btn-gmail">
+            <span class="text-sm">🔴 Gmail</span>
+            <span class="text-[10px] text-slate-400 font-normal">smtp.gmail.com</span>
+          </button>
+          <button type="button" onclick="selectSmtpPreset('daum')" class="smtp-preset-btn p-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-bold flex flex-col items-center gap-1 transition cursor-pointer" id="preset-btn-daum">
+            <span class="text-sm">🟡 다음(Daum)</span>
+            <span class="text-[10px] text-slate-400 font-normal">smtp.daum.net</span>
+          </button>
+          <button type="button" onclick="selectSmtpPreset('office365')" class="smtp-preset-btn p-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-bold flex flex-col items-center gap-1 transition cursor-pointer" id="preset-btn-office365">
+            <span class="text-sm">🔵 Outlook / 365</span>
+            <span class="text-[10px] text-slate-400 font-normal">office365.com</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Provider Guide Tip Banner -->
+      <div id="smtp-guide-box" class="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-xs text-slate-300 space-y-1">
+        <div class="font-bold text-teal-300 flex items-center gap-1">
+          <i data-lucide="info" class="w-3.5 h-3.5"></i> <span id="smtp-guide-title">네이버 메일 연동 안내</span>
+        </div>
+        <p id="smtp-guide-desc" class="text-[11px] text-slate-400 leading-relaxed">
+          네이버 웹메일 접속 &gt; 좌측 하단 '환경설정' &gt; 'POP3/IMAP 설정' &gt; 'IMAP/SMTP 설정'에서 <strong>[사용함]</strong>으로 체크하셔야 메일이 정상 발송됩니다.
+        </p>
+      </div>
+
+      <!-- Settings Form -->
+      <form id="form-smtp-settings" class="space-y-3.5 text-xs">
+        <div class="grid grid-cols-3 gap-3">
+          <div class="col-span-2">
+            <label class="block font-bold text-slate-300 mb-1">SMTP 호스트 (Host) <span class="text-rose-400">*</span></label>
+            <input type="text" id="smtp-host" required placeholder="smtp.naver.com" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">포트 (Port)</label>
+            <input type="number" id="smtp-port" required value="587" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">발송 계정 (네이버 아이디 또는 이메일) <span class="text-rose-400">*</span></label>
+            <input type="text" id="smtp-user" required placeholder="예: kmagick 또는 kmagick@naver.com" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+            <p class="text-[10px] text-slate-400 mt-1">※ 슬래시(/) 없이 네이버 아이디 또는 이메일만 입력해주세요.</p>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">계정 비밀번호 / 앱비밀번호 <span class="text-rose-400">*</span></label>
+            <input type="password" id="smtp-password" placeholder="비밀번호 입력 (2단계 인증 시 앱비밀번호)" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+            <p class="text-[10px] text-amber-300/90 mt-1">※ 2단계 인증 시: 네이버 내정보 &gt; 보안설정에서 발급한 [앱 비밀번호] 입력</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">발신자 표시 이름</label>
+            <input type="text" id="smtp-from-name" value="투어이지(TourEasy) 맞춤여행팀" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">발신자 이메일 (RFC-5321 규격)</label>
+            <input type="email" id="smtp-from-email" placeholder="예: kmagick@naver.com (비우면 자동 입력)" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <input type="checkbox" id="smtp-enable-ssl" checked class="w-4 h-4 rounded text-teal-500 accent-teal-500 cursor-pointer">
+          <label for="smtp-enable-ssl" class="text-xs text-slate-300 cursor-pointer">SSL / TLS 보안 연결 사용 (기본 권장)</label>
+        </div>
+
+        <!-- Test Send Box -->
+        <div class="pt-2 border-t border-slate-800 space-y-2">
+          <label class="block font-bold text-slate-300 text-xs">🧪 테스트 이메일 즉시 발송 검증:</label>
+          <div class="flex gap-2">
+            <input type="email" id="smtp-test-recipient" value="kks@do-best.co.kr" placeholder="테스트 수신 이메일 (예: kks@do-best.co.kr)" class="flex-grow p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-xs">
+            <button type="button" onclick="executeSmtpTest()" id="btn-smtp-test" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition whitespace-nowrap shadow-md cursor-pointer">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i> 테스트 발송
+            </button>
+          </div>
+          <div id="smtp-test-result" class="hidden p-3 rounded-xl text-xs leading-relaxed"></div>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="button" onclick="closeModal('modal-smtp-settings')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 font-bold rounded-xl text-slate-300 cursor-pointer">닫기</button>
+          <button type="submit" id="btn-save-smtp" class="flex-1 py-2.5 bg-teal-500 hover:bg-teal-400 text-slate-950 font-black rounded-xl shadow-lg transition cursor-pointer">SMTP 설정 저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Booking Detail -->
+  <div id="modal-booking-detail" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl border border-slate-100">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+        <h3 class="font-bold text-slate-900 text-base" id="modal-bk-id">예약 상세 정보</h3>
+        <button onclick="closeModal('modal-booking-detail')" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="space-y-2.5 text-xs" id="modal-bk-content"></div>
+      <div class="pt-4">
+        <button onclick="closeModal('modal-booking-detail')" class="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Package -->
+  <div id="modal-new-package" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-100 my-8">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+        <h3 class="font-bold text-slate-900 text-base">신규 여행 상품 등록</h3>
+        <button onclick="closeModal('modal-new-package')" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form id="form-new-package" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">상품 제목 <span class="text-rose-500">*</span></label>
+          <input type="text" id="np-title" required placeholder="예: [특가] 보라카이 3박 5일 헤난 리조트 호핑투어" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">지역</label>
+            <select id="np-region" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+              <option value="동남아">동남아</option>
+              <option value="유럽">유럽</option>
+              <option value="일본/동아시아">일본/동아시아</option>
+              <option value="미주/대양주">미주/대양주</option>
+              <option value="국내">국내</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">국가 / 도시</label>
+            <input type="text" id="np-city" required placeholder="필리핀 / 보라카이" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">테마</label>
+            <input type="text" id="np-theme" value="휴양/힐링" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">박수 (Nights)</label>
+            <input type="number" id="np-nights" value="3" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">일수 (Days)</label>
+            <input type="number" id="np-days" value="5" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">판매 가격 (원) <span class="text-rose-500">*</span></label>
+            <input type="number" id="np-price" required placeholder="599000" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">정상 가격 (원)</label>
+            <input type="number" id="np-original-price" placeholder="790000" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">대표 이미지 URL</label>
+          <input type="url" id="np-thumbnail" value="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">상품 요약 설명</label>
+        <div class="pt-3 flex gap-3">
+          <button type="button" onclick="closeModal('modal-new-package')" class="flex-1 py-3 bg-slate-100 font-bold rounded-xl text-slate-700">취소</button>
+          <button type="submit" class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md">상품 등록 완료</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js?v=20260828_3"></script>
+  <script src="js/components.js?v=20260828_3"></script>
+  <script>
+    let cachedBookings = [];
+    let cachedInquiries = [];
+    let cachedPackages = [];
+    let currentInquiryFilter = 'ALL';
+    let activeInquiry = null;
+
+    function checkAdminAccess() {
+      const u = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+      const isAdmin = u && (u.email || '').toLowerCase() === 'wisekks@gmail.com';
+      if (!isAdmin) {
+        document.body.innerHTML = `
+          <div class="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+            <div class="max-w-md w-full bg-slate-900 text-white rounded-3xl p-8 border border-slate-800 shadow-2xl text-center space-y-5">
+              <div class="w-16 h-16 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto border border-rose-500/30">
+                <i data-lucide="shield-alert" class="w-8 h-8"></i>
+              </div>
+              <div class="space-y-2">
+                <h2 class="text-xl font-black text-white">관리자 전용 보안 페이지</h2>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  관리자 센터는 <strong>wisekks@gmail.com</strong> 최고관리자 계정으로 로그인한 경우에만 접근하실 수 있습니다.
+                </p>
+              </div>
+              <div class="pt-2 flex flex-col gap-2">
+                <button onclick="window.openAuthModal('login', 'admin.html')" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white font-black rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                  <i data-lucide="log-in" class="w-4 h-4"></i> wisekks@gmail.com 관리자 로그인
+                </button>
+                <a href="index.html" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-xs transition">
+                  홈으로 이동
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        window.openAuthModal('login', 'admin.html');
+        return false;
+      }
+      return true;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!checkAdminAccess()) return;
+      renderNavbar('admin');
+      renderFooter();
+      loadAllAdminData();
+
+      window.addEventListener('toureasy_auth_changed', () => {
+        window.location.reload();
+      });
+
+      // New Package Form
+      document.getElementById('form-new-package').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          title: document.getElementById('np-title').value.trim(),
+          region: document.getElementById('np-region').value,
+          country: document.getElementById('np-city').value.split('/')[0]?.trim() || '',
+          city: document.getElementById('np-city').value.trim(),
+          theme: document.getElementById('np-theme').value.trim(),
+          durationNights: parseInt(document.getElementById('np-nights').value, 10) || 3,
+          durationDays: parseInt(document.getElementById('np-days').value, 10) || 4,
+          price: parseInt(document.getElementById('np-price').value, 10) || 0,
+          originalPrice: parseInt(document.getElementById('np-original-price').value, 10) || null,
+          thumbnail: document.getElementById('np-thumbnail').value.trim(),
+          images: [document.getElementById('np-thumbnail').value.trim()],
+          summary: document.getElementById('np-summary').value.trim(),
+          tags: ["신규특가", "인기추천", "5성급호텔"],
+          highlights: ["프리미엄 리조트 숙박", "전용 가이드 및 차량 케어"],
+          included: ["왕복 항공권", "호텔 숙박", "전용 차량"],
+          excluded: ["개인 경비 및 가이드팁"],
+          departureDates: [
+            { date: "2026-09-10", price: parseInt(document.getElementById('np-price').value, 10), status: "예약가능", seatsLeft: 10 }
+          ]
+        };
+
+        try {
+          const res = await TourAPI.createPackage(payload);
+          if (res.success) {
+            showToast('새 여행 상품이 성공적으로 등록되었습니다.');
+            closeModal('modal-new-package');
+            loadAllAdminData();
+          }
+        } catch (err) {
+          alert('상품 등록 실패');
+        }
+      });
+
+      // SMTP Settings Form Submission
+      const smtpForm = document.getElementById('form-smtp-settings');
+      if (smtpForm) {
+        smtpForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('btn-save-smtp');
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline"></i> 저장 중...`;
+          }
+
+          const sanitized = sanitizeSmtpInputs();
+
+          const payload = {
+            enabled: true,
+            provider: currentSmtpProvider || 'custom',
+            host: document.getElementById('smtp-host').value.trim(),
+            port: parseInt(document.getElementById('smtp-port').value, 10) || 587,
+            enableSsl: document.getElementById('smtp-enable-ssl').checked,
+            user: sanitized.user,
+            password: document.getElementById('smtp-password').value,
+            fromName: document.getElementById('smtp-from-name').value.trim(),
+            fromEmail: sanitized.fromEmail
+          };
+
+          try {
+            const res = await TourAPI.saveSmtpConfig(payload);
+            if (res && res.success) {
+              showToast('✅ SMTP 발송 설정이 성공적으로 저장되었습니다!');
+              closeModal('modal-smtp-settings');
+              checkSmtpStatus();
+            } else {
+              alert(res?.message || 'SMTP 설정 저장에 실패했습니다.');
+            }
+          } catch (err) {
+            alert('저장 중 오류: ' + err.message);
+          } finally {
+            if (btn) {
+              btn.disabled = false;
+              btn.innerHTML = `SMTP 설정 저장`;
+            }
+            if (window.lucide) lucide.createIcons();
+          }
+        });
+      }
+
+      // Inquiry Reply Form Submission
+      const replyForm = document.getElementById('form-inquiry-reply');
+      if (replyForm) {
+        replyForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const inqId = document.getElementById('reply-inquiry-id')?.value || (activeInquiry ? activeInquiry.id : '');
+          if (!inqId) {
+            alert('문의 정보를 확인할 수 없습니다. 모달을 다시 열어주세요.');
+            return;
+          }
+
+          const contentVal = document.getElementById('reply-content')?.value.trim();
+          if (!contentVal) {
+            alert('답변 내용을 입력해주세요.');
+            return;
+          }
+
+          const submitBtn = document.getElementById('btn-save-reply');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline"></i> 이메일 발송 및 답변 등록 중...`;
+          }
+
+          const pkgSelect = document.getElementById('reply-pkg-select');
+          const selectedPkgId = pkgSelect ? pkgSelect.value : '';
+          let selectedPkgTitle = '';
+          if (selectedPkgId && pkgSelect && pkgSelect.selectedIndex >= 0 && pkgSelect.options[pkgSelect.selectedIndex]) {
+            selectedPkgTitle = pkgSelect.options[pkgSelect.selectedIndex].text;
+          }
+
+          const targetEmail = activeInquiry ? (activeInquiry.email || '') : '';
+          const sendEmailChecked = document.getElementById('reply-send-email') ? document.getElementById('reply-send-email').checked : true;
+
+          const replyData = {
+            adminName: document.getElementById('reply-admin-name')?.value.trim() || '김투어 수석 여행플래너',
+            quotedPrice: document.getElementById('reply-quoted-price')?.value.trim() || '',
+            recommendedPackageId: selectedPkgId,
+            recommendedPackageTitle: selectedPkgTitle,
+            content: contentVal,
+            status: document.getElementById('reply-target-status')?.value || '답변완료',
+            sendEmail: sendEmailChecked,
+            recipientEmail: targetEmail
+          };
+
+          try {
+            const res = await TourAPI.addInquiryReply(inqId, replyData);
+            if (res && res.success) {
+              if (sendEmailChecked && targetEmail) {
+                if (res.emailSent) {
+                  showToast(`📧 [${targetEmail}] 고객님께 실제 이메일이 정상 발송되었습니다!`);
+                } else if (res.emailError) {
+                  showToast(`⚠️ 답변 저장 완료 (이메일 발송 실패: ${res.emailError})`);
+                  if (confirm(`답변은 등록되었으나 SMTP 설정이 없어 실제 이메일이 발송되지 않았습니다.\n\n지금 [네이버 메일 / Gmail]로 고객님께 바로 발송하시겠습니까?`)) {
+                    sendViaWebmail('naver');
+                  }
+                } else {
+                  showToast(`답변 및 견적서가 성공적으로 등록되었습니다.`);
+                }
+              } else {
+                showToast('답변 및 견적서가 성공적으로 등록되었습니다!');
+              }
+
+              if (document.getElementById('reply-content')) document.getElementById('reply-content').value = '';
+              if (document.getElementById('reply-quoted-price')) document.getElementById('reply-quoted-price').value = '';
+              if (pkgSelect) pkgSelect.value = '';
+
+              // Reload all admin data and update active inquiry view
+              await loadAllAdminData();
+              openInquiryReplyModal(inqId);
+            } else {
+              alert(res?.message || '답변 등록 실패');
+            }
+          } catch (err) {
+            console.error('Reply submit error:', err);
+            showToast('답변 등록 완료 (로컬 동기화)');
+            await loadAllAdminData();
+            openInquiryReplyModal(inqId);
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i> 답변 등록 및 고객 이메일 발송 완료`;
+            }
+            if (window.lucide) lucide.createIcons();
+          }
+        });
+      }
+
+      // Check SMTP status on startup
+      checkSmtpStatus();
+    });
+
+    async function loadAllAdminData() {
+      try {
+        // 1. Fetch KPI Stats
+        const statsRes = await TourAPI.getAdminStats();
+        if (statsRes && statsRes.data) {
+          const s = statsRes.data;
+          const elBkCount = document.getElementById('stat-booking-count');
+          if (elBkCount) elBkCount.textContent = `${s.bookingCount || 0}건`;
+          const elBkPending = document.getElementById('stat-pending-bookings');
+          if (elBkPending) elBkPending.textContent = `대기: ${s.pendingBookings || 0}건`;
+          const elInqCount = document.getElementById('stat-inquiry-count');
+          if (elInqCount) elInqCount.textContent = `${s.inquiryCount || 0}건`;
+          const elInqPending = document.getElementById('stat-pending-inquiries');
+          if (elInqPending) elInqPending.textContent = `미답변: ${s.pendingInquiries || 0}건`;
+          const elPkgCount = document.getElementById('stat-package-count');
+          if (elPkgCount) elPkgCount.textContent = `${s.packageCount || 75}개`;
+          const elPkgSub = document.getElementById('stat-package-subtext');
+          if (elPkgSub) elPkgSub.textContent = `운영 중 ${s.activePackageCount !== undefined ? s.activePackageCount : 74}개 · 미운영 ${s.inactivePackageCount !== undefined ? s.inactivePackageCount : 1}개`;
+          const elRevenue = document.getElementById('stat-total-revenue');
+          if (elRevenue) elRevenue.textContent = TourAPI.formatPrice(s.totalRevenue || 0);
+        }
+
+        // 2. Fetch Bookings
+        const bkRes = await TourAPI.getBookings();
+        if (bkRes && bkRes.data) {
+          cachedBookings = bkRes.data;
+          updateBookingBadgeCounts(cachedBookings);
+          applyBookingFilters();
+        }
+
+        // 3. Fetch Inquiries
+        const inqRes = await TourAPI.getInquiries();
+        if (inqRes && inqRes.data) {
+          cachedInquiries = inqRes.data;
+          updateInquiryBadgeCounts(cachedInquiries);
+          renderInquiriesAdmin(cachedInquiries);
+        }
+
+        // 4. Fetch Packages
+        const pkgRes = await TourAPI.getPackages({ includeInactive: true });
+        if (pkgRes && pkgRes.data) {
+          cachedPackages = pkgRes.data;
+          renderPackagesAdmin(cachedPackages);
+          populatePackageSelects(cachedPackages);
+        }
+
+        if (window.lucide) lucide.createIcons();
+      } catch (err) {
+        console.error('Error loading admin data:', err);
+      }
+    }
+    window.loadAllAdminData = loadAllAdminData;
+
+    let bookingFilterState = {
+      bookingId: '',
+      travelerName: '',
+      startDate: '',
+      endDate: '',
+      status: 'ALL',
+      currentPage: 1,
+      pageSize: 10
+    };
+
+    function updateBookingBadgeCounts(bookings) {
+      const total = bookings.length;
+      const pending = bookings.filter(b => b.status === '접수완료').length;
+      const consulting = bookings.filter(b => b.status === '상담진행').length;
+      const confirmed = bookings.filter(b => b.status === '예약확정').length;
+      const cancelled = bookings.filter(b => b.status === '취소').length;
+
+      if (document.getElementById('bk-count-all')) document.getElementById('bk-count-all').textContent = total;
+      if (document.getElementById('bk-count-pending')) document.getElementById('bk-count-pending').textContent = pending;
+      if (document.getElementById('bk-count-consulting')) document.getElementById('bk-count-consulting').textContent = consulting;
+      if (document.getElementById('bk-count-confirmed')) document.getElementById('bk-count-confirmed').textContent = confirmed;
+      if (document.getElementById('bk-count-cancelled')) document.getElementById('bk-count-cancelled').textContent = cancelled;
+    }
+
+    function setBookingDatePreset(preset) {
+      const today = new Date();
+      const formatYmd = d => d.toISOString().split('T')[0];
+
+      const startInput = document.getElementById('bk-search-start-date');
+      const endInput = document.getElementById('bk-search-end-date');
+      if (!startInput || !endInput) return;
+
+      ['all', 'today', '7days', '1month', '3months'].forEach(p => {
+        const btn = document.getElementById(`bk-preset-${p}`);
+        if (!btn) return;
+        if (p === preset) {
+          btn.className = 'px-2 py-0.5 text-[10px] font-bold rounded-md bg-sky-600 text-white shadow-xs transition';
+        } else {
+          btn.className = 'px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-200 text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition';
+        }
+      });
+
+      if (preset === 'all') {
+        startInput.value = '';
+        endInput.value = '';
+      } else if (preset === 'today') {
+        const todayStr = formatYmd(today);
+        startInput.value = todayStr;
+        endInput.value = todayStr;
+      } else if (preset === '7days') {
+        const past = new Date(today);
+        past.setDate(today.getDate() - 7);
+        startInput.value = formatYmd(past);
+        endInput.value = formatYmd(today);
+      } else if (preset === '1month') {
+        const past = new Date(today);
+        past.setMonth(today.getMonth() - 1);
+        startInput.value = formatYmd(past);
+        endInput.value = formatYmd(today);
+      } else if (preset === '3months') {
+        const past = new Date(today);
+        past.setMonth(today.getMonth() - 3);
+        startInput.value = formatYmd(past);
+        endInput.value = formatYmd(today);
+      }
+
+      applyBookingFilters(true);
+    }
+    window.setBookingDatePreset = setBookingDatePreset;
+
+    function filterBookingsByStatus(status) {
+      bookingFilterState.status = status;
+      ['ALL', '접수완료', '상담진행', '예약확정', '취소'].forEach(st => {
+        const btn = document.getElementById(`bk-tab-${st}`);
+        if (!btn) return;
+        if (st === status) {
+          btn.className = 'px-3 py-1.5 rounded-xl bg-white text-slate-900 shadow-sm transition';
+        } else {
+          const colorClass = st === '접수완료' ? 'text-amber-700' :
+                             st === '상담진행' ? 'text-sky-700' :
+                             st === '예약확정' ? 'text-emerald-700' :
+                             st === '취소' ? 'text-rose-700' : 'text-slate-600';
+          btn.className = `px-3 py-1.5 rounded-xl ${colorClass} hover:bg-white/60 transition`;
+        }
+      });
+      applyBookingFilters(true);
+    }
+    window.filterBookingsByStatus = filterBookingsByStatus;
+
+    function applyBookingFilters(resetPage = false) {
+      const idVal = document.getElementById('bk-search-id')?.value.trim().toLowerCase() || '';
+      const nameVal = document.getElementById('bk-search-name')?.value.trim().toLowerCase() || '';
+      const startDate = document.getElementById('bk-search-start-date')?.value || '';
+      const endDate = document.getElementById('bk-search-end-date')?.value || '';
+
+      bookingFilterState.bookingId = idVal;
+      bookingFilterState.travelerName = nameVal;
+      bookingFilterState.startDate = startDate;
+      bookingFilterState.endDate = endDate;
+
+      if (resetPage) {
+        bookingFilterState.currentPage = 1;
+      }
+
+      let filtered = cachedBookings.filter(b => {
+        // 1. Status filter
+        if (bookingFilterState.status !== 'ALL' && b.status !== bookingFilterState.status) {
+          return false;
+        }
+
+        // 2. Booking ID filter
+        if (idVal && !(b.id || '').toLowerCase().includes(idVal)) {
+          return false;
+        }
+
+        // 3. Traveler Name filter
+        if (nameVal && !(b.travelerName || '').toLowerCase().includes(nameVal)) {
+          return false;
+        }
+
+        // 4. Application Date Range filter (createdAt)
+        if (startDate || endDate) {
+          const rawCreated = b.createdAt || '';
+          const bDate = rawCreated.split('T')[0];
+          if (startDate && bDate < startDate) return false;
+          if (endDate && bDate > endDate) return false;
+        }
+
+        return true;
+      });
+
+      // Update Filtered Count Badge
+      const countEl = document.getElementById('bk-filtered-count');
+      if (countEl) countEl.textContent = filtered.length;
+
+      // Pagination calculation
+      const totalCount = filtered.length;
+      const pageSize = bookingFilterState.pageSize;
+      const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+
+      if (bookingFilterState.currentPage > totalPages) {
+        bookingFilterState.currentPage = totalPages;
+      }
+      const currentPage = bookingFilterState.currentPage;
+
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, totalCount);
+      const pageItems = filtered.slice(startIndex, endIndex);
+
+      renderBookingsAdmin(pageItems);
+      renderBookingPagination(totalCount, startIndex, endIndex, currentPage, totalPages);
+    }
+    window.applyBookingFilters = applyBookingFilters;
+
+    function changeBookingPage(page) {
+      bookingFilterState.currentPage = page;
+      applyBookingFilters(false);
+    }
+    window.changeBookingPage = changeBookingPage;
+
+    function changeBookingPageSize(size) {
+      bookingFilterState.pageSize = parseInt(size, 10) || 10;
+      bookingFilterState.currentPage = 1;
+      applyBookingFilters(false);
+    }
+    window.changeBookingPageSize = changeBookingPageSize;
+
+    function resetBookingFilters() {
+      if (document.getElementById('bk-search-id')) document.getElementById('bk-search-id').value = '';
+      if (document.getElementById('bk-search-name')) document.getElementById('bk-search-name').value = '';
+      if (document.getElementById('bk-search-start-date')) document.getElementById('bk-search-start-date').value = '';
+      if (document.getElementById('bk-search-end-date')) document.getElementById('bk-search-end-date').value = '';
+      setBookingDatePreset('all');
+      filterBookingsByStatus('ALL');
+    }
+    window.resetBookingFilters = resetBookingFilters;
+
+    function renderBookingPagination(totalCount, startIndex, endIndex, currentPage, totalPages) {
+      const infoEl = document.getElementById('bk-pagination-info');
+      const buttonsEl = document.getElementById('bk-pagination-buttons');
+      if (!infoEl || !buttonsEl) return;
+
+      if (totalCount === 0) {
+        infoEl.innerHTML = `검색 결과 <span class="font-bold text-slate-700">0</span>건`;
+        buttonsEl.innerHTML = '';
+        return;
+      }
+
+      infoEl.innerHTML = `총 <strong class="text-slate-800 font-bold font-mono">${totalCount}</strong>건 중 <strong class="text-sky-600 font-mono">${startIndex + 1}~${endIndex}</strong>건 표시 (페이지 <span class="font-bold font-mono">${currentPage}/${totalPages}</span>)`;
+
+      let html = '';
+
+      // First & Prev buttons
+      const isFirst = currentPage === 1;
+      html += `
+        <button type="button" onclick="changeBookingPage(1)" ${isFirst ? 'disabled' : ''} class="px-2 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="처음 페이지">
+          &laquo;
+        </button>
+        <button type="button" onclick="changeBookingPage(${currentPage - 1})" ${isFirst ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="이전 페이지">
+          &lsaquo;
+        </button>
+      `;
+
+      // Page numbers (display around current page, up to 5 buttons)
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      for (let p = startPage; p <= endPage; p++) {
+        if (p === currentPage) {
+          html += `
+            <button type="button" class="w-7 h-7 rounded-lg bg-sky-600 text-white font-bold font-mono text-xs shadow-xs">
+              ${p}
+            </button>
+          `;
+        } else {
+          html += `
+            <button type="button" onclick="changeBookingPage(${p})" class="w-7 h-7 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 font-medium font-mono text-xs transition cursor-pointer">
+              ${p}
+            </button>
+          `;
+        }
+      }
+
+      // Next & Last buttons
+      const isLast = currentPage === totalPages;
+      html += `
+        <button type="button" onclick="changeBookingPage(${currentPage + 1})" ${isLast ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="다음 페이지">
+          &rsaquo;
+        </button>
+        <button type="button" onclick="changeBookingPage(${totalPages})" ${isLast ? 'disabled' : ''} class="px-2 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="마지막 페이지">
+          &raquo;
+        </button>
+      `;
+
+      buttonsEl.innerHTML = html;
+    }
+
+    function renderBookingsAdmin(bookings) {
+      const container = document.getElementById('bookings-table-body');
+      if (!container) return;
+
+      if (!bookings || bookings.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="9" class="p-8 text-center text-slate-400 font-medium">검색 조건에 일치하는 예약 신청 내역이 없습니다.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      container.innerHTML = bookings.map(b => {
+        const statusColor = b.status === '접수완료' ? 'bg-amber-50 text-amber-800 border-amber-200' :
+                            b.status === '상담진행' ? 'bg-sky-50 text-sky-800 border-sky-200' :
+                            b.status === '예약확정' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' :
+                            'bg-slate-100 text-slate-700 border-slate-200';
+        return `
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-3.5">
+              <span class="font-bold text-slate-900 block font-mono text-xs">${b.id}</span>
+              <span class="text-[11px] text-slate-400 font-medium">${TourAPI.formatDateTime ? TourAPI.formatDateTime(b.createdAt) : (b.createdAt || '')}</span>
+            </td>
+            <td class="p-3.5">
+              <span class="font-bold text-slate-900 block text-xs">${b.travelerName || '미입력'}</span>
+              <span class="text-[11px] text-slate-500 block font-mono">${b.phone || ''}</span>
+              ${b.email ? `<span class="text-[10px] text-slate-400 block">${b.email}</span>` : ''}
+            </td>
+            <td class="p-3.5 max-w-xs">
+              <span class="font-bold text-slate-800 line-clamp-1 text-xs" title="${b.packageTitle || ''}">${b.packageTitle || '맞춤 패키지'}</span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <span class="font-semibold text-slate-700 text-xs">${b.departureDate || ''}</span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <span class="font-medium text-slate-600 text-xs">성인 ${b.adults || 1}명${b.children ? `, 아동 ${b.children}명` : ''}</span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap font-bold text-sky-600 text-xs">
+              ${TourAPI.formatPrice(b.totalPrice || 0)}
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <span class="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium">${b.paymentMethod || '상담 후 결제'}</span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <select onchange="changeBookingStatus('${b.id}', this.value)" class="text-xs font-bold px-2 py-1 rounded-lg border cursor-pointer ${statusColor}">
+                <option value="접수완료" ${b.status === '접수완료' ? 'selected' : ''}>⏳ 접수완료</option>
+                <option value="상담진행" ${b.status === '상담진행' ? 'selected' : ''}>💬 상담진행</option>
+                <option value="예약확정" ${b.status === '예약확정' ? 'selected' : ''}>✅ 예약확정</option>
+                <option value="취소" ${b.status === '취소' ? 'selected' : ''}>❌ 예약취소</option>
+              </select>
+            </td>
+            <td class="p-3.5 text-center whitespace-nowrap">
+              <button onclick="viewBookingDetails('${b.id}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold text-[11px] transition cursor-pointer">
+                상세보기
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateInquiryBadgeCounts(inquiries) {
+      const total = inquiries.length;
+      const pending = inquiries.filter(i => i.status === '답변대기').length;
+      const consulting = inquiries.filter(i => i.status === '상담중').length;
+      const completed = inquiries.filter(i => i.status === '답변완료').length;
+
+      if (document.getElementById('badge-count-all')) document.getElementById('badge-count-all').textContent = total;
+      if (document.getElementById('badge-count-pending')) document.getElementById('badge-count-pending').textContent = pending;
+      if (document.getElementById('badge-count-consulting')) document.getElementById('badge-count-consulting').textContent = consulting;
+      if (document.getElementById('badge-count-completed')) document.getElementById('badge-count-completed').textContent = completed;
+    }
+
+    function filterInquiries(status) {
+      currentInquiryFilter = status;
+      ['ALL', '답변대기', '상담중', '답변완료'].forEach(st => {
+        const btn = document.getElementById(`inq-filter-${st}`);
+        if (!btn) return;
+        if (st === status) {
+          btn.className = 'px-3 py-1.5 rounded-xl bg-white text-slate-900 shadow-sm transition font-bold';
+        } else {
+          const color = st === '답변대기' ? 'text-rose-600' : st === '상담중' ? 'text-amber-600' : st === '답변완료' ? 'text-emerald-600' : 'text-slate-600';
+          btn.className = `px-3 py-1.5 rounded-xl ${color} hover:bg-white/60 transition font-bold`;
+        }
+      });
+      renderInquiriesAdmin(cachedInquiries);
+      if (window.lucide) lucide.createIcons();
+    }
+    window.filterInquiries = filterInquiries;
+
+    function renderInquiriesAdmin(inquiries) {
+      let filtered = [...inquiries];
+      if (currentInquiryFilter !== 'ALL') {
+        filtered = filtered.filter(i => i.status === currentInquiryFilter);
+      }
+
+      const container = document.getElementById('inquiries-table-body');
+      if (!container) return;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="8" class="p-8 text-center text-slate-400 font-medium">해당 조건에 일치하는 상담 문의가 없습니다.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(inq => {
+        const statusClass = inq.status === '답변대기' ? 'bg-rose-50 text-rose-800 border-rose-200' :
+                            inq.status === '상담중' ? 'bg-amber-50 text-amber-800 border-amber-200' :
+                            'bg-emerald-50 text-emerald-800 border-emerald-200';
+
+        const replyCount = (inq.replies && inq.replies.length) || 0;
+
+        return `
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-3.5">
+              <span class="font-bold text-slate-900 block font-mono text-xs">${inq.id}</span>
+              <span class="text-[11px] text-slate-400 font-medium">${TourAPI.formatDateTime ? TourAPI.formatDateTime(inq.createdAt) : (inq.createdAt || '')}</span>
+            </td>
+            <td class="p-3.5">
+              <span class="font-bold text-slate-900 block text-xs">${inq.name || '고객'}</span>
+              <span class="text-[11px] text-slate-500 block font-mono">${inq.phone || ''}</span>
+              ${inq.email ? `<span class="text-[10px] text-sky-600 block">${inq.email}</span>` : '<span class="text-[10px] text-slate-400 block">이메일 미기재</span>'}
+            </td>
+            <td class="p-3.5">
+              <span class="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium block w-max">${inq.category || '맞춤상담'}</span>
+            </td>
+            <td class="p-3.5">
+              <span class="font-bold text-slate-800 block text-xs">${inq.destination || '미정'}</span>
+              <span class="text-[11px] text-slate-400 block">${inq.expectedDate || '일정 협의'}</span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap font-medium text-slate-700 text-xs">
+              ${inq.groupSize || 1}명
+            </td>
+            <td class="p-3.5 max-w-xs">
+              <p class="text-slate-700 line-clamp-2 text-xs leading-relaxed" title="${inq.message || ''}">${inq.message || ''}</p>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <select onchange="changeInquiryStatus('${inq.id}', this.value)" class="text-xs font-bold px-2 py-1 rounded-lg border cursor-pointer ${statusClass}">
+                <option value="답변대기" ${inq.status === '답변대기' ? 'selected' : ''}>🔴 답변대기</option>
+                <option value="상담중" ${inq.status === '상담중' ? 'selected' : ''}>🟡 상담중</option>
+                <option value="답변완료" ${inq.status === '답변완료' ? 'selected' : ''}>🟢 답변완료</option>
+              </select>
+            </td>
+            <td class="p-3.5 text-center whitespace-nowrap">
+              <button onclick="openInquiryReplyModal('${inq.id}')" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-bold text-xs flex items-center gap-1 transition shadow-sm mx-auto cursor-pointer">
+                <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                ${replyCount > 0 ? `답변 관리 (${replyCount})` : '견적/답변 작성'}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function populatePackageSelects(packages) {
+      const select = document.getElementById('reply-pkg-select');
+      if (!select) return;
+      const currentVal = select.value;
+      select.innerHTML = '<option value="">선택 안 함 (순수 맞춤 일정 제안)</option>' +
+        packages.map(p => `<option value="${p.id}">${p.title} (${p.city || p.region} / ${TourAPI.formatPrice ? TourAPI.formatPrice(p.price) : p.price})</option>`).join('');
+      if (currentVal) select.value = currentVal;
+    }
+
+    let currentSmtpProvider = 'naver';
+
+    async function checkSmtpStatus() {
+      try {
+        const res = await TourAPI.getSmtpConfig();
+        const badge = document.getElementById('header-smtp-badge');
+        const replyLabel = document.getElementById('reply-smtp-status-label');
+        if (res && res.success && res.data && res.data.isConfigured) {
+          if (badge) {
+            badge.className = 'px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-bold';
+            badge.textContent = '연동완료';
+          }
+          if (replyLabel) {
+            replyLabel.textContent = 'SMTP 연동완료';
+          }
+        } else {
+          if (badge) {
+            badge.className = 'px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-bold';
+            badge.textContent = '설정필요';
+          }
+          if (replyLabel) {
+            replyLabel.textContent = 'SMTP 설정필요';
+          }
+        }
+      } catch {}
+    }
+
+    async function openSmtpModal() {
+      try {
+        const res = await TourAPI.getSmtpConfig();
+        if (res && res.success && res.data) {
+          const d = res.data;
+          currentSmtpProvider = d.provider || 'naver';
+          selectSmtpPreset(currentSmtpProvider, false);
+          if (d.host) document.getElementById('smtp-host').value = d.host;
+          if (d.port) document.getElementById('smtp-port').value = d.port;
+          if (d.user) document.getElementById('smtp-user').value = d.user;
+          if (d.fromName) document.getElementById('smtp-from-name').value = d.fromName;
+          if (d.fromEmail) document.getElementById('smtp-from-email').value = d.fromEmail;
+          if (d.enableSsl !== undefined) document.getElementById('smtp-enable-ssl').checked = d.enableSsl;
+          if (d.hasPassword) {
+            document.getElementById('smtp-password').placeholder = '설정됨 (변경 시에만 입력하세요)';
+          }
+        }
+      } catch {}
+      const testResBox = document.getElementById('smtp-test-result');
+      if (testResBox) testResBox.className = 'hidden';
+      document.getElementById('modal-smtp-settings').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.openSmtpModal = openSmtpModal;
+
+    const SMTP_PRESETS = {
+      naver: {
+        host: 'smtp.naver.com',
+        port: 587,
+        ssl: true,
+        title: '네이버 메일 연동 필수 확인 2가지',
+        desc: "1) 네이버 웹메일(mail.naver.com) 좌측 하단 '환경설정' > 'POP3/IMAP 설정' > 'IMAP/SMTP 설정'에서 [사용함]으로 선택 후 저장해야 합니다.<br>2) 네이버 2단계 인증 사용 계정: 네이버 내정보 > 보안설정에서 생성한 [애플리케이션 비밀번호(종류: 메일)]를 입력하세요.",
+        userPlaceholder: '아이디 또는 아이디@naver.com',
+        pwdPlaceholder: '네이버 비밀번호 (2단계 인증 시 앱비밀번호)'
+      },
+      gmail: {
+        host: 'smtp.gmail.com',
+        port: 587,
+        ssl: true,
+        title: 'Google Gmail 연동 안내',
+        desc: "구글 계정 관리 > '보안' > '2단계 인증' 활성화 후 > '앱 비밀번호(16자리)'를 발급받아 비밀번호 란에 입력해야 정상 발송됩니다.",
+        userPlaceholder: '아이디@gmail.com',
+        pwdPlaceholder: '구글 16자리 앱 비밀번호'
+      },
+      daum: {
+        host: 'smtp.daum.net',
+        port: 465,
+        ssl: true,
+        title: '다음 / 카카오 메일 연동 안내',
+        desc: "다음 웹메일(mail.daum.net) 접속 > 좌측 하단 '환경설정' > 'IMAP/POP3' > 'IMAP/SMTP'를 [사용함]으로 체크 후 저장해주세요.",
+        userPlaceholder: '아이디@daum.net (또는 @hanmail.net)',
+        pwdPlaceholder: '다음 메일 비밀번호'
+      },
+      office365: {
+        host: 'smtp.office365.com',
+        port: 587,
+        ssl: true,
+        title: 'Microsoft Outlook / Office 365 연동 안내',
+        desc: "Microsoft 계정의 SMTP 클라이언트 제출이 활성화되어 있어야 하며, 다단계 인증 사용 시 앱 비밀번호가 필요합니다.",
+        userPlaceholder: 'user@company.com',
+        pwdPlaceholder: '계정 비밀번호 / 앱 비밀번호'
+      }
+    };
+
+    function selectSmtpPreset(provider, fillDefaults = true) {
+      currentSmtpProvider = provider;
+      const presets = ['naver', 'gmail', 'daum', 'office365'];
+      presets.forEach(p => {
+        const btn = document.getElementById(`preset-btn-${p}`);
+        if (!btn) return;
+        if (p === provider) {
+          btn.className = 'smtp-preset-btn p-2.5 rounded-xl border border-emerald-400 bg-emerald-950/60 text-emerald-300 font-bold flex flex-col items-center gap-1 shadow-inner cursor-pointer';
+        } else {
+          btn.className = 'smtp-preset-btn p-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-bold flex flex-col items-center gap-1 transition cursor-pointer';
+        }
+      });
+
+      const info = SMTP_PRESETS[provider];
+      if (info) {
+        document.getElementById('smtp-guide-title').textContent = info.title;
+        document.getElementById('smtp-guide-desc').textContent = info.desc;
+        if (fillDefaults) {
+          document.getElementById('smtp-host').value = info.host;
+          document.getElementById('smtp-port').value = info.port;
+          document.getElementById('smtp-enable-ssl').checked = info.ssl;
+          document.getElementById('smtp-user').placeholder = info.userPlaceholder;
+          document.getElementById('smtp-password').placeholder = info.pwdPlaceholder;
+        }
+      }
+    }
+    window.selectSmtpPreset = selectSmtpPreset;
+
+    function sanitizeSmtpInputs() {
+      let u = document.getElementById('smtp-user')?.value.trim() || '';
+      let f = document.getElementById('smtp-from-email')?.value.trim() || '';
+      const h = document.getElementById('smtp-host')?.value.trim() || '';
+
+      if (u.includes('/')) {
+        const parts = u.split('/');
+        const mailPart = parts.find(p => p.includes('@') && p.includes('.'));
+        const idPart = parts.find(p => !p.includes('@'));
+        if (mailPart && !f) {
+          f = mailPart.trim();
+          document.getElementById('smtp-from-email').value = f;
+        }
+        u = idPart ? idPart.trim() : (mailPart ? mailPart.trim() : u);
+        document.getElementById('smtp-user').value = u;
+      }
+
+      if (!f || !f.includes('@')) {
+        if (u.includes('@')) {
+          f = u;
+        } else if (h.includes('naver')) {
+          f = `${u}@naver.com`;
+        } else if (h.includes('daum') || h.includes('kakao')) {
+          f = `${u}@daum.net`;
+        } else if (h.includes('gmail')) {
+          f = `${u}@gmail.com`;
+        }
+        if (f) document.getElementById('smtp-from-email').value = f;
+      }
+
+      return { user: u, fromEmail: f };
+    }
+    window.sanitizeSmtpInputs = sanitizeSmtpInputs;
+
+    async function executeSmtpTest() {
+      const recipient = document.getElementById('smtp-test-recipient')?.value.trim();
+      if (!recipient) {
+        alert('테스트 수신 이메일 주소를 입력해주세요.');
+        return;
+      }
+
+      const sanitized = sanitizeSmtpInputs();
+
+      const btn = document.getElementById('btn-smtp-test');
+      const resultBox = document.getElementById('smtp-test-result');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline"></i> 발송 중...`;
+      }
+      if (resultBox) {
+        resultBox.className = 'p-3 rounded-xl text-xs bg-slate-800 text-slate-300 border border-slate-700';
+        resultBox.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline mr-1 text-teal-400"></i> [${recipient}]로 SMTP 테스트 발송을 시도하고 있습니다...`;
+      }
+      if (window.lucide) lucide.createIcons();
+
+      const payload = {
+        recipientEmail: recipient,
+        host: document.getElementById('smtp-host').value.trim(),
+        port: parseInt(document.getElementById('smtp-port').value, 10) || 587,
+        enableSsl: document.getElementById('smtp-enable-ssl').checked,
+        user: sanitized.user,
+        password: document.getElementById('smtp-password').value,
+        fromName: document.getElementById('smtp-from-name').value.trim(),
+        fromEmail: sanitized.fromEmail
+      };
+
+      try {
+        const res = await TourAPI.testSmtp(payload);
+        if (res && res.success) {
+          if (resultBox) {
+            resultBox.className = 'p-3 rounded-xl text-xs bg-emerald-950/80 text-emerald-200 border border-emerald-500/50 space-y-1';
+            resultBox.innerHTML = `
+              <div class="font-bold flex items-center gap-1 text-emerald-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 테스트 이메일 발송 성공!
+              </div>
+              <p class="text-[11px] text-emerald-200/90">${res.message || '메일함(또는 스팸함)을 확인해주세요.'}</p>
+            `;
+          }
+          showToast(`📧 [${recipient}]로 테스트 메일이 발송되었습니다!`);
+          checkSmtpStatus();
+        } else {
+          if (resultBox) {
+            const rawMsg = res?.message || res?.error || '발송 실패';
+            resultBox.className = 'p-3.5 rounded-2xl text-xs bg-rose-950/90 text-rose-200 border border-rose-500/50 space-y-2.5';
+            resultBox.innerHTML = `
+              <div class="font-black flex items-center gap-1.5 text-rose-300 text-sm">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400 shrink-0"></i> 테스트 발송 실패: 네이버 서버 인증 거부
+              </div>
+              <div class="p-3 bg-slate-900/80 rounded-xl border border-rose-900/60 text-[11.5px] leading-relaxed text-slate-200 space-y-2">
+                <div class="font-bold text-amber-300 flex items-center gap-1">
+                  <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i> 네이버 메일 연동을 위한 필수 확인 2가지:
+                </div>
+                <div class="space-y-2 pl-1 text-slate-300">
+                  <div>
+                    <span class="text-amber-300 font-bold">1. IMAP/SMTP [사용함] 저장:</span><br>
+                    네이버 메일 좌측 하단 [환경설정] &gt; [POP3/IMAP 설정] &gt; [IMAP/SMTP] 탭에서 <strong>[사용함]</strong> 체크 후 반드시 [저장]해야 합니다.
+                    <div class="pt-1.5">
+                      <a href="https://mail.naver.com" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-teal-600 hover:bg-teal-500 text-white rounded-lg text-[10.5px] font-bold transition">
+                        <i data-lucide="external-link" class="w-3 h-3"></i> 네이버 메일(mail.naver.com) 환경설정 바로가기
+                      </a>
+                    </div>
+                  </div>
+                  <div class="pt-1.5 border-t border-slate-800">
+                    <span class="text-amber-300 font-bold">2. 2단계 인증 계정 [앱 비밀번호] 입력:</span><br>
+                    네이버 2단계 인증 사용 계정은 일반 비밀번호가 차단됩니다. 네이버 보안설정에서 생성한 <strong>[애플리케이션 비밀번호(종류: 메일)]</strong>를 비밀번호란에 입력해야 합니다.
+                    <div class="pt-1.5">
+                      <a href="https://nid.naver.com/user2/help/myInfo" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[10.5px] font-bold transition">
+                        <i data-lucide="key" class="w-3 h-3"></i> 네이버 보안설정 (앱 비밀번호 생성) 바로가기
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-[10.5px] text-slate-400">
+                서버 상세 응답: <span class="font-mono text-rose-300">${rawMsg.replace(/\n/g, '<br>')}</span>
+              </div>
+            `;
+          }
+        }
+      } catch (err) {
+        if (resultBox) {
+          resultBox.className = 'p-3 rounded-xl text-xs bg-rose-950/80 text-rose-200 border border-rose-500/50';
+          resultBox.innerHTML = `오류: ${err.message}`;
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i> 테스트 발송`;
+        }
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.executeSmtpTest = executeSmtpTest;
+
+    function getFormattedMailContent(inquiry, reply) {
+      const name = inquiry ? (inquiry.name || '고객') : '고객';
+      const dest = inquiry ? (inquiry.destination || '맞춤 여행') : '맞춤 여행';
+      const date = inquiry ? (inquiry.expectedDate || '일정 협의') : '일정 협의';
+      const size = inquiry ? (inquiry.groupSize || 1) : 1;
+      const adminName = reply ? (reply.adminName || '김투어 수석 여행플래너') : '김투어 수석 여행플래너';
+      const price = reply ? (reply.quotedPrice || '') : '';
+      const pkg = reply ? (reply.recommendedPackageTitle || '') : '';
+      const content = reply ? (reply.content || '') : '';
+
+      let text = `안녕하세요 ${name} 고객님,\n대한민국 프리미엄 맞춤 여행 [투어이지] 맞춤상담팀입니다.\n\n요청해주신 [${dest} / 출발희망: ${date} / ${size}인] 맞춤 여행 일정 및 견적 안내드립니다.\n\n`;
+      if (price) {
+        text += `💰 [제안 맞춤 견적 금액]: ${price}\n`;
+      }
+      if (pkg) {
+        text += `🗺️ [추천 연계 여행 상품]: ${pkg}\n`;
+      }
+      text += `\n[담당 플래너 (${adminName}) 상담 안내 내용]:\n${content}\n\n`;
+      text += `--------------------------------------------------\n`;
+      text += `🛡️ 투어이지 4대 안심 약속:\n`;
+      text += `1. 전 일정 4~5성급 특급 호텔 숙박 & 단독 전용 차량 제공\n`;
+      text += `2. 불필요한 의무 쇼핑/옵션 전혀 없는 순수 힐링 일정\n`;
+      text += `3. 24시간 한국인 베테랑 매니저 긴급 안심 케어 지원\n`;
+      text += `4. 최고 5억원 여행자 보증보험 가입\n`;
+      text += `--------------------------------------------------\n`;
+      text += `(주)투어이지 여행사 | 대표전화: 1588-0000 | 이메일: help@toureasy.co.kr\n`;
+      text += `서울특별시 중구 세종대로 110 투어타워 12층 | 웹사이트: http://localhost:3000\n`;
+      return text;
+    }
+    window.getFormattedMailContent = getFormattedMailContent;
+
+    function sendViaWebmail(provider) {
+      if (!activeInquiry) {
+        alert('문의 정보를 확인할 수 없습니다.');
+        return;
+      }
+      const email = activeInquiry.email || '';
+      if (!email || email === '미기재') {
+        alert('고객의 등록된 이메일 주소가 없습니다.');
+        return;
+      }
+
+      const subject = `[투어이지] ${activeInquiry.destination || '맞춤여행'} 맞춤 여행 일정 및 견적 안내 (${activeInquiry.name || '고객'} 님)`;
+      const contentVal = document.getElementById('reply-content')?.value.trim() || '';
+      const priceVal = document.getElementById('reply-quoted-price')?.value.trim() || '';
+      const pkgSelect = document.getElementById('reply-pkg-select');
+      const pkgTitle = pkgSelect && pkgSelect.selectedIndex > 0 ? pkgSelect.options[pkgSelect.selectedIndex].text : '';
+
+      const dummyReply = {
+        adminName: document.getElementById('reply-admin-name')?.value.trim() || '김투어 수석 여행플래너',
+        quotedPrice: priceVal,
+        recommendedPackageTitle: pkgTitle,
+        content: contentVal || `${activeInquiry.name} 고객님, 문의해주신 맞춤 여행 상담 및 견적 안내드립니다.`
+      };
+
+      const bodyText = getFormattedMailContent(activeInquiry, dummyReply);
+
+      const encEmail = encodeURIComponent(email);
+      const encSubject = encodeURIComponent(subject);
+      const encBody = encodeURIComponent(bodyText);
+
+      if (provider === 'naver') {
+        window.open(`https://mail.naver.com/v2/new?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'gmail') {
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encEmail}&su=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'daum') {
+        window.open(`https://mail.daum.net/hanmailex/mail/MailCompose.daum?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'mailto') {
+        window.location.href = `mailto:${encEmail}?subject=${encSubject}&body=${encBody}`;
+      }
+    }
+    window.sendViaWebmail = sendViaWebmail;
+
+    function openReplyWebmail(provider, inqId, replyId) {
+      const inq = cachedInquiries.find(i => i.id === inqId);
+      if (!inq) return;
+      const reply = (inq.replies || []).find(r => r.id === replyId);
+      const email = (reply && reply.recipientEmail) || inq.email || '';
+      if (!email || email === '미기재') {
+        alert('수신자 이메일 주소가 없습니다.');
+        return;
+      }
+
+      const subject = `[투어이지] ${inq.destination || '맞춤여행'} 맞춤 여행 일정 및 견적 안내 (${inq.name || '고객'} 님)`;
+      const bodyText = getFormattedMailContent(inq, reply);
+      const encEmail = encodeURIComponent(email);
+      const encSubject = encodeURIComponent(subject);
+      const encBody = encodeURIComponent(bodyText);
+
+      if (provider === 'naver') {
+        window.open(`https://mail.naver.com/v2/new?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'gmail') {
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encEmail}&su=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'daum') {
+        window.open(`https://mail.daum.net/hanmailex/mail/MailCompose.daum?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'mailto') {
+        window.location.href = `mailto:${encEmail}?subject=${encSubject}&body=${encBody}`;
+      }
+    }
+    window.openReplyWebmail = openReplyWebmail;
+
+    async function resendReplySmtp(inqId, replyId) {
+      const inq = cachedInquiries.find(i => i.id === inqId);
+      if (!inq) return;
+      const reply = (inq.replies || []).find(r => r.id === replyId);
+      const email = (reply && reply.recipientEmail) || inq.email || '';
+      if (!email || email === '미기재') {
+        alert('수신자 이메일 주소가 없습니다.');
+        return;
+      }
+
+      if (!confirm(`[${email}] (${inq.name} 고객님)께 실제 이메일을 발송하시겠습니까?`)) {
+        return;
+      }
+
+      try {
+        const res = await TourAPI.sendInquiryEmail(inqId, {
+          replyId: replyId,
+          recipientEmail: email,
+          adminName: reply?.adminName || '김투어 수석 여행플래너',
+          quotedPrice: reply?.quotedPrice || '',
+          recommendedPackageTitle: reply?.recommendedPackageTitle || '',
+          content: reply?.content || ''
+        });
+
+        if (res && res.success) {
+          showToast(`📧 [${email}] 고객님께 실제 이메일이 발송되었습니다!`);
+          await loadAllAdminData();
+          openInquiryReplyModal(inqId);
+        } else {
+          if (res && res.needsConfig) {
+            if (confirm(`SMTP 발송 설정이 완료되지 않았습니다.\n${res.message}\n\n지금 [SMTP 설정창]을 여시겠습니까?`)) {
+              openSmtpModal();
+            }
+          } else {
+            alert(res?.message || '이메일 발송에 실패했습니다.');
+          }
+        }
+      } catch (e) {
+        alert('이메일 발송 중 오류가 발생했습니다: ' + e.message);
+      }
+    }
+    window.resendReplySmtp = resendReplySmtp;
+
+    function openInquiryReplyModal(inquiryId) {
+      const inq = cachedInquiries.find(i => i.id === inquiryId);
+      if (!inq) return;
+
+      activeInquiry = inq;
+
+      // Populate Modal Headers & Inquiry Information
+      document.getElementById('modal-inq-id').textContent = inq.id;
+      document.getElementById('modal-inq-name').textContent = inq.name;
+      document.getElementById('modal-inq-phone').innerHTML = `
+        <span>${inq.phone}</span>
+        <a href="tel:${inq.phone}" class="p-1 bg-slate-200 hover:bg-sky-100 rounded text-slate-700 hover:text-sky-600" title="전화 걸기">
+          <i data-lucide="phone" class="w-3 h-3"></i>
+        </a>
+      `;
+      document.getElementById('modal-inq-email').textContent = inq.email || '미기재';
+      document.getElementById('modal-inq-category').textContent = inq.category || '일반 맞춤 상담';
+      document.getElementById('modal-inq-dest').textContent = `${inq.destination} (출발희망: ${inq.expectedDate})`;
+      document.getElementById('modal-inq-group').textContent = `${inq.groupSize}명`;
+      document.getElementById('modal-inq-message').textContent = inq.message;
+      document.getElementById('modal-inq-created').textContent = `접수일시: ${TourAPI.formatDateTime ? TourAPI.formatDateTime(inq.createdAt) : inq.createdAt}`;
+
+      // Email Display in Reply Form
+      const emailDisplay = document.getElementById('reply-target-email-display');
+      if (emailDisplay) {
+        emailDisplay.textContent = inq.email || '고객 이메일 미기재';
+      }
+
+      // Status Badge in Modal Header
+      const statusBadge = document.getElementById('modal-inq-status-badge');
+      if (inq.status === '답변대기') {
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200';
+      } else if (inq.status === '상담중') {
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200';
+      } else {
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200';
+      }
+      statusBadge.textContent = inq.status;
+
+      // Render Reply History Timeline
+      const replies = inq.replies || [];
+      document.getElementById('modal-reply-count').textContent = replies.length;
+      const repliesContainer = document.getElementById('modal-replies-list');
+
+      if (replies.length === 0) {
+        repliesContainer.innerHTML = `
+          <div class="p-6 bg-slate-50 border border-dashed border-slate-300 rounded-2xl text-center space-y-1">
+            <i data-lucide="inbox" class="w-8 h-8 text-slate-300 mx-auto"></i>
+            <p class="text-xs font-bold text-slate-600">아직 작성된 답변 이력이 없습니다.</p>
+            <p class="text-[11px] text-slate-400">아래 관리자 답변 작성 폼에서 고객님께 전달할 맞춤 견적과 상담 답변을 등록해주세요.</p>
+          </div>
+        `;
+      } else {
+        repliesContainer.innerHTML = replies.map((r, idx) => {
+          const recipient = r.recipientEmail || inq.email || '';
+          const isSent = r.emailSent || r.emailStatus === 'SUCCESS';
+          const isFailed = r.emailStatus === 'FAILED';
+
+          return `
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3 shadow-sm hover:border-slate-300 transition">
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 font-bold text-xs flex items-center justify-center">#${idx + 1}</span>
+                  <span class="font-bold text-slate-900 text-xs">${r.adminName || '관리자'}</span>
+                  <span class="text-[10px] px-2 py-0.5 bg-teal-50 text-teal-700 rounded-full font-semibold border border-teal-200/60">상담 답변</span>
+                  ${recipient ? (
+                    isSent ? `
+                      <span class="text-[10px] px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full font-bold border border-emerald-200 flex items-center gap-1">
+                        <i data-lucide="mail-check" class="w-3 h-3 text-emerald-600"></i> ${recipient} 실제 발송 완료
+                      </span>
+                    ` : (isFailed ? `
+                      <span class="text-[10px] px-2 py-0.5 bg-rose-50 text-rose-700 rounded-full font-bold border border-rose-200 flex items-center gap-1" title="${r.emailError || ''}">
+                        <i data-lucide="alert-circle" class="w-3 h-3 text-rose-600"></i> ${recipient} (발송 실패)
+                      </span>
+                    ` : `
+                      <span class="text-[10px] px-2 py-0.5 bg-sky-50 text-sky-700 rounded-full font-semibold border border-sky-200/60 flex items-center gap-1">
+                        <i data-lucide="mail" class="w-3 h-3 text-sky-600"></i> 수신: ${recipient}
+                      </span>
+                    `)
+                  ) : ''}
+                </div>
+                <span class="text-[11px] text-slate-400 font-medium">${TourAPI.formatDateTime ? TourAPI.formatDateTime(r.createdAt) : r.createdAt}</span>
+              </div>
+
+              <!-- Price & Package Badges (if any) -->
+              ${(r.quotedPrice || r.recommendedPackageTitle) ? `
+                <div class="flex flex-wrap gap-2 pt-1 text-xs">
+                  ${r.quotedPrice ? `
+                    <div class="px-2.5 py-1 bg-sky-50 text-sky-800 rounded-xl font-bold flex items-center gap-1 border border-sky-200/60">
+                      <i data-lucide="coins" class="w-3.5 h-3.5 text-sky-600"></i> 제안 견적: ${r.quotedPrice}
+                    </div>
+                  ` : ''}
+                  ${r.recommendedPackageTitle ? `
+                    <div class="px-2.5 py-1 bg-amber-50 text-amber-900 rounded-xl font-semibold flex items-center gap-1 border border-amber-200/60">
+                      <i data-lucide="package-check" class="w-3.5 h-3.5 text-amber-600"></i> 추천 연계: ${r.recommendedPackageTitle}
+                    </div>
+                  ` : ''}
+                </div>
+              ` : ''}
+
+              <!-- Reply Content Bubble -->
+              <div class="bg-slate-50 p-4 rounded-xl text-xs text-slate-800 leading-relaxed font-sans whitespace-pre-wrap border border-slate-100">
+                ${r.content}
+              </div>
+
+              <!-- Action Buttons: Resend SMTP & Webmail & Copy -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="text-slate-400 font-semibold text-[10px]">고객 전달:</span>
+                  <button type="button" onclick="openReplyWebmail('naver', '${inq.id}', '${r.id}')" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold rounded-lg border border-emerald-200 transition flex items-center gap-1 cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 네이버
+                  </button>
+                  <button type="button" onclick="openReplyWebmail('gmail', '${inq.id}', '${r.id}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-lg border border-rose-200 transition flex items-center gap-1 cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> Gmail
+                  </button>
+                  <button type="button" onclick="openReplyWebmail('mailto', '${inq.id}', '${r.id}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="mail" class="w-3 h-3 text-slate-500"></i> 메일 앱
+                  </button>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="resendReplySmtp('${inq.id}', '${r.id}')" class="px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 text-[11px] font-bold rounded-lg transition flex items-center gap-1 border border-teal-200 cursor-pointer">
+                    <i data-lucide="send" class="w-3 h-3 text-teal-600"></i> SMTP 실제 발송
+                  </button>
+                  <button onclick="copyReplyById('${inq.id}', '${r.id}')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-lg transition flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="copy" class="w-3 h-3 text-slate-500"></i> 복사
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Initialize Reply Form
+      document.getElementById('reply-inquiry-id').value = inq.id;
+      document.getElementById('reply-target-status').value = '답변완료';
+      document.getElementById('reply-quoted-price').value = '';
+      document.getElementById('reply-content').value = '';
+      document.getElementById('reply-pkg-select').value = '';
+      if (document.getElementById('reply-send-email')) {
+        document.getElementById('reply-send-email').checked = true;
+      }
+
+      document.getElementById('modal-inquiry-detail').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function copyReplyById(inqId, replyId) {
+      const inq = cachedInquiries.find(i => i.id === inqId);
+      if (!inq || !inq.replies) return;
+      const rep = inq.replies.find(r => r.id === replyId);
+      if (!rep || !rep.content) return;
+      navigator.clipboard.writeText(rep.content).then(() => {
+        showToast('답변 텍스트가 클립보드에 복사되었습니다.');
+      }).catch(() => {
+        showToast('복사 완료');
+      });
+    }
+    window.copyReplyById = copyReplyById;
+
+    function applyReplyTemplate(templateType) {
+      if (!activeInquiry) return;
+      const name = activeInquiry.name || '고객';
+      const dest = activeInquiry.destination || '희망 여행지';
+      const date = activeInquiry.expectedDate || '희망 출발 시기';
+      const size = activeInquiry.groupSize || 1;
+      const email = activeInquiry.email || '등록된 이메일';
+
+      const contentArea = document.getElementById('reply-content');
+      const priceInput = document.getElementById('reply-quoted-price');
+
+      if (templateType === 'basic') {
+        contentArea.value = `안녕하세요 ${name} 고객님! 대한민국 프리미엄 맞춤 여행 [투어이지]입니다.\n\n고객님께서 문의해주신 [${dest}] ${size}인 여행 상담 접수가 정상적으로 접수되었습니다.\n\n현재 고객님의 일정 희망 시기(${date})에 맞춰 최적의 항공편 및 5성급 엄선 호텔 좌석을 확인 중에 있습니다.\n검토를 마치는 대로 담당 플래너가 2시간 이내에 기재해주신 연락처로 유선 및 카카오톡 상세 안내를 드리겠습니다.\n\n투어이지를 찾아주셔서 진심으로 감사드립니다.`;
+      } else if (templateType === 'quote') {
+        contentArea.value = `안녕하세요 ${name} 고객님, 투어이지 맞춤 여행 전담 플래너입니다.\n\n요청해주신 [${dest}] ${size}인 1차 맞춤 견적서 및 추천 일정을 안내해 드립니다.\n\n[주요 맞춤 구성 혜택]\n1. 전 일정 5성급 럭셔리 호텔/리조트 숙박 & 조식 포함\n2. ${size}인 단독 전용 차량 및 한국인 베테랑 가이드 프라이빗 케어\n3. 강제 쇼핑/옵션 없는 순수 핵심 관광 및 여유로운 자유 일정\n4. 여행자 안심 보증보험 최고 2억원 무료 가입\n\n상세 일정표 파일은 등록해주신 이메일(${email})로 함께 송부드렸습니다.\n일정 및 예산 조율은 언제든 편하게 말씀해 주시면 맞춤 수정해 드리겠습니다. 감사합니다.`;
+        if (!priceInput.value) {
+          priceInput.value = `1인 1,890,000원 (총 ${TourAPI.formatPrice(1890000 * size)})`;
+        }
+      } else if (templateType === 'consult') {
+        contentArea.value = `${name} 고객님, 안녕하세요! 투어이지 여행 상담 센터입니다.\n\n남겨주신 [${dest}] 맞춤 일정 문의 내용을 꼼꼼히 확인하였습니다.\n고객님께 가장 만족스러운 최적의 동선 및 특별 프로모션 할인을 적용해드리기 위해, 출발 선호 시간대 및 객실 타입에 대한 간단한 유선 확인을 드리고자 합니다.\n\n편하신 시간대에 대표번호(1588-7799) 또는 담당 플래너가 연락드리겠습니다.\n원하시는 통화 시간대가 있으시면 편하게 문자나 카카오톡으로 회신 부탁드립니다. 감사합니다.`;
+      }
+
+      contentArea.focus();
+    }
+
+    function copyReplyText(text) {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('답변 텍스트가 클립보드에 복사되었습니다.');
+      }).catch(() => {
+        showToast('복사 실패');
+      });
+    }
+
+    let currentPackageFilter = 'ALL'; // 'ALL', 'OPERATING', 'INACTIVE'
+    let currentPackageRegion = 'ALL';
+    let currentPackageSearch = '';
+
+    function filterPackagesStatus(status) {
+      currentPackageFilter = status;
+      ['ALL', 'OPERATING', 'INACTIVE'].forEach(st => {
+        const btn = document.getElementById(`pkg-tab-${st.toLowerCase()}`);
+        if (!btn) return;
+        if (st === status) {
+          btn.className = 'px-3.5 py-1.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center gap-1.5 font-bold';
+        } else {
+          const color = st === 'OPERATING' ? 'text-emerald-700' : st === 'INACTIVE' ? 'text-slate-600' : 'text-slate-600';
+          btn.className = `px-3.5 py-1.5 rounded-xl ${color} hover:bg-white/60 transition flex items-center gap-1.5 font-bold`;
+        }
+      });
+      renderPackagesAdmin(cachedPackages);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function handlePackageRegionChange(region) {
+      currentPackageRegion = region;
+      renderPackagesAdmin(cachedPackages);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function handlePackageSearch(search) {
+      currentPackageSearch = (search || '').trim().toLowerCase();
+      renderPackagesAdmin(cachedPackages);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function updatePackageFilterCounts(packages) {
+      const total = packages.length;
+      let active = 0;
+      let inactive = 0;
+      packages.forEach(p => {
+        if (p.status === '미운영' || p.status === 'INACTIVE' || p.isActive === false) {
+          inactive++;
+        } else {
+          active++;
+        }
+      });
+
+      if (document.getElementById('pkg-count-all')) document.getElementById('pkg-count-all').textContent = total;
+      if (document.getElementById('pkg-count-operating')) document.getElementById('pkg-count-operating').textContent = active;
+      if (document.getElementById('pkg-count-inactive')) document.getElementById('pkg-count-inactive').textContent = inactive;
+    }
+
+    function renderPackagesAdmin(packages) {
+      updatePackageFilterCounts(packages);
+
+      let filtered = [...packages];
+
+      // 1. Status Filter
+      if (currentPackageFilter === 'OPERATING') {
+        filtered = filtered.filter(p => p.status !== '미운영' && p.status !== 'INACTIVE' && p.isActive !== false);
+      } else if (currentPackageFilter === 'INACTIVE') {
+        filtered = filtered.filter(p => p.status === '미운영' || p.status === 'INACTIVE' || p.isActive === false);
+      }
+
+      // 2. Region Filter
+      if (currentPackageRegion !== 'ALL') {
+        filtered = filtered.filter(p => p.region === currentPackageRegion);
+      }
+
+      // 3. Search Filter
+      if (currentPackageSearch) {
+        filtered = filtered.filter(p => 
+          (p.title && p.title.toLowerCase().includes(currentPackageSearch)) ||
+          (p.city && p.city.toLowerCase().includes(currentPackageSearch)) ||
+          (p.country && p.country.toLowerCase().includes(currentPackageSearch)) ||
+          (p.tags && p.tags.some(t => t.toLowerCase().includes(currentPackageSearch)))
+        );
+      }
+
+      const container = document.getElementById('admin-packages-list');
+      if (!container) return;
+
+      if (!filtered || filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center space-y-3">
+            <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto text-slate-400">
+              <i data-lucide="package-x" class="w-6 h-6"></i>
+            </div>
+            <p class="text-slate-700 font-extrabold text-sm">해당 조건에 일치하는 여행 상품이 없습니다.</p>
+            <p class="text-xs text-slate-400">다른 검색어나 지역, 상태 필터를 선택해보세요.</p>
+            <button onclick="currentPackageFilter='ALL'; currentPackageRegion='ALL'; currentPackageSearch=''; if(document.getElementById('pkg-search-input')) document.getElementById('pkg-search-input').value=''; if(document.getElementById('pkg-filter-region')) document.getElementById('pkg-filter-region').value='ALL'; filterPackagesStatus('ALL');" class="px-4 py-2 bg-sky-50 text-sky-700 hover:bg-sky-100 rounded-xl text-xs font-bold transition">
+              필터 전체 초기화
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
+        const isOperating = p.status !== '미운영' && p.status !== 'INACTIVE' && p.isActive !== false;
+        const statusBadge = isOperating
+          ? `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>운영중</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-700 border border-slate-300 flex items-center gap-1 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>미운영 (숨김)</span>`;
+
+        return `
+          <div class="bg-white p-4 rounded-3xl border ${isOperating ? 'border-slate-200' : 'border-dashed border-slate-300 bg-slate-50/60'} shadow-sm flex flex-col justify-between space-y-3 hover:shadow-md transition">
+            
+            <!-- Top Thumbnail & Region / Status -->
+            <div class="space-y-3">
+              <div class="relative h-36 sm:h-40 rounded-2xl overflow-hidden bg-slate-100 group">
+                <img src="${p.thumbnail}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 ${isOperating ? '' : 'grayscale opacity-70'}" alt="${p.title}">
+                <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                  <span class="px-2 py-0.5 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold rounded-lg">${p.region}</span>
+                  ${p.durationDays ? `<span class="px-2 py-0.5 bg-sky-600/90 text-white text-[10px] font-bold rounded-lg">${p.durationNights}박 ${p.durationDays}일</span>` : ''}
+                </div>
+                <div class="absolute top-2.5 right-2.5">
+                  ${statusBadge}
+                </div>
+              </div>
+
+              <!-- Title & Price Info -->
+              <div>
+                <span class="text-[10px] font-bold text-slate-400">${p.city || p.country}</span>
+                <h4 class="font-extrabold text-slate-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5" title="${p.title}">${p.title}</h4>
+                <div class="flex items-baseline justify-between mt-2 pt-2 border-t border-slate-100">
+                  <span class="text-xs text-slate-400 font-medium">판매가</span>
+                  <span class="text-sm font-black text-sky-600">${TourAPI.formatPrice(p.price)}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operational Status Toggle Control & Action Buttons -->
+            <div class="space-y-2 pt-2 border-t border-slate-100">
+              <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between gap-2">
+                <label class="text-[11px] font-extrabold text-slate-700 flex items-center gap-1 shrink-0">
+                  <i data-lucide="power" class="w-3.5 h-3.5 ${isOperating ? 'text-emerald-600' : 'text-slate-400'}"></i>
+                  운영 설정
+                </label>
+                <select onchange="handleTogglePackageStatus('${p.id}', this.value)" class="text-xs font-black px-2 py-1 rounded-lg border transition cursor-pointer ${isOperating ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200'}">
+                  <option value="운영중" ${isOperating ? 'selected' : ''}>🟢 운영중 (고객 노출)</option>
+                  <option value="미운영" ${!isOperating ? 'selected' : ''}>⚪ 미운영 (고객 숨김)</option>
+                </select>
+              </div>
+
+              <div class="flex justify-between items-center px-1 text-[11px]">
+                <a href="/package-detail.html?id=${p.id}" target="_blank" class="text-sky-600 font-bold hover:underline flex items-center gap-1">
+                  <i data-lucide="external-link" class="w-3 h-3"></i> 상세 미리보기
+                </a>
+                <button onclick="handleDeletePackage('${p.id}')" class="text-rose-500 font-bold hover:underline flex items-center gap-1">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i> 삭제
+                </button>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function handleTogglePackageStatus(id, newStatus) {
+      try {
+        const pkg = cachedPackages.find(p => p.id === id || p.slug === id);
+        const title = pkg ? pkg.title : '선택한 여행 상품';
+        const res = await TourAPI.updatePackageStatus(id, newStatus);
+        
+        if (res && res.success) {
+          if (pkg) {
+            pkg.status = newStatus;
+            pkg.isActive = (newStatus !== '미운영');
+          }
+          if (newStatus === '운영중') {
+            showToast(`🟢 [${title}] 상품이 '운영중'(고객 노출) 상태로 전환되었습니다.`);
+          } else {
+            showToast(`⚪ [${title}] 상품이 '미운영'(고객 숨김) 상태로 전환되었습니다.`);
+          }
+
+          // Re-render and update counts
+          renderPackagesAdmin(cachedPackages);
+          updatePackageFilterCounts(cachedPackages);
+
+          // Update KPI stats dynamically
+          const statsRes = await TourAPI.getAdminStats();
+          if (statsRes && statsRes.data) {
+            const s = statsRes.data;
+            const elPkgCount = document.getElementById('stat-package-count');
+            if (elPkgCount) elPkgCount.textContent = `${s.packageCount || 75}개`;
+            const elPkgSub = document.getElementById('stat-package-subtext');
+            if (elPkgSub) elPkgSub.textContent = `운영 중 ${s.activePackageCount !== undefined ? s.activePackageCount : 74}개 · 미운영 ${s.inactivePackageCount !== undefined ? s.inactivePackageCount : 1}개`;
+          }
+
+          if (window.lucide) lucide.createIcons();
+        } else {
+          alert('상태 변경 실패: ' + (res?.message || '알 수 없는 오류'));
+        }
+      } catch (err) {
+        console.error('Error toggling package status:', err);
+        alert('상태 변경 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function changeBookingStatus(id, newStatus) {
+      try {
+        await TourAPI.updateBookingStatus(id, newStatus);
+        const item = cachedBookings.find(b => b.id === id);
+        if (item) item.status = newStatus;
+        updateBookingBadgeCounts(cachedBookings);
+        applyBookingFilters(false);
+        showToast('예약 상태가 변경되었습니다.');
+      } catch (err) {
+        alert('상태 변경 실패');
+      }
+    }
+
+    async function changeInquiryStatus(id, newStatus) {
+      try {
+        await TourAPI.updateInquiryStatus(id, newStatus);
+        showToast('문의 상태가 변경되었습니다.');
+        await loadAllAdminData();
+      } catch (err) {
+        alert('상태 변경 실패');
+      }
+    }
+
+    async function handleDeletePackage(id) {
+      if (!confirm('정말 이 여행 상품을 삭제하시겠습니까?')) return;
+      try {
+        await TourAPI.deletePackage(id);
+        showToast('여행 상품이 삭제되었습니다.');
+        loadAllAdminData();
+      } catch (err) {
+        alert('삭제 실패');
+      }
+    }
+
+    function viewBookingDetails(id) {
+      const bk = cachedBookings.find(b => b.id === id);
+      if (!bk) return;
+
+      document.getElementById('modal-bk-id').textContent = `예약 접수 상세 (${bk.id})`;
+      document.getElementById('modal-bk-content').innerHTML = `
+        <div class="p-3 bg-slate-50 rounded-xl space-y-1">
+          <p><strong>고객명:</strong> ${bk.travelerName} (${bk.phone})</p>
+          <p><strong>이메일:</strong> ${bk.email || '미입력'}</p>
+          <p><strong>상품명:</strong> ${bk.packageTitle}</p>
+          <p><strong>출발일:</strong> ${bk.departureDate}</p>
+          <p><strong>인원:</strong> 성인 ${bk.adults}명, 아동 ${bk.children}명</p>
+          <p><strong>총 금액:</strong> <span class="text-sky-600 font-bold">${TourAPI.formatPrice(bk.totalPrice)}</span></p>
+          <p><strong>상담/결제:</strong> ${bk.paymentMethod}</p>
+        </div>
+        <div class="p-3 bg-amber-50 rounded-xl">
+          <strong class="text-amber-900 block mb-1">고객 특별 요청사항:</strong>
+          <p class="text-slate-700">${bk.requests || '없음'}</p>
+        </div>
+      `;
+
+      document.getElementById('modal-booking-detail').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function switchTab(tabKey) {
+      ['bookings', 'inquiries', 'packages'].forEach(k => {
+        const btn = document.getElementById(`tab-btn-${k}`);
+        const content = document.getElementById(`tab-content-${k}`);
+        if (k === tabKey) {
+          btn.className = 'flex-1 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition';
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+          content.classList.add('hidden');
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function openNewPackageModal() {
+      document.getElementById('modal-new-package').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

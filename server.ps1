@@ -437,18 +437,17 @@ function Read-RequestBodyString($request) {
 
 # Start HTTP Listener
 $listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add("http://*:$port/")
 $listener.Prefixes.Add("http://localhost:$port/")
+$listener.Prefixes.Add("http://127.0.0.1:$port/")
 
 try {
     $listener.Start()
 } catch {
-    $listener = New-Object System.Net.HttpListener
-    $listener.Prefixes.Add("http://localhost:$port/")
-    $listener.Start()
+    Write-Host "Failed to start listener: $_"
+    exit 1
 }
 
-Write-Host "TourEasy Web Server Started at http://localhost:$port" -ForegroundColor Green
+Write-Host "TourEasy Web Server Started at http://localhost:$port and http://127.0.0.1:$port" -ForegroundColor Green
 
 while ($listener.IsListening) {
     try {
