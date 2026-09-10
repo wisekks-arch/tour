@@ -1,0 +1,94 @@
+[
+  {
+    "id": "term-01",
+    "termKo": "서번트 리더십 (Servant Leadership)",
+    "termEn": "Servant Leadership",
+    "category": "애자일 / 리더십",
+    "definitionKo": "팀원들이 최고의 성과를 낼 수 있도록 장애물(Impediments)을 제거하고, 필요한 자원을 지원하며, 팀의 성장과 자율성을 촉진하는 애자일 리더십 스타일.",
+    "keyPoints": [
+      "팀을 통제·지시(Command & Control)하지 않고 촉진(Facilitate)함",
+      "방해 요소(Blockers) 제거 및 심리적 안전감(Psychological Safety) 조성",
+      "팀의 자체 조직화(Self-Organizing) 지원"
+    ]
+  },
+  {
+    "id": "term-02",
+    "termKo": "주공정법 (Critical Path Method, CPM)",
+    "termEn": "Critical Path Method (CPM)",
+    "category": "일정 관리",
+    "definitionKo": "프로젝트 네트워크 다이어그램에서 시작부터 끝까지 가장 긴 경로로, 프로젝트의 최소 소요 기간을 결정하며 여유 시간(Total Float)이 0인 활동들의 연속선.",
+    "keyPoints": [
+      "주공정 상의 활동이 하루 지연되면 전체 프로젝트가 하루 지연됨",
+      "주공정의 총 여유(Total Float)는 0 또는 음수",
+      "주공정은 상황에 따라 여러 개가 존재할 수 있으며 변경될 수 있음"
+    ]
+  },
+  {
+    "id": "term-03",
+    "termKo": "골드 플레이팅 vs 범위 크립",
+    "termEn": "Gold Plating vs Scope Creep",
+    "category": "범위 관리",
+    "definitionKo": "고객이 요구하지 않은 추가 기능이나 품질을 개발팀이 임의로 추가하는 행위(Gold Plating)와, 통제되지 않은 상태에서 프로젝트 범위가 점진적으로 팽창하는 현상(Scope Creep).",
+    "keyPoints": [
+      "골드 플레이팅: 고객 만족을 명분으로 팀이 승인 없이 기능을 덧붙이는 행위 (PMP에서는 절대 금지)",
+      "범위 크립: 공식 변경 통제 절차 없이 비공식적으로 요구사항이 늘어나는 현상",
+      "둘 다 일정 지연, 예산 초과, 리스크 증가의 주원인"
+    ]
+  },
+  {
+    "id": "term-04",
+    "termKo": "통합 변경 통제 (Perform Integrated Change Control)",
+    "termEn": "Integrated Change Control (ICC)",
+    "category": "통합 관리",
+    "definitionKo": "모든 변경 요청을 검토하고, 변경 사항이 프로젝트의 3대 제약(범위, 일정, 원가) 및 품질에 미치는 영향을 종합 분석하여 변경통제위원회(CCB)의 승인을 받는 프로세스.",
+    "keyPoints": [
+      "모든 변경 요청은 반드시 문서화(Written)되어야 함",
+      "1단계: 영향 분석(Impact Analysis) ➔ 2단계: CCB 제출 ➔ 3단계: 승인/기각 ➔ 4단계: 기준선(Baseline) 갱신 및 소통"
+    ]
+  },
+  {
+    "id": "term-05",
+    "termKo": "최소 존속 가능 제품 (MVP)",
+    "termEn": "Minimum Viable Product (MVP)",
+    "category": "애자일 / 가치 전달",
+    "definitionKo": "핵심적인 고객 가치를 검증하고 실제 사용자 피드백을 수집하기 위해 최소한의 노력으로 구축할 수 있는 가장 단순한 형태의 작동 가능한 제품 버전.",
+    "keyPoints": [
+      "빠른 시장 출시(Time to Market) 및 조기 가치 실현",
+      "학습 및 점진적 개선(Iterative & Incremental)의 출발점",
+      "전체 범위가 완성될 때까지 기다리지 않고 조기 피드백 획득"
+    ]
+  },
+  {
+    "id": "term-06",
+    "termKo": "번다운 차트 vs 번업 차트",
+    "termEn": "Burndown vs Burnup Chart",
+    "category": "애자일 도구",
+    "definitionKo": "번다운 차트는 스프린트 동안 '남은 작업량(Remaining Work)'의 감소 추세를 보여주며, 번업 차트는 '완료된 작업량(Completed Work)'과 '총 범위(Total Scope)'의 변화를 동시에 추적하는 시각화 도구.",
+    "keyPoints": [
+      "번다운 차트: 작업 소진 속도 및 스프린트 목표 달성 예측",
+      "번업 차트: 범위 변경(Scope Change)과 실제 진척도를 분리하여 파악 가능"
+    ]
+  },
+  {
+    "id": "term-07",
+    "termKo": "완료의 정의 (Definition of Done, DoD)",
+    "termEn": "Definition of Done (DoD)",
+    "category": "애자일 품질",
+    "definitionKo": "특정 사용자 스토리나 산출물이 '완료'되어 잠재적으로 배포 가능한 증분(Shippable Increment)으로 인정받기 위해 충족해야 하는 팀 공통의 체크리스트 기준.",
+    "keyPoints": [
+      "단위 테스트 완료, 코드 리뷰 통과, 문서화 완료 등 팀 전체가 합의한 품질 기준",
+      "수락 기준(Acceptance Criteria)은 개별 스토리별 기준인 반면, DoD는 모든 스토리에 적용되는 공통 기준"
+    ]
+  },
+  {
+    "id": "term-08",
+    "termKo": "이해관계자 참여 평가 매트릭스",
+    "termEn": "Stakeholder Engagement Assessment Matrix",
+    "category": "이해관계자 관리",
+    "definitionKo": "이해관계자의 '현재 참여 수준(Current, C)'과 프로젝트 성공을 위해 필요한 '목표 참여 수준(Desired, D)'을 비교하여 갭(Gap)을 식별하고 참여 전략을 수립하는 도구.",
+    "keyPoints": [
+      "분류: 부지(Unaware) - 저항(Resistant) - 중립(Neutral) - 지지(Supportive) - 주도(Leading)",
+      "현재 C 상태에서 목표 D 상태로 전환하기 위한 맞춤 소통 전략 수립"
+    ]
+  }
+]

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오답노트 & 북마크 - PMP Exam Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+  <div id="main-navbar"></div>
+
+  <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-heading flex items-center gap-2">
+          <i data-lucide="bookmark-check" class="w-7 h-7 text-rose-400"></i> 취약점 분석 & 오답노트 보관함
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          모의고사 및 학습 중 틀린 문제와 별표 표시한 중요 문항을 집중적으로 복습하고 재시험을 칠 수 있습니다.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-clear-incorrect" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 transition-colors flex items-center gap-1.5">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-400"></i> 오답 기록 초기화
+        </button>
+      </div>
+    </div>
+
+    <!-- Mode Filter Tabs -->
+    <div class="flex items-center gap-3 border-b border-slate-800 pb-4 text-xs font-bold">
+      <button id="tab-incorrect" class="px-4 py-2 rounded-xl bg-rose-600 text-white shadow-sm transition-all flex items-center gap-1.5">
+        <i data-lucide="alert-circle" class="w-4 h-4"></i> 틀린 문제 (<span id="count-incorrect">0</span>)
+      </button>
+      <button id="tab-bookmarks" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all flex items-center gap-1.5">
+        <i data-lucide="bookmark" class="w-4 h-4 text-amber-400"></i> 찜한 문항 북마크 (<span id="count-bookmarks">0</span>)
+      </button>
+      <button id="tab-history" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all flex items-center gap-1.5">
+        <i data-lucide="history" class="w-4 h-4 text-sky-400"></i> 시험 응시 이력
+      </button>
+    </div>
+
+    <!-- Content Feed Container -->
+    <div id="review-feed" class="space-y-6">
+      <!-- Dynamically rendered -->
+    </div>
+  </main>
+
+  <div id="main-footer"></div>
+
+  <script src="js/app-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let allQuestions = [];
+    let currentTab = 'incorrect';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Components.renderNavbar('review');
+      Components.renderFooter();
+
+      allQuestions = await API.getQuestions();
+      updateCounters();
+      renderCurrentTab();
+      setupTabs();
+    });
+
+    function updateCounters() {
+      const incList = AppStore.getIncorrectQuestions();
+      const bkmList = AppStore.getBookmarks();
+      document.getElementById('count-incorrect').innerText = incList.length;
+      document.getElementById('count-bookmarks').innerText = bkmList.length;
+    }
+
+    function setupTabs() {
+      document.getElementById('tab-incorrect').addEventListener('click', () => {
+        currentTab = 'incorrect';
+        updateTabStyles();
+        renderCurrentTab();
+      });
+      document.getElementById('tab-bookmarks').addEventListener('click', () => {
+        currentTab = 'bookmarks';
+        updateTabStyles();
+        renderCurrentTab();
+      });
+      document.getElementById('tab-history').addEventListener('click', () => {
+        currentTab = 'history';
+        updateTabStyles();
+        renderCurrentTab();
+      });
+
+      document.getElementById('btn-clear-incorrect').addEventListener('click', () => {
+        if (confirm('오답노트 기록을 모두 삭제하시겠습니까?')) {
+          localStorage.removeItem(AppStore.KEYS.INCORRECT);
+          updateCounters();
+          renderCurrentTab();
+          Components.showToast('오답노트 기록이 초기화되었습니다.', 'info');
+        }
+      });
+    }
+
+    function updateTabStyles() {
+      const tInc = document.getElementById('tab-incorrect');
+      const tBkm = document.getElementById('tab-bookmarks');
+      const tHis = document.getElementById('tab-history');
+
+      tInc.className = currentTab === 'incorrect' ? 'px-4 py-2 rounded-xl bg-rose-600 text-white shadow-sm transition-all flex items-center gap-1.5' : 'px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all flex items-center gap-1.5';
+      tBkm.className = currentTab === 'bookmarks' ? 'px-4 py-2 rounded-xl bg-amber-600 text-white shadow-sm transition-all flex items-center gap-1.5' : 'px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all flex items-center gap-1.5';
+      tHis.className = currentTab === 'history' ? 'px-4 py-2 rounded-xl bg-sky-600 text-white shadow-sm transition-all flex items-center gap-1.5' : 'px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all flex items-center gap-1.5';
+    }
+
+    function renderCurrentTab() {
+      const feed = document.getElementById('review-feed');
+      feed.innerHTML = '';
+
+      if (currentTab === 'history') {
+        renderHistoryTab(feed);
+        return;
+      }
+
+      let targetIds = [];
+      if (currentTab === 'incorrect') {
+        targetIds = AppStore.getIncorrectQuestions().map(i => i.id);
+      } else {
+        targetIds = AppStore.getBookmarks();
+      }
+
+      const questionsToDisplay = allQuestions.filter(q => targetIds.includes(q.id));
+
+      if (questionsToDisplay.length === 0) {
+        feed.innerHTML = `
+          <div class="text-center py-20 bg-slate-900/60 rounded-3xl border border-slate-800 text-slate-400 space-y-3">
+            <div class="text-3xl">✨</div>
+            <div class="font-bold text-base text-slate-300">
+              ${currentTab === 'incorrect' ? '오답노트에 등록된 문항이 없습니다! (모두 정답을 맞추셨거나 기록이 없습니다)' : '북마크로 저장된 문항이 없습니다.'}
+            </div>
+            <a href="exam.html" class="inline-block px-4 py-2 rounded-xl bg-sky-600 text-white text-xs font-bold hover:bg-sky-500 shadow">
+              모의고사 풀러 가기
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      questionsToDisplay.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-7 space-y-5 shadow-xl';
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-sky-400 text-sm">#${idx + 1}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">${q.domainName}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">${q.methodologyName}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-800/80">정답: [보기 ${q.correctAnswer}]</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="text-base sm:text-lg font-bold text-white leading-relaxed">${q.questionKo}</h3>
+            <div class="text-xs sm:text-sm text-slate-400 italic pl-3 border-l-2 border-sky-500/40">${q.questionEn}</div>
+          </div>
+
+          <!-- Options Preview -->
+          <div class="space-y-2">
+            ${q.options.map(opt => `
+              <div class="p-3 rounded-xl border ${opt.isCorrect ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-950/40 border-slate-800 text-slate-300'} flex items-start gap-2.5 text-xs sm:text-sm">
+                <span class="font-bold font-mono ${opt.isCorrect ? 'text-emerald-400' : 'text-slate-400'}">[${opt.id}]</span>
+                <span>${opt.textKo}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Rationale -->
+          <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-2 leading-relaxed text-slate-300">
+            <div class="font-bold text-sky-400">💡 핵심 해설 및 출제 근거:</div>
+            <p>${q.options.find(o => o.isCorrect)?.explanationKo || ''}</p>
+            <div class="pt-2 text-slate-400 border-t border-slate-800">
+              <span class="text-slate-500">참고:</span> ${q.pmbokReference}
+            </div>
+          </div>
+        `;
+        feed.appendChild(card);
+      });
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function renderHistoryTab(feed) {
+      const history = AppStore.getExamHistory();
+      if (history.length === 0) {
+        feed.innerHTML = `
+          <div class="text-center py-20 bg-slate-900/60 rounded-3xl border border-slate-800 text-slate-400">
+            아직 응시한 모의고사 기록이 없습니다.
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = `
+        <div class="bg-slate-900 rounded-3xl border border-slate-800 p-6 space-y-4 shadow-xl">
+          <h3 class="font-bold text-base text-white">과거 모의고사 응시 기록</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-950 text-slate-400 uppercase font-semibold border-b border-slate-800">
+                <tr>
+                  <th class="p-3">응시 일시</th>
+                  <th class="p-3">득점률</th>
+                  <th class="p-3">맞은 문항</th>
+                  <th class="p-3">판정</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${history.map(h => `
+                  <tr class="hover:bg-slate-800/50">
+                    <td class="p-3 font-mono">${h.date}</td>
+                    <td class="p-3 font-bold ${h.score >= 70 ? 'text-emerald-400' : 'text-amber-400'}">${h.score}%</td>
+                    <td class="p-3">${h.correctCount} / ${h.totalQuestions}</td>
+                    <td class="p-3">
+                      <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] ${h.isPass ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">
+                        ${h.isPass ? 'PASS' : 'FAIL'}
+                      </span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

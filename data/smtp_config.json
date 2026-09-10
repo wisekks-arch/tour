@@ -1,0 +1,12 @@
+﻿{
+    "enabled":  true,
+    "provider":  "naver",
+    "host":  "smtp.naver.com",
+    "port":  587,
+    "enableSsl":  true,
+    "user":  "kmagick",
+    "password":  "JYP5JM29FRWH",
+    "fromEmail":  "kmagick@naver.com",
+    "fromName":  "투어이지(TourEasy) 맞춤여행팀",
+    "updatedAt":  "2026-09-01T15:41:47"
+}

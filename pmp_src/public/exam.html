@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP 실전 모의고사 - PMP Exam Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans select-none">
+
+  <!-- Pearson VUE Style Exam Header Bar -->
+  <header class="exam-topbar text-white px-4 py-3 sticky top-0 z-40 shadow-lg flex items-center justify-between border-b border-sky-500/30">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center font-bold text-sm shadow">
+          <i data-lucide="award" class="w-5 h-5"></i>
+        </span>
+        <span class="font-bold text-sm sm:text-base tracking-tight font-heading">PMI-PMP® Mock Exam Simulation</span>
+      </div>
+      <div class="hidden md:flex items-center gap-2 text-xs bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+        <span id="domain-badge" class="font-semibold text-sky-400">전체 영역 모의고사</span>
+      </div>
+    </div>
+
+    <!-- Center/Right: Timer, Tools & Controls -->
+    <div class="flex items-center gap-3 sm:gap-4">
+      <!-- Exam Timer -->
+      <div class="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-slate-700 text-amber-400 font-mono font-bold text-sm sm:text-base">
+        <i data-lucide="clock" class="w-4 h-4 animate-pulse text-amber-400"></i>
+        <span id="exam-timer">03:50:00</span>
+      </div>
+
+      <!-- Tools Toolbar -->
+      <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700 text-xs">
+        <button id="btn-toggle-lang" class="px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition-colors flex items-center gap-1 font-semibold" title="한글 / 영어 병기 토글">
+          <i data-lucide="languages" class="w-3.5 h-3.5 text-sky-400"></i> <span id="lang-label">한/영 병기</span>
+        </button>
+        <button id="btn-toggle-strike" class="px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition-colors flex items-center gap-1 font-semibold" title="오답 소거선(Strikethrough) 모드 토글">
+          <i data-lucide="strikethrough" class="w-3.5 h-3.5 text-rose-400"></i> 소거
+        </button>
+      </div>
+
+      <!-- Mark for Review -->
+      <button id="btn-mark-review" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 border border-slate-700 transition-colors text-xs font-bold flex items-center gap-1.5">
+        <i data-lucide="flag" class="w-4 h-4"></i> <span id="mark-text">검토 표시</span>
+      </button>
+
+      <!-- Question List Drawer Toggle -->
+      <button id="btn-open-nav" class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1.5 shadow">
+        <i data-lucide="grid" class="w-4 h-4"></i> 문항 목록 (<span id="nav-counter">1/12</span>)
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Question Canvas -->
+  <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 flex flex-col justify-between">
+    <!-- Question Box -->
+    <div class="space-y-6">
+      <!-- Question Meta & Status Bar -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="text-sky-400 font-bold text-sm">Question <span id="current-q-num">1</span> of <span id="total-q-num">12</span></span>
+          <span class="text-slate-600">|</span>
+          <span id="q-domain-tag" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium">Domain: People</span>
+          <span id="q-method-tag" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium">Agile</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="review-status-indicator" class="hidden text-amber-400 font-bold flex items-center gap-1">
+            <i data-lucide="flag" class="w-3.5 h-3.5"></i> 검토 대상 마킹됨
+          </span>
+        </div>
+      </div>
+
+      <!-- Question Text Body -->
+      <div class="space-y-3">
+        <!-- Korean Question -->
+        <div id="q-text-ko" class="text-base sm:text-lg font-semibold text-slate-100 leading-relaxed tracking-normal select-text">
+          문제 로딩 중...
+        </div>
+        <!-- English Question (Bilingual Toggle) -->
+        <div id="q-text-en" class="text-sm font-normal text-slate-400 italic leading-relaxed border-l-2 border-sky-500/40 pl-3 select-text">
+          Loading question in English...
+        </div>
+      </div>
+
+      <!-- Options Container -->
+      <div id="options-container" class="space-y-3 pt-2">
+        <!-- Options rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="pt-8 pb-4 border-t border-slate-800 flex items-center justify-between">
+      <button id="btn-prev" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm transition-colors flex items-center gap-1.5 disabled:opacity-30 disabled:pointer-events-none">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i> 이전 문항
+      </button>
+
+      <div class="flex items-center gap-3">
+        <button id="btn-submit-exam" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-all shadow-lg shadow-emerald-600/30 flex items-center gap-1.5">
+          <i data-lucide="check-circle" class="w-4 h-4"></i> 최종 답안 제출 및 채점
+        </button>
+      </div>
+
+      <button id="btn-next" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-sm transition-colors flex items-center gap-1.5 disabled:opacity-30 disabled:pointer-events-none">
+        다음 문항 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </main>
+
+  <!-- Question Navigation Drawer (Modal/Slide-over) -->
+  <div id="nav-drawer" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex justify-end transition-opacity">
+    <div class="w-full max-w-md bg-slate-900 border-l border-slate-800 h-full p-6 flex flex-col justify-between shadow-2xl">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <h3 class="font-bold text-base text-white flex items-center gap-2">
+            <i data-lucide="grid" class="w-5 h-5 text-sky-400"></i> 문항 탐색기 & 답안 현황
+          </h3>
+          <button id="btn-close-nav" class="text-slate-400 hover:text-white p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex items-center gap-3 text-xs text-slate-400">
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-sky-600 inline-block"></span> 응답 완료</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-800 border border-slate-600 inline-block"></span> 미응답</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber-500 inline-block"></span> 검토 마킹</span>
+        </div>
+
+        <!-- Grid -->
+        <div id="nav-grid" class="grid grid-cols-4 gap-2.5 max-h-[60vh] overflow-y-auto p-1">
+          <!-- Dynamic Grid Items -->
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-800">
+        <button id="btn-drawer-submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow">
+          시험 종료 및 채점하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score & Analytics Report Modal -->
+  <div id="result-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <!-- Title Header -->
+      <div class="text-center space-y-2">
+        <div id="result-icon-badge" class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-3xl font-bold shadow-lg">
+          🏆
+        </div>
+        <h2 id="result-title" class="text-2xl sm:text-3xl font-extrabold text-white font-heading">
+          PMP 모의고사 채점 결과
+        </h2>
+        <p id="result-sub" class="text-sm text-slate-400">
+          PMI PMP 시험 기준 합격선(약 70% 이상) 분석 리포트
+        </p>
+      </div>
+
+      <!-- Score KPI Cards -->
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+          <div class="text-xs text-slate-400">총 득점률</div>
+          <div id="score-percentage" class="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-1">85%</div>
+        </div>
+        <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+          <div class="text-xs text-slate-400">맞은 문항 수</div>
+          <div id="score-counts" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">10 / 12</div>
+        </div>
+        <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+          <div class="text-xs text-slate-400">합격 판정</div>
+          <div id="score-status" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">PASS</div>
+        </div>
+      </div>
+
+      <!-- Domain Performance Breakdown -->
+      <div class="space-y-3 bg-slate-950/60 p-5 rounded-2xl border border-slate-800">
+        <h4 class="font-bold text-sm text-slate-200">도메인별 성취도 (ECO Domain Breakdown)</h4>
+        <div class="space-y-2.5 text-xs" id="domain-breakdown-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3 pt-2">
+        <a href="study.html" class="flex-1 py-3 text-center rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 transition-colors">
+          상세 해설 보러가기
+        </a>
+        <a href="review.html" class="flex-1 py-3 text-center rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 font-bold text-sm border border-rose-500/40 transition-colors">
+          틀린 문제 복습하기
+        </a>
+        <button id="btn-modal-restart" class="flex-1 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow">
+          다시 응시하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let questions = [];
+    let currentIndex = 0;
+    let userAnswers = {}; // { qId: 'A' }
+    let markedQuestions = new Set();
+    let strikethroughs = {}; // { qId: Set(['A', 'C']) }
+    let timerInterval = null;
+    let remainingSeconds = 13800; // 230 mins default (or 30 mins for demo)
+    let isBilingual = true;
+    let isStrikeMode = false;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      questions = await API.getQuestions();
+      if (!questions || questions.length === 0) {
+        document.getElementById('q-text-ko').innerText = '문제를 불러올 수 없습니다.';
+        return;
+      }
+
+      initTimer();
+      renderQuestion(0);
+      setupEventListeners();
+      if (window.lucide) window.lucide.createIcons();
+    });
+
+    function initTimer() {
+      // 30 mins demo timer for 12 questions
+      remainingSeconds = 1800; 
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const hours = Math.floor(remainingSeconds / 3600);
+      const minutes = Math.floor((remainingSeconds % 3600) / 60);
+      const seconds = remainingSeconds % 60;
+      document.getElementById('exam-timer').innerText = 
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function renderQuestion(index) {
+      if (index < 0 || index >= questions.length) return;
+      currentIndex = index;
+      const q = questions[index];
+
+      document.getElementById('current-q-num').innerText = index + 1;
+      document.getElementById('total-q-num').innerText = questions.length;
+      document.getElementById('nav-counter').innerText = `${index + 1}/${questions.length}`;
+      document.getElementById('q-domain-tag').innerText = `Domain: ${q.domainName}`;
+      document.getElementById('q-method-tag').innerText = q.methodologyName;
+
+      document.getElementById('q-text-ko').innerText = q.questionKo;
+      document.getElementById('q-text-en').innerText = q.questionEn;
+      document.getElementById('q-text-en').style.display = isBilingual ? 'block' : 'none';
+
+      // Mark Status
+      const isMarked = markedQuestions.has(q.id);
+      const markBtn = document.getElementById('btn-mark-review');
+      const markIndicator = document.getElementById('review-status-indicator');
+      if (isMarked) {
+        markBtn.classList.add('bg-amber-500/20', 'text-amber-300', 'border-amber-500/50');
+        markIndicator.classList.remove('hidden');
+      } else {
+        markBtn.classList.remove('bg-amber-500/20', 'text-amber-300', 'border-amber-500/50');
+        markIndicator.classList.add('hidden');
+      }
+
+      // Render Options
+      const optContainer = document.getElementById('options-container');
+      optContainer.innerHTML = '';
+
+      if (!strikethroughs[q.id]) {
+        strikethroughs[q.id] = new Set();
+      }
+
+      q.options.forEach(opt => {
+        const isSelected = userAnswers[q.id] === opt.id;
+        const isStruck = strikethroughs[q.id].has(opt.id);
+
+        const card = document.createElement('div');
+        card.className = `option-item p-4 rounded-2xl border cursor-pointer flex items-start gap-3.5 transition-all ${
+          isSelected 
+            ? 'bg-sky-500/15 border-sky-500 shadow-md shadow-sky-500/10' 
+            : 'bg-slate-800/70 border-slate-700 hover:border-slate-500'
+        } ${isStruck ? 'strikethrough-option' : ''}`;
+
+        card.innerHTML = `
+          <div class="w-7 h-7 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 ${
+            isSelected 
+              ? 'bg-sky-500 text-white' 
+              : 'bg-slate-700 text-slate-300'
+          }">
+            ${opt.id}
+          </div>
+          <div class="flex-grow space-y-1">
+            <div class="text-sm sm:text-base text-slate-100 font-medium leading-relaxed">${opt.textKo}</div>
+            ${isBilingual ? `<div class="text-xs text-slate-400 italic">${opt.textEn}</div>` : ''}
+          </div>
+        `;
+
+        card.addEventListener('click', (e) => {
+          if (isStrikeMode) {
+            if (strikethroughs[q.id].has(opt.id)) {
+              strikethroughs[q.id].delete(opt.id);
+            } else {
+              strikethroughs[q.id].add(opt.id);
+            }
+            renderQuestion(currentIndex);
+          } else {
+            userAnswers[q.id] = opt.id;
+            renderQuestion(currentIndex);
+          }
+        });
+
+        optContainer.appendChild(card);
+      });
+
+      // Prev/Next buttons
+      document.getElementById('btn-prev').disabled = (currentIndex === 0);
+      document.getElementById('btn-next').disabled = (currentIndex === questions.length - 1);
+    }
+
+    function setupEventListeners() {
+      // Prev / Next
+      document.getElementById('btn-prev').addEventListener('click', () => {
+        if (currentIndex > 0) renderQuestion(currentIndex - 1);
+      });
+      document.getElementById('btn-next').addEventListener('click', () => {
+        if (currentIndex < questions.length - 1) renderQuestion(currentIndex + 1);
+      });
+
+      // Mark for Review
+      document.getElementById('btn-mark-review').addEventListener('click', () => {
+        const q = questions[currentIndex];
+        if (markedQuestions.has(q.id)) {
+          markedQuestions.delete(q.id);
+          Components.showToast('검토 마킹이 해제되었습니다.', 'info');
+        } else {
+          markedQuestions.add(q.id);
+          Components.showToast('이 문제를 검토 대상으로 마킹했습니다.', 'warning');
+        }
+        renderQuestion(currentIndex);
+      });
+
+      // Bilingual Toggle
+      document.getElementById('btn-toggle-lang').addEventListener('click', () => {
+        isBilingual = !isBilingual;
+        document.getElementById('lang-label').innerText = isBilingual ? '한/영 병기' : '한글 전용';
+        renderQuestion(currentIndex);
+      });
+
+      // Strikeout Toggle
+      document.getElementById('btn-toggle-strike').addEventListener('click', () => {
+        isStrikeMode = !isStrikeMode;
+        const btn = document.getElementById('btn-toggle-strike');
+        if (isStrikeMode) {
+          btn.classList.add('bg-rose-500/20', 'text-rose-300', 'border-rose-500/50');
+          Components.showToast('오답 소거 모드 활성화 (보기를 클릭하면 취소선이 그어집니다)', 'warning');
+        } else {
+          btn.classList.remove('bg-rose-500/20', 'text-rose-300', 'border-rose-500/50');
+          Components.showToast('일반 선택 모드로 전환되었습니다.', 'info');
+        }
+      });
+
+      // Navigation Drawer Toggle
+      document.getElementById('btn-open-nav').addEventListener('click', openNavDrawer);
+      document.getElementById('btn-close-nav').addEventListener('click', closeNavDrawer);
+      document.getElementById('btn-drawer-submit').addEventListener('click', () => submitExam(false));
+      document.getElementById('btn-submit-exam').addEventListener('click', () => submitExam(false));
+
+      // Modal Restart
+      document.getElementById('btn-modal-restart').addEventListener('click', () => {
+        location.reload();
+      });
+    }
+
+    function openNavDrawer() {
+      const grid = document.getElementById('nav-grid');
+      grid.innerHTML = '';
+
+      questions.forEach((q, idx) => {
+        const isAnswered = !!userAnswers[q.id];
+        const isMarked = markedQuestions.has(q.id);
+        const isCurrent = (idx === currentIndex);
+
+        const btn = document.createElement('button');
+        btn.className = `p-3 rounded-xl font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all border ${
+          isCurrent ? 'ring-2 ring-sky-400 ' : ''
+        } ${
+          isMarked 
+            ? 'bg-amber-500/20 border-amber-500 text-amber-300' 
+            : isAnswered 
+              ? 'bg-sky-600 border-sky-500 text-white' 
+              : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500'
+        }`;
+
+        btn.innerHTML = `
+          <span>Q${idx + 1}</span>
+          ${isMarked ? '<i data-lucide="flag" class="w-3 h-3 text-amber-400"></i>' : isAnswered ? '<i data-lucide="check" class="w-3 h-3"></i>' : '<span class="text-[10px] text-slate-500">미응답</span>'}
+        `;
+
+        btn.addEventListener('click', () => {
+          closeNavDrawer();
+          renderQuestion(idx);
+        });
+
+        grid.appendChild(btn);
+      });
+
+      document.getElementById('nav-drawer').classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeNavDrawer() {
+      document.getElementById('nav-drawer').classList.add('hidden');
+    }
+
+    function submitExam(isAuto = false) {
+      if (!isAuto) {
+        const answeredCount = Object.keys(userAnswers).length;
+        const total = questions.length;
+        if (answeredCount < total) {
+          if (!confirm(`총 ${total}문제 중 ${answeredCount}문제만 답변하셨습니다. 지금 제출하시겠습니까?`)) {
+            return;
+          }
+        }
+      }
+
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      let domainStats = {
+        people: { total: 0, correct: 0, name: '사람 (People 42%)' },
+        process: { total: 0, correct: 0, name: '공정 (Process 50%)' },
+        business: { total: 0, correct: 0, name: '비즈니스 환경 (Business 8%)' }
+      };
+
+      questions.forEach(q => {
+        const userChoice = userAnswers[q.id];
+        const isCorrect = (userChoice === q.correctAnswer);
+
+        if (domainStats[q.domain]) {
+          domainStats[q.domain].total++;
+          if (isCorrect) domainStats[q.domain].correct++;
+        }
+
+        if (isCorrect) {
+          correctCount++;
+          AppStore.removeIncorrectQuestion(q.id);
+        } else {
+          // Record incorrect question for review notebook
+          AppStore.recordIncorrectQuestion(q.id, userChoice || 'None', q.correctAnswer, q.domain);
+        }
+      });
+
+      const percentage = Math.round((correctCount / questions.length) * 100);
+      const isPass = percentage >= 70;
+
+      // Save Exam Result to History
+      AppStore.saveExamResult({
+        score: percentage,
+        correctCount,
+        totalQuestions: questions.length,
+        isPass
+      });
+
+      // Show Result Modal
+      document.getElementById('score-percentage').innerText = `${percentage}%`;
+      document.getElementById('score-counts').innerText = `${correctCount} / ${questions.length}`;
+      document.getElementById('score-status').innerText = isPass ? 'PASS (합격권)' : 'FAIL (보완 필요)';
+      document.getElementById('score-status').className = `text-2xl sm:text-3xl font-extrabold mt-1 ${isPass ? 'text-emerald-400' : 'text-rose-400'}`;
+
+      const breakdownList = document.getElementById('domain-breakdown-list');
+      breakdownList.innerHTML = '';
+
+      Object.entries(domainStats).forEach(([key, d]) => {
+        if (d.total === 0) return;
+        const dPct = Math.round((d.correct / d.total) * 100);
+        breakdownList.innerHTML += `
+          <div class="space-y-1">
+            <div class="flex justify-between font-semibold">
+              <span class="text-slate-300">${d.name}</span>
+              <span class="${dPct >= 70 ? 'text-emerald-400' : 'text-amber-400'}">${d.correct}/${d.total} (${dPct}%)</span>
+            </div>
+            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-full rounded-full ${dPct >= 70 ? 'bg-emerald-500' : 'bg-amber-500'}" style="width: ${dPct}%"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      closeNavDrawer();
+      document.getElementById('result-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

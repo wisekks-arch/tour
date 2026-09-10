@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cat-fashion",
+    "name": "패션 / 의류",
+    "icon": "shirt",
+    "badge": "NEW",
+    "description": "트렌디한 데일리 룩부터 프리미엄 아우터까지",
+    "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-digital",
+    "name": "디지털 / 가전",
+    "icon": "laptop",
+    "badge": "HOT",
+    "description": "스마트한 일상을 위한 최신 스마트 디바이스",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-beauty",
+    "name": "뷰티 / 케어",
+    "icon": "sparkles",
+    "badge": "BEST",
+    "description": "피부 본연의 건강한 광채를 위한 스킨케어",
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-living",
+    "name": "리빙 / 인테리어",
+    "icon": "home",
+    "badge": "",
+    "description": "감각적인 홈 스타일링과 프리미엄 리빙 아이템",
+    "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-food",
+    "name": "푸드 / 키친",
+    "icon": "coffee",
+    "badge": "SALE",
+    "description": "장인의 정성이 담긴 프리미엄 디저트와 다이닝",
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+  }
+]

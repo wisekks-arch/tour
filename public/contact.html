@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객센터 & 1:1 맞춤 상담 - 투어이지(TourEasy)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow pb-24">
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-14">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-2">
+        <span class="px-3 py-1 bg-sky-500/20 text-sky-300 font-bold rounded-full text-xs border border-sky-400/30 uppercase inline-block">
+          Customer Support & Inquiry
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-black tracking-tight">고객센터 & 1:1 맞춤 견적 문의</h1>
+        <p class="text-slate-300 text-xs sm:text-sm">
+          여행 관련 궁금한 점이나 단체/맞춤 일정 설계가 필요하시면 언제든 편하게 문의해주세요.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Grid (Form + FAQ) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Left: 1:1 Inquiry Form & Success View (7 cols) -->
+        <div class="lg:col-span-7">
+          
+          <!-- SUCCESS VIEW (Hidden by default) -->
+          <div id="inquiry-success-view" class="hidden bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-lg text-center space-y-6 animate-fadeIn">
+            <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs border border-emerald-300 shadow-sm">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> 상담 문의가 성공적으로 접수되었습니다
+            </div>
+
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner ring-8 ring-emerald-50">
+              <i data-lucide="check-circle-2" class="w-12 h-12"></i>
+            </div>
+
+            <div class="space-y-2">
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                1:1 맞춤 견적 문의 <span class="text-emerald-600">접수 완료!</span>
+              </h2>
+              <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                투어이지 맞춤 여행 상담을 신청해주셔서 감사합니다.<br>
+                전문 여행 플래너가 기재해주신 연락처로 <strong>평균 2시간 이내(업무시간 기준)</strong>에 빠르고 친절하게 맞춤 견적을 안내해 드립니다.
+              </p>
+            </div>
+
+            <!-- Next Steps Guidance Box -->
+            <div class="max-w-lg mx-auto bg-sky-50/90 border border-sky-200/80 p-4 sm:p-5 rounded-2xl text-left text-xs text-slate-700 space-y-2">
+              <div class="font-bold text-sky-900 flex items-center gap-1.5 text-sm">
+                <i data-lucide="info" class="w-4 h-4 text-sky-600 shrink-0"></i> 상담 접수 후 진행 절차
+              </div>
+              <ul class="space-y-1.5 text-slate-600 pl-1">
+                <li class="flex items-start gap-2">
+                  <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
+                  <span><strong>맞춤 분석</strong>: 담당 플래너가 여행지/인원/희망시기를 분석하여 최적 플랜을 구성합니다.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
+                  <span><strong>1:1 해피콜 상담</strong>: 유선 및 카카오톡으로 상세 일정표와 확정 견적서를 발송해 드립니다.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
+                  <span><strong>일정 조율 및 예약</strong>: 고객님 의견에 따라 일정을 맞춤 조율 후 최종 확정합니다.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Inquiry Receipt Card -->
+            <div class="max-w-lg mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left space-y-3 text-xs shadow-sm">
+              <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <span class="text-slate-500 font-semibold">문의 접수 번호</span>
+                <span id="res-inq-id" class="text-teal-600 font-mono font-black text-sm"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">신청자 성명</span>
+                <span id="res-inq-name" class="font-bold text-slate-800"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">연락처</span>
+                <span id="res-inq-phone" class="font-semibold text-slate-800"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">이메일</span>
+                <span id="res-inq-email" class="font-semibold text-slate-800"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">상담 문의 유형</span>
+                <span id="res-inq-category" class="font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">희망 여행지 / 시기</span>
+                <span id="res-inq-dest" class="font-semibold text-slate-800"></span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500">예상 인원</span>
+                <span id="res-inq-group" class="font-semibold text-slate-800"></span>
+              </div>
+              <div class="pt-2 border-t border-slate-200 space-y-1">
+                <span class="text-slate-500 font-semibold block">상세 문의 내용</span>
+                <p id="res-inq-msg" class="text-slate-700 bg-white p-3 rounded-xl border border-slate-200/80 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+              <button onclick="window.print()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
+                <i data-lucide="printer" class="w-4 h-4"></i> 접수증 인쇄 / PDF 저장
+              </button>
+              <button onclick="resetInquiryView()" class="px-5 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition">
+                새 문의 작성하기
+              </button>
+              <a href="packages.html" class="px-5 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs shadow-md shadow-sky-200 transition">
+                여행 상품 보러가기
+              </a>
+            </div>
+          </div>
+
+          <!-- INQUIRY FORM CONTAINER -->
+          <div id="inquiry-form-container" class="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div>
+              <span class="text-sky-600 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="edit-3" class="w-4 h-4"></i> Free Consultation
+              </span>
+              <h2 class="text-2xl font-black text-slate-900 tracking-tight mt-1">1:1 여행 맞춤 상담 신청</h2>
+              <p class="text-slate-500 text-xs mt-1">담당 여행 플래너가 2시간 이내에 꼼꼼히 확인 후 신속하게 연락드립니다.</p>
+            </div>
+
+            <!-- Member Status Notification Banner (Visible when logged in) -->
+            <div id="inquiry-user-badge" class="hidden bg-gradient-to-r from-sky-50 to-teal-50 border border-sky-200/80 p-3.5 rounded-2xl flex items-center justify-between gap-3 text-xs">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <i data-lucide="user-check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="font-black text-slate-900 flex items-center gap-1.5">
+                    <span id="inquiry-badge-name"></span> 회원님의 기본 정보가 자동 적용되었습니다.
+                    <span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 text-[10px] font-bold">인증회원</span>
+                  </span>
+                  <span class="text-[11px] text-slate-500 block font-mono" id="inquiry-badge-contact"></span>
+                </div>
+              </div>
+              <button type="button" onclick="window.logoutUser()" class="text-[11px] text-slate-400 hover:text-rose-600 font-semibold underline shrink-0">
+                로그아웃
+              </button>
+            </div>
+
+            <form id="inquiry-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">신청자 성명 <span class="text-rose-500">*</span></label>
+                  <input 
+                    type="text" 
+                    id="inq-name" 
+                    required 
+                    placeholder="홍길동" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">연락처 <span class="text-rose-500">*</span></label>
+                  <input 
+                    type="tel" 
+                    id="inq-phone" 
+                    required 
+                    placeholder="010-1234-5678" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">이메일 주소</label>
+                  <input 
+                    type="email" 
+                    id="inq-email" 
+                    placeholder="example@email.com" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">상담 문의 유형</label>
+                  <select id="inq-category" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+                    <option value="일반 패키지 여행 상담">일반 패키지 여행 상담</option>
+                    <option value="단체 맞춤 / 기업 인센티브">단체 맞춤 / 기업 인센티브 연수</option>
+                    <option value="프라이빗 허니문 견적">프라이빗 허니문 견적</option>
+                    <option value="가족 단독 투어 설계">가족 단독 투어 설계</option>
+                    <option value="기타 제휴 및 제안">기타 제휴 및 제안</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">희망 여행지</label>
+                  <input 
+                    type="text" 
+                    id="inq-destination" 
+                    placeholder="예: 유럽 3국, 다낭, 삿포로" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">예상 출발 시기</label>
+                  <input 
+                    type="text" 
+                    id="inq-date" 
+                    placeholder="예: 2026년 10월 초" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">예상 인원수</label>
+                  <input 
+                    type="number" 
+                    id="inq-group-size" 
+                    value="2" 
+                    min="1" 
+                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">상세 문의 내용 <span class="text-rose-500">*</span></label>
+                <textarea 
+                  id="inq-message" 
+                  rows="4" 
+                  required 
+                  placeholder="원하시는 일정, 선호 호텔 등급, 1인당 희망 예산, 특별 요청사항 등을 자유롭게 작성해주세요." 
+                  class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-800 focus:outline-none focus:border-sky-500 leading-relaxed"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                id="btn-submit-inquiry"
+                class="w-full py-4 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-200 transition text-sm flex items-center justify-center gap-2"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i> 1:1 상담 신청 완료하기
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Right: FAQ Accordions & Call Center (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Call Center Info Card -->
+          <div class="bg-gradient-to-br from-slate-900 to-sky-950 p-6 rounded-3xl text-white shadow-md space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center">
+                <i data-lucide="phone-call" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <span class="text-xs text-sky-300 font-semibold block">친절한 실시간 전화 상담</span>
+                <span class="text-2xl font-black text-white">1588-7799</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              전문 상담원이 고객님의 궁금증을 실시간으로 해결해 드립니다. 카카오톡 플러스친구 [투어이지]를 통해서도 간편하게 상담받으실 수 있습니다.
+            </p>
+            <div class="pt-2 flex gap-2">
+              <a href="tel:1588-7799" class="flex-1 py-2.5 bg-white text-slate-900 font-bold rounded-xl text-xs text-center hover:bg-slate-100 transition">
+                전화 연결
+              </a>
+              <button onclick="showToast('카카오톡 채널: @투어이지')" class="flex-1 py-2.5 bg-amber-400 text-slate-950 font-bold rounded-xl text-xs text-center hover:bg-amber-300 transition">
+                카카오톡 문의
+              </button>
+            </div>
+          </div>
+
+          <!-- FAQ Accordion -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2 pb-2 border-b border-slate-100">
+              <i data-lucide="help-circle" class="w-5 h-5 text-sky-600"></i> 자주 묻는 질문 (FAQ)
+            </h3>
+
+            <div class="space-y-3 text-xs" id="faq-accordion">
+              
+              <!-- Item 1 -->
+              <details class="group bg-slate-50 p-4 rounded-2xl border border-slate-200/80 cursor-pointer">
+                <summary class="font-bold text-slate-800 flex justify-between items-center list-none">
+                  <span>여권 유효기간은 얼마나 남아있어야 하나요?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="text-slate-600 mt-2 leading-relaxed pt-2 border-t border-slate-200">
+                  대부분의 해외 국가는 입국일 기준 최소 6개월 이상의 여권 잔여 유효기간을 요구합니다. 출발 전 여권 만료일을 반드시 확인해 주시기 바랍니다.
+                </p>
+              </details>
+
+              <!-- Item 2 -->
+              <details class="group bg-slate-50 p-4 rounded-2xl border border-slate-200/80 cursor-pointer">
+                <summary class="font-bold text-slate-800 flex justify-between items-center list-none">
+                  <span>예약 후 결제는 어떻게 진행되나요?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="text-slate-600 mt-2 leading-relaxed pt-2 border-t border-slate-200">
+                  온라인 예약 신청 시 비용이 즉시 결제되지 않으며, 담당 매니저가 항공권 및 호텔 좌석을 최종 확정한 후 가상계좌 또는 카드 안심 결제창을 전달해 드립니다.
+                </p>
+              </details>
+
+              <!-- Item 3 -->
+              <details class="group bg-slate-50 p-4 rounded-2xl border border-slate-200/80 cursor-pointer">
+                <summary class="font-bold text-slate-800 flex justify-between items-center list-none">
+                  <span>가이드 쇼핑 강요나 의무 옵션이 있나요?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="text-slate-600 mt-2 leading-relaxed pt-2 border-t border-slate-200">
+                  투어이지는 순수 여행의 즐거움을 보장하기 위해 'No 쇼핑 / No 옵션' 원칙을 준수합니다. 강제 쇼핑센터 방문 없이 여유로운 자유시간과 핵심 관광을 즐기실 수 있습니다.
+                </p>
+              </details>
+
+              <!-- Item 4 -->
+              <details class="group bg-slate-50 p-4 rounded-2xl border border-slate-200/80 cursor-pointer">
+                <summary class="font-bold text-slate-800 flex justify-between items-center list-none">
+                  <span>가족 모임이나 동창회 단독 출발이 가능한가요?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="text-slate-600 mt-2 leading-relaxed pt-2 border-t border-slate-200">
+                  네, 4인 이상 가족 또는 소모임부터 단독 전용 차량 및 가이드 배정이 가능합니다. 1:1 맞춤 상담 신청 폼에 요청해주시면 단독 행사 견적서를 맞춤 제작해 드립니다.
+                </p>
+              </details>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    function autofillInquiryUserInfo() {
+      const user = TourAPI.getCurrentUser();
+      const badge = document.getElementById('inquiry-user-badge');
+      const badgeName = document.getElementById('inquiry-badge-name');
+      const badgeContact = document.getElementById('inquiry-badge-contact');
+      const nameInput = document.getElementById('inq-name');
+      const phoneInput = document.getElementById('inq-phone');
+      const emailInput = document.getElementById('inq-email');
+
+      if (user) {
+        if (nameInput && (!nameInput.value || nameInput.dataset.autofilled === 'true')) {
+          nameInput.value = user.name || '';
+          nameInput.dataset.autofilled = 'true';
+        }
+        if (phoneInput && (!phoneInput.value || phoneInput.dataset.autofilled === 'true')) {
+          phoneInput.value = user.phone || '';
+          phoneInput.dataset.autofilled = 'true';
+        }
+        if (emailInput && (!emailInput.value || emailInput.dataset.autofilled === 'true')) {
+          emailInput.value = user.email || '';
+          emailInput.dataset.autofilled = 'true';
+        }
+
+        if (badge) {
+          if (badgeName) badgeName.textContent = user.name || '회원';
+          if (badgeContact) badgeContact.textContent = `${user.email || ''}${user.phone ? ' | ' + user.phone : ''}`;
+          badge.classList.remove('hidden');
+        }
+      } else {
+        if (badge) badge.classList.add('hidden');
+        if (nameInput && nameInput.dataset.autofilled === 'true') {
+          nameInput.value = '';
+          delete nameInput.dataset.autofilled;
+        }
+        if (phoneInput && phoneInput.dataset.autofilled === 'true') {
+          phoneInput.value = '';
+          delete phoneInput.dataset.autofilled;
+        }
+        if (emailInput && emailInput.dataset.autofilled === 'true') {
+          emailInput.value = '';
+          delete emailInput.dataset.autofilled;
+        }
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNavbar('contact');
+      renderFooter();
+      autofillInquiryUserInfo();
+
+      // Listen for login/logout events across tabs or modals
+      window.addEventListener('toureasy_auth_changed', autofillInquiryUserInfo);
+      window.addEventListener('toureasy_logged_in', autofillInquiryUserInfo);
+      window.addEventListener('toureasy_logged_out', autofillInquiryUserInfo);
+
+      // Handle Inquiry Form Submission
+      const form = document.getElementById('inquiry-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('btn-submit-inquiry');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '문의 접수 중...';
+
+        const payload = {
+          name: document.getElementById('inq-name').value.trim(),
+          phone: document.getElementById('inq-phone').value.trim(),
+          email: document.getElementById('inq-email').value.trim() || '미기재',
+          category: document.getElementById('inq-category').value,
+          destination: document.getElementById('inq-destination').value.trim() || '미정 / 추천 요청',
+          expectedDate: document.getElementById('inq-date').value.trim() || '미정 / 일정 조율 희망',
+          groupSize: parseInt(document.getElementById('inq-group-size').value, 10) || 1,
+          message: document.getElementById('inq-message').value.trim()
+        };
+
+        try {
+          const res = await TourAPI.createInquiry(payload);
+          if (res.success && res.data) {
+            const data = res.data;
+            document.getElementById('res-inq-id').textContent = data.id;
+            document.getElementById('res-inq-name').textContent = data.name;
+            document.getElementById('res-inq-phone').textContent = data.phone;
+            document.getElementById('res-inq-email').textContent = data.email || '미기재';
+            document.getElementById('res-inq-category').textContent = data.category;
+            document.getElementById('res-inq-dest').textContent = `${data.destination} (${data.expectedDate})`;
+            document.getElementById('res-inq-group').textContent = `${data.groupSize}명`;
+            document.getElementById('res-inq-msg').textContent = data.message;
+
+            // Switch to Success View
+            document.getElementById('inquiry-form-container').classList.add('hidden');
+            const successView = document.getElementById('inquiry-success-view');
+            successView.classList.remove('hidden');
+
+            // Scroll to top of view
+            successView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            showToast('1:1 여행 맞춤 견적 문의가 성공적으로 접수되었습니다!');
+            if (window.lucide) lucide.createIcons();
+          } else {
+            throw new Error(res.message || '문의 접수 실패');
+          }
+        } catch (err) {
+          alert(err.message || '문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i> 1:1 상담 신청 완료하기`;
+          if (window.lucide) lucide.createIcons();
+        }
+      });
+    });
+
+    function resetInquiryView() {
+      document.getElementById('inquiry-form').reset();
+      autofillInquiryUserInfo();
+      document.getElementById('inquiry-success-view').classList.add('hidden');
+      const formContainer = document.getElementById('inquiry-form-container');
+      formContainer.classList.remove('hidden');
+      formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.lucide) lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

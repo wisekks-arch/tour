@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주문 완료 - EASYSHOP</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 py-12 w-full">
+    
+    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden text-center p-8 sm:p-12 space-y-8">
+      
+      <!-- Success Icon -->
+      <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto shadow-md shadow-emerald-500/10">
+        <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+      </div>
+
+      <div class="space-y-2">
+        <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-black uppercase">Order Completed</span>
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-heading">
+          주문이 정상적으로 완료되었습니다!
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-500">고객님의 소중한 주문이 안전하게 접수되었습니다.</p>
+      </div>
+
+      <!-- Order Voucher Info Box -->
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-left space-y-4 text-xs">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+          <span class="text-slate-400">주문 번호</span>
+          <span id="complete-order-id" class="font-mono font-black text-indigo-600 text-sm">ORD-20260907-XXXX</span>
+        </div>
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+          <span class="text-slate-400">결제 일시</span>
+          <span id="complete-order-date" class="font-bold text-slate-800">2026-09-07 10:30</span>
+        </div>
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+          <span class="text-slate-400">배송지</span>
+          <span id="complete-shipping-address" class="font-bold text-slate-800 truncate max-w-xs">서울시 강남구 테헤란로</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400">최종 결제 금액</span>
+          <span id="complete-total-amount" class="font-black text-slate-900 text-base">0원</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <a href="/order-lookup.html" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-2xl transition">
+          주문/배송 조회 바로가기
+        </a>
+        <a href="/products.html" class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition">
+          쇼핑 계속하기
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/cart-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      ShopUI.renderNavbar();
+      ShopUI.renderFooter();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('orderId') || 'ORD-' + Date.now().toString().slice(-8);
+
+      document.getElementById('complete-order-id').innerText = orderId;
+      document.getElementById('complete-order-date').innerText = new Date().toLocaleString('ko-KR');
+
+      try {
+        const saved = sessionStorage.getItem('latest_order');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          document.getElementById('complete-shipping-address').innerText = parsed.shippingAddress || '서울시';
+          document.getElementById('complete-total-amount').innerText = ShopUI.formatPrice(parsed.totalAmount);
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

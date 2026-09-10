@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP 문제 은행 관리자 - PMP Exam Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+  <div id="main-navbar"></div>
+
+  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Admin Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-heading flex items-center gap-2">
+          <i data-lucide="settings" class="w-7 h-7 text-sky-400"></i> PMP 문제 은행 관리자 콘솔
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          신규 시나리오 문제 등록, 기존 문제 수정/삭제 및 JSON 데이터베이스 관리를 수행합니다.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-open-add-modal" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i> 신규 문제 등록
+        </button>
+      </div>
+    </div>
+
+    <!-- Questions Data Table -->
+    <div class="bg-slate-900 rounded-3xl border border-slate-800 p-6 space-y-4 shadow-xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+        <span class="font-bold text-slate-300">등록된 문제 목록 (<span id="admin-total-count">0</span>건)</span>
+        <div class="flex items-center gap-2">
+          <input type="text" id="admin-search-input" placeholder="키워드 검색..." class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-sky-500">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-300">
+          <thead class="bg-slate-950 text-slate-400 uppercase font-semibold border-b border-slate-800">
+            <tr>
+              <th class="p-3">ID</th>
+              <th class="p-3">도메인 / 방법론</th>
+              <th class="p-3">문제 제목 & 내용</th>
+              <th class="p-3 text-center">정답</th>
+              <th class="p-3 text-right">관리</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body" class="divide-y divide-slate-800">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add/Edit Question Modal -->
+  <div id="q-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <h3 id="modal-title" class="font-bold text-lg text-white">신규 문제 등록</h3>
+        <button id="btn-close-modal" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="q-form" class="space-y-4 text-xs">
+        <input type="hidden" id="form-q-id">
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">도메인 (Domain)</label>
+            <select id="form-domain" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white">
+              <option value="people">사람 (People 42%)</option>
+              <option value="process">공정 (Process 50%)</option>
+              <option value="business">비즈니스 환경 (Business 8%)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">개발 방법론 (Methodology)</label>
+            <select id="form-methodology" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white">
+              <option value="agile">애자일 (Agile)</option>
+              <option value="predictive">예측형 (Predictive / Waterfall)</option>
+              <option value="hybrid">하이브리드 (Hybrid)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">문제 제목 / 토픽</label>
+          <input type="text" id="form-title" required placeholder="예: 애자일 스프린트 중 기술적 갈등 해결" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">지문 본문 (한국어)</label>
+          <textarea id="form-question-ko" required rows="3" placeholder="문제 시나리오를 입력하세요..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">지문 본문 (영문 번역)</label>
+          <textarea id="form-question-en" rows="2" placeholder="English question text..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white font-mono"></textarea>
+        </div>
+
+        <!-- 4 Options -->
+        <div class="space-y-3 pt-2 border-t border-slate-800">
+          <div class="font-bold text-slate-200">보기 및 개별 해설 설정</div>
+
+          <div class="grid grid-cols-1 gap-3">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sky-400">보기 A</span>
+                <input type="text" id="form-opt-a" required placeholder="보기 A 텍스트" class="flex-grow bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+              </div>
+              <input type="text" id="form-exp-a" placeholder="보기 A 해설" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-slate-300">
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sky-400">보기 B</span>
+                <input type="text" id="form-opt-b" required placeholder="보기 B 텍스트" class="flex-grow bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+              </div>
+              <input type="text" id="form-exp-b" placeholder="보기 B 해설" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-slate-300">
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sky-400">보기 C</span>
+                <input type="text" id="form-opt-c" required placeholder="보기 C 텍스트" class="flex-grow bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+              </div>
+              <input type="text" id="form-exp-c" placeholder="보기 C 해설" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-slate-300">
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sky-400">보기 D</span>
+                <input type="text" id="form-opt-d" required placeholder="보기 D 텍스트" class="flex-grow bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+              </div>
+              <input type="text" id="form-exp-d" placeholder="보기 D 해설" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-slate-300">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block font-bold text-emerald-400 mb-1">정답 보기 선택</label>
+            <select id="form-correct-answer" class="w-full bg-slate-950 border border-emerald-600 rounded-xl p-2.5 text-emerald-300 font-bold">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">PMBOK 출제 근거</label>
+            <input type="text" id="form-ref" placeholder="PMBOK 7th Ed. Team Performance Domain" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white">
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-800">
+          <button type="button" id="btn-cancel-modal" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">
+            취소
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold shadow">
+            저장하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="main-footer"></div>
+
+  <script src="js/app-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let questions = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Components.renderNavbar('admin');
+      Components.renderFooter();
+
+      loadAdminTable();
+      setupEvents();
+    });
+
+    async function loadAdminTable() {
+      questions = await API.getQuestions();
+      document.getElementById('admin-total-count').innerText = questions.length;
+      renderTableRows(questions);
+    }
+
+    function renderTableRows(list) {
+      const tbody = document.getElementById('admin-table-body');
+      tbody.innerHTML = '';
+
+      list.forEach(q => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition-colors';
+        tr.innerHTML = `
+          <td class="p-3 font-mono text-sky-400 font-bold">${q.id}</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] block w-max">${q.domainName}</span>
+            <span class="text-slate-500 text-[10px] mt-0.5 block">${q.methodologyName}</span>
+          </td>
+          <td class="p-3 max-w-md">
+            <div class="font-bold text-slate-100 truncate">${q.titleKo || q.questionKo.substring(0, 30)}</div>
+            <div class="text-slate-400 text-[11px] truncate">${q.questionKo}</div>
+          </td>
+          <td class="p-3 text-center">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold inline-flex items-center justify-center border border-emerald-500/30">
+              ${q.correctAnswer}
+            </span>
+          </td>
+          <td class="p-3 text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              <button class="btn-edit p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300" data-id="${q.id}">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+              </button>
+              <button class="btn-delete p-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300" data-id="${q.id}">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </td>
+        `;
+
+        tr.querySelector('.btn-edit').addEventListener('click', () => openEditModal(q.id));
+        tr.querySelector('.btn-delete').addEventListener('click', () => deleteItem(q.id));
+
+        tbody.appendChild(tr);
+      });
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function setupEvents() {
+      document.getElementById('btn-open-add-modal').addEventListener('click', () => {
+        document.getElementById('modal-title').innerText = '신규 문제 등록';
+        document.getElementById('q-form').reset();
+        document.getElementById('form-q-id').value = '';
+        document.getElementById('q-modal').classList.remove('hidden');
+      });
+
+      document.getElementById('btn-close-modal').addEventListener('click', () => {
+        document.getElementById('q-modal').classList.add('hidden');
+      });
+      document.getElementById('btn-cancel-modal').addEventListener('click', () => {
+        document.getElementById('q-modal').classList.add('hidden');
+      });
+
+      document.getElementById('q-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = document.getElementById('form-q-id').value || ('q-' + Date.now());
+        const domain = document.getElementById('form-domain').value;
+        const methodology = document.getElementById('form-methodology').value;
+        const domainNames = { people: '사람 (People)', process: '공정 (Process)', business: '비즈니스 환경 (Business)' };
+        const methodNames = { agile: '애자일 (Agile)', predictive: '예측형 (Predictive)', hybrid: '하이브리드 (Hybrid)' };
+
+        const qData = {
+          id,
+          domain,
+          domainName: domainNames[domain],
+          methodology,
+          methodologyName: methodNames[methodology],
+          difficulty: 'medium',
+          titleKo: document.getElementById('form-title').value,
+          questionKo: document.getElementById('form-question-ko').value,
+          questionEn: document.getElementById('form-question-en').value,
+          correctAnswer: document.getElementById('form-correct-answer').value,
+          pmbokReference: document.getElementById('form-ref').value,
+          tipKo: '문제 키워드를 분석하여 PMBOK/Agile 원칙에 맞는 행동을 선택하세요.',
+          options: [
+            { id: 'A', textKo: document.getElementById('form-opt-a').value, textEn: '', isCorrect: document.getElementById('form-correct-answer').value === 'A', explanationKo: document.getElementById('form-exp-a').value },
+            { id: 'B', textKo: document.getElementById('form-opt-b').value, textEn: '', isCorrect: document.getElementById('form-correct-answer').value === 'B', explanationKo: document.getElementById('form-exp-b').value },
+            { id: 'C', textKo: document.getElementById('form-opt-c').value, textEn: '', isCorrect: document.getElementById('form-correct-answer').value === 'C', explanationKo: document.getElementById('form-exp-c').value },
+            { id: 'D', textKo: document.getElementById('form-opt-d').value, textEn: '', isCorrect: document.getElementById('form-correct-answer').value === 'D', explanationKo: document.getElementById('form-exp-d').value }
+          ]
+        };
+
+        const isEdit = !!document.getElementById('form-q-id').value;
+        await API.saveQuestion(qData, isEdit);
+        document.getElementById('q-modal').classList.add('hidden');
+        Components.showToast('문제가 성공적으로 저장되었습니다.', 'success');
+        loadAdminTable();
+      });
+
+      // Search filter
+      document.getElementById('admin-search-input').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const filtered = questions.filter(q => 
+          q.questionKo.toLowerCase().includes(query) || 
+          (q.titleKo && q.titleKo.toLowerCase().includes(query)) ||
+          q.domainName.toLowerCase().includes(query)
+        );
+        renderTableRows(filtered);
+      });
+    }
+
+    function openEditModal(qId) {
+      const q = questions.find(item => item.id === qId);
+      if (!q) return;
+
+      document.getElementById('modal-title').innerText = `문제 수정 (${q.id})`;
+      document.getElementById('form-q-id').value = q.id;
+      document.getElementById('form-domain').value = q.domain;
+      document.getElementById('form-methodology').value = q.methodology;
+      document.getElementById('form-title').value = q.titleKo || '';
+      document.getElementById('form-question-ko').value = q.questionKo;
+      document.getElementById('form-question-en').value = q.questionEn || '';
+      document.getElementById('form-correct-answer').value = q.correctAnswer;
+      document.getElementById('form-ref').value = q.pmbokReference || '';
+
+      const optA = q.options.find(o => o.id === 'A') || {};
+      const optB = q.options.find(o => o.id === 'B') || {};
+      const optC = q.options.find(o => o.id === 'C') || {};
+      const optD = q.options.find(o => o.id === 'D') || {};
+
+      document.getElementById('form-opt-a').value = optA.textKo || '';
+      document.getElementById('form-exp-a').value = optA.explanationKo || '';
+      document.getElementById('form-opt-b').value = optB.textKo || '';
+      document.getElementById('form-exp-b').value = optB.explanationKo || '';
+      document.getElementById('form-opt-c').value = optC.textKo || '';
+      document.getElementById('form-exp-c').value = optC.explanationKo || '';
+      document.getElementById('form-opt-d').value = optD.textKo || '';
+      document.getElementById('form-exp-d').value = optD.explanationKo || '';
+
+      document.getElementById('q-modal').classList.remove('hidden');
+    }
+
+    async function deleteItem(qId) {
+      if (confirm(`정말 문제 ${qId} 항목을 삭제하시겠습니까?`)) {
+        await API.deleteQuestion(qId);
+        Components.showToast('문제가 삭제되었습니다.', 'info');
+        loadAdminTable();
+      }
+    }
+  </script>
+</body>
+</html>

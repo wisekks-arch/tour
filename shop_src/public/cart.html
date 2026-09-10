@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>장바구니 - EASYSHOP</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    
+    <div class="mb-8">
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-heading">
+        장바구니 (<span id="cart-page-count">0</span>)
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">주문하실 상품의 수량 및 옵션을 확인해 주세요.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left: Cart Items Table (8 cols) -->
+      <div class="lg:col-span-8 space-y-4">
+        
+        <!-- Free Shipping Benefit Progress Bar -->
+        <div class="bg-indigo-50 p-5 rounded-3xl border border-indigo-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shrink-0">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-900" id="cart-shipping-msg">50,000원 이상 무료배송</h4>
+              <p class="text-[11px] text-slate-500">배송비 3,000원 절약 혜택</p>
+            </div>
+          </div>
+          <div class="w-full sm:w-48 bg-indigo-200/60 h-2.5 rounded-full overflow-hidden">
+            <div id="cart-shipping-bar" class="h-full bg-indigo-600 transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Controls Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center justify-between text-xs font-semibold">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="select-all-chk" onchange="toggleAll(this.checked)" checked class="rounded text-indigo-600 focus:ring-indigo-500" />
+            <span class="text-slate-800">전체 선택</span>
+          </label>
+          <button onclick="removeSelectedItems()" class="text-slate-400 hover:text-rose-600 transition flex items-center gap-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> 선택 삭제
+          </button>
+        </div>
+
+        <!-- Items Container -->
+        <div id="cart-items-container" class="space-y-3">
+          <!-- Dynamically loaded -->
+        </div>
+
+        <!-- Empty Cart Notice -->
+        <div id="cart-empty-view" class="hidden bg-white p-16 rounded-3xl border border-slate-200/80 text-center space-y-4">
+          <i data-lucide="shopping-cart" class="w-16 h-16 mx-auto stroke-1 text-slate-300"></i>
+          <h3 class="text-base font-bold text-slate-800">장바구니가 비어 있습니다.</h3>
+          <p class="text-xs text-slate-400">마음에 드는 상품을 찾아 장바구니에 담아보세요!</p>
+          <a href="/products.html" class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-2xl text-xs font-bold hover:bg-indigo-700 transition">
+            상품 쇼핑하러 가기
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right: Summary & Checkout (4 cols) -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Coupon Widget -->
+        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-wider">할인 쿠폰 적용</h3>
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="coupon-input" 
+              placeholder="WELCOME10 또는 EASY2026" 
+              class="flex-1 px-3 py-2 text-xs border border-slate-200 rounded-xl uppercase font-semibold focus:outline-none focus:border-indigo-500"
+            />
+            <button onclick="applyCouponCode()" class="px-4 py-2 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold rounded-xl transition">
+              적용
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400">💡 웰컴 쿠폰: <strong class="text-indigo-600">WELCOME10</strong> (10% 할인)</p>
+        </div>
+
+        <!-- Order Summary Card -->
+        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+          <h3 class="text-sm font-black text-slate-900 pb-3 border-b border-slate-100">결제 예상 금액</h3>
+          
+          <div class="space-y-2.5 text-xs text-slate-600">
+            <div class="flex items-center justify-between">
+              <span>선택 상품 금액</span>
+              <span id="summary-prod-total" class="font-bold text-slate-900">0원</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>상품 할인 혜택</span>
+              <span id="summary-prod-savings" class="font-bold text-rose-500">-0원</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>쿠폰 할인</span>
+              <span id="summary-coupon-discount" class="font-bold text-rose-500">-0원</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>배송비</span>
+              <span id="summary-shipping-fee" class="font-bold text-slate-900">0원</span>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-baseline justify-between">
+            <span class="text-sm font-black text-slate-900">최종 결제 금액</span>
+            <span id="summary-final-total" class="text-2xl font-black text-indigo-600 font-heading">0원</span>
+          </div>
+
+          <button 
+            type="button" 
+            onclick="proceedToCheckout()" 
+            class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl shadow-xl shadow-indigo-600/30 transition text-sm flex items-center justify-center gap-2"
+          >
+            <span>주문서 작성하기</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/cart-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let couponDiscount = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ShopUI.renderNavbar();
+      ShopUI.renderFooter();
+
+      renderCartView();
+      CartStore.subscribe(() => renderCartView());
+    });
+
+    function renderCartView() {
+      const items = CartStore.getItems();
+      const container = document.getElementById('cart-items-container');
+      const emptyView = document.getElementById('cart-empty-view');
+      const countEl = document.getElementById('cart-page-count');
+
+      countEl.innerText = items.length;
+
+      if (items.length === 0) {
+        container.innerHTML = '';
+        emptyView.classList.remove('hidden');
+        updateSummary();
+        return;
+      }
+
+      emptyView.classList.add('hidden');
+      container.innerHTML = items.map(item => `
+        <div class="bg-white p-5 rounded-3xl border border-slate-200/80 flex flex-col sm:flex-row items-center gap-4 group">
+          <!-- Checkbox -->
+          <input 
+            type="checkbox" 
+            ${item.selected ? 'checked' : ''} 
+            onchange="CartStore.toggleSelect('${item.id}', '${item.selectedOption}')"
+            class="rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+          />
+
+          <!-- Thumbnail -->
+          <img src="${item.thumbnail}" alt="${item.name}" class="w-20 h-20 object-cover rounded-2xl border border-slate-100 shrink-0" />
+
+          <!-- Details -->
+          <div class="flex-1 min-w-0 text-center sm:text-left">
+            <span class="text-[10px] font-bold text-indigo-600 uppercase">${item.category}</span>
+            <h3 class="text-sm font-bold text-slate-900 leading-snug line-clamp-1">${item.name}</h3>
+            ${item.selectedOption ? `<p class="text-xs text-slate-400 mt-0.5">옵션: ${item.selectedOption}</p>` : ''}
+            <div class="text-sm font-black text-slate-900 font-heading mt-1">${ShopUI.formatPrice(item.price)}</div>
+          </div>
+
+          <!-- Quantity Controls -->
+          <div class="flex items-center bg-slate-100 rounded-xl overflow-hidden">
+            <button onclick="CartStore.updateQuantity('${item.id}', '${item.selectedOption}', ${item.quantity - 1})" class="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-200 font-bold">-</button>
+            <span class="px-3 text-xs font-bold text-slate-800">${item.quantity}</span>
+            <button onclick="CartStore.updateQuantity('${item.id}', '${item.selectedOption}', ${item.quantity + 1})" class="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-200 font-bold">+</button>
+          </div>
+
+          <!-- Item Total -->
+          <div class="text-right min-w-[100px]">
+            <span class="text-sm font-black text-indigo-600">${ShopUI.formatPrice(item.price * item.quantity)}</span>
+          </div>
+
+          <!-- Delete -->
+          <button onclick="CartStore.removeItem('${item.id}', '${item.selectedOption}')" class="p-2 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50 transition">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summary = CartStore.getSummary(couponDiscount);
+
+      // Shipping progress
+      const progress = Math.min(100, (summary.productTotal / summary.freeShippingThreshold) * 100);
+      document.getElementById('cart-shipping-bar').style.width = `${progress}%`;
+      const msgEl = document.getElementById('cart-shipping-msg');
+      if (summary.remainingForFreeShipping > 0) {
+        msgEl.innerHTML = `<strong>${ShopUI.formatPrice(summary.remainingForFreeShipping)}</strong> 더 담으면 무료배송!`;
+      } else {
+        msgEl.innerHTML = `<span class="text-emerald-600 font-bold">🎉 무료배송 혜택 적용 완료!</span>`;
+      }
+
+      document.getElementById('summary-prod-total').innerText = ShopUI.formatPrice(summary.originalTotal);
+      document.getElementById('summary-prod-savings').innerText = `-${ShopUI.formatPrice(summary.totalSavings)}`;
+      document.getElementById('summary-coupon-discount').innerText = `-${ShopUI.formatPrice(summary.couponDiscount)}`;
+      document.getElementById('summary-shipping-fee').innerText = summary.shippingFee === 0 ? '무료' : ShopUI.formatPrice(summary.shippingFee);
+      document.getElementById('summary-final-total').innerText = ShopUI.formatPrice(summary.finalAmount);
+    }
+
+    function toggleAll(checked) {
+      CartStore.toggleSelectAll(checked);
+    }
+
+    function removeSelectedItems() {
+      if (confirm('선택한 상품을 장바구니에서 삭제하시겠습니까?')) {
+        CartStore.removeSelected();
+      }
+    }
+
+    function applyCouponCode() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const summary = CartStore.getSummary();
+
+      if (code === 'WELCOME10') {
+        couponDiscount = Math.floor(summary.productTotal * 0.1);
+        ShopUI.showToast(`10% 웰컴 할인 쿠폰이 적용되었습니다 (-${ShopUI.formatPrice(couponDiscount)})`);
+      } else if (code === 'EASY2026') {
+        couponDiscount = 5000;
+        ShopUI.showToast('5,000원 특별 할인 쿠폰이 적용되었습니다!');
+      } else {
+        ShopUI.showToast('유효하지 않은 쿠폰 코드입니다.', 'error');
+        couponDiscount = 0;
+      }
+      updateSummary();
+    }
+
+    function proceedToCheckout() {
+      const summary = CartStore.getSummary();
+      if (summary.selectedItems.length === 0) {
+        ShopUI.showToast('주문할 상품을 최소 1개 이상 선택해 주세요.', 'error');
+        return;
+      }
+      window.location.href = `/checkout.html?coupon=${couponDiscount}`;
+    }
+  </script>
+</body>
+</html>

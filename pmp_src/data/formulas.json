@@ -1,0 +1,98 @@
+[
+  {
+    "category": "EVM (획득가치관리)",
+    "name": "일정차이 (Schedule Variance, SV)",
+    "formula": "SV = EV - PV",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "SV > 0: 일정 단축 (Ahead of Schedule)\nSV = 0: 일정 준수 (On Schedule)\nSV < 0: 일정 지연 (Behind Schedule)",
+    "description": "계획된 작업 대비 실제로 완료된 작업 가치의 차이를 나타냅니다."
+  },
+  {
+    "category": "EVM (획득가치관리)",
+    "name": "원가차이 (Cost Variance, CV)",
+    "formula": "CV = EV - AC",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "CV > 0: 예산 절감 (Under Budget)\nCV = 0: 예산 준수 (On Budget)\nCV < 0: 예산 초과 (Over Budget)",
+    "description": "실제 지출된 비용 대비 획득한 가치의 차이를 나타냅니다."
+  },
+  {
+    "category": "EVM (획득가치관리)",
+    "name": "일정성과지수 (Schedule Performance Index, SPI)",
+    "formula": "SPI = EV / PV",
+    "unit": "비율 (Ratio)",
+    "interpretation": "SPI > 1.0: 계획 대비 진척 우수 (일정 단축)\nSPI = 1.0: 계획대로 진행 중\nSPI < 1.0: 계획 대비 진척 미흡 (일정 지연)",
+    "description": "투입된 시간에 대한 작업 진척 효율성을 측정합니다."
+  },
+  {
+    "category": "EVM (획득가치관리)",
+    "name": "원가성과지수 (Cost Performance Index, CPI)",
+    "formula": "CPI = EV / AC",
+    "unit": "비율 (Ratio)",
+    "interpretation": "CPI > 1.0: 1원당 1원 이상의 가치 창출 (예산 절감)\nCPI = 1.0: 원가 효율 표준\nCPI < 1.0: 1원당 1원 미만의 가치 창출 (예산 초과)",
+    "description": "투입된 원가에 대한 획득 가치의 효율성을 측정합니다."
+  },
+  {
+    "category": "EVM (완공시점 추정)",
+    "name": "완공시점총원가추정치 (Estimate At Completion, EAC) - 현재 추세 지속",
+    "formula": "EAC = BAC / CPI",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "현재의 원가 효율(CPI)이 프로젝트 종료 시까지 동일하게 유지될 것으로 예상될 때 적용합니다.",
+    "description": "가장 기본적이고 빈출되는 EAC 산출 공식입니다."
+  },
+  {
+    "category": "EVM (완공시점 추정)",
+    "name": "완공시점총원가추정치 (EAC) - 잔여 작업은 당초 계획대로 진행",
+    "formula": "EAC = AC + (BAC - EV)",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "현재까지의 차이가 일시적인 변동이며, 앞으로 남은 작업은 원래 계획 예산대로 집행될 것으로 예상될 때 적용합니다.",
+    "description": "현재까지 지출액(AC)에 잔여 작업 예산(BAC - EV)을 더합니다."
+  },
+  {
+    "category": "EVM (완공시점 추정)",
+    "name": "완공시점총원가추정치 (EAC) - 원가 및 일정 성과 모두 반영",
+    "formula": "EAC = AC + [(BAC - EV) / (CPI * SPI)]",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "일정 지연이 원가에 영향을 미치고 두 요소 모두 잔여 작업에 지속 영향을 미칠 때 적용합니다.",
+    "description": "CPI와 SPI 복합 지수를 반영한 보수적 추정치입니다."
+  },
+  {
+    "category": "EVM (잔여원가 및 성과목표)",
+    "name": "잔여작업원가추정치 (Estimate to Complete, ETC)",
+    "formula": "ETC = EAC - AC",
+    "unit": "금액 ($ / 원)",
+    "interpretation": "프로젝트를 완공하기 위해 앞으로 추가로 필요한 예산액입니다.",
+    "description": "총 추정 원가(EAC)에서 현재까지 지출된 원가(AC)를 뺀 값입니다."
+  },
+  {
+    "category": "EVM (잔여원가 및 성과목표)",
+    "name": "잔여성과지수 (To-Complete Performance Index, TCPI)",
+    "formula": "TCPI(BAC 기준) = (BAC - EV) / (BAC - AC)\nTCPI(EAC 기준) = (BAC - EV) / (EAC - AC)",
+    "unit": "비율 (Ratio)",
+    "interpretation": "TCPI > 1.0: 남은 기간 동안 더 높은 효율을 달성해야 함 (목표 달성 어려움)\nTCPI <= 1.0: 현재 효율로도 목표 예산 내 완공 가능",
+    "description": "정해진 예산(BAC 또는 EAC) 내에서 프로젝트를 끝마치기 위해 잔여 작업에서 유지해야 할 원가 효율 지수입니다."
+  },
+  {
+    "category": "일정 추정 (Schedule Estimating)",
+    "name": "삼점추정 베타(PERT) 가중평균",
+    "formula": "Te = (O + 4M + P) / 6",
+    "unit": "기간 (일 / 주)",
+    "interpretation": "O = 낙관치(Optimistic), M = 최빈치(Most Likely), P = 비관치(Pessimistic)",
+    "description": "과거 통계 기반의 정규분포 가중치를 적용한 기대 소요 기간 추정치입니다."
+  },
+  {
+    "category": "일정 추정 (Schedule Estimating)",
+    "name": "삼점추정 표준편차 (Standard Deviation, σ) 및 분산",
+    "formula": "표준편차 σ = (P - O) / 6\n분산 V = σ² = [(P - O) / 6]²",
+    "unit": "기간 (일 / 주)",
+    "interpretation": "활동의 불확실성 및 위험 변동 폭을 측정합니다.",
+    "description": "비관치와 낙관치의 차이를 6으로 나누어 산출합니다."
+  },
+  {
+    "category": "의사소통 관리 (Communication)",
+    "name": "잠재적 의사소통 채널 수 (Communication Channels)",
+    "formula": "Channels = N * (N - 1) / 2",
+    "unit": "개수",
+    "interpretation": "N = 이해관계자 또는 팀원 총 수 (PM 포함)",
+    "description": "인원이 증가할 때 소통 복잡도가 기하급수적으로 늘어남을 나타내는 지표입니다."
+  }
+]

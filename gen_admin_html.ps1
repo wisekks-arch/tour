@@ -1,0 +1,778 @@
+$ErrorActionPreference = 'Stop'
+$shopDir = 'd:\92.SW\shop'
+$publicDir = Join-Path $shopDir 'public'
+
+$adminHtml = @'
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EASYSHOP 관리자 대시보드 - 통합 어드민</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-800 flex min-h-screen">
+
+  <!-- Left Admin Sidebar -->
+  <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 hidden md:flex">
+    <!-- Brand -->
+    <div class="h-20 px-6 flex items-center gap-3 border-b border-slate-800">
+      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-600/30">
+        <i data-lucide="shield-check" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h2 class="text-white font-black text-lg tracking-tight font-heading">EASY<span class="text-indigo-400">ADMIN</span></h2>
+        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">v2.4 Management</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 px-4 py-6 space-y-1.5 text-xs font-bold" id="admin-sidebar-nav">
+      <button onclick="switchAdminTab('dashboard')" id="nav-btn-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-600 text-white transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+        <span>통합 대시보드</span>
+      </button>
+      <button onclick="switchAdminTab('products')" id="nav-btn-products" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+        <i data-lucide="package" class="w-4 h-4"></i>
+        <span>상품 관리 (CRUD)</span>
+      </button>
+      <button onclick="switchAdminTab('orders')" id="nav-btn-orders" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+        <span>주문 & 배송 관리</span>
+      </button>
+      <button onclick="switchAdminTab('inquiries')" id="nav-btn-inquiries" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>고객 문의 / Q&A</span>
+      </button>
+    </nav>
+
+    <!-- Bottom Actions -->
+    <div class="p-4 border-t border-slate-800 space-y-2">
+      <a href="/index.html" target="_blank" class="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-slate-800 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold transition">
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <span>쇼핑몰 바로가기</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Right Main Content Area -->
+  <div class="flex-1 flex flex-col min-w-0">
+    
+    <!-- Top Bar -->
+    <header class="h-20 bg-white border-b border-slate-200/80 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+      <div class="flex items-center gap-4">
+        <h2 id="current-tab-title" class="text-xl font-black text-slate-900 tracking-tight font-heading">
+          통합 대시보드
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="refreshCurrentTab()" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="새로고침">
+          <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+        </button>
+        <div class="flex items-center gap-2 pl-3 border-l border-slate-200">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 font-bold flex items-center justify-center text-xs">
+            AD
+          </div>
+          <div class="text-left hidden sm:block">
+            <p class="text-xs font-bold text-slate-900">최고 관리자</p>
+            <p class="text-[10px] text-slate-400">admin@easyshop.kr</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Tabs -->
+    <main class="flex-1 p-6 sm:p-8 space-y-8 overflow-y-auto">
+      
+      <!-- ================= 1. DASHBOARD TAB ================= -->
+      <section id="tab-dashboard" class="space-y-8">
+        
+        <!-- KPI Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Card 1: Today Sales -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-2">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold">
+              <span>오늘 매출액</span>
+              <div class="p-2 rounded-xl bg-indigo-50 text-indigo-600"><i data-lucide="dollar-sign" class="w-4 h-4"></i></div>
+            </div>
+            <p class="text-2xl font-black text-slate-900 font-heading" id="kpi-today-sales">289,000원</p>
+            <p class="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> 전일 대비 +18.4%
+            </p>
+          </div>
+
+          <!-- Card 2: Monthly Cumulative -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-2">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold">
+              <span>당월 누적 매출</span>
+              <div class="p-2 rounded-xl bg-emerald-50 text-emerald-600"><i data-lucide="wallet" class="w-4 h-4"></i></div>
+            </div>
+            <p class="text-2xl font-black text-slate-900 font-heading" id="kpi-month-sales">714,000원</p>
+            <p class="text-[11px] text-slate-400">총 4건 결제 완료</p>
+          </div>
+
+          <!-- Card 3: Pending Orders -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-2">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold">
+              <span>신규 / 배송 대기 주문</span>
+              <div class="p-2 rounded-xl bg-amber-50 text-amber-600"><i data-lucide="clock" class="w-4 h-4"></i></div>
+            </div>
+            <p class="text-2xl font-black text-amber-600 font-heading" id="kpi-pending-orders">2건</p>
+            <p class="text-[11px] text-amber-600 font-semibold">상품 준비 및 송장 입력 필요</p>
+          </div>
+
+          <!-- Card 4: Total Products / Out of stock -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-2">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold">
+              <span>운영 상품 / 품절 임박</span>
+              <div class="p-2 rounded-xl bg-rose-50 text-rose-600"><i data-lucide="alert-circle" class="w-4 h-4"></i></div>
+            </div>
+            <p class="text-2xl font-black text-slate-900 font-heading" id="kpi-total-products">12개 / 1개</p>
+            <p class="text-[11px] text-slate-400">정상 판매 운영 중</p>
+          </div>
+        </div>
+
+        <!-- Sales Chart & Recent Orders -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Chart (7 cols) -->
+          <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-black text-slate-900 text-sm">최근 7일간 일별 매출 추이</h3>
+              <span class="text-xs text-slate-400 font-medium">단위: 만원</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Quick Orders (5 cols) -->
+          <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-black text-slate-900 text-sm">최근 접수된 주문 (Top 3)</h3>
+                <button onclick="switchAdminTab('orders')" class="text-xs font-bold text-indigo-600 hover:underline">전체보기</button>
+              </div>
+              <div id="quick-orders-list" class="space-y-3 pt-3 divide-y divide-slate-100">
+                <!-- Dynamically loaded -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ================= 2. PRODUCTS TAB (CRUD) ================= -->
+      <section id="tab-products" class="hidden space-y-6">
+        
+        <!-- Action Toolbar -->
+        <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <input 
+              type="text" 
+              id="admin-prod-search" 
+              placeholder="상품명 검색..." 
+              oninput="filterAdminProducts()"
+              class="px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-indigo-500 w-full sm:w-64"
+            />
+            <select id="admin-prod-cat-filter" onchange="filterAdminProducts()" class="px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 bg-white">
+              <option value="전체">전체 카테고리</option>
+              <option value="패션 / 의류">패션 / 의류</option>
+              <option value="디지털 / 가전">디지털 / 가전</option>
+              <option value="뷰티 / 케어">뷰티 / 케어</option>
+              <option value="리빙 / 인테리어">리빙 / 인테리어</option>
+              <option value="푸드 / 키친">푸드 / 키친</option>
+            </select>
+          </div>
+
+          <button onclick="openProductModal()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-lg shadow-indigo-600/20 transition flex items-center justify-center gap-2">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>신규 상품 등록</span>
+          </button>
+        </div>
+
+        <!-- Products Table -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-50 text-slate-400 font-bold border-b border-slate-200 uppercase">
+                <tr>
+                  <th class="p-4">상품</th>
+                  <th class="p-4">카테고리</th>
+                  <th class="p-4">판매가</th>
+                  <th class="p-4">정가</th>
+                  <th class="p-4">재고</th>
+                  <th class="p-4">평점/리뷰</th>
+                  <th class="p-4">상태</th>
+                  <th class="p-4 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table" class="divide-y divide-slate-100 font-medium">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= 3. ORDERS TAB ================= -->
+      <section id="tab-orders" class="hidden space-y-6">
+        
+        <!-- Status Filter -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 flex flex-wrap gap-2 text-xs font-bold">
+          <button onclick="filterOrdersByStatus('전체')" class="px-4 py-2 rounded-xl bg-slate-900 text-white order-status-btn active" data-status="전체">전체 주문</button>
+          <button onclick="filterOrdersByStatus('결제완료')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 order-status-btn" data-status="결제완료">결제완료</button>
+          <button onclick="filterOrdersByStatus('상품준비')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 order-status-btn" data-status="상품준비">상품준비</button>
+          <button onclick="filterOrdersByStatus('배송중')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 order-status-btn" data-status="배송중">배송중</button>
+          <button onclick="filterOrdersByStatus('배송완료')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 order-status-btn" data-status="배송완료">배송완료</button>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-50 text-slate-400 font-bold border-b border-slate-200 uppercase">
+                <tr>
+                  <th class="p-4">주문번호</th>
+                  <th class="p-4">주문자 / 연락처</th>
+                  <th class="p-4">주문 상품</th>
+                  <th class="p-4">결제 금액</th>
+                  <th class="p-4">결제 수단</th>
+                  <th class="p-4">주문 일시</th>
+                  <th class="p-4">진행 상태</th>
+                  <th class="p-4 text-center">관리</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-table" class="divide-y divide-slate-100 font-medium">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= 4. INQUIRIES TAB ================= -->
+      <section id="tab-inquiries" class="hidden space-y-6">
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-50 text-slate-400 font-bold border-b border-slate-200 uppercase">
+                <tr>
+                  <th class="p-4">유형</th>
+                  <th class="p-4">상품 / 제목</th>
+                  <th class="p-4">작성자 / 연락처</th>
+                  <th class="p-4">등록 일시</th>
+                  <th class="p-4">상태</th>
+                  <th class="p-4 text-center">답변 관리</th>
+                </tr>
+              </thead>
+              <tbody id="admin-inquiries-table" class="divide-y divide-slate-100 font-medium">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Product Modal (Create/Edit) -->
+  <div id="product-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="modal-product-title" class="text-base font-black text-slate-900">신규 상품 등록</h3>
+        <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleProductSave(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="prod-edit-id" />
+        
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">상품명 *</label>
+          <input type="text" id="prod-form-name" required class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">카테고리 *</label>
+            <select id="prod-form-category" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none bg-white">
+              <option value="패션 / 의류">패션 / 의류</option>
+              <option value="디지털 / 가전">디지털 / 가전</option>
+              <option value="뷰티 / 케어">뷰티 / 케어</option>
+              <option value="리빙 / 인테리어">리빙 / 인테리어</option>
+              <option value="푸드 / 키친">푸드 / 키친</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">재고 수량 *</label>
+            <input type="number" id="prod-form-stock" required value="50" min="0" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">판매가 (할인가) *</label>
+            <input type="number" id="prod-form-price" required value="49000" min="0" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">정상가 (원가)</label>
+            <input type="number" id="prod-form-original-price" value="69000" min="0" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">대표 썸네일 이미지 URL *</label>
+          <input type="url" id="prod-form-thumbnail" required value="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">간단 요약 설명</label>
+          <input type="text" id="prod-form-summary" value="트렌디한 감성의 최고급 퀄리티 상품" class="w-full p-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+        </div>
+
+        <div class="flex items-center gap-4 pt-2">
+          <label class="flex items-center gap-1.5 font-bold cursor-pointer">
+            <input type="checkbox" id="prod-form-isbest" class="rounded text-indigo-600" />
+            <span>베스트 지정</span>
+          </label>
+          <label class="flex items-center gap-1.5 font-bold cursor-pointer">
+            <input type="checkbox" id="prod-form-isnew" checked class="rounded text-indigo-600" />
+            <span>신상품 지정</span>
+          </label>
+          <label class="flex items-center gap-1.5 font-bold cursor-pointer">
+            <input type="checkbox" id="prod-form-issale" class="rounded text-indigo-600" />
+            <span>세일 특가</span>
+          </label>
+        </div>
+
+        <div class="flex gap-2 pt-4 border-t border-slate-100">
+          <button type="button" onclick="closeProductModal()" class="flex-1 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 transition">취소</button>
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-bold text-white transition shadow-lg shadow-indigo-600/30">저장하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Inquiry Answer Modal -->
+  <div id="inquiry-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-black text-slate-900">고객 문의 답변 작성</h3>
+        <button onclick="closeInquiryModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <input type="hidden" id="inq-edit-id" />
+        <div class="p-3 bg-slate-50 rounded-xl space-y-1">
+          <p class="font-bold text-slate-900" id="inq-detail-title"></p>
+          <p class="text-slate-600" id="inq-detail-content"></p>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">관리자 답변 내용</label>
+          <textarea id="inq-form-answer" rows="4" class="w-full p-3 rounded-xl border border-slate-200 text-xs focus:border-indigo-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeInquiryModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 font-bold text-slate-700">취소</button>
+          <button type="button" onclick="saveInquiryAnswer()" class="flex-1 py-2.5 rounded-xl bg-indigo-600 text-white font-bold">답변 등록</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/cart-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let adminProducts = [];
+    let adminOrders = [];
+    let adminInquiries = [];
+    let salesChartInstance = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadAllAdminData();
+      renderDashboard();
+    });
+
+    async function loadAllAdminData() {
+      adminProducts = await ShopAPI.getProducts();
+      adminOrders = await ShopAPI.getOrders();
+      adminInquiries = await ShopAPI.getInquiries();
+    }
+
+    function switchAdminTab(tab) {
+      ['dashboard', 'products', 'orders', 'inquiries'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`nav-btn-${t}`);
+        if (btn) btn.className = 'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition';
+      });
+
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-btn-${tab}`);
+      if (activeBtn) activeBtn.className = 'w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-600 text-white transition';
+
+      const titles = {
+        dashboard: '통합 대시보드',
+        products: '상품 관리 (CRUD)',
+        orders: '주문 & 배송 관리',
+        inquiries: '고객 문의 / Q&A'
+      };
+      document.getElementById('current-tab-title').innerText = titles[tab];
+
+      if (tab === 'dashboard') renderDashboard();
+      if (tab === 'products') renderAdminProductsTable(adminProducts);
+      if (tab === 'orders') renderAdminOrdersTable(adminOrders);
+      if (tab === 'inquiries') renderAdminInquiriesTable(adminInquiries);
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function refreshCurrentTab() {
+      await loadAllAdminData();
+      const currentTitle = document.getElementById('current-tab-title').innerText;
+      if (currentTitle.includes('대시보드')) renderDashboard();
+      else if (currentTitle.includes('상품')) renderAdminProductsTable(adminProducts);
+      else if (currentTitle.includes('주문')) renderAdminOrdersTable(adminOrders);
+      else if (currentTitle.includes('문의')) renderAdminInquiriesTable(adminInquiries);
+      ShopUI.showToast('데이터를 새로고침했습니다.');
+    }
+
+    function renderDashboard() {
+      const totalMonth = adminOrders.reduce((acc, o) => acc + (o.totalAmount || 0), 0);
+      const pendingCount = adminOrders.filter(o => o.status === '결제완료' || o.status === '상품준비').length;
+      const lowStockCount = adminProducts.filter(p => p.stock < 10).length;
+
+      document.getElementById('kpi-month-sales').innerText = ShopUI.formatPrice(totalMonth);
+      document.getElementById('kpi-pending-orders').innerText = `${pendingCount}건`;
+      document.getElementById('kpi-total-products').innerText = `${adminProducts.length}개 / ${lowStockCount}개`;
+
+      // Quick Orders
+      const quickContainer = document.getElementById('quick-orders-list');
+      quickContainer.innerHTML = adminOrders.slice(0, 3).map(o => `
+        <div class="pt-3 first:pt-0 flex items-center justify-between text-xs">
+          <div>
+            <span class="font-bold text-slate-900">${o.customerName} (${o.orderId})</span>
+            <p class="text-[11px] text-slate-400">${o.orderDate}</p>
+          </div>
+          <div class="text-right">
+            <span class="font-black text-indigo-600">${ShopUI.formatPrice(o.totalAmount)}</span>
+            <span class="block text-[10px] font-bold ${o.status === '결제완료' ? 'text-amber-600' : 'text-emerald-600'}">${o.status}</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Render Chart
+      renderSalesChart();
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function renderSalesChart() {
+      const ctx = document.getElementById('salesChart');
+      if (!ctx) return;
+      if (salesChartInstance) salesChartInstance.destroy();
+
+      salesChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['9/1', '9/2', '9/3', '9/4', '9/5', '9/6', '9/7'],
+          datasets: [{
+            label: '일별 매출 (만원)',
+            data: [42, 65, 58, 90, 85, 120, 98],
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 3,
+            pointBackgroundColor: '#4f46e5',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
+        }
+      });
+    }
+
+    // Products Management Table
+    function renderAdminProductsTable(products) {
+      const tbody = document.getElementById('admin-products-table');
+      tbody.innerHTML = products.map(p => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4 flex items-center gap-3">
+            <img src="${p.thumbnail}" alt="${p.name}" class="w-10 h-10 rounded-xl object-cover border border-slate-200" />
+            <div>
+              <p class="font-bold text-slate-900 line-clamp-1">${p.name}</p>
+              <p class="text-[10px] text-slate-400 font-mono">${p.id}</p>
+            </div>
+          </td>
+          <td class="p-4 font-semibold text-slate-700">${p.category}</td>
+          <td class="p-4 font-black text-indigo-600">${ShopUI.formatPrice(p.price)}</td>
+          <td class="p-4 text-slate-400">${ShopUI.formatPrice(p.originalPrice)}</td>
+          <td class="p-4">
+            <span class="px-2 py-0.5 rounded-md font-bold text-xs ${p.stock > 10 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}">
+              ${p.stock}개
+            </span>
+          </td>
+          <td class="p-4 text-slate-600">★ ${p.rating || 5.0} (${p.reviewCount || 0})</td>
+          <td class="p-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">판매중</span>
+          </td>
+          <td class="p-4 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button onclick="editProduct('${p.id}')" class="p-1.5 text-slate-500 hover:text-indigo-600 rounded-lg hover:bg-slate-100" title="수정">
+                <i data-lucide="edit-2" class="w-4 h-4"></i>
+              </button>
+              <button onclick="deleteProduct('${p.id}')" class="p-1.5 text-slate-500 hover:text-rose-600 rounded-lg hover:bg-rose-50" title="삭제">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function filterAdminProducts() {
+      const keyword = document.getElementById('admin-prod-search').value.toLowerCase();
+      const cat = document.getElementById('admin-prod-cat-filter').value;
+
+      let filtered = [...adminProducts];
+      if (cat !== '전체') filtered = filtered.filter(p => p.category === cat);
+      if (keyword) filtered = filtered.filter(p => p.name.toLowerCase().includes(keyword));
+
+      renderAdminProductsTable(filtered);
+    }
+
+    function openProductModal(prod = null) {
+      document.getElementById('modal-product-title').innerText = prod ? '상품 정보 수정' : '신규 상품 등록';
+      document.getElementById('prod-edit-id').value = prod ? prod.id : '';
+      document.getElementById('prod-form-name').value = prod ? prod.name : '';
+      document.getElementById('prod-form-category').value = prod ? prod.category : '패션 / 의류';
+      document.getElementById('prod-form-stock').value = prod ? prod.stock : 50;
+      document.getElementById('prod-form-price').value = prod ? prod.price : 49000;
+      document.getElementById('prod-form-original-price').value = prod ? prod.originalPrice : 69000;
+      document.getElementById('prod-form-thumbnail').value = prod ? prod.thumbnail : 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
+      document.getElementById('prod-form-summary').value = prod ? prod.summary : '';
+      document.getElementById('prod-form-isbest').checked = prod ? !!prod.isBest : false;
+      document.getElementById('prod-form-isnew').checked = prod ? !!prod.isNew : true;
+      document.getElementById('prod-form-issale').checked = prod ? !!prod.isSale : false;
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    async function handleProductSave(e) {
+      e.preventDefault();
+      const editId = document.getElementById('prod-edit-id').value;
+      const price = parseInt(document.getElementById('prod-form-price').value);
+      const originalPrice = parseInt(document.getElementById('prod-form-original-price').value) || price;
+      const discountRate = originalPrice > price ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+
+      const productData = {
+        id: editId || 'prod-' + Date.now().toString().slice(-4),
+        name: document.getElementById('prod-form-name').value,
+        category: document.getElementById('prod-form-category').value,
+        price: price,
+        originalPrice: originalPrice,
+        discountRate: discountRate,
+        stock: parseInt(document.getElementById('prod-form-stock').value),
+        thumbnail: document.getElementById('prod-form-thumbnail').value,
+        summary: document.getElementById('prod-form-summary').value,
+        isBest: document.getElementById('prod-form-isbest').checked,
+        isNew: document.getElementById('prod-form-isnew').checked,
+        isSale: document.getElementById('prod-form-issale').checked,
+        rating: 5.0,
+        reviewCount: 0
+      };
+
+      if (editId) {
+        await ShopAPI.updateProduct(editId, productData);
+        ShopUI.showToast('상품 정보가 수정되었습니다.');
+      } else {
+        await ShopAPI.createProduct(productData);
+        ShopUI.showToast('신규 상품이 성공적으로 등록되었습니다!');
+      }
+
+      closeProductModal();
+      await refreshCurrentTab();
+    }
+
+    function editProduct(id) {
+      const p = adminProducts.find(item => item.id === id);
+      if (p) openProductModal(p);
+    }
+
+    async function deleteProduct(id) {
+      if (confirm('해당 상품을 삭제하시겠습니까?')) {
+        await ShopAPI.deleteProduct(id);
+        ShopUI.showToast('상품이 삭제되었습니다.');
+        await refreshCurrentTab();
+      }
+    }
+
+    // Orders Management Table
+    function renderAdminOrdersTable(orders) {
+      const tbody = document.getElementById('admin-orders-table');
+      tbody.innerHTML = orders.map(o => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4 font-mono font-bold text-indigo-600">${o.orderId}</td>
+          <td class="p-4">
+            <p class="font-bold text-slate-900">${o.customerName}</p>
+            <p class="text-[11px] text-slate-400">${o.customerPhone}</p>
+          </td>
+          <td class="p-4">
+            <p class="font-semibold text-slate-800 line-clamp-1">${o.items && o.items[0] ? o.items[0].name + (o.items.length > 1 ? ` 외 ${o.items.length - 1}건` : '') : '주문상품'}</p>
+          </td>
+          <td class="p-4 font-black text-slate-900">${ShopUI.formatPrice(o.totalAmount)}</td>
+          <td class="p-4 text-slate-600">${o.paymentMethod || '신용카드'}</td>
+          <td class="p-4 text-slate-400 text-[11px]">${o.orderDate}</td>
+          <td class="p-4">
+            <select onchange="updateOrderStatus('${o.orderId}', this.value)" class="p-1.5 rounded-lg border border-slate-200 text-xs font-bold bg-white cursor-pointer ${o.status === '배송완료' ? 'text-slate-500' : 'text-indigo-600'}">
+              <option value="결제완료" ${o.status === '결제완료' ? 'selected' : ''}>결제완료</option>
+              <option value="상품준비" ${o.status === '상품준비' ? 'selected' : ''}>상품준비</option>
+              <option value="배송중" ${o.status === '배송중' ? 'selected' : ''}>배송중</option>
+              <option value="배송완료" ${o.status === '배송완료' ? 'selected' : ''}>배송완료</option>
+              <option value="주문취소" ${o.status === '주문취소' ? 'selected' : ''}>주문취소</option>
+            </select>
+          </td>
+          <td class="p-4 text-center">
+            <button onclick="inputTrackingNumber('${o.orderId}')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 text-indigo-600 rounded-lg text-xs font-bold transition">
+              송장등록
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function filterOrdersByStatus(status) {
+      document.querySelectorAll('.order-status-btn').forEach(btn => {
+        if (btn.getAttribute('data-status') === status) {
+          btn.className = 'px-4 py-2 rounded-xl bg-slate-900 text-white order-status-btn active';
+        } else {
+          btn.className = 'px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 order-status-btn';
+        }
+      });
+
+      let filtered = adminOrders;
+      if (status !== '전체') filtered = adminOrders.filter(o => o.status === status);
+      renderAdminOrdersTable(filtered);
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      await ShopAPI.updateOrderStatus(orderId, newStatus);
+      ShopUI.showToast(`[${orderId}] 상태가 [${newStatus}]으로 변경되었습니다.`);
+      await loadAllAdminData();
+    }
+
+    async function inputTrackingNumber(orderId) {
+      const num = prompt('운송장 번호를 입력하세요: (예: CJ68291039841)');
+      if (num) {
+        await ShopAPI.updateOrderStatus(orderId, '배송중', num);
+        ShopUI.showToast(`송장번호가 등록되고 배송중 상태로 변경되었습니다.`);
+        await refreshCurrentTab();
+      }
+    }
+
+    // Inquiries Management Table
+    function renderAdminInquiriesTable(inquiries) {
+      const tbody = document.getElementById('admin-inquiries-table');
+      tbody.innerHTML = inquiries.map(inq => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4"><span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-600 font-bold">${inq.type}</span></td>
+          <td class="p-4">
+            <p class="font-bold text-slate-900">${inq.title}</p>
+            <p class="text-[11px] text-slate-400">${inq.productName || '일반상담'}</p>
+          </td>
+          <td class="p-4 text-slate-700">${inq.author} (${inq.phone})</td>
+          <td class="p-4 text-slate-400">${inq.createdAt}</td>
+          <td class="p-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${inq.status === '답변완료' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}">
+              ${inq.status}
+            </span>
+          </td>
+          <td class="p-4 text-center">
+            <button onclick="openInquiryModal('${inq.id}')" class="px-3 py-1 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-indigo-600 transition">
+              답변작성
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function openInquiryModal(id) {
+      const inq = adminInquiries.find(item => item.id === id);
+      if (!inq) return;
+
+      document.getElementById('inq-edit-id').value = inq.id;
+      document.getElementById('inq-detail-title').innerText = `[${inq.type}] ${inq.title}`;
+      document.getElementById('inq-detail-content').innerText = inq.content;
+      document.getElementById('inq-form-answer').value = inq.answer || '';
+      document.getElementById('inquiry-modal').classList.remove('hidden');
+    }
+
+    function closeInquiryModal() {
+      document.getElementById('inquiry-modal').classList.add('hidden');
+    }
+
+    async function saveInquiryAnswer() {
+      const id = document.getElementById('inq-edit-id').value;
+      const ans = document.getElementById('inq-form-answer').value.trim();
+      if (!ans) {
+        alert('답변 내용을 입력해 주세요.');
+        return;
+      }
+      await ShopAPI.answerInquiry(id, ans);
+      ShopUI.showToast('고객 문의 답변이 성공적으로 등록되었습니다.');
+      closeInquiryModal();
+      await refreshCurrentTab();
+    }
+  </script>
+</body>
+</html>
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $publicDir 'admin.html'), $adminHtml, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: admin.html" -ForegroundColor Green

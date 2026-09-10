@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMP 영역별 집중 학습 - PMP Exam Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+  <div id="main-navbar"></div>
+
+  <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Header & Domain Filter Tabs -->
+    <div class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-heading flex items-center gap-2">
+            <i data-lucide="book-open-check" class="w-7 h-7 text-sky-400"></i> 영역별 집중 학습 & 즉시 해설 모드
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">
+            정답을 선택하는 즉시 O/X 결과와 함께 각 보기별 오답 사유 및 PMBOK 7판 출제 근거를 확인합니다.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btn-toggle-bilingual" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 shadow">
+            <i data-lucide="languages" class="w-3.5 h-3.5 text-sky-400"></i> 한/영 병기 토글
+          </button>
+        </div>
+      </div>
+
+      <!-- Domain Selection Pills -->
+      <div class="flex flex-wrap items-center gap-2 pt-2 border-b border-slate-800 pb-4">
+        <button data-domain="all" class="domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-sky-600 text-white shadow-sm">
+          전체 문항 (All)
+        </button>
+        <button data-domain="people" class="domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800">
+          사람 (People 42%)
+        </button>
+        <button data-domain="process" class="domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800">
+          공정 (Process 50%)
+        </button>
+        <button data-domain="business" class="domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800">
+          비즈니스 환경 (Business 8%)
+        </button>
+        <button data-domain="agile" class="domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800">
+          애자일/하이브리드 특화
+        </button>
+      </div>
+    </div>
+
+    <!-- Questions Feed Container -->
+    <div id="questions-feed" class="space-y-6">
+      <!-- Dynamically Rendered Question Cards -->
+    </div>
+  </main>
+
+  <div id="main-footer"></div>
+
+  <script src="js/app-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let allQuestions = [];
+    let currentFilter = 'all';
+    let isBilingual = true;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Components.renderNavbar('study');
+      Components.renderFooter();
+
+      allQuestions = await API.getQuestions();
+      
+      // Check URL query param for domain
+      const params = new URLSearchParams(location.search);
+      const domParam = params.get('domain');
+      if (domParam) {
+        currentFilter = domParam;
+        updateDomainPillsUI();
+      }
+
+      renderFeed();
+      setupEvents();
+    });
+
+    function updateDomainPillsUI() {
+      document.querySelectorAll('.domain-filter-btn').forEach(btn => {
+        if (btn.dataset.domain === currentFilter) {
+          btn.className = 'domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-sky-600 text-white shadow-sm';
+        } else {
+          btn.className = 'domain-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800';
+        }
+      });
+    }
+
+    function setupEvents() {
+      document.querySelectorAll('.domain-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentFilter = btn.dataset.domain;
+          updateDomainPillsUI();
+          renderFeed();
+        });
+      });
+
+      document.getElementById('btn-toggle-bilingual').addEventListener('click', () => {
+        isBilingual = !isBilingual;
+        document.querySelectorAll('.en-text-block').forEach(el => {
+          el.style.display = isBilingual ? 'block' : 'none';
+        });
+      });
+    }
+
+    function renderFeed() {
+      const feed = document.getElementById('questions-feed');
+      feed.innerHTML = '';
+
+      let filtered = allQuestions;
+      if (currentFilter === 'agile') {
+        filtered = allQuestions.filter(q => q.methodology === 'agile' || q.methodology === 'hybrid');
+      } else if (currentFilter !== 'all') {
+        filtered = allQuestions.filter(q => q.domain === currentFilter);
+      }
+
+      if (filtered.length === 0) {
+        feed.innerHTML = `
+          <div class="text-center py-16 bg-slate-900/60 rounded-3xl border border-slate-800 text-slate-400">
+            해당 영역에 등록된 문제가 없습니다.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((q, idx) => {
+        const isBookmarked = AppStore.isBookmarked(q.id);
+        const card = document.createElement('div');
+        card.id = `card-${q.id}`;
+        card.className = 'bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-7 space-y-5 shadow-xl transition-all';
+
+        card.innerHTML = `
+          <!-- Meta Header -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-sky-400 text-sm">#${idx + 1}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">${q.domainName}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">${q.methodologyName}</span>
+            </div>
+            <button class="btn-bookmark p-1.5 rounded-lg text-slate-400 hover:text-amber-400 transition-colors" data-id="${q.id}">
+              <i data-lucide="bookmark" class="w-4 h-4 ${isBookmarked ? 'fill-amber-400 text-amber-400' : ''}"></i>
+            </button>
+          </div>
+
+          <!-- Question Body -->
+          <div class="space-y-2">
+            <h3 class="text-base sm:text-lg font-bold text-white leading-relaxed select-text">${q.questionKo}</h3>
+            <div class="en-text-block text-xs sm:text-sm text-slate-400 italic pl-3 border-l-2 border-sky-500/40 select-text" style="display: ${isBilingual ? 'block' : 'none'};">
+              ${q.questionEn}
+            </div>
+          </div>
+
+          <!-- Options -->
+          <div class="space-y-2.5 options-group" data-qid="${q.id}">
+            ${q.options.map(opt => `
+              <div class="opt-btn p-3.5 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-slate-600 cursor-pointer flex items-start gap-3 transition-all" data-opt="${opt.id}">
+                <div class="w-6 h-6 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center font-bold text-xs shrink-0">
+                  ${opt.id}
+                </div>
+                <div class="space-y-0.5">
+                  <div class="text-sm text-slate-200 font-medium">${opt.textKo}</div>
+                  <div class="en-text-block text-xs text-slate-500 italic" style="display: ${isBilingual ? 'block' : 'none'};">${opt.textEn}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Explanation Box (Initially Hidden) -->
+          <div class="explanation-box hidden pt-4 border-t border-slate-800 space-y-4">
+            <div class="result-banner p-3.5 rounded-2xl flex items-center gap-2 font-bold text-sm"></div>
+
+            <div class="bg-slate-950/80 rounded-2xl p-4 border border-slate-800 space-y-3 text-xs leading-relaxed">
+              <div class="font-bold text-sky-400 text-sm flex items-center gap-1.5">
+                <i data-lucide="info" class="w-4 h-4"></i> PMBOK 7th / Agile 가이드 상세 해설
+              </div>
+
+              <!-- Option by option explanation -->
+              <div class="space-y-2 pt-1">
+                ${q.options.map(opt => `
+                  <div class="p-2.5 rounded-xl ${opt.isCorrect ? 'bg-emerald-950/40 border border-emerald-800/60 text-emerald-200' : 'bg-slate-900/60 text-slate-300'}">
+                    <strong class="font-bold mr-1 ${opt.isCorrect ? 'text-emerald-400' : 'text-slate-400'}">[보기 ${opt.id}]</strong> ${opt.explanationKo}
+                  </div>
+                `).join('')}
+              </div>
+
+              <div class="pt-2 text-slate-400 border-t border-slate-800 flex flex-col gap-1">
+                <div><span class="text-slate-500">출제 근거:</span> <span class="text-slate-300">${q.pmbokReference}</span></div>
+                <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 font-medium">
+                  💡 <strong>합격 꿀팁:</strong> ${q.tipKo}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Click on Option in Study mode
+        card.querySelectorAll('.opt-btn').forEach(optEl => {
+          optEl.addEventListener('click', () => {
+            const chosenId = optEl.dataset.opt;
+            const expBox = card.querySelector('.explanation-box');
+            const resultBanner = card.querySelector('.result-banner');
+            const isCorrect = (chosenId === q.correctAnswer);
+
+            // Mark option styles
+            card.querySelectorAll('.opt-btn').forEach(btn => {
+              const bOpt = btn.dataset.opt;
+              btn.classList.remove('border-emerald-500', 'bg-emerald-500/15', 'border-rose-500', 'bg-rose-500/15');
+              if (bOpt === q.correctAnswer) {
+                btn.classList.add('border-emerald-500', 'bg-emerald-500/15');
+              } else if (bOpt === chosenId && !isCorrect) {
+                btn.classList.add('border-rose-500', 'bg-rose-500/15');
+              }
+            });
+
+            // Banner style
+            if (isCorrect) {
+              resultBanner.className = 'result-banner p-3.5 rounded-2xl flex items-center gap-2 font-bold text-sm bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+              resultBanner.innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i> 정답입니다! (선택: ${chosenId})`;
+              AppStore.removeIncorrectQuestion(q.id);
+            } else {
+              resultBanner.className = 'result-banner p-3.5 rounded-2xl flex items-center gap-2 font-bold text-sm bg-rose-500/20 text-rose-300 border border-rose-500/30';
+              resultBanner.innerHTML = `<i data-lucide="x-circle" class="w-5 h-5 text-rose-400"></i> 오답입니다! (선택: ${chosenId} / 정답: ${q.correctAnswer}) - 오답노트에 자동 등록되었습니다.`;
+              AppStore.recordIncorrectQuestion(q.id, chosenId, q.correctAnswer, q.domain);
+            }
+
+            expBox.classList.remove('hidden');
+            if (window.lucide) window.lucide.createIcons();
+          });
+        });
+
+        // Bookmark Toggle
+        card.querySelector('.btn-bookmark').addEventListener('click', (e) => {
+          const btn = e.currentTarget;
+          const isNowBookmarked = AppStore.toggleBookmark(q.id);
+          const icon = btn.querySelector('svg');
+          if (isNowBookmarked) {
+            icon.classList.add('fill-amber-400', 'text-amber-400');
+            Components.showToast('북마크에 저장되었습니다.', 'warning');
+          } else {
+            icon.classList.remove('fill-amber-400', 'text-amber-400');
+            Components.showToast('북마크가 해제되었습니다.', 'info');
+          }
+        });
+
+        feed.appendChild(card);
+      });
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

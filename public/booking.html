@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예약 및 상담 신청 - 투어이지(TourEasy)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow pb-24">
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-10">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <span class="px-3 py-1 bg-sky-500/20 text-sky-300 font-bold rounded-full text-xs border border-sky-400/30 uppercase mb-3 inline-block">
+          Easy & Safe Booking
+        </span>
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight">여행 예약 및 견적 상담 접수</h1>
+        <p class="text-slate-300 text-xs sm:text-sm mt-1">
+          신청 정보를 입력해주시면 전문 여행 매니저가 유선 및 카카오톡으로 상세 일정과 확정 견적을 안내해 드립니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Booking Form Container -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-8">
+      
+      <!-- SUCCESS CONTAINER (Hidden by default) -->
+      <div id="booking-success-view" class="hidden bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-xl text-center space-y-6 animate-fadeIn">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs border border-emerald-300 shadow-sm">
+          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> 접수완료되었습니다
+        </div>
+
+        <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner ring-8 ring-emerald-50">
+          <i data-lucide="check-circle-2" class="w-12 h-12"></i>
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            예약 및 견적 상담이 정상적으로 <span class="text-emerald-600">접수완료되었습니다!</span>
+          </h2>
+          <p class="text-slate-500 text-sm max-w-lg mx-auto leading-relaxed">
+            투어이지를 이용해 주셔서 진심으로 감사드립니다.<br class="hidden sm:inline">
+            입력해주신 연락처로 <strong>담당 전문 매니저가 24시간 이내에 신속히 유선 안내</strong>해 드립니다.
+          </p>
+        </div>
+
+        <!-- Next Steps Guidance Box -->
+        <div class="max-w-md mx-auto bg-sky-50/80 border border-sky-200/80 p-4 sm:p-5 rounded-2xl text-left text-xs text-slate-700 space-y-2">
+          <div class="font-bold text-sky-900 flex items-center gap-1.5 text-sm">
+            <i data-lucide="info" class="w-4 h-4 text-sky-600 shrink-0"></i> 예약 접수 후 진행 안내
+          </div>
+          <ul class="space-y-1.5 text-slate-600 pl-1">
+            <li class="flex items-start gap-2">
+              <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
+              <span><strong>접수 확인</strong>: 예약 내용이 안전하게 등록되었습니다.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
+              <span><strong>해피콜 상담</strong>: 전문 상담원이 잔여 좌석/일정을 최종 확인 후 연락드립니다.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-4 h-4 rounded-full bg-sky-200 text-sky-800 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
+              <span><strong>최종 확정 및 결제</strong>: 상담 완료 후 확정 바우처 발송 및 결제가 진행됩니다.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Booking Voucher Card -->
+        <div class="max-w-md mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left space-y-3 text-xs shadow-sm">
+          <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+            <span class="text-slate-500 font-semibold">예약 접수 번호</span>
+            <span id="res-booking-id" class="text-sky-600 font-mono font-black text-sm"></span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">여행 상품</span>
+            <span id="res-package-title" class="font-bold text-slate-800 text-right truncate max-w-[200px]"></span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">출발 예정일</span>
+            <span id="res-departure-date" class="font-semibold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">대표 예약자</span>
+            <span id="res-traveler-name" class="font-semibold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-500">연락처</span>
+            <span id="res-phone" class="font-semibold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between items-center pt-2 border-t border-slate-200">
+            <span class="text-slate-700 font-bold">예상 총 결제금액</span>
+            <span id="res-total-price" class="text-base font-black text-sky-600"></span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-3 pt-4">
+          <button onclick="window.print()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition">
+            <i data-lucide="printer" class="w-4 h-4"></i> 접수증 인쇄 / PDF 저장
+          </button>
+          <a href="packages.html" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition">
+            다른 여행상품 둘러보기
+          </a>
+          <a href="index.html" class="px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs shadow-md shadow-sky-200 transition">
+            홈으로 돌아가기
+          </a>
+        </div>
+      </div>
+
+      <!-- MEMBER ONLY ACCESS GATE (Shown when logged out) -->
+      <div id="booking-login-gate" class="bg-white p-8 sm:p-12 rounded-3xl border border-sky-100 shadow-xl text-center space-y-6">
+        <div class="w-16 h-16 bg-sky-50 text-sky-600 rounded-3xl flex items-center justify-center mx-auto ring-8 ring-sky-50/50">
+          <i data-lucide="lock" class="w-8 h-8"></i>
+        </div>
+        <div class="space-y-2">
+          <span class="px-3 py-1 bg-amber-50 text-amber-700 font-bold rounded-full text-xs border border-amber-200 inline-block">
+            회원 전용 서비스
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            여행 상품 예약은 <span class="text-sky-600">회원 로그인 후</span> 이용 가능합니다
+          </h2>
+          <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+            투어이지는 안전한 예약 관리 및 1:1 전담 매니저 안심 케어를 위해 회원제로 예약을 운영하고 있습니다.<br>
+            로그인 또는 간편 회원가입 후 바로 예약 신청을 완료하실 수 있습니다.
+          </p>
+        </div>
+
+        <!-- Selected Package Mini Card Preview -->
+        <div id="gate-pkg-preview" class="max-w-md mx-auto p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left flex items-center gap-3">
+          <img id="gate-pkg-img" src="" class="w-16 h-16 rounded-xl object-cover shrink-0" alt="상품 이미지">
+          <div class="min-w-0 flex-1">
+            <span id="gate-pkg-region" class="text-[10px] font-bold text-sky-600"></span>
+            <h4 id="gate-pkg-title" class="text-xs font-black text-slate-900 truncate"></h4>
+            <span id="gate-pkg-price" class="text-xs font-black text-slate-700"></span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 max-w-md mx-auto">
+          <button type="button" onclick="window.openAuthModal('login', window.location.href)" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-black rounded-xl shadow-md shadow-sky-500/20 text-sm transition flex items-center justify-center gap-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i> 로그인하고 예약하기
+          </button>
+          <button type="button" onclick="window.openAuthModal('register', window.location.href)" class="w-full sm:flex-1 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold rounded-xl text-sm transition flex items-center justify-center gap-2">
+            <i data-lucide="user-plus" class="w-4 h-4 text-sky-600"></i> 간편 회원가입
+          </button>
+        </div>
+
+        <p class="text-[11px] text-slate-400">
+          아이디 또는 비밀번호를 잊으셨나요? 
+          <button type="button" onclick="window.openAuthModal('find-id')" class="text-sky-600 underline font-semibold">아이디 찾기</button> / 
+          <button type="button" onclick="window.openAuthModal('reset-password')" class="text-sky-600 underline font-semibold">비밀번호 찾기</button>
+        </p>
+      </div>
+
+      <!-- FORM CONTAINER -->
+      <form id="booking-form" class="space-y-8 hidden">
+        
+        <!-- Member Status Banner (Visible when logged in) -->
+        <div id="booking-member-banner" class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 p-4 rounded-2xl flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold">
+              <i data-lucide="user-check" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <span class="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                <span id="booking-user-name"></span> 회원님 계정으로 예약 진행 중
+                <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">인증회원</span>
+              </span>
+              <span class="text-[11px] text-slate-500 block" id="booking-user-email"></span>
+            </div>
+          </div>
+          <button type="button" onclick="window.logoutUser()" class="text-xs text-slate-500 hover:text-rose-600 font-semibold underline shrink-0">
+            로그아웃
+          </button>
+        </div>
+        
+        <!-- 1. Selected Package Summary Box -->
+        <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-base pb-3 border-b border-slate-100">
+            <i data-lucide="map-pinned" class="w-5 h-5 text-sky-600"></i> 선택 여행 상품 정보
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-5 items-start">
+            <img id="form-pkg-img" src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=400&q=80" class="w-full sm:w-36 h-28 object-cover rounded-2xl bg-slate-100 shrink-0">
+            <div class="flex-1 space-y-1">
+              <span id="form-pkg-badge" class="px-2 py-0.5 bg-sky-50 text-sky-700 font-bold text-[11px] rounded-md border border-sky-200">패키지</span>
+              <h3 id="form-pkg-title" class="font-bold text-slate-900 text-base sm:text-lg leading-snug">상품을 선택해주세요</h3>
+              <p id="form-pkg-duration" class="text-xs text-slate-500"></p>
+              <div class="pt-1">
+                <span class="text-xs text-slate-500">1인 기준:</span>
+                <span id="form-pkg-unit-price" class="font-extrabold text-sky-600 text-sm ml-1"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Schedule & Number of Travelers -->
+        <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-base pb-3 border-b border-slate-100">
+            <i data-lucide="calendar" class="w-5 h-5 text-sky-600"></i> 일정 및 여행 인원
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <!-- Departure Date -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">출발 예정일 <span class="text-rose-500">*</span></label>
+              <input 
+                type="date" 
+                id="input-departure-date" 
+                required 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+
+            <!-- Adults Count -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">성인 인원 (만 12세 이상) <span class="text-rose-500">*</span></label>
+              <input 
+                type="number" 
+                id="input-adults" 
+                min="1" 
+                max="50" 
+                value="2" 
+                required 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+
+            <!-- Children Count -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">아동 인원 (만 2세 ~ 11세)</label>
+              <input 
+                type="number" 
+                id="input-children" 
+                min="0" 
+                max="20" 
+                value="0" 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Traveler Information -->
+        <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-base pb-3 border-b border-slate-100">
+            <i data-lucide="user" class="w-5 h-5 text-sky-600"></i> 대표 예약자 정보
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">예약자 성명 <span class="text-rose-500">*</span></label>
+              <input 
+                type="text" 
+                id="input-name" 
+                placeholder="홍길동" 
+                required 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">휴대폰 번호 <span class="text-rose-500">*</span></label>
+              <input 
+                type="tel" 
+                id="input-phone" 
+                placeholder="010-1234-5678" 
+                required 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">이메일 주소 (선택)</label>
+              <input 
+                type="email" 
+                id="input-email" 
+                placeholder="example@email.com (일정표 및 바우처 수신용)" 
+                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Additional Options -->
+        <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-base pb-3 border-b border-slate-100">
+            <i data-lucide="plus-circle" class="w-5 h-5 text-sky-600"></i> 선택 옵션 추가
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <label class="flex items-center justify-between p-3.5 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200 cursor-pointer transition">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="opt-insurance" class="w-4 h-4 text-sky-600 rounded">
+                <div>
+                  <span class="font-bold text-slate-800 block">여행자 보험 프리미엄 업그레이드 (보장한도 2억원 + 휴대품 분실 특약)</span>
+                  <span class="text-slate-400 text-[11px]">해외 의료비 보장 한도 2배 확대</span>
+                </div>
+              </div>
+              <span class="font-bold text-sky-600">+20,000원 / 1인</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200 cursor-pointer transition">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="opt-single" class="w-4 h-4 text-sky-600 rounded">
+                <div>
+                  <span class="font-bold text-slate-800 block">호텔 1인 단독 사용 (싱글 룸차지)</span>
+                  <span class="text-slate-400 text-[11px]">혼자 편안하게 투숙 희망 시 선택</span>
+                </div>
+              </div>
+              <span class="font-bold text-sky-600">+250,000원</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200 cursor-pointer transition">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="opt-pickup" class="w-4 h-4 text-sky-600 rounded">
+                <div>
+                  <span class="font-bold text-slate-800 block">공항 전용 단독 리무진 픽업/샌딩 서비스</span>
+                  <span class="text-slate-400 text-[11px]">공항 ↔ 호텔 간 대기 없는 프라이빗 이동</span>
+                </div>
+              </div>
+              <span class="font-bold text-sky-600">+40,000원</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Special Requests & Payment Preference -->
+        <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-base pb-3 border-b border-slate-100">
+            <i data-lucide="message-square" class="w-5 h-5 text-sky-600"></i> 추가 요청사항 및 상담 희망 방식
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1.5">특별 요청사항 (선택)</label>
+            <textarea 
+              id="input-requests" 
+              rows="3" 
+              placeholder="예: 부모님 칠순 기념 여행입니다, 유아용 침대 요청, 객실 인접 배정, 특정 음식 알레르기 등" 
+              class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-800 focus:outline-none focus:border-sky-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-2">상담 및 결제 방식</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
+              <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:border-sky-400">
+                <input type="radio" name="payment-method" value="상담 후 무통장 입금" checked class="text-sky-600">
+                <span>상담 후 무통장 입금</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:border-sky-400">
+                <input type="radio" name="payment-method" value="카드 결제 링크 발송" class="text-sky-600">
+                <span>카드 결제 링크 발송</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:border-sky-400">
+                <input type="radio" name="payment-method" value="회사 법인카드/계산서" class="text-sky-600">
+                <span>법인카드/세금계산서</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Total Calculation & Submit Button -->
+        <div class="bg-gradient-to-tr from-sky-900 to-slate-900 p-6 sm:p-8 rounded-3xl text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <span class="text-xs text-sky-200 font-semibold block mb-1">예상 결제 금액 (확정 상담 후 최종 결제)</span>
+            <span id="form-total-price" class="text-3xl font-black text-white">0원</span>
+            <span class="text-[11px] text-slate-400 block mt-1">※ 예약 접수 후에는 별도의 취소 위약금이 발생하지 않습니다.</span>
+          </div>
+
+          <button 
+            type="submit" 
+            id="btn-submit-booking"
+            class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-teal-400 to-sky-400 hover:from-teal-300 hover:to-sky-300 text-slate-950 font-black rounded-2xl shadow-lg transition text-base"
+          >
+            예약 및 견적 상담 접수하기
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let currentPkg = null;
+    let baseUnitPrice = 0;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderNavbar('packages');
+      renderFooter();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const pkgId = urlParams.get('id') || 'pkg-001';
+      const initialDate = urlParams.get('date');
+      const initialAdults = parseInt(urlParams.get('adults'), 10) || 2;
+      const initialChildren = parseInt(urlParams.get('children'), 10) || 0;
+
+      document.getElementById('input-adults').value = initialAdults;
+      document.getElementById('input-children').value = initialChildren;
+
+      if (initialDate) {
+        document.getElementById('input-departure-date').value = initialDate;
+      } else {
+        // Set default date to +14 days
+        const d = new Date();
+        d.setDate(d.getDate() + 14);
+        document.getElementById('input-departure-date').value = d.toISOString().slice(0, 10);
+      }
+
+      // Load Package Info
+      try {
+        const res = await TourAPI.getPackageById(pkgId);
+        if (res.data) {
+          currentPkg = res.data;
+          baseUnitPrice = currentPkg.price;
+
+          document.getElementById('form-pkg-img').src = currentPkg.thumbnail;
+          document.getElementById('form-pkg-title').textContent = currentPkg.title;
+          document.getElementById('form-pkg-badge').textContent = `${currentPkg.region} • ${currentPkg.theme}`;
+          document.getElementById('form-pkg-duration').textContent = `${currentPkg.durationNights}박 ${currentPkg.durationDays}일 일정`;
+          document.getElementById('form-pkg-unit-price').textContent = TourAPI.formatPrice(currentPkg.price);
+
+          // Update gate preview
+          const gateImg = document.getElementById('gate-pkg-img');
+          const gateTitle = document.getElementById('gate-pkg-title');
+          const gateRegion = document.getElementById('gate-pkg-region');
+          const gatePrice = document.getElementById('gate-pkg-price');
+          if (gateImg) gateImg.src = currentPkg.thumbnail;
+          if (gateTitle) gateTitle.textContent = currentPkg.title;
+          if (gateRegion) gateRegion.textContent = `${currentPkg.region} • ${currentPkg.durationNights}박 ${currentPkg.durationDays}일`;
+          if (gatePrice) gatePrice.textContent = `1인 ` + TourAPI.formatPrice(currentPkg.price);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
+      // Check authentication & configure booking view
+      checkAuthAndSetupBooking();
+
+      calculateTotal();
+
+      // Listeners for real-time recalculation
+      document.getElementById('input-adults').addEventListener('input', calculateTotal);
+      document.getElementById('input-children').addEventListener('input', calculateTotal);
+      document.getElementById('opt-insurance').addEventListener('change', calculateTotal);
+      document.getElementById('opt-single').addEventListener('change', calculateTotal);
+      document.getElementById('opt-pickup').addEventListener('change', calculateTotal);
+
+      // Submit Form
+      document.getElementById('booking-form').addEventListener('submit', handleBookingSubmit);
+
+      // Auth change event listeners
+      window.addEventListener('toureasy_logged_in', () => {
+        checkAuthAndSetupBooking();
+      });
+      window.addEventListener('toureasy_logged_out', () => {
+        checkAuthAndSetupBooking();
+      });
+      window.addEventListener('toureasy_auth_changed', () => {
+        checkAuthAndSetupBooking();
+      });
+    });
+
+    function checkAuthAndSetupBooking() {
+      const user = TourAPI.getCurrentUser();
+      const gateEl = document.getElementById('booking-login-gate');
+      const formEl = document.getElementById('booking-form');
+
+      if (!user) {
+        if (gateEl) gateEl.classList.remove('hidden');
+        if (formEl) formEl.classList.add('hidden');
+      } else {
+        if (gateEl) gateEl.classList.add('hidden');
+        if (formEl) formEl.classList.remove('hidden');
+
+        const nameEl = document.getElementById('booking-user-name');
+        const emailEl = document.getElementById('booking-user-email');
+        if (nameEl) nameEl.textContent = user.name;
+        if (emailEl) emailEl.textContent = user.email;
+
+        // Auto-fill traveler inputs with user's profile
+        const inputName = document.getElementById('input-name');
+        const inputPhone = document.getElementById('input-phone');
+        const inputEmail = document.getElementById('input-email');
+        if (inputName && !inputName.value) inputName.value = user.name || '';
+        if (inputPhone && !inputPhone.value) inputPhone.value = user.phone || '';
+        if (inputEmail && !inputEmail.value) inputEmail.value = user.email || '';
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function calculateTotal() {
+      const adults = parseInt(document.getElementById('input-adults').value, 10) || 1;
+      const children = parseInt(document.getElementById('input-children').value, 10) || 0;
+
+      const childPrice = Math.round(baseUnitPrice * 0.8);
+      let total = (adults * baseUnitPrice) + (children * childPrice);
+
+      if (document.getElementById('opt-insurance').checked) {
+        total += (adults + children) * 20000;
+      }
+      if (document.getElementById('opt-single').checked) {
+        total += 250000;
+      }
+      if (document.getElementById('opt-pickup').checked) {
+        total += 40000;
+      }
+
+      document.getElementById('form-total-price').textContent = TourAPI.formatPrice(total);
+      return total;
+    }
+
+    async function handleBookingSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btn-submit-booking');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 접수 처리 중...</span>`;
+
+      const totalPrice = calculateTotal();
+      const payload = {
+        packageId: currentPkg ? currentPkg.id : '',
+        packageTitle: currentPkg ? currentPkg.title : '맞춤 여행 패키지',
+        departureDate: document.getElementById('input-departure-date').value,
+        travelerName: document.getElementById('input-name').value.trim(),
+        phone: document.getElementById('input-phone').value.trim(),
+        email: document.getElementById('input-email').value.trim(),
+        adults: parseInt(document.getElementById('input-adults').value, 10) || 1,
+        children: parseInt(document.getElementById('input-children').value, 10) || 0,
+        totalPrice: totalPrice,
+        options: {
+          insuranceUpgrade: document.getElementById('opt-insurance').checked,
+          singleRoom: document.getElementById('opt-single').checked,
+          airportPickup: document.getElementById('opt-pickup').checked
+        },
+        requests: document.getElementById('input-requests').value.trim(),
+        paymentMethod: document.querySelector('input[name="payment-method"]:checked')?.value || '상담 후 결제'
+      };
+
+      try {
+        const res = await TourAPI.createBooking(payload);
+        if (res.success && res.data) {
+          // 1. Show immediate button success state
+          submitBtn.className = 'w-full py-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 text-sm flex items-center justify-center gap-2 transition-all';
+          submitBtn.innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i> 접수완료되었습니다!`;
+          lucide.createIcons();
+
+          // 2. Trigger prominent toast
+          showToast('🎉 예약 및 상담 신청이 정상적으로 접수완료되었습니다!', 'success');
+
+          // 3. Smooth transition to success voucher screen after brief confirmation
+          setTimeout(() => {
+            document.getElementById('booking-form').classList.add('hidden');
+            const successView = document.getElementById('booking-success-view');
+            successView.classList.remove('hidden');
+
+            document.getElementById('res-booking-id').textContent = res.data.id;
+            document.getElementById('res-package-title').textContent = res.data.packageTitle;
+            document.getElementById('res-departure-date').textContent = res.data.departureDate;
+            document.getElementById('res-traveler-name').textContent = res.data.travelerName;
+            document.getElementById('res-phone').textContent = res.data.phone;
+            document.getElementById('res-total-price').textContent = TourAPI.formatPrice(res.data.totalPrice);
+
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 600);
+        }
+      } catch (err) {
+        alert(err.message || '예약 신청 중 오류가 발생했습니다.');
+        submitBtn.disabled = false;
+        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-500/20 text-sm transition';
+        submitBtn.textContent = '예약 및 견적 상담 접수하기';
+      }
+    }
+  </script>
+</body>
+</html>

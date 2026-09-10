@@ -1,0 +1,56 @@
+﻿[
+    {
+        "id":  "usr-admin-wisekks",
+        "email":  "wisekks@gmail.com",
+        "name":  "관리자",
+        "phone":  "010-8754-9373",
+        "role":  "ADMIN",
+        "createdAt":  "2026-09-01T13:18:00",
+        "password":  "#wisesoo7337"
+    },
+    {
+        "id":  "usr-001",
+        "email":  "user@toureasy.com",
+        "password":  "TourEasy1234!",
+        "name":  "김투어",
+        "phone":  "010-1234-5678",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-01T09:00:00"
+    },
+    {
+        "id":  "usr-admin",
+        "email":  "admin@toureasy.co.kr",
+        "password":  "TourAdmin2026!",
+        "name":  "최고관리자",
+        "phone":  "010-9876-5432",
+        "role":  "ADMIN",
+        "createdAt":  "2026-09-01T09:00:00"
+    },
+    {
+        "id":  "usr-1788235251531",
+        "email":  "hong@toureasy.com",
+        "name":  "홍길동",
+        "phone":  "010-7777-8888",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-01T13:00:51",
+        "password":  "BrandNewSecret2026@"
+    },
+    {
+        "id":  "usr-1788236092470",
+        "email":  "kks@do-best.co.kr",
+        "password":  "#wises7337",
+        "name":  "김길동",
+        "phone":  "010-8754-9373",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-01T13:14:52"
+    },
+    {
+        "id":  "usr-1789004661526",
+        "email":  "kwangsoo-kim@hanmail.net",
+        "password":  "#wisesoo7337",
+        "name":  "김광수",
+        "phone":  "01087549373",
+        "role":  "MEMBER",
+        "createdAt":  "2026-09-10T10:44:21"
+    }
+]

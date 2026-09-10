@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여행 상품 검색 & 필터 - 투어이지(TourEasy)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow">
+    <!-- Header Banner -->
+    <section class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black tracking-tight">여행 상품 둘러보기</h1>
+          <p class="text-slate-300 text-sm mt-1">전문가가 기획한 믿을 수 있는 국내외 맞춤 여행 패키지를 만나보세요.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-slate-300">
+          <a href="/" class="hover:text-white">홈</a>
+          <span>&gt;</span>
+          <span class="text-sky-400 font-bold">여행 상품</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content with Sidebar Filters and Package List -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        
+        <!-- Left Filter Sidebar -->
+        <aside class="lg:col-span-1">
+          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm sticky top-28 space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+              <h2 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <i data-lucide="sliders-horizontal" class="w-4 h-4 text-sky-600"></i> 상세 필터
+              </h2>
+              <button id="btn-reset-filters" class="text-xs text-slate-400 hover:text-sky-600 font-semibold transition">
+                초기화
+              </button>
+            </div>
+
+            <!-- Keyword Search -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">키워드 검색</label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="filter-search" 
+                  placeholder="도시명, 호텔, 테마 검색" 
+                  class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 transition"
+                />
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- Region Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">여행 지역</label>
+              <div class="space-y-1.5" id="region-filter-group">
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="전체" checked class="text-sky-600 focus:ring-sky-500">
+                  <span>전체 지역</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="동남아" class="text-sky-600 focus:ring-sky-500">
+                  <span>동남아시아 (다낭/발리 등)</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="유럽" class="text-sky-600 focus:ring-sky-500">
+                  <span>유럽 (프랑스/스위스/이탈리아)</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="일본/동아시아" class="text-sky-600 focus:ring-sky-500">
+                  <span>일본 / 동아시아</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="미주/대양주" class="text-sky-600 focus:ring-sky-500">
+                  <span>미주 / 괌 / 사이판</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-region" value="국내" class="text-sky-600 focus:ring-sky-500">
+                  <span>국내 / 제주도</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Theme Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">여행 테마</label>
+              <div class="space-y-1.5" id="theme-filter-group">
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="전체" checked class="text-sky-600 focus:ring-sky-500">
+                  <span>모든 테마</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="휴양" class="text-sky-600 focus:ring-sky-500">
+                  <span>휴양 / 힐링</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="역사" class="text-sky-600 focus:ring-sky-500">
+                  <span>역사 / 문화 탐방</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="온천" class="text-sky-600 focus:ring-sky-500">
+                  <span>온천 / 미식</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="허니문" class="text-sky-600 focus:ring-sky-500">
+                  <span>허니문 / 럭셔리</span>
+                </label>
+                <label class="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 cursor-pointer">
+                  <input type="radio" name="filter-theme" value="가족" class="text-sky-600 focus:ring-sky-500">
+                  <span>가족 / 키즈</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Price Filter -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">가격대 (1인 기준)</label>
+              <select id="filter-price-range" class="w-full py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 cursor-pointer">
+                <option value="all">전체 가격</option>
+                <option value="under100">100만원 미만</option>
+                <option value="100to200">100만원 ~ 200만원</option>
+                <option value="200to400">200만원 ~ 400만원</option>
+                <option value="over400">400만원 이상</option>
+              </select>
+            </div>
+
+            <!-- Apply Button -->
+            <button id="btn-apply-filters" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-sm shadow-md shadow-sky-200 transition">
+              필터 적용하기
+            </button>
+
+          </div>
+        </aside>
+
+        <!-- Right Packages List Area -->
+        <div class="lg:col-span-3 space-y-6">
+          
+          <!-- Top Sort & Count Bar -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-slate-900">검색 결과:</span>
+              <span id="result-count" class="px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 font-extrabold text-xs">0개</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <label for="sort-select" class="text-xs font-semibold text-slate-500 shrink-0">정렬 기준:</label>
+              <select id="sort-select" class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold rounded-xl px-3 py-2 focus:outline-none focus:border-sky-500 cursor-pointer">
+                <option value="default">추천 베스트순</option>
+                <option value="priceAsc">가격 낮은순</option>
+                <option value="priceDesc">가격 높은순</option>
+                <option value="rating">평점 높은순</option>
+                <option value="reviews">후기 많은순</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Packages Grid -->
+          <div id="packages-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Dynamic Cards -->
+          </div>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="hidden bg-white p-12 rounded-3xl border border-slate-200/80 text-center">
+            <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">조건에 맞는 여행 상품이 없습니다</h3>
+            <p class="text-sm text-slate-500 mb-6">검색어나 필터 조건을 변경하여 다시 검색해보세요.</p>
+            <button onclick="resetFilters()" class="px-5 py-2.5 bg-sky-600 text-white font-bold rounded-xl text-sm hover:bg-sky-700 transition">
+              필터 전체 초기화
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js?v=20260828_3"></script>
+  <script src="js/components.js?v=20260828_3"></script>
+  <script>
+    let currentParams = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNavbar('packages');
+      renderFooter();
+
+      // Read initial URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialRegion = urlParams.get('region') || '전체';
+      const initialTheme = urlParams.get('theme') || '전체';
+      const initialSearch = urlParams.get('search') || '';
+      const initialEarlyBird = urlParams.get('earlyBird');
+
+      if (initialSearch) {
+        document.getElementById('filter-search').value = initialSearch;
+      }
+
+      // Check corresponding radio
+      const regionRadio = document.querySelector(`input[name="filter-region"][value="${initialRegion}"]`);
+      if (regionRadio) regionRadio.checked = true;
+
+      const themeRadio = document.querySelector(`input[name="filter-theme"][value="${initialTheme}"]`);
+      if (themeRadio) themeRadio.checked = true;
+
+      currentParams = {
+        region: initialRegion !== '전체' ? initialRegion : '',
+        theme: initialTheme !== '전체' ? initialTheme : '',
+        search: initialSearch,
+        earlyBird: initialEarlyBird === 'true' ? 'true' : ''
+      };
+
+      loadPackages();
+
+      // Event listeners
+      document.getElementById('btn-apply-filters').addEventListener('click', applyFilters);
+      document.getElementById('btn-reset-filters').addEventListener('click', resetFilters);
+      document.getElementById('sort-select').addEventListener('change', () => {
+        currentParams.sort = document.getElementById('sort-select').value;
+        loadPackages();
+      });
+      document.getElementById('filter-search').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') applyFilters();
+      });
+    });
+
+    function applyFilters() {
+      const search = document.getElementById('filter-search').value.trim();
+      const region = document.querySelector('input[name="filter-region"]:checked')?.value || '전체';
+      const theme = document.querySelector('input[name="filter-theme"]:checked')?.value || '전체';
+      const priceRange = document.getElementById('filter-price-range').value;
+
+      currentParams.search = search;
+      currentParams.region = region !== '전체' ? region : '';
+      currentParams.theme = theme !== '전체' ? theme : '';
+
+      delete currentParams.minPrice;
+      delete currentParams.maxPrice;
+
+      if (priceRange === 'under100') {
+        currentParams.maxPrice = 999999;
+      } else if (priceRange === '100to200') {
+        currentParams.minPrice = 1000000;
+        currentParams.maxPrice = 2000000;
+      } else if (priceRange === '200to400') {
+        currentParams.minPrice = 2000000;
+        currentParams.maxPrice = 4000000;
+      } else if (priceRange === 'over400') {
+        currentParams.minPrice = 4000000;
+      }
+
+      loadPackages();
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-search').value = '';
+      const rAll = document.querySelector('input[name="filter-region"][value="전체"]');
+      if (rAll) rAll.checked = true;
+      const tAll = document.querySelector('input[name="filter-theme"][value="전체"]');
+      if (tAll) tAll.checked = true;
+      document.getElementById('filter-price-range').value = 'all';
+      document.getElementById('sort-select').value = 'default';
+
+      currentParams = {};
+      loadPackages();
+    }
+
+    async function loadPackages() {
+      const grid = document.getElementById('packages-grid');
+      const emptyState = document.getElementById('empty-state');
+      const countBadge = document.getElementById('result-count');
+
+      grid.innerHTML = `
+        <div class="col-span-full py-16 text-center text-slate-400">
+          <div class="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          여행 상품을 찾는 중입니다...
+        </div>
+      `;
+      emptyState.classList.add('hidden');
+
+      try {
+        const res = await TourAPI.getPackages(currentParams);
+        countBadge.textContent = `${res.count}개`;
+
+        if (res.data && res.data.length > 0) {
+          grid.innerHTML = res.data.map(pkg => createPackageCard(pkg)).join('');
+          lucide.createIcons();
+        } else {
+          grid.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          lucide.createIcons();
+        }
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-rose-500 font-semibold">상품 목록을 불러오는 중 오류가 발생했습니다.</div>`;
+      }
+    }
+  </script>
+</body>
+</html>

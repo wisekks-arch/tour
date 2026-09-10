@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주문 / 결제하기 - EASYSHOP</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+
+  <!-- Global Navbar -->
+  <div id="navbar-root"></div>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    
+    <div class="mb-8">
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-heading">
+        주문서 작성 및 결제
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">배송지 정보와 결제 수단을 확인해 주세요.</p>
+    </div>
+
+    <form id="checkout-form" onsubmit="handleOrderSubmit(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left: Form Information (8 cols) -->
+      <div class="lg:col-span-8 space-y-6">
+        
+        <!-- 1. Orderer Info -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="user" class="w-4 h-4 text-indigo-600"></i> 주문자 정보
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1.5">주문자 성명 *</label>
+              <input type="text" id="order-name" required value="홍길동" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1.5">연락처 *</label>
+              <input type="tel" id="order-phone" required value="010-1234-5678" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1.5">이메일 *</label>
+              <input type="email" id="order-email" required value="customer@example.com" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Shipping Address -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600"></i> 배송지 정보
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1.5">수령인 성명 *</label>
+                <input type="text" id="ship-name" required value="홍길동" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1.5">수령인 연락처 *</label>
+                <input type="tel" id="ship-phone" required value="010-1234-5678" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1.5">기본 주소 *</label>
+              <input type="text" id="ship-address" required value="서울특별시 강남구 테헤란로 152 강남파이낸스센터" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1.5">상세 주소</label>
+              <input type="text" id="ship-address-detail" value="18층 1802호" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1.5">배송 요청사항</label>
+              <select id="ship-note" class="w-full p-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none bg-white">
+                <option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>
+                <option value="배송 전 연락 부탁드립니다.">배송 전 연락 부탁드립니다.</option>
+                <option value="경비실에 맡겨주세요.">경비실에 맡겨주세요.</option>
+                <option value="택배함에 넣어주세요.">택배함에 넣어주세요.</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Payment Method -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="credit-card" class="w-4 h-4 text-indigo-600"></i> 결제 수단 선택
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+            <label class="flex flex-col items-center gap-2 p-4 rounded-2xl border border-indigo-600 bg-indigo-50/40 cursor-pointer text-center">
+              <input type="radio" name="pay_method" value="신용/체크카드" checked class="text-indigo-600" />
+              <span>신용/체크카드</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer text-center">
+              <input type="radio" name="pay_method" value="카카오페이" class="text-indigo-600" />
+              <span>카카오페이</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer text-center">
+              <input type="radio" name="pay_method" value="토스페이" class="text-indigo-600" />
+              <span>토스페이</span>
+            </label>
+            <label class="flex flex-col items-center gap-2 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer text-center">
+              <input type="radio" name="pay_method" value="가상계좌 (무통장)" class="text-indigo-600" />
+              <span>가상계좌 입금</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Ordered Items Summary & Submit (4 cols) -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+          <h3 class="text-sm font-black text-slate-900 pb-3 border-b border-slate-100">주문 상품 목록</h3>
+          
+          <div id="checkout-items-list" class="space-y-3 max-h-60 overflow-y-auto divide-y divide-slate-100">
+            <!-- Dynamically listed items -->
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
+            <div class="flex items-center justify-between">
+              <span>상품 금액</span>
+              <span id="co-prod-total" class="font-bold text-slate-900">0원</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>쿠폰 할인</span>
+              <span id="co-coupon-discount" class="font-bold text-rose-500">-0원</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>배송비</span>
+              <span id="co-shipping-fee" class="font-bold text-slate-900">0원</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-baseline justify-between">
+            <span class="text-sm font-black text-slate-900">총 결제 금액</span>
+            <span id="co-final-total" class="text-2xl font-black text-indigo-600 font-heading">0원</span>
+          </div>
+
+          <div class="pt-4 space-y-2">
+            <label class="flex items-start gap-2 text-[11px] text-slate-500 cursor-pointer">
+              <input type="checkbox" required class="mt-0.5 rounded text-indigo-600" />
+              <span>구매조건 확인 및 결제진행 동의 (전자상거래법 제8조)</span>
+            </label>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl shadow-xl shadow-indigo-600/30 transition text-sm flex items-center justify-center gap-2"
+          >
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            <span id="pay-button-text">결제 및 주문완료</span>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root"></div>
+
+  <!-- Scripts -->
+  <script src="js/cart-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let couponDiscount = 0;
+    let summary = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ShopUI.renderNavbar();
+      ShopUI.renderFooter();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      couponDiscount = parseInt(urlParams.get('coupon')) || 0;
+
+      summary = CartStore.getSummary(couponDiscount);
+      if (summary.selectedItems.length === 0) {
+        alert('주문할 상품이 없습니다.');
+        window.location.href = '/cart.html';
+        return;
+      }
+
+      renderCheckoutSummary();
+    });
+
+    function renderCheckoutSummary() {
+      const container = document.getElementById('checkout-items-list');
+      container.innerHTML = summary.selectedItems.map(item => `
+        <div class="flex gap-3 pt-3 first:pt-0">
+          <img src="${item.thumbnail}" alt="${item.name}" class="w-12 h-12 rounded-xl object-cover border border-slate-100 shrink-0" />
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${item.name}</h4>
+            <p class="text-[11px] text-slate-400">${item.selectedOption ? item.selectedOption + ' / ' : ''}${item.quantity}개</p>
+            <span class="text-xs font-black text-indigo-600">${ShopUI.formatPrice(item.price * item.quantity)}</span>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('co-prod-total').innerText = ShopUI.formatPrice(summary.productTotal);
+      document.getElementById('co-coupon-discount').innerText = `-${ShopUI.formatPrice(summary.couponDiscount)}`;
+      document.getElementById('co-shipping-fee').innerText = summary.shippingFee === 0 ? '무료' : ShopUI.formatPrice(summary.shippingFee);
+      document.getElementById('co-final-total').innerText = ShopUI.formatPrice(summary.finalAmount);
+      document.getElementById('pay-button-text').innerText = `${ShopUI.formatPrice(summary.finalAmount)} 결제하기`;
+    }
+
+    async function handleOrderSubmit(e) {
+      e.preventDefault();
+
+      const orderData = {
+        customerName: document.getElementById('order-name').value,
+        customerPhone: document.getElementById('order-phone').value,
+        customerEmail: document.getElementById('order-email').value,
+        shippingName: document.getElementById('ship-name').value,
+        shippingPhone: document.getElementById('ship-phone').value,
+        shippingAddress: `${document.getElementById('ship-address').value} ${document.getElementById('ship-address-detail').value}`,
+        shippingNote: document.getElementById('ship-note').value,
+        paymentMethod: document.querySelector('input[name="pay_method"]:checked').value,
+        items: summary.selectedItems,
+        totalAmount: summary.finalAmount,
+        shippingFee: summary.shippingFee,
+        discountAmount: summary.couponDiscount + summary.totalSavings
+      };
+
+      try {
+        const result = await ShopAPI.createOrder(orderData);
+        CartStore.removeSelected();
+        const orderId = result.order ? result.order.orderId : ('ORD-' + Date.now().toString().slice(-8));
+        sessionStorage.setItem('latest_order', JSON.stringify(result.order || orderData));
+        window.location.href = `/order-complete.html?orderId=${encodeURIComponent(orderId)}`;
+      } catch (err) {
+        alert('주문 처리 중 오류가 발생했습니다.');
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

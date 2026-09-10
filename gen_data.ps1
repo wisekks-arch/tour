@@ -1,0 +1,645 @@
+$ErrorActionPreference = 'Stop'
+$shopDir = 'd:\92.SW\shop'
+$dataDir = Join-Path $shopDir 'data'
+
+# 1. Categories
+$categoriesJson = @'
+[
+  {
+    "id": "cat-fashion",
+    "name": "패션 / 의류",
+    "icon": "shirt",
+    "badge": "NEW",
+    "description": "트렌디한 데일리 룩부터 프리미엄 아우터까지",
+    "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-digital",
+    "name": "디지털 / 가전",
+    "icon": "laptop",
+    "badge": "HOT",
+    "description": "스마트한 일상을 위한 최신 스마트 디바이스",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-beauty",
+    "name": "뷰티 / 케어",
+    "icon": "sparkles",
+    "badge": "BEST",
+    "description": "피부 본연의 건강한 광채를 위한 스킨케어",
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-living",
+    "name": "리빙 / 인테리어",
+    "icon": "home",
+    "badge": "",
+    "description": "감각적인 홈 스타일링과 프리미엄 리빙 아이템",
+    "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "cat-food",
+    "name": "푸드 / 키친",
+    "icon": "coffee",
+    "badge": "SALE",
+    "description": "장인의 정성이 담긴 프리미엄 디저트와 다이닝",
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+  }
+]
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $dataDir 'categories.json'), $categoriesJson, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: categories.json" -ForegroundColor Green
+
+# 2. Products (15+ rich items with full options, specs, reviews, qna)
+$productsJson = @'
+[
+  {
+    "id": "prod-01",
+    "name": "프리미엄 캐시미어 블렌드 오버핏 코트",
+    "category": "패션 / 의류",
+    "categoryId": "cat-fashion",
+    "price": 289000,
+    "originalPrice": 389000,
+    "discountRate": 25,
+    "rating": 4.9,
+    "reviewCount": 142,
+    "stock": 35,
+    "isBest": true,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "최고급 몽골리안 캐시미어 30% 혼방, 우아한 실루엣과 극강의 보온성",
+    "description": "<h3>타임리스 클래식의 정수, 프리미엄 캐시미어 코트</h3><p>엄선된 몽골산 천연 캐시미어와 호주산 메리노 울을 황금비율로 블렌딩하여 가벼우면서도 탁월한 보온성을 선사합니다. 체형을 자연스럽게 커버하는 세미 오버핏 실루엣과 고급 소뿔 단추 마감으로 격식 있는 자리부터 데일리 룩까지 완벽하게 소화합니다.</p><ul><li>원단: 캐시미어 30%, 메리노울 70%</li><li>색상: 오트밀 베이지, 미드나잇 블랙, 차콜 그레이</li><li>드라이클리닝 권장, 전용 슈트케이스 및 옷걸이 동봉</li></ul>",
+    "options": [
+      { "name": "오트밀 베이지 / M(95-100)", "stock": 12 },
+      { "name": "오트밀 베이지 / L(105)", "stock": 8 },
+      { "name": "미드나잇 블랙 / M(95-100)", "stock": 10 },
+      { "name": "미드나잇 블랙 / L(105)", "stock": 5 }
+    ],
+    "specs": {
+      "제조국": "대한민국",
+      "제조사": "EasyShop Private Label",
+      "소재": "캐시미어 30%, 울 70%",
+      "품질보증": "구입일로부터 1년 무상 수선",
+      "배송안내": "CJ대한통운 (오후 2시 이전 주문 시 당일 출발)"
+    },
+    "reviews": [
+      { "id": "rev-1", "author": "김*현", "rating": 5, "date": "2026-09-01", "content": "원단 촉감이 정말 부드럽고 가볍습니다. 백화점 100만원대 코트 부럽지 않네요!", "likes": 24 },
+      { "id": "rev-2", "author": "이*진", "rating": 5, "date": "2026-08-28", "content": "오트밀 색상이 너무 고급스러워요. 배송도 하루 만에 와서 대만족입니다.", "likes": 18 }
+    ],
+    "qnas": [
+      { "id": "qna-1", "author": "박*수", "date": "2026-09-02", "question": "178cm / 72kg인데 L사이즈 가면 될까요?", "answer": "고객님 안녕하세요! 고객님의 체형에는 L(105) 사이즈를 착용하시면 자연스러운 세미 오버핏으로 멋스럽게 착용 가능합니다." }
+    ]
+  },
+  {
+    "id": "prod-02",
+    "name": "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
+    "category": "디지털 / 가전",
+    "categoryId": "cat-digital",
+    "price": 198000,
+    "originalPrice": 269000,
+    "discountRate": 26,
+    "rating": 4.9,
+    "reviewCount": 328,
+    "stock": 42,
+    "isBest": true,
+    "isNew": false,
+    "isSale": true,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "하이브리드 ANC 45dB 노이즈 차단, 최대 60시간 연속 재생, 고해상도 Hi-Res 오디오",
+    "description": "<h3>압도적인 몰입감, 소음 없는 당신만의 사운드 스페이스</h3><p>40mm 티타늄 다이내믹 드라이버 탑재로 깊고 단단한 저음과 맑고 청량한 고음을 전달합니다. 첨단 듀얼 피드백 노이즈 캔슬링 칩셋으로 주변 소음을 실시간 45dB까지 감쇄합니다.</p>",
+    "options": [
+      { "name": "스페이스 그레이", "stock": 20 },
+      { "name": "매트 실버", "stock": 15 },
+      { "name": "미드나잇 블루", "stock": 7 }
+    ],
+    "specs": {
+      "블루투스": "v5.4 최신 칩셋",
+      "배터리": "ANC 켜짐 시 최대 45시간, 꺼짐 시 60시간",
+      "충전": "USB-C 고속 충전 (10분 충전 시 5시간 재생)",
+      "무게": "245g 초경량 설계"
+    },
+    "reviews": [
+      { "id": "rev-3", "author": "최*혁", "rating": 5, "date": "2026-09-04", "content": "카페에서 공부할 때 쓰는데 소음이 거짓말처럼 사라집니다. 착용감도 편해요.", "likes": 31 }
+    ],
+    "qnas": []
+  },
+  {
+    "id": "prod-03",
+    "name": "글로우 리바이탈라이징 나이트 앰플 세럼 50ml",
+    "category": "뷰티 / 케어",
+    "categoryId": "cat-beauty",
+    "price": 46000,
+    "originalPrice": 68000,
+    "discountRate": 32,
+    "rating": 4.8,
+    "reviewCount": 215,
+    "stock": 80,
+    "isBest": true,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "8중 히알루론산 & 펩타이드 콤플렉스, 밤사이 되살아나는 탄력 수분 광채",
+    "description": "<h3>피부 깊숙이 채워지는 밤샘 수분 탄력 케어</h3><p>피부 장벽을 탄탄하게 가꿔주는 8중 복합 히알루론산과 콜라겐 생성에 도움을 주는 고농축 펩타이드 성분이 밤사이 지친 피부에 즉각적인 생기를 불어넣어 줍니다.</p>",
+    "options": [
+      { "name": "단품 50ml", "stock": 50 },
+      { "name": "기획세트 (50ml + 미니어처 15ml 증정)", "stock": 30 }
+    ],
+    "specs": {
+      "용량": "50ml",
+      "피부타입": "모든 피부용 (민감성 피부 자극 테스트 완료)",
+      "제조국": "대한민국"
+    },
+    "reviews": [
+      { "id": "rev-4", "author": "정*영", "rating": 5, "date": "2026-09-03", "content": "끈적이지 않고 쏙 흡수되는데 다음날 아침 화장이 진짜 잘 먹어요!", "likes": 12 }
+    ],
+    "qnas": []
+  },
+  {
+    "id": "prod-04",
+    "name": "미니멀 무선 마그네틱 터치 LED 무드등",
+    "category": "리빙 / 인테리어",
+    "categoryId": "cat-living",
+    "price": 38000,
+    "originalPrice": 55000,
+    "discountRate": 30,
+    "rating": 4.9,
+    "reviewCount": 89,
+    "stock": 55,
+    "isBest": false,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "3단계 색온도 조절, 무단계 디밍, 2000mAh 대용량 배터리 무선 인테리어 조명",
+    "description": "<h3>어느 공간에나 감성을 더하는 미니멀 조명</h3><p>알루미늄 바디와 부드러운 디퓨저 렌즈로 눈부심 없는 아늑한 빛을 연출합니다. 마그네틱 베이스로 각도 조절이 자유로우며 벽면, 테이블, 선반 어디에나 거치 가능합니다.</p>",
+    "options": [
+      { "name": "샌드 베이지", "stock": 30 },
+      { "name": "매트 화이트", "stock": 25 }
+    ],
+    "specs": {
+      "배터리": "2,000mAh 리튬이온",
+      "충전방식": "Type-C 포트",
+      "색온도": "3000K / 4000K / 5700K"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-05",
+    "name": "스페셜티 드립백 커피 시그니처 4종 기프트 세트",
+    "category": "푸드 / 키친",
+    "categoryId": "cat-food",
+    "price": 28000,
+    "originalPrice": 35000,
+    "discountRate": 20,
+    "rating": 5.0,
+    "reviewCount": 164,
+    "stock": 90,
+    "isBest": true,
+    "isNew": false,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "에티오피아 예가체프, 과테말라 안티구아, 콜롬비아 수프리모 등 최고 등급 20개입",
+    "description": "<h3>집에서 즐기는 바리스타의 스페셜티 커피</h3><p>Q-Grader가 직접 엄선하고 당일 로스팅한 신선한 원두만을 질소 충전 드립백에 담았습니다. 간편하게 뜨거운 물만 부어 풍부한 크레마와 아로마를 느껴보세요.</p>",
+    "options": [
+      { "name": "시그니처 버라이어티 20개입", "stock": 60 },
+      { "name": "다크 로스팅 에디션 20개입", "stock": 30 }
+    ],
+    "specs": {
+      "구성": "드립백 10g x 20개",
+      "유통기한": "제조일로부터 1년 (최근 1개월 내 제조품 발송)",
+      "포장": "고급 선물용 하드케이스 & 쇼핑백 포함"
+    },
+    "reviews": [
+      { "id": "rev-5", "author": "한*숙", "rating": 5, "date": "2026-08-30", "content": "선물용으로 샀는데 포장도 너무 예쁘고 커피 향이 집안 가득 퍼지네요.", "likes": 15 }
+    ],
+    "qnas": []
+  },
+  {
+    "id": "prod-06",
+    "name": "에르고노믹 알루미늄 노트북 거치대 스탠드",
+    "category": "디지털 / 가전",
+    "categoryId": "cat-digital",
+    "price": 45000,
+    "originalPrice": 62000,
+    "discountRate": 27,
+    "rating": 4.9,
+    "reviewCount": 188,
+    "stock": 60,
+    "isBest": true,
+    "isNew": false,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "풀 CNC 가공 항공 알루미늄, 360도 회전 및 무단 높이/각도 조절, 흔들림 없는 지지력",
+    "description": "<h3>바른 자세를 위한 프리미엄 데스크테리어 필수품</h3><p>맥북, 태블릿부터 17인치 대화면 게이밍 노트북까지 완벽 거치 가능한 듀얼 힌지 구조입니다. 열 방출 벤틸레이션 홀로 장시간 사용 시 발열을 효과적으로 낮춰줍니다.</p>",
+    "options": [
+      { "name": "실버", "stock": 35 },
+      { "name": "스페이스 그레이", "stock": 25 }
+    ],
+    "specs": {
+      "호환": "10인치 ~ 17.3인치 노트북 및 태블릿",
+      "재질": "항공 알루미늄 합금 + 실리콘 패드",
+      "최대하중": "최대 10kg 지지"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-07",
+    "name": "프렌치 린넨 100% 루즈핏 스트라이프 셔츠",
+    "category": "패션 / 의류",
+    "categoryId": "cat-fashion",
+    "price": 79000,
+    "originalPrice": 119000,
+    "discountRate": 33,
+    "rating": 4.8,
+    "reviewCount": 94,
+    "stock": 48,
+    "isBest": false,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "프랑스 노르망디산 프리미엄 린넨, 자연스러운 구김과 쾌적한 쿨링 터치",
+    "description": "<h3>자연을 닮은 편안함, 내추럴 프렌치 린넨</h3><p>피부에 닿는 순간 시원한 청량감을 주는 100% 최고급 프렌치 린넨으로 제작되었습니다. 여유 있는 오버핏 패턴으로 단독 착용은 물론 가벼운 아우터 셔츠로도 훌륭합니다.</p>",
+    "options": [
+      { "name": "스카이블루 스트라이프 / M", "stock": 18 },
+      { "name": "스카이블루 스트라이프 / L", "stock": 12 },
+      { "name": "클래식 네이비 스트라이프 / M", "stock": 10 },
+      { "name": "클래식 네이비 스트라이프 / L", "stock": 8 }
+    ],
+    "specs": {
+      "소재": "프렌치 린넨 100%",
+      "세탁": "찬물 단독 울코스 손세탁 권장",
+      "원산지": "대한민국"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-08",
+    "name": "울트라 슬림 기계식 무선 블루투스 키보드",
+    "category": "디지털 / 가전",
+    "categoryId": "cat-digital",
+    "price": 129000,
+    "originalPrice": 169000,
+    "discountRate": 23,
+    "rating": 4.9,
+    "reviewCount": 240,
+    "stock": 38,
+    "isBest": true,
+    "isNew": true,
+    "isSale": false,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "로우 프로파일 게이트론 적축/갈축, Mac/Windows 동시 지원 멀티페어링",
+    "description": "<h3>얇고 경쾌한 프리미엄 타건감</h3><p>두께 18mm의 초슬림 디자인으로 손목 받침대 없이도 장시간 편안한 타이핑을 제공합니다. 3개 기기 동시 연결 블루투스 5.1 및 유선 Type-C 모드를 모두 지원합니다.</p>",
+    "options": [
+      { "name": "저소음 갈축 (부드러운 구분감)", "stock": 20 },
+      { "name": "리니어 적축 (조용하고 빠른 입력)", "stock": 18 }
+    ],
+    "specs": {
+      "키 레이아웃": "84키 텐키리스 컴팩트",
+      "백라이트": "화이트 LED 15가지 이펙트",
+      "배터리": "4000mAh (최대 200시간 사용)"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-09",
+    "name": "시그니처 우디 아로마 디퓨저 & 캔들 세트",
+    "category": "리빙 / 인테리어",
+    "categoryId": "cat-living",
+    "price": 52000,
+    "originalPrice": 75000,
+    "discountRate": 30,
+    "rating": 4.9,
+    "reviewCount": 112,
+    "stock": 70,
+    "isBest": false,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "프랑스 그라스 향료 조향, 시더우드와 은은한 샌달우드가 전하는 힐링의 숲",
+    "description": "<h3>지친 하루의 끝, 공간을 채우는 우아한 휴식</h3><p>천연 소이왁스와 식물성 디퓨저 베이스로 머리 아픔 없는 편안한 발향을 선사합니다. 고급스러운 앰버 글라스 보틀로 인테리어 오브제로도 손색없습니다.</p>",
+    "options": [
+      { "name": "포레스트 레스트 (시더우드 & 앰버)", "stock": 40 },
+      { "name": "모닝 미스트 (유칼립투스 & 베르가못)", "stock": 30 }
+    ],
+    "specs": {
+      "구성": "디퓨저 200ml + 리드스틱 6개 + 소이캔들 180g",
+      "사용기간": "디퓨저 약 2~3개월 지속",
+      "안전확인": "환경부 안전기준 적합확인 신고 완료"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-10",
+    "name": "비건 세라마이드 보습 장벽 수분크림 100ml",
+    "category": "뷰티 / 케어",
+    "categoryId": "cat-beauty",
+    "price": 34000,
+    "originalPrice": 48000,
+    "discountRate": 29,
+    "rating": 4.8,
+    "reviewCount": 178,
+    "stock": 65,
+    "isBest": false,
+    "isNew": false,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "100시간 보습 지속력 임상 완료, 5종 세라마이드로 무너진 피부 장벽 급속 리셋",
+    "description": "<h3>속건조 완벽 해결, 순한 비건 보습막</h3><p>EWG 그린 등급 원료만을 사용하여 민감성 피부도 안심하고 사용할 수 있는 고보습 장벽 크림입니다. 번들거림 없이 실키하게 밀착됩니다.</p>",
+    "options": [
+      { "name": "본품 100ml 튜브형", "stock": 45 },
+      { "name": "대용량 200ml 펌프형 (+15,000원)", "stock": 20 }
+    ],
+    "specs": {
+      "용량": "100ml / 200ml",
+      "인증": "이탈리아 V-LABEL 비건 정식 인증",
+      "피부타입": "건성, 민감성, 수부지"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-11",
+    "name": "핸드메이드 세라믹 머그 & 우드 코스터 세트",
+    "category": "리빙 / 인테리어",
+    "categoryId": "cat-living",
+    "price": 24000,
+    "originalPrice": 32000,
+    "discountRate": 25,
+    "rating": 4.9,
+    "reviewCount": 76,
+    "stock": 40,
+    "isBest": false,
+    "isNew": true,
+    "isSale": true,
+    "isFreeShipping": false,
+    "thumbnail": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "도예 작가의 정성스런 손길로 빚은 질감, 월넛 천연목 코스터 포함",
+    "description": "<h3>따뜻한 온기를 전하는 테이블웨어</h3><p>1,250도 고온에서 구워내 내구성이 뛰어나며 전자레인지 및 식기세척기 사용이 가능합니다. 자연스러운 유약의 흐름이 멋스러운 나만의 컵입니다.</p>",
+    "options": [
+      { "name": "아이보리 매트 (350ml)", "stock": 20 },
+      { "name": "테라코타 샌드 (350ml)", "stock": 20 }
+    ],
+    "specs": {
+      "재질": "도자기 (머그), 북미산 월넛 (코스터)",
+      "원산지": "대한민국 여주"
+    },
+    "reviews": [],
+    "qnas": []
+  },
+  {
+    "id": "prod-12",
+    "name": "유기농 프리미엄 마누카 꿀 UMF 15+ MGO 514",
+    "category": "푸드 / 키친",
+    "categoryId": "cat-food",
+    "price": 88000,
+    "originalPrice": 125000,
+    "discountRate": 29,
+    "rating": 5.0,
+    "reviewCount": 98,
+    "stock": 45,
+    "isBest": true,
+    "isNew": false,
+    "isSale": true,
+    "isFreeShipping": true,
+    "thumbnail": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "summary": "뉴질랜드 100% 정품 인증, 풍부한 항산화와 면역력을 챙기는 프리미엄 천연 꿀",
+    "description": "<h3>자연이 준 가장 순수한 선물</h3><p>뉴질랜드 청정 자연에서 채밀된 100% 생마누카 꿀입니다. UMF 협회 공식 인증을 받은 고등급 제품으로 매일 아침 공복 한 스푼으로 활력을 채워보세요.</p>",
+    "options": [
+      { "name": "마누카 UMF 15+ (250g)", "stock": 25 },
+      { "name": "마누카 UMF 15+ (500g)", "stock": 20 }
+    ],
+    "specs": {
+      "용량": "250g / 500g",
+      "원산지": "뉴질랜드 100% 직수입",
+      "보관": "직사광선을 피해 실온 보관"
+    },
+    "reviews": [],
+    "qnas": []
+  }
+]
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $dataDir 'products.json'), $productsJson, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: products.json" -ForegroundColor Green
+
+# 3. Orders
+$ordersJson = @'
+[
+  {
+    "orderId": "ORD-20260907-8812",
+    "orderDate": "2026-09-07 09:30:15",
+    "customerName": "김민준",
+    "customerPhone": "010-3849-1290",
+    "customerEmail": "minjun.kim@example.com",
+    "shippingAddress": "서울특별시 강남구 테헤란로 152 강남파이낸스센터 18층",
+    "shippingNote": "부재 시 문 앞에 놓아주세요.",
+    "paymentMethod": "신용카드 (현대카드)",
+    "totalAmount": 289000,
+    "shippingFee": 0,
+    "discountAmount": 10000,
+    "status": "배송중",
+    "trackingNumber": "CJ68291039841",
+    "items": [
+      {
+        "productId": "prod-01",
+        "name": "프리미엄 캐시미어 블렌드 오버핏 코트",
+        "option": "오트밀 베이지 / L(105)",
+        "quantity": 1,
+        "price": 289000,
+        "thumbnail": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  {
+    "orderId": "ORD-20260906-5521",
+    "orderDate": "2026-09-06 18:42:10",
+    "customerName": "이지은",
+    "customerPhone": "010-9921-7734",
+    "customerEmail": "jieun.lee@example.com",
+    "shippingAddress": "경기도 성남시 분당구 판교역로 235 에이치스퀘어 N동 5층",
+    "shippingNote": "배송 전 연락 부탁드립니다.",
+    "paymentMethod": "카카오페이",
+    "totalAmount": 244000,
+    "shippingFee": 0,
+    "discountAmount": 0,
+    "status": "상품준비",
+    "trackingNumber": "",
+    "items": [
+      {
+        "productId": "prod-02",
+        "name": "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
+        "option": "스페이스 그레이",
+        "quantity": 1,
+        "price": 198000,
+        "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "productId": "prod-03",
+        "name": "글로우 리바이탈라이징 나이트 앰플 세럼 50ml",
+        "option": "단품 50ml",
+        "quantity": 1,
+        "price": 46000,
+        "thumbnail": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  {
+    "orderId": "ORD-20260906-3109",
+    "orderDate": "2026-09-06 14:15:30",
+    "customerName": "박서준",
+    "customerPhone": "010-4412-8876",
+    "customerEmail": "seojun.park@example.com",
+    "shippingAddress": "부산광역시 해운대구 센텀중앙로 90 큐비이센텀 1201호",
+    "shippingNote": "경비실에 맡겨주세요.",
+    "paymentMethod": "토스페이",
+    "totalAmount": 129000,
+    "shippingFee": 0,
+    "discountAmount": 5000,
+    "status": "결제완료",
+    "trackingNumber": "",
+    "items": [
+      {
+        "productId": "prod-08",
+        "name": "울트라 슬림 기계식 무선 블루투스 키보드",
+        "option": "저소음 갈축 (부드러운 구분감)",
+        "quantity": 1,
+        "price": 129000,
+        "thumbnail": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  {
+    "orderId": "ORD-20260905-1940",
+    "orderDate": "2026-09-05 11:05:44",
+    "customerName": "정수아",
+    "customerPhone": "010-7731-0029",
+    "customerEmail": "suah.jung@example.com",
+    "shippingAddress": "인천광역시 연수구 송도과학로 32 테크노파크 IT센터 20층",
+    "shippingNote": "직접 수령하겠습니다.",
+    "paymentMethod": "네이버페이",
+    "totalAmount": 52000,
+    "shippingFee": 0,
+    "discountAmount": 0,
+    "status": "배송완료",
+    "trackingNumber": "CJ99481726354",
+    "items": [
+      {
+        "productId": "prod-09",
+        "name": "시그니처 우디 아로마 디퓨저 & 캔들 세트",
+        "option": "포레스트 레스트 (시더우드 & 앰버)",
+        "quantity": 1,
+        "price": 52000,
+        "thumbnail": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  }
+]
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $dataDir 'orders.json'), $ordersJson, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: orders.json" -ForegroundColor Green
+
+# 4. Inquiries
+$inquiriesJson = @'
+[
+  {
+    "id": "inq-01",
+    "type": "상품문의",
+    "productName": "프리미엄 캐시미어 블렌드 오버핏 코트",
+    "author": "김*아",
+    "phone": "010-9876-5432",
+    "title": "여성 55 사이즈가 입기에 M사이즈가 많이 클까요?",
+    "content": "루즈하게 입는 걸 좋아하는데 M사이즈 총장과 어깨너비가 어느 정도인지 궁금합니다.",
+    "status": "답변완료",
+    "createdAt": "2026-09-06 16:20",
+    "answer": "고객님 안녕하세요! M사이즈는 총장 112cm, 어깨단면 51cm로 여성 고객님께서 착용 시 자연스럽고 트렌디한 롱 오버핏으로 연출 가능합니다. 상세페이지 하단 실측표를 참고 부탁드립니다.",
+    "answeredAt": "2026-09-06 17:05"
+  },
+  {
+    "id": "inq-02",
+    "type": "배송문의",
+    "productName": "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
+    "author": "이*원",
+    "phone": "010-1234-5678",
+    "title": "오늘 주문하면 내일 바로 받아볼 수 있나요?",
+    "content": "생일 선물로 주려고 하는데 당일 발송 가능한지 문의드립니다.",
+    "status": "답변완료",
+    "createdAt": "2026-09-07 09:10",
+    "answer": "안녕하세요 고객님! 오후 2시 이전 결제 완료 건은 당일 출고되며, 서울/수도권 기준 익일 수령 가능하십니다. 감사합니다.",
+    "answeredAt": "2026-09-07 09:25"
+  },
+  {
+    "id": "inq-03",
+    "type": "교환/반품",
+    "productName": "울트라 슬림 기계식 무선 블루투스 키보드",
+    "author": "최*민",
+    "phone": "010-5555-8888",
+    "title": "갈축으로 주문했는데 적축으로 교환 가능한가요?",
+    "content": "미개봉 상태입니다. 색상 교환 절차 안내 부탁드립니다.",
+    "status": "답변대기",
+    "createdAt": "2026-09-07 10:15",
+    "answer": "",
+    "answeredAt": ""
+  }
+]
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $dataDir 'inquiries.json'), $inquiriesJson, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: inquiries.json" -ForegroundColor Green
