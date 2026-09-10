@@ -35,87 +35,66 @@
 
   <main class="flex-grow">
     <!-- Hero Section -->
-    <section class="relative min-h-[580px] lg:min-h-[640px] flex items-center justify-center bg-slate-900 overflow-hidden">
+    <!-- Hero Section -->
+    <section class="relative min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] flex items-center justify-center bg-slate-900 overflow-hidden">
       <!-- Background Image with Overlay -->
       <img 
         src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" 
         alt="Travel Hero" 
-        class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"
+        class="absolute inset-0 w-full h-full object-cover opacity-50 scale-105"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
 
-      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center">
         <!-- Hero Tag -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-sky-300 border border-white/20 text-xs font-semibold uppercase tracking-wider mb-6">
-          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i> 2026 가을·겨울 얼리버드 프로모션 진행 중
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-sky-300 border border-white/20 text-[11px] sm:text-xs font-semibold uppercase tracking-wider mb-4">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i> 2026 가을·겨울 프리미엄 여행 프로모션
         </div>
 
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-snug mb-3 sm:mb-4">
           일상을 벗어나 떠나는<br>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-amber-200">가장 완벽하고 안전한 여행</span>
         </h1>
-        <p class="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
-          엄선된 5성급 호텔, 강제 쇼핑 없는 프라이빗 일정, 24시간 안심 케어로 잊지 못할 추억을 만들어 드립니다.
+        <p class="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto mb-6 sm:mb-8 font-normal leading-relaxed">
+          엄선된 5성급 호텔, 노쇼핑 프라이빗 일정, 24시간 안심 케어로 잊지 못할 추억을 선사합니다.
         </p>
 
-        <!-- Search Bar Widget -->
-        <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl shadow-2xl border border-white/40 max-w-4xl mx-auto text-left">
-          <form id="hero-search-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
+        <!-- Compact Mobile-Friendly Search Bar Widget -->
+        <div class="bg-white/95 backdrop-blur-md p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/40 max-w-2xl mx-auto text-left">
+          <form id="hero-search-form" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 sm:gap-2">
             
             <!-- Destination Input -->
-            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
-              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">어디로 떠나시나요?</label>
-              <div class="flex items-center gap-2 mt-1">
-                <i data-lucide="map-pin" class="w-4 h-4 text-sky-600 shrink-0"></i>
-                <input 
-                  type="text" 
-                  id="search-dest" 
-                  placeholder="다낭, 파리, 삿포로, 발리..." 
-                  class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none placeholder-slate-400"
-                />
-              </div>
+            <div class="flex-1 flex items-center gap-2 px-3 py-2 sm:py-2.5 bg-slate-50 hover:bg-sky-50/50 rounded-xl border border-slate-200/80 transition">
+              <i data-lucide="map-pin" class="w-4 h-4 text-sky-600 shrink-0"></i>
+              <input 
+                type="text" 
+                id="search-dest" 
+                placeholder="여행지, 도시, 호텔 검색 (다낭, 파리, 삿포로...)" 
+                class="w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none placeholder-slate-400"
+              />
             </div>
 
-            <!-- Region Filter -->
-            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
-              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">지역 선택</label>
-              <div class="flex items-center gap-2 mt-1">
-                <i data-lucide="globe" class="w-4 h-4 text-sky-600 shrink-0"></i>
-                <select id="search-region" class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
-                  <option value="전체">모든 지역</option>
-                  <option value="동남아">동남아시아</option>
+            <!-- Compact Region & Search Button Row on Mobile -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <div class="flex-1 sm:w-32 flex items-center gap-1 px-2.5 py-2 sm:py-2.5 bg-slate-50 hover:bg-sky-50/50 rounded-xl border border-slate-200/80 transition">
+                <i data-lucide="globe" class="w-3.5 h-3.5 text-sky-600 shrink-0"></i>
+                <select id="search-region" class="w-full bg-transparent text-xs font-semibold text-slate-800 focus:outline-none cursor-pointer">
+                  <option value="전체">전체 지역</option>
+                  <option value="동남아">동남아</option>
                   <option value="유럽">유럽</option>
-                  <option value="일본/동아시아">일본/동아시아</option>
-                  <option value="미주/대양주">미주/대양주/괌</option>
+                  <option value="일본/동아시아">일본</option>
+                  <option value="미주/대양주">미주/대양주</option>
                   <option value="국내">국내/제주</option>
                 </select>
               </div>
-            </div>
 
-            <!-- Theme Filter -->
-            <div class="p-3 bg-slate-50 hover:bg-sky-50/50 rounded-2xl border border-slate-200/80 transition">
-              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">여행 테마</label>
-              <div class="flex items-center gap-2 mt-1">
-                <i data-lucide="compass" class="w-4 h-4 text-sky-600 shrink-0"></i>
-                <select id="search-theme" class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
-                  <option value="전체">모든 테마</option>
-                  <option value="휴양">휴양 / 힐링</option>
-                  <option value="역사">역사 / 문화 탐방</option>
-                  <option value="온천">온천 / 미식</option>
-                  <option value="허니문">허니문 / 럭셔리</option>
-                  <option value="가족">가족 / 키즈</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Search Button -->
-            <div>
+              <!-- Search Button -->
               <button 
                 type="submit" 
-                class="w-full h-14 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 text-base transition duration-300"
+                class="px-5 py-2 sm:py-2.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md flex items-center justify-center gap-1.5 text-xs sm:text-sm transition duration-300 shrink-0 cursor-pointer"
               >
-                <i data-lucide="search" class="w-5 h-5"></i>
-                <span>여행 검색하기</span>
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                <span>검색</span>
               </button>
             </div>
 
@@ -123,92 +102,125 @@
         </div>
 
         <!-- Quick Theme Badges -->
-        <div class="flex flex-wrap items-center justify-center gap-2 mt-6 text-xs text-slate-300">
-          <span class="text-slate-400 font-medium">추천 검색어:</span>
-          <a href="packages.html?region=동남아" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#다낭 5성급</a>
-          <a href="packages.html?region=유럽" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#서유럽 3국 일주</a>
-          <a href="packages.html?region=일본/동아시아" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#홋카이도 온천료칸</a>
-          <a href="packages.html?theme=허니문" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition">#발리 풀빌라</a>
+        <div class="flex flex-wrap items-center justify-center gap-1.5 mt-4 text-[11px] text-slate-300">
+          <span class="text-slate-400 font-medium">인기검색:</span>
+          <button type="button" onclick="filterHomeCategory('동남아')" class="px-2.5 py-0.5 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition cursor-pointer">#다낭 5성급</button>
+          <button type="button" onclick="filterHomeCategory('유럽')" class="px-2.5 py-0.5 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition cursor-pointer">#서유럽 3국</button>
+          <button type="button" onclick="filterHomeCategory('일본/동아시아')" class="px-2.5 py-0.5 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition cursor-pointer">#홋카이도 온천</button>
+          <button type="button" onclick="filterHomeCategory('허니문')" class="px-2.5 py-0.5 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition cursor-pointer">#발리 풀빌라</button>
         </div>
 
       </div>
     </section>
 
     <!-- Quick Destination Categories -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20">
+      <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
         
-        <a href="packages.html?region=동남아" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-2 group-hover:bg-sky-600 group-hover:text-white transition">
-            <i data-lucide="palmtree" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('동남아')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-sky-600 group-hover:text-white transition">
+            <i data-lucide="palmtree" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">동남아 휴양</span>
-          <span class="text-slate-400 text-xs">다낭/발리/방콕</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">동남아 휴양</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">다낭/발리/방콕</span>
+        </button>
 
-        <a href="packages.html?region=유럽" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 group-hover:bg-indigo-600 group-hover:text-white transition">
-            <i data-lucide="landmark" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('일본/동아시아')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-rose-600 group-hover:text-white transition">
+            <i data-lucide="bath" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">유럽 일주</span>
-          <span class="text-slate-400 text-xs">파리/스위스/로마</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">일본 온천</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">삿포로/후쿠오카</span>
+        </button>
 
-        <a href="packages.html?region=일본/동아시아" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-2 group-hover:bg-rose-600 group-hover:text-white transition">
-            <i data-lucide="bath" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('유럽')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-indigo-600 group-hover:text-white transition">
+            <i data-lucide="landmark" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">일본 온천/미식</span>
-          <span class="text-slate-400 text-xs">삿포로/후쿠오카</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">유럽 일주</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">파리/스위스/로마</span>
+        </button>
 
-        <a href="packages.html?theme=허니문" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center mb-2 group-hover:bg-pink-600 group-hover:text-white transition">
-            <i data-lucide="heart" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('미주/대양주')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-teal-600 group-hover:text-white transition">
+            <i data-lucide="sun" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">럭셔리 허니문</span>
-          <span class="text-slate-400 text-xs">프라이빗 풀빌라</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">미주/대양주</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">괌/하와이/호주</span>
+        </button>
 
-        <a href="packages.html?region=미주/대양주" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-2 group-hover:bg-teal-600 group-hover:text-white transition">
-            <i data-lucide="sun" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('국내')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-amber-600 group-hover:text-white transition">
+            <i data-lucide="mountain" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">괌/사이판 가족</span>
-          <span class="text-slate-400 text-xs">올인클루시브 PIC</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">국내/제주</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">호캉스/힐링</span>
+        </button>
 
-        <a href="packages.html?region=국내" class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition">
-          <div class="w-12 h-12 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2 group-hover:bg-amber-600 group-hover:text-white transition">
-            <i data-lucide="mountain" class="w-6 h-6"></i>
+        <button onclick="filterHomeCategory('허니문')" class="bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-slate-100 hover:border-sky-300 text-center group transition cursor-pointer">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center mb-1.5 sm:mb-2 group-hover:bg-pink-600 group-hover:text-white transition">
+            <i data-lucide="heart" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="font-bold text-slate-800 text-sm block">국내/제주 힐링</span>
-          <span class="text-slate-400 text-xs">5성급 호캉스</span>
-        </a>
+          <span class="font-bold text-slate-800 text-xs sm:text-sm block">럭셔리 허니문</span>
+          <span class="text-slate-400 text-[10px] sm:text-xs hidden sm:block">프라이빗 풀빌라</span>
+        </button>
 
       </div>
     </section>
 
     <!-- Best Seller & Featured Packages -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="packages-section">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
         <div>
-          <span class="text-sky-600 font-bold text-sm tracking-wider uppercase flex items-center gap-1.5 mb-2">
+          <span class="text-sky-600 font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center gap-1.5 mb-1">
             <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i> Best Travel Deals
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h2 class="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
             투어이지 추천 베스트 패키지
           </h2>
-          <p class="text-slate-500 text-sm mt-1">고객 만족도 98% 이상! 가장 사랑받는 인기 여행 코스입니다.</p>
+          <p class="text-slate-500 text-xs sm:text-sm mt-0.5">고객 만족도 98% 이상! 카테고리별 인기 여행 코스를 만나보세요.</p>
         </div>
-        <a href="packages.html" class="mt-4 sm:mt-0 inline-flex items-center gap-1.5 font-bold text-sm text-sky-600 hover:text-sky-700">
-          전체 상품 보기 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <a href="packages.html" class="inline-flex items-center gap-1.5 font-bold text-xs sm:text-sm text-sky-600 hover:text-sky-700 shrink-0">
+          전체 상품 보기 (75개) <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
 
-      <!-- Packages Grid Container -->
-      <div id="featured-packages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        <!-- Dynamic cards inserted by JS -->
+      <!-- Category Filter Tabs UI (Horizontal Scrollable on Mobile) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none mb-6" id="home-category-tabs">
+        <button onclick="filterHomeCategory('ALL')" id="home-cat-ALL" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-sky-600 text-white shadow-sm transition whitespace-nowrap cursor-pointer">
+          ✨ 전체 추천 (8개)
+        </button>
+        <button onclick="filterHomeCategory('동남아')" id="home-cat-동남아" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          🌴 동남아
+        </button>
+        <button onclick="filterHomeCategory('일본/동아시아')" id="home-cat-일본/동아시아" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          🗾 일본
+        </button>
+        <button onclick="filterHomeCategory('유럽')" id="home-cat-유럽" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          🏰 유럽
+        </button>
+        <button onclick="filterHomeCategory('미주/대양주')" id="home-cat-미주/대양주" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          🗽 미주/괌/대양주
+        </button>
+        <button onclick="filterHomeCategory('국내')" id="home-cat-국내" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          🌊 국내/제주
+        </button>
+        <button onclick="filterHomeCategory('허니문')" id="home-cat-허니문" class="home-cat-btn px-4 py-2 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-300 transition whitespace-nowrap cursor-pointer">
+          💖 럭셔리 허니문
+        </button>
+      </div>
+
+      <!-- Packages Grid Container (Strictly 8 Items) -->
+      <div id="featured-packages-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Dynamic 8 cards inserted by JS -->
+      </div>
+
+      <!-- More Packages Action Button at Bottom of Grid -->
+      <div class="mt-10 text-center">
+        <a href="packages.html" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white hover:bg-sky-50 text-slate-800 hover:text-sky-600 border border-slate-200 hover:border-sky-300 font-bold rounded-2xl shadow-sm text-sm transition group">
+          <span>전체 75개 여행 상품 모두 보러가기</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+        </a>
       </div>
     </section>
 
@@ -410,6 +422,70 @@
   <script src="js/api.js?v=20260828_3"></script>
   <script src="js/components.js?v=20260828_3"></script>
   <script>
+    let cachedAllPackages = [];
+    let currentHomeCategory = 'ALL';
+
+    function renderHomePackages(category = 'ALL') {
+      const grid = document.getElementById('featured-packages-grid');
+      if (!grid) return;
+
+      let filtered = cachedAllPackages;
+      if (category && category !== 'ALL') {
+        filtered = cachedAllPackages.filter(pkg => {
+          if (category === '동남아') return pkg.region === '동남아' || pkg.destination?.includes('다낭') || pkg.destination?.includes('발리') || pkg.destination?.includes('방콕') || pkg.destination?.includes('싱가포르') || pkg.destination?.includes('푸켓');
+          if (category === '일본/동아시아') return pkg.region === '일본' || pkg.region === '동아시아' || pkg.region === '일본/동아시아' || pkg.destination?.includes('일본') || pkg.destination?.includes('도쿄') || pkg.destination?.includes('오사카') || pkg.destination?.includes('삿포로') || pkg.destination?.includes('후쿠오카');
+          if (category === '유럽') return pkg.region === '유럽' || pkg.destination?.includes('유럽') || pkg.destination?.includes('파리') || pkg.destination?.includes('스위스') || pkg.destination?.includes('이탈리아') || pkg.destination?.includes('스페인') || pkg.destination?.includes('프라하');
+          if (category === '미주/대양주') return pkg.region === '미주' || pkg.region === '대양주' || pkg.region === '미주/대양주' || pkg.destination?.includes('미국') || pkg.destination?.includes('하와이') || pkg.destination?.includes('괌') || pkg.destination?.includes('사이판') || pkg.destination?.includes('호주') || pkg.destination?.includes('뉴질랜드');
+          if (category === '국내') return pkg.region === '국내' || pkg.destination?.includes('제주') || pkg.destination?.includes('부산') || pkg.destination?.includes('강원');
+          if (category === '허니문') return pkg.theme === '허니문' || pkg.theme === 'luxury' || pkg.title?.includes('허니문') || pkg.title?.includes('풀빌라');
+          return pkg.region === category || pkg.theme === category;
+        });
+      }
+
+      // Strictly limit to 8 items on home page
+      const displayList = filtered.slice(0, 8);
+
+      if (displayList.length > 0) {
+        grid.innerHTML = displayList.map(pkg => createPackageCard(pkg)).join('');
+        if (window.lucide) lucide.createIcons();
+      } else {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-16 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <i data-lucide="package-search" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+            <p class="text-slate-600 font-bold text-sm">해당 카테고리의 상품이 아직 준비 중입니다.</p>
+            <p class="text-slate-400 text-xs mt-1">다른 카테고리를 선택하거나 전체보기를 이용해주세요.</p>
+            <button onclick="filterHomeCategory('ALL')" class="mt-4 px-4 py-2 bg-sky-50 text-sky-600 hover:bg-sky-100 rounded-xl text-xs font-bold transition">전체 추천 상품 보기</button>
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    function filterHomeCategory(category) {
+      currentHomeCategory = category;
+
+      // Update button styles
+      const buttons = document.querySelectorAll('.home-cat-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+        btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+      });
+
+      const activeBtn = document.getElementById(`home-cat-${category}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+        activeBtn.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+      }
+
+      renderHomePackages(category);
+
+      // Smooth scroll down to packages section if triggered from top chips
+      const pkgSection = document.getElementById('packages-section');
+      if (pkgSection && window.scrollY < pkgSection.offsetTop - 150) {
+        pkgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       renderNavbar('home');
       renderFooter();
@@ -419,8 +495,8 @@
       try {
         const response = await TourAPI.getPackages();
         if (response && response.data && response.data.length > 0) {
-          grid.innerHTML = response.data.map(pkg => createPackageCard(pkg)).join('');
-          if (window.lucide) lucide.createIcons();
+          cachedAllPackages = response.data;
+          renderHomePackages('ALL');
         } else {
           grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">등록된 추천 상품이 없습니다.</div>`;
         }
@@ -434,14 +510,12 @@
       if (searchForm) {
         searchForm.addEventListener('submit', (e) => {
           e.preventDefault();
-          const dest = document.getElementById('search-dest').value.trim();
-          const region = document.getElementById('search-region').value;
-          const theme = document.getElementById('search-theme').value;
+          const dest = document.getElementById('search-dest')?.value?.trim() || '';
+          const region = document.getElementById('search-region')?.value || '전체';
 
           const params = new URLSearchParams();
           if (dest) params.append('search', dest);
           if (region && region !== '전체') params.append('region', region);
-          if (theme && theme !== '전체') params.append('theme', theme);
 
           window.location.href = `packages.html?${params.toString()}`;
         });
