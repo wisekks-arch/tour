@@ -63,7 +63,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
       
       <!-- 1. KPI Stats Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
@@ -71,8 +71,8 @@
             <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-booking-count">0건</span>
             <span class="text-[11px] text-amber-600 font-bold" id="stat-pending-bookings">대기: 0건</span>
           </div>
-          <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center">
-            <i data-lucide="calendar-check" class="w-6 h-6"></i>
+          <div class="w-11 h-11 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+            <i data-lucide="calendar-check" class="w-5 h-5"></i>
           </div>
         </div>
 
@@ -82,8 +82,8 @@
             <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-inquiry-count">0건</span>
             <span class="text-[11px] text-rose-600 font-bold" id="stat-pending-inquiries">미답변: 0건</span>
           </div>
-          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center">
-            <i data-lucide="message-square" class="w-6 h-6"></i>
+          <div class="w-11 h-11 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+            <i data-lucide="message-square" class="w-5 h-5"></i>
           </div>
         </div>
 
@@ -91,36 +91,50 @@
           <div>
             <span class="text-xs text-slate-400 font-semibold block">총 등록 상품</span>
             <span class="text-2xl font-black text-slate-900 mt-1 block" id="stat-package-count">75개</span>
-            <span class="text-[11px] text-emerald-600 font-bold" id="stat-package-subtext">운영 중 74개 · 미운영 1개</span>
+            <span class="text-[11px] text-emerald-600 font-bold" id="stat-package-subtext">운영 74 · 미운영 1</span>
           </div>
-          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
-            <i data-lucide="plane" class="w-6 h-6"></i>
+          <div class="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+            <i data-lucide="plane" class="w-5 h-5"></i>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-semibold block">가입 회원 현황</span>
+            <span class="text-2xl font-black text-purple-600 mt-1 block" id="stat-user-count">0명</span>
+            <span class="text-[11px] text-purple-600 font-bold" id="stat-user-subtext">일반 0 · 관리자 0</span>
+          </div>
+          <div class="w-11 h-11 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+            <i data-lucide="users" class="w-5 h-5"></i>
           </div>
         </div>
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <span class="text-xs text-slate-400 font-semibold block">누적 예상 견적액</span>
-            <span class="text-2xl font-black text-sky-600 mt-1 block truncate max-w-[150px]" id="stat-total-revenue">0원</span>
+            <span class="text-2xl font-black text-sky-600 mt-1 block truncate max-w-[130px]" id="stat-total-revenue">0원</span>
             <span class="text-[11px] text-slate-400">접수 기준 총액</span>
           </div>
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
-            <i data-lucide="coins" class="w-6 h-6"></i>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+            <i data-lucide="coins" class="w-5 h-5"></i>
           </div>
         </div>
 
       </div>
 
       <!-- 2. Tabs Navigation -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-1.5 flex gap-2 max-w-md shadow-sm">
-        <button id="tab-btn-bookings" onclick="switchTab('bookings')" class="flex-1 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition">
+      <div class="bg-white rounded-2xl border border-slate-200 p-1.5 flex flex-wrap gap-2 max-w-2xl shadow-sm">
+        <button id="tab-btn-bookings" onclick="switchTab('bookings')" class="flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition cursor-pointer">
           예약 접수 목록
         </button>
-        <button id="tab-btn-inquiries" onclick="switchTab('inquiries')" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+        <button id="tab-btn-inquiries" onclick="switchTab('inquiries')" class="flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
           1:1 상담 문의
         </button>
-        <button id="tab-btn-packages" onclick="switchTab('packages')" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+        <button id="tab-btn-packages" onclick="switchTab('packages')" class="flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
           여행 상품 관리
+        </button>
+        <button id="tab-btn-users" onclick="switchTab('users')" class="flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+          👥 회원 가입 현황
         </button>
       </div>
 
@@ -371,6 +385,89 @@
         <!-- Dynamic Package Cards Grid -->
         <div class="p-6 pt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="admin-packages-list">
           <!-- Dynamic Package Cards -->
+        </div>
+      </section>
+
+      <!-- 6. TAB 4: Users / Members Management -->
+      <section id="tab-content-users" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden space-y-4">
+        <!-- User Management Header & Filters -->
+        <div class="p-5 sm:p-6 border-b border-slate-100 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
+                <i data-lucide="users" class="w-5 h-5 text-sky-600"></i> 회원 가입 및 계정 관리 현황
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">
+                투어이지 가입 회원의 계정 목록, 권한(일반회원/관리자) 및 가입일시를 실시간으로 확인합니다.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="loadUsersData()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl flex items-center gap-1.5 transition cursor-pointer">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 회원 목록 새로고침
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls: Role Filter Tabs, Search Bar -->
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 pt-2">
+            <!-- Role Filter Tabs -->
+            <div class="bg-slate-100 p-1 rounded-2xl flex items-center gap-1 text-xs font-bold shrink-0" id="user-role-tabs">
+              <button id="user-tab-all" onclick="filterUsersRole('ALL')" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center gap-1.5 font-bold cursor-pointer">
+                전체 회원 <span id="user-count-all" class="px-1.5 py-0.5 rounded-full text-[10px] bg-slate-200 text-slate-700">0</span>
+              </button>
+              <button id="user-tab-member" onclick="filterUsersRole('MEMBER')" class="px-3.5 py-1.5 rounded-xl text-sky-700 hover:bg-white/60 transition flex items-center gap-1.5 font-bold cursor-pointer">
+                <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                일반회원 <span id="user-count-member" class="px-1.5 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800">0</span>
+              </button>
+              <button id="user-tab-admin" onclick="filterUsersRole('ADMIN')" class="px-3.5 py-1.5 rounded-xl text-purple-700 hover:bg-white/60 transition flex items-center gap-1.5 font-bold cursor-pointer">
+                <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                관리자 <span id="user-count-admin" class="px-1.5 py-0.5 rounded-full text-[10px] bg-purple-100 text-purple-800">0</span>
+              </button>
+            </div>
+
+            <!-- Search Bar & Sort -->
+            <div class="flex flex-1 sm:flex-initial items-center gap-2">
+              <div class="relative flex-1 min-w-[260px]">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                <input id="user-search-input" type="text" oninput="handleUserSearch(this.value)" placeholder="회원 성명, 이메일(아이디), 연락처 검색..." class="w-full pl-9 pr-3 py-2 rounded-xl text-xs border border-slate-200 focus:border-sky-500 focus:outline-none bg-white">
+              </div>
+              <select id="user-sort-select" onchange="handleUserSort(this.value)" class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 focus:border-sky-500 focus:outline-none shrink-0">
+                <option value="newest">가입일 최신순</option>
+                <option value="oldest">가입일 오래된순</option>
+                <option value="name">이름 가나다순</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50/80 text-slate-400 font-bold border-b border-slate-100">
+              <tr>
+                <th class="p-4 pl-6 whitespace-nowrap">No.</th>
+                <th class="p-4 whitespace-nowrap">회원 구분</th>
+                <th class="p-4 whitespace-nowrap">성명</th>
+                <th class="p-4 whitespace-nowrap">아이디 (이메일)</th>
+                <th class="p-4 whitespace-nowrap">연락처</th>
+                <th class="p-4 whitespace-nowrap">가입일시</th>
+                <th class="p-4 pr-6 text-center whitespace-nowrap">활동 내역 요약</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body" class="divide-y divide-slate-100">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Users Pagination -->
+        <div class="p-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div id="user-pagination-info" class="text-slate-500 font-medium">
+            <!-- info -->
+          </div>
+          <div id="user-pagination-buttons" class="flex items-center gap-1">
+            <!-- buttons -->
+          </div>
         </div>
       </section>
 
@@ -1049,6 +1146,9 @@
           renderPackagesAdmin(cachedPackages);
           populatePackageSelects(cachedPackages);
         }
+
+        // 5. Fetch Users
+        await loadUsersData();
 
         if (window.lucide) lucide.createIcons();
       } catch (err) {
@@ -2312,19 +2412,267 @@
     }
 
     function switchTab(tabKey) {
-      ['bookings', 'inquiries', 'packages'].forEach(k => {
+      ['bookings', 'inquiries', 'packages', 'users'].forEach(k => {
         const btn = document.getElementById(`tab-btn-${k}`);
         const content = document.getElementById(`tab-content-${k}`);
+        if (!btn || !content) return;
         if (k === tabKey) {
-          btn.className = 'flex-1 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition';
+          btn.className = 'flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition cursor-pointer';
           content.classList.remove('hidden');
         } else {
-          btn.className = 'flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+          btn.className = 'flex-1 min-w-[120px] py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer';
           content.classList.add('hidden');
         }
       });
+      if (tabKey === 'users' && cachedUsers.length === 0) {
+        loadUsersData();
+      }
       lucide.createIcons();
     }
+
+    // --- User / Member Management State & Functions ---
+    let cachedUsers = [];
+    let userFilterState = {
+      role: 'ALL',
+      search: '',
+      sort: 'newest',
+      currentPage: 1,
+      pageSize: 10
+    };
+
+    async function loadUsersData() {
+      try {
+        const res = await TourAPI.getUsers();
+        if (res && res.data) {
+          cachedUsers = res.data;
+          updateUserBadgeCounts(cachedUsers);
+          applyUserFilters();
+        }
+      } catch (err) {
+        console.error('Error loading users data:', err);
+      }
+    }
+    window.loadUsersData = loadUsersData;
+
+    function updateUserBadgeCounts(users) {
+      const total = users.length;
+      const members = users.filter(u => (u.role || 'MEMBER').toUpperCase() !== 'ADMIN').length;
+      const admins = users.filter(u => (u.role || '').toUpperCase() === 'ADMIN').length;
+
+      const elTotal = document.getElementById('user-count-all');
+      const elMember = document.getElementById('user-count-member');
+      const elAdmin = document.getElementById('user-count-admin');
+      if (elTotal) elTotal.textContent = total;
+      if (elMember) elMember.textContent = members;
+      if (elAdmin) elAdmin.textContent = admins;
+
+      const elKpiCount = document.getElementById('stat-user-count');
+      const elKpiSub = document.getElementById('stat-user-subtext');
+      if (elKpiCount) elKpiCount.textContent = `${total}명`;
+      if (elKpiSub) elKpiSub.textContent = `일반 ${members} · 관리자 ${admins}`;
+    }
+
+    function filterUsersRole(role) {
+      userFilterState.role = role;
+      userFilterState.currentPage = 1;
+      ['all', 'member', 'admin'].forEach(r => {
+        const btn = document.getElementById(`user-tab-${r}`);
+        if (!btn) return;
+        const targetRole = r.toUpperCase() === 'ALL' ? 'ALL' : r.toUpperCase();
+        if (targetRole === role) {
+          btn.className = 'px-3.5 py-1.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center gap-1.5 font-bold cursor-pointer';
+        } else {
+          const color = r === 'member' ? 'text-sky-700' : r === 'admin' ? 'text-purple-700' : 'text-slate-600';
+          btn.className = `px-3.5 py-1.5 rounded-xl ${color} hover:bg-white/60 transition flex items-center gap-1.5 font-bold cursor-pointer`;
+        }
+      });
+      applyUserFilters();
+    }
+    window.filterUsersRole = filterUsersRole;
+
+    function handleUserSearch(query) {
+      userFilterState.search = (query || '').trim().toLowerCase();
+      userFilterState.currentPage = 1;
+      applyUserFilters();
+    }
+    window.handleUserSearch = handleUserSearch;
+
+    function handleUserSort(sortVal) {
+      userFilterState.sort = sortVal;
+      applyUserFilters();
+    }
+    window.handleUserSort = handleUserSort;
+
+    function applyUserFilters() {
+      let filtered = [...cachedUsers];
+
+      // 1. Role filter
+      if (userFilterState.role === 'MEMBER') {
+        filtered = filtered.filter(u => (u.role || 'MEMBER').toUpperCase() !== 'ADMIN');
+      } else if (userFilterState.role === 'ADMIN') {
+        filtered = filtered.filter(u => (u.role || '').toUpperCase() === 'ADMIN');
+      }
+
+      // 2. Search filter
+      if (userFilterState.search) {
+        const s = userFilterState.search;
+        filtered = filtered.filter(u =>
+          (u.name && u.name.toLowerCase().includes(s)) ||
+          (u.email && u.email.toLowerCase().includes(s)) ||
+          (u.phone && u.phone.replace(/-/g, '').includes(s.replace(/-/g, '')))
+        );
+      }
+
+      // 3. Sort
+      if (userFilterState.sort === 'newest') {
+        filtered.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+      } else if (userFilterState.sort === 'oldest') {
+        filtered.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+      } else if (userFilterState.sort === 'name') {
+        filtered.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ko'));
+      }
+
+      // Pagination
+      const totalCount = filtered.length;
+      const pageSize = userFilterState.pageSize;
+      const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+      if (userFilterState.currentPage > totalPages) userFilterState.currentPage = totalPages;
+      const currentPage = userFilterState.currentPage;
+
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, totalCount);
+      const pageItems = filtered.slice(startIndex, endIndex);
+
+      renderUsersAdmin(pageItems, startIndex);
+      renderUserPagination(totalCount, startIndex, endIndex, currentPage, totalPages);
+    }
+
+    function renderUsersAdmin(users, offset = 0) {
+      const tbody = document.getElementById('users-table-body');
+      if (!tbody) return;
+
+      if (users.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="p-8 text-center text-slate-400 font-medium">
+              <i data-lucide="user-x" class="w-8 h-8 mx-auto mb-2 text-slate-300"></i>
+              해당 조건에 일치하는 회원이 없습니다.
+            </td>
+          </tr>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      tbody.innerHTML = users.map((u, idx) => {
+        const isAdmin = (u.role || '').toUpperCase() === 'ADMIN';
+        const roleBadge = isAdmin
+          ? `<span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-purple-50 text-purple-700 border border-purple-200/80 flex items-center gap-1 w-max">
+               <i data-lucide="shield" class="w-3 h-3 text-purple-600"></i> 관리자
+             </span>`
+          : `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 flex items-center gap-1 w-max">
+               <i data-lucide="user" class="w-3 h-3 text-sky-600"></i> 일반회원
+             </span>`;
+
+        // Cross check bookings or inquiries
+        const userBookings = (cachedBookings || []).filter(b => (b.email && b.email.toLowerCase() === (u.email || '').toLowerCase()) || (b.travelerName && b.travelerName === u.name)).length;
+        const userInquiries = (cachedInquiries || []).filter(i => (i.email && i.email.toLowerCase() === (u.email || '').toLowerCase()) || (i.name && i.name === u.name)).length;
+
+        const formattedDate = TourAPI.formatDateTime ? TourAPI.formatDateTime(u.createdAt) : (u.createdAt || '-');
+
+        return `
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-4 pl-6 font-mono text-slate-400 text-xs">${offset + idx + 1}</td>
+            <td class="p-4">${roleBadge}</td>
+            <td class="p-4">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full ${isAdmin ? 'bg-purple-100 text-purple-700' : 'bg-sky-100 text-sky-700'} flex items-center justify-center font-bold text-xs shrink-0">
+                  ${(u.name || '회').slice(0, 1)}
+                </div>
+                <span class="font-bold text-slate-900 text-xs">${u.name || '이름 없음'}</span>
+              </div>
+            </td>
+            <td class="p-4">
+              <span class="font-mono text-slate-800 text-xs font-semibold">${u.email || '-'}</span>
+            </td>
+            <td class="p-4">
+              <span class="font-mono text-slate-600 text-xs">${u.phone || '<span class="text-slate-300">미등록</span>'}</span>
+            </td>
+            <td class="p-4">
+              <span class="text-slate-500 text-xs">${formattedDate}</span>
+            </td>
+            <td class="p-4 pr-6 text-center">
+              <div class="inline-flex items-center gap-2 text-[11px] font-semibold">
+                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700" title="예약 접수 이력">
+                  예약 <strong class="text-sky-600 font-mono">${userBookings}</strong>건
+                </span>
+                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700" title="1:1 맞춤상담 이력">
+                  상담 <strong class="text-teal-600 font-mono">${userInquiries}</strong>건
+                </span>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function renderUserPagination(totalCount, startIndex, endIndex, currentPage, totalPages) {
+      const infoEl = document.getElementById('user-pagination-info');
+      const buttonsEl = document.getElementById('user-pagination-buttons');
+      if (!infoEl || !buttonsEl) return;
+
+      if (totalCount === 0) {
+        infoEl.innerHTML = `총 <strong class="text-slate-700 font-bold font-mono">0</strong>명`;
+        buttonsEl.innerHTML = '';
+        return;
+      }
+
+      infoEl.innerHTML = `총 <strong class="text-slate-800 font-bold font-mono">${totalCount}</strong>명 중 <strong class="text-sky-600 font-mono">${startIndex + 1}~${endIndex}</strong>명 표시 (페이지 <span class="font-bold font-mono">${currentPage}/${totalPages}</span>)`;
+
+      let html = '';
+      const isFirst = currentPage === 1;
+      const isLast = currentPage === totalPages;
+
+      html += `
+        <button type="button" onclick="changeUserPage(1)" ${isFirst ? 'disabled' : ''} class="px-2 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="처음">
+          &laquo;
+        </button>
+        <button type="button" onclick="changeUserPage(${currentPage - 1})" ${isFirst ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="이전">
+          &lsaquo;
+        </button>
+      `;
+
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+
+      for (let p = startPage; p <= endPage; p++) {
+        if (p === currentPage) {
+          html += `<button type="button" class="w-7 h-7 rounded-lg bg-sky-600 text-white font-bold font-mono text-xs shadow-xs">${p}</button>`;
+        } else {
+          html += `<button type="button" onclick="changeUserPage(${p})" class="w-7 h-7 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 font-medium font-mono text-xs transition cursor-pointer">${p}</button>`;
+        }
+      }
+
+      html += `
+        <button type="button" onclick="changeUserPage(${currentPage + 1})" ${isLast ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="다음">
+          &rsaquo;
+        </button>
+        <button type="button" onclick="changeUserPage(${totalPages})" ${isLast ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition font-bold cursor-pointer" title="마지막">
+          &raquo;
+        </button>
+      `;
+
+      buttonsEl.innerHTML = html;
+    }
+
+    function changeUserPage(page) {
+      userFilterState.currentPage = page;
+      applyUserFilters();
+    }
+    window.changeUserPage = changeUserPage;
 
     function openNewPackageModal() {
       document.getElementById('modal-new-package').classList.remove('hidden');

@@ -4969,6 +4969,25 @@ const TourAPI = {
     return { success: false, message: '비밀번호 재설정 처리 중 오류가 발생했습니다.' };
   },
 
+  // 13. Get All Registered Users (Admin)
+  async getUsers() {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/users`);
+        if (res.ok) return await res.json();
+      }
+    } catch (e) {
+      console.warn('getUsers network call failed, trying local fallback:', e);
+    }
+    try {
+      const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
+      if (mockUsers && mockUsers.length > 0) {
+        return { success: true, count: mockUsers.length, data: mockUsers };
+      }
+    } catch {}
+    return { success: true, count: 0, data: [] };
+  },
+
   // --- Formatting Helpers ---
   formatPrice(price) {
     if (!price) return '0원';
