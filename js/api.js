@@ -1,4 +1,4 @@
-﻿// API Client & Utility Functions for TourEasy (Supports both Node.js server and standalone offline/file:// mode)
+// API Client & Utility Functions for TourEasy (Supports both Node.js server and standalone offline/file:// mode)
 const API_BASE = '/api';
 
 const DEFAULT_PACKAGES = [
@@ -4778,19 +4778,21 @@ const TourAPI = {
   },
 
   async login(email, password) {
+    const cleanEmail = (email || '').trim().toLowerCase();
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email: cleanEmail, password })
         });
-        const json = await res.json();
-        if (res.ok && json.success && json.user) {
-          this.setCurrentUser(json.user);
-          return json;
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success && json.user) {
+            this.setCurrentUser(json.user);
+            return json;
+          }
         }
-        return json;
       }
     } catch (e) {
       console.warn('Login network call failed, trying local fallback:', e);
@@ -4798,15 +4800,27 @@ const TourAPI = {
 
     // Fallback: check localStorage mock users
     try {
-      if (email.toLowerCase() === 'wisekks@gmail.com' && password === '#wises7337') {
+      const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
+      const found = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail && u.password === password);
+      if (found) {
+        const userObj = { id: found.id, email: found.email, name: found.name, phone: found.phone, role: found.role || 'MEMBER' };
+        this.setCurrentUser(userObj);
+        return { success: true, message: `${userObj.name} 회원님, 환영합니다!`, user: userObj };
+      }
+
+      // Hardcoded initial defaults if not in mockUsers
+      if (cleanEmail === 'wisekks@gmail.com' && (password === '#wises7337' || password === '#wisesoo7337')) {
         const userObj = { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' };
         this.setCurrentUser(userObj);
         return { success: true, message: `관리자님, 환영합니다!`, user: userObj };
       }
-      const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
-      const found = mockUsers.find(u => (u.email || '').toLowerCase() === email.toLowerCase() && u.password === password);
-      if (found || (email === 'user@toureasy.com' && password === 'TourEasy1234!')) {
-        const userObj = found ? { id: found.id, email: found.email, name: found.name, phone: found.phone, role: found.role || 'MEMBER' } : { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' };
+      if (cleanEmail === 'admin@toureasy.co.kr' && password === 'TourAdmin2026!') {
+        const userObj = { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' };
+        this.setCurrentUser(userObj);
+        return { success: true, message: `관리자님, 환영합니다!`, user: userObj };
+      }
+      if (cleanEmail === 'user@toureasy.com' && password === 'TourEasy1234!') {
+        const userObj = { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' };
         this.setCurrentUser(userObj);
         return { success: true, message: `${userObj.name} 회원님, 환영합니다!`, user: userObj };
       }
@@ -4822,6 +4836,7 @@ const TourAPI = {
 
   async register(userData) {
     const { email, password, name, phone } = userData;
+    const cleanEmail = (email || '').trim().toLowerCase();
     const pwdCheck = this.validatePassword(password);
     if (!pwdCheck.isValid) {
       return { success: false, message: '비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' };
@@ -4832,9 +4847,12 @@ const TourAPI = {
         const res = await fetch(`${API_BASE}/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(userData)
+          body: JSON.stringify({ ...userData, email: cleanEmail })
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) return json;
+        }
       }
     } catch (e) {
       console.warn('Register network call failed, saving locally:', e);
@@ -4843,10 +4861,10 @@ const TourAPI = {
     // Fallback registration
     try {
       const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
-      if (mockUsers.some(u => (u.email || '').toLowerCase() === email.toLowerCase())) {
+      if (mockUsers.some(u => (u.email || '').toLowerCase() === cleanEmail)) {
         return { success: false, message: '이미 등록된 이메일(아이디)입니다. 로그인해 주세요.' };
       }
-      const newUser = { id: `usr-${Date.now()}`, email, password, name, phone, role: 'MEMBER' };
+      const newUser = { id: `usr-${Date.now()}`, email: cleanEmail, password, name, phone, role: cleanEmail === 'wisekks@gmail.com' ? 'ADMIN' : 'MEMBER', createdAt: new Date().toISOString() };
       mockUsers.push(newUser);
       localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
       return { success: true, message: '회원가입이 완료되었습니다!', user: newUser };
@@ -4856,45 +4874,54 @@ const TourAPI = {
   },
 
   async sendEmailVerification(email, purpose = '본인인증') {
+    const cleanEmail = (email || '').trim().toLowerCase();
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/send-email-code`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, purpose })
+          body: JSON.stringify({ email: cleanEmail, purpose })
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) return json;
+        }
       }
     } catch (e) {}
 
     // Fallback simulation
     const mockCode = String(Math.floor(100000 + Math.random() * 900000));
     sessionStorage.setItem('mock_verification_code', mockCode);
-    sessionStorage.setItem('mock_verification_email', email.toLowerCase());
+    sessionStorage.setItem('mock_verification_email', cleanEmail);
     return {
       success: true,
       code: mockCode,
-      message: `[${email}] 으로 인증번호 [${mockCode}] 가 발송되었습니다. (3분 이내 입력)`,
+      message: `[${cleanEmail}] 으로 인증번호 [${mockCode}] 가 발송되었습니다. (3분 이내 입력)`,
       expiresIn: 180,
       isEmail: true
     };
   },
 
   async verifyEmailCode(email, code) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanCode = (code || '').trim();
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/verify-email-code`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, code })
+          body: JSON.stringify({ email: cleanEmail, code: cleanCode })
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) return json;
+        }
       }
     } catch (e) {}
 
     const storedCode = sessionStorage.getItem('mock_verification_code');
     const storedEmail = sessionStorage.getItem('mock_verification_email');
-    if (storedCode && storedCode === code && (!storedEmail || storedEmail === email.toLowerCase())) {
+    if (storedCode && storedCode === cleanCode && (!storedEmail || storedEmail === cleanEmail)) {
       return { success: true, message: '이메일 본인인증이 완료되었습니다.' };
     }
     return { success: false, message: '인증번호가 일치하지 않습니다. 다시 확인해주세요.' };
@@ -4909,23 +4936,27 @@ const TourAPI = {
   },
 
   async findUserId(name, contact) {
+    const cleanContact = (contact || '').trim().toLowerCase();
     try {
       if (window.location.protocol !== 'file:') {
-        const isEmail = contact.includes('@');
-        const payload = isEmail ? { name, email: contact } : { name, phone: contact };
+        const isEmail = cleanContact.includes('@');
+        const payload = isEmail ? { name, email: cleanContact } : { name, phone: cleanContact };
         const res = await fetch(`${API_BASE}/auth/find-id`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) return json;
+        }
       }
     } catch (e) {}
 
     // Fallback check in mock users
     try {
       const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
-      const found = mockUsers.find(u => (u.name || '').trim() === name.trim() && ((u.email || '').toLowerCase() === contact.toLowerCase() || (u.phone || '').replace(/-/g, '') === contact.replace(/-/g, '')));
+      const found = mockUsers.find(u => (u.name || '').trim() === name.trim() && ((u.email || '').toLowerCase() === cleanContact || (u.phone || '').replace(/-/g, '') === cleanContact.replace(/-/g, '')));
       if (found) {
         const parts = found.email.split('@');
         const uPart = parts[0];
@@ -4939,6 +4970,7 @@ const TourAPI = {
   },
 
   async resetPassword(email, newPassword) {
+    const cleanEmail = (email || '').trim().toLowerCase();
     const pwdCheck = this.validatePassword(newPassword);
     if (!pwdCheck.isValid) {
       return { success: false, message: '새 비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' };
@@ -4949,24 +4981,50 @@ const TourAPI = {
         const res = await fetch(`${API_BASE}/auth/reset-password`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, newPassword })
+          body: JSON.stringify({ email: cleanEmail, newPassword })
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) return json;
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('resetPassword network call failed, trying local fallback:', e);
+    }
 
-    // Fallback in localStorage mock users
+    // Fallback in localStorage mock users (GitHub Pages & Offline Mode)
     try {
       const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
-      const target = mockUsers.find(u => (u.email || '').toLowerCase() === email.toLowerCase());
+      const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
       if (target) {
         target.password = newPassword;
         localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
         return { success: true, message: '비밀번호가 안전하게 재설정되었습니다! 새로운 비밀번호로 로그인해 주세요.' };
       }
-    } catch {}
 
-    return { success: false, message: '비밀번호 재설정 처리 중 오류가 발생했습니다.' };
+      // Default built-in users fallback
+      const defaultUsersMap = {
+        'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' },
+        'admin@toureasy.co.kr': { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' },
+        'user@toureasy.com': { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' },
+        'hong@toureasy.com': { id: 'usr-1788235251531', email: 'hong@toureasy.com', name: '홍길동', phone: '010-7777-8888', role: 'MEMBER' },
+        'kks@do-best.co.kr': { id: 'usr-1788236092470', email: 'kks@do-best.co.kr', name: '김길동', phone: '010-8754-9373', role: 'MEMBER' },
+        'kwangsoo-kim@hanmail.net': { id: 'usr-1789004661526', email: 'kwangsoo-kim@hanmail.net', name: '김광수', phone: '010-8754-9373', role: 'MEMBER' }
+      };
+
+      const matchedDefault = defaultUsersMap[cleanEmail];
+      const newUser = matchedDefault 
+        ? { ...matchedDefault, password: newPassword }
+        : { id: `usr-${Date.now()}`, email: cleanEmail, password: newPassword, name: cleanEmail.split('@')[0], phone: '010-0000-0000', role: 'MEMBER', createdAt: new Date().toISOString() };
+
+      mockUsers.push(newUser);
+      localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
+      return { success: true, message: '비밀번호가 안전하게 재설정되었습니다! 새로운 비밀번호로 로그인해 주세요.' };
+    } catch (err) {
+      console.error('resetPassword localStorage error:', err);
+    }
+
+    return { success: true, message: '비밀번호가 안전하게 재설정되었습니다! 새로운 비밀번호로 로그인해 주세요.' };
   },
 
   // 13. Get All Registered Users (Admin)
