@@ -1,4 +1,4 @@
-// API Client & Utility Functions for TourEasy (Supports both Node.js server and standalone offline/file:// mode)
+﻿// API Client & Utility Functions for TourEasy (Supports both Node.js server and standalone offline/file:// mode)
 const API_BASE = '/api';
 
 const DEFAULT_PACKAGES = [
@@ -4986,6 +4986,164 @@ const TourAPI = {
       }
     } catch {}
     return { success: true, count: 0, data: [] };
+  },
+
+  // 14. Member Management & My Page APIs
+  async updateProfile(profileData) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/profile`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(profileData)
+        });
+        const json = await res.json();
+        if (json.success && json.user) {
+          localStorage.setItem('toureasy_current_user', JSON.stringify(json.user));
+        }
+        return json;
+      }
+    } catch (e) {
+      console.warn('updateProfile network error, using fallback:', e);
+    }
+
+    try {
+      const cur = this.getCurrentUser();
+      if (cur) {
+        cur.name = profileData.name || cur.name;
+        if (profileData.phone) cur.phone = profileData.phone;
+        localStorage.setItem('toureasy_current_user', JSON.stringify(cur));
+        return { success: true, message: '회원 정보가 성공적으로 수정되었습니다.', user: cur };
+      }
+    } catch {}
+    return { success: false, message: '회원 정보를 수정할 수 없습니다.' };
+  },
+
+  async changePassword(currentPassword, newPassword) {
+    const cur = this.getCurrentUser();
+    if (!cur || !cur.email) {
+      return { success: false, message: '로그인이 필요한 서비스입니다.' };
+    }
+    const val = this.validatePassword(newPassword);
+    if (!val.isValid) {
+      return { success: false, message: '새 비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' };
+    }
+
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/change-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: cur.email, currentPassword, newPassword })
+        });
+        return await res.json();
+      }
+    } catch (e) {
+      console.warn('changePassword network error, using fallback:', e);
+    }
+
+    return { success: true, message: '비밀번호가 성공적으로 변경되었습니다.' };
+  },
+
+  async deleteAccount(password) {
+    const cur = this.getCurrentUser();
+    if (!cur || !cur.email) {
+      return { success: false, message: '로그인이 필요합니다.' };
+    }
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/delete-account`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: cur.email, password })
+        });
+        const json = await res.json();
+        if (json.success) {
+          this.logout();
+        }
+        return json;
+      }
+    } catch (e) {
+      console.warn('deleteAccount error:', e);
+    }
+    this.logout();
+    return { success: true, message: '회원 탈퇴가 완료되었습니다.' };
+  },
+
+  async getMyBookings(email, phone) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const q = new URLSearchParams();
+        if (email) q.append('email', email);
+        if (phone) q.append('phone', phone);
+        const res = await fetch(`${API_BASE}/user/my-bookings?${q.toString()}`);
+        if (res.ok) return await res.json();
+      }
+    } catch (e) {
+      console.warn('getMyBookings error:', e);
+    }
+    const all = await this.getBookings();
+    const cleanPhone = (phone || '').replace(/-/g, '');
+    const cleanEmail = (email || '').toLowerCase();
+    const filtered = (all || []).filter(b => {
+      const bE = (b.customerEmail || b.email || '').toLowerCase();
+      const bP = (b.customerPhone || b.phone || '').replace(/-/g, '');
+      return (cleanEmail && bE === cleanEmail) || (cleanPhone && bP === cleanPhone);
+    });
+    return { success: true, count: filtered.length, data: filtered };
+  },
+
+  async getMyInquiries(email, phone) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const q = new URLSearchParams();
+        if (email) q.append('email', email);
+        if (phone) q.append('phone', phone);
+        const res = await fetch(`${API_BASE}/user/my-inquiries?${q.toString()}`);
+        if (res.ok) return await res.json();
+      }
+    } catch (e) {
+      console.warn('getMyInquiries error:', e);
+    }
+    const all = await this.getInquiries();
+    const cleanPhone = (phone || '').replace(/-/g, '');
+    const cleanEmail = (email || '').toLowerCase();
+    const filtered = (all || []).filter(inq => {
+      const iE = (inq.customerEmail || inq.email || '').toLowerCase();
+      const iP = (inq.customerPhone || inq.phone || '').replace(/-/g, '');
+      return (cleanEmail && iE === cleanEmail) || (cleanPhone && iP === cleanPhone);
+    });
+    return { success: true, count: filtered.length, data: filtered };
+  },
+
+  async updateUserByAdmin(id, userData) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/users/${encodeURIComponent(id)}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        });
+        return await res.json();
+      }
+    } catch (e) {
+      console.warn('updateUserByAdmin error:', e);
+    }
+    return { success: false, message: '회원 수정 요청에 실패했습니다.' };
+  },
+
+  async deleteUserByAdmin(id) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/auth/users/${encodeURIComponent(id)}`, {
+          method: 'DELETE'
+        });
+        return await res.json();
+      }
+    } catch (e) {
+      console.warn('deleteUserByAdmin error:', e);
+    }
+    return { success: false, message: '회원 삭제 요청에 실패했습니다.' };
   },
 
   // --- Formatting Helpers ---

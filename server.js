@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -364,6 +364,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       // 0-7. GET /api/auth/users (회원 목록 - 관리자용)
+            // 0-7. GET /api/auth/users (회원 목록 - 관리자용)
       if (pathname === '/api/auth/users' && method === 'GET') {
         const users = readJson('users.json', []);
         const safe = users.map(u => ({
@@ -375,6 +376,182 @@ const server = http.createServer(async (req, res) => {
           createdAt: u.createdAt
         }));
         return sendJson(res, 200, { success: true, count: safe.length, data: safe });
+      }
+
+      // 0-8. PUT /api/auth/profile (회원 정보 수정)
+      if (pathname === '/api/auth/profile' && (method === 'PUT' || method === 'POST')) {
+        const body = await parseRequestBody(req);
+        const email = (body.email || '').trim().toLowerCase();
+        const name = (body.name || '').trim();
+        const phone = (body.phone || '').trim();
+
+        if (!email) {
+          return sendJson(res, 400, { success: false, message: '이메일 정보가 필요합니다.' });
+        }
+        if (!name) {
+          return sendJson(res, 400, { success: false, message: '이름을 입력해 주세요.' });
+        }
+
+        const users = readJson('users.json', []);
+        const target = users.find(u => (u.email || '').toLowerCase() === email || (body.id && u.id === body.id));
+
+        if (!target) {
+          return sendJson(res, 404, { success: false, message: '회원 정보를 찾을 수 없습니다.' });
+        }
+
+        target.name = name;
+        if (phone) target.phone = phone;
+        writeJson('users.json', users);
+
+        return sendJson(res, 200, {
+          success: true,
+          message: '회원 정보가 성공적으로 수정되었습니다.',
+          user: {
+            id: target.id,
+            email: target.email,
+            name: target.name,
+            phone: target.phone,
+            role: target.role || 'MEMBER',
+            createdAt: target.createdAt
+          }
+        });
+      }
+
+      // 0-9. POST /api/auth/change-password (비밀번호 변경)
+      if (pathname === '/api/auth/change-password' && method === 'POST') {
+        const body = await parseRequestBody(req);
+        const email = (body.email || '').trim().toLowerCase();
+        const currentPassword = body.currentPassword || '';
+        const newPassword = body.newPassword || '';
+
+        if (!email || !currentPassword || !newPassword) {
+          return sendJson(res, 400, { success: false, message: '현재 비밀번호와 새 비밀번호를 모두 입력해 주세요.' });
+        }
+
+        if (!validatePasswordRules(newPassword)) {
+          return sendJson(res, 400, { success: false, message: '새 비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' });
+        }
+
+        const users = readJson('users.json', []);
+        const target = users.find(u => (u.email || '').toLowerCase() === email && u.password === currentPassword);
+
+        if (!target) {
+          return sendJson(res, 400, { success: false, message: '현재 비밀번호가 일치하지 않습니다.' });
+        }
+
+        target.password = newPassword;
+        writeJson('users.json', users);
+
+        return sendJson(res, 200, {
+          success: true,
+          message: '비밀번호가 성공적으로 변경되었습니다.'
+        });
+      }
+
+      // 0-10. POST /api/auth/delete-account (회원 탈퇴)
+      if (pathname === '/api/auth/delete-account' && method === 'POST') {
+        const body = await parseRequestBody(req);
+        const email = (body.email || '').trim().toLowerCase();
+        const password = body.password || '';
+
+        const users = readJson('users.json', []);
+        const idx = users.findIndex(u => (u.email || '').toLowerCase() === email && u.password === password);
+
+        if (idx === -1) {
+          return sendJson(res, 400, { success: false, message: '비밀번호가 일치하지 않거나 회원을 찾을 수 없습니다.' });
+        }
+
+        users.splice(idx, 1);
+        writeJson('users.json', users);
+
+        return sendJson(res, 200, {
+          success: true,
+          message: '회원 탈퇴가 안전하게 처리되었습니다.'
+        });
+      }
+
+      // 0-11. PUT /api/auth/users/:id & DELETE /api/auth/users/:id (관리자 회원 관리)
+      if (pathname.startsWith('/api/auth/users/') && (method === 'PUT' || method === 'PATCH')) {
+        const id = pathname.replace('/api/auth/users/', '');
+        const body = await parseRequestBody(req);
+        const users = readJson('users.json', []);
+        const target = users.find(u => u.id === id);
+
+        if (!target) {
+          return sendJson(res, 404, { success: false, message: '회원을 찾을 수 없습니다.' });
+        }
+
+        if (body.name) target.name = body.name.trim();
+        if (body.phone !== undefined) target.phone = body.phone.trim();
+        if (body.role) target.role = body.role.toUpperCase();
+        if (body.password && validatePasswordRules(body.password)) target.password = body.password;
+
+        writeJson('users.json', users);
+
+        return sendJson(res, 200, {
+          success: true,
+          message: '회원 정보가 관리자 권한으로 수정되었습니다.',
+          user: {
+            id: target.id,
+            email: target.email,
+            name: target.name,
+            phone: target.phone,
+            role: target.role || 'MEMBER',
+            createdAt: target.createdAt
+          }
+        });
+      }
+
+      if (pathname.startsWith('/api/auth/users/') && method === 'DELETE') {
+        const id = pathname.replace('/api/auth/users/', '');
+        let users = readJson('users.json', []);
+        const beforeLen = users.length;
+        users = users.filter(u => u.id !== id);
+
+        if (users.length === beforeLen) {
+          return sendJson(res, 404, { success: false, message: '삭제할 회원을 찾을 수 없습니다.' });
+        }
+
+        writeJson('users.json', users);
+        return sendJson(res, 200, { success: true, message: '회원이 삭제되었습니다.' });
+      }
+
+      // 0-12. GET /api/user/my-bookings (내 예약 내역)
+      if (pathname === '/api/user/my-bookings' && method === 'GET') {
+        const email = (parsedUrl.query.email || '').trim().toLowerCase();
+        const phone = (parsedUrl.query.phone || '').trim().replace(/-/g, '');
+
+        if (!email && !phone) {
+          return sendJson(res, 400, { success: false, message: '사용자 식별 정보(이메일/연락처)가 필요합니다.' });
+        }
+
+        const bookings = readJson('bookings.json', []);
+        const myBookings = bookings.filter(b => {
+          const bEmail = (b.customerEmail || b.email || '').trim().toLowerCase();
+          const bPhone = (b.customerPhone || b.phone || '').trim().replace(/-/g, '');
+          return (email && bEmail === email) || (phone && bPhone === phone);
+        });
+
+        return sendJson(res, 200, { success: true, count: myBookings.length, data: myBookings });
+      }
+
+      // 0-13. GET /api/user/my-inquiries (내 문의 내역)
+      if (pathname === '/api/user/my-inquiries' && method === 'GET') {
+        const email = (parsedUrl.query.email || '').trim().toLowerCase();
+        const phone = (parsedUrl.query.phone || '').trim().replace(/-/g, '');
+
+        if (!email && !phone) {
+          return sendJson(res, 400, { success: false, message: '사용자 식별 정보(이메일/연락처)가 필요합니다.' });
+        }
+
+        const inquiries = readJson('inquiries.json', []);
+        const myInquiries = inquiries.filter(inq => {
+          const iEmail = (inq.customerEmail || inq.email || '').trim().toLowerCase();
+          const iPhone = (inq.customerPhone || inq.phone || '').trim().replace(/-/g, '');
+          return (email && iEmail === email) || (phone && iPhone === phone);
+        });
+
+        return sendJson(res, 200, { success: true, count: myInquiries.length, data: myInquiries });
       }
 
       // 1. GET /api/packages

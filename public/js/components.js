@@ -38,16 +38,20 @@ function renderNavbar(activeKey = '') {
   // Top Auth UI
   const topAuthHtml = currentUser ? `
     <div class="flex items-center gap-2.5">
-      <span class="text-white text-xs font-bold flex items-center gap-1">
+      <button onclick="window.openMyPageModal('profile')" class="text-white text-xs font-bold flex items-center gap-1 hover:underline cursor-pointer">
         <i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-300"></i> ${currentUser.name} 회원님
-      </span>
-      <span class="text-sky-200">•</span>
-      <button onclick="window.logoutUser()" class="hover:underline text-sky-100 text-xs font-medium">로그아웃</button>
+      </button>
+      <span class="text-sky-200">|</span>
+      <button onclick="window.openMyPageModal('profile')" class="text-amber-200 hover:underline text-xs font-bold flex items-center gap-1 cursor-pointer">
+        <i data-lucide="settings" class="w-3 h-3"></i> 회원정보 관리
+      </button>
+      <span class="text-sky-200">|</span>
+      <button onclick="window.logoutUser()" class="hover:underline text-sky-100 text-xs font-medium cursor-pointer">로그아웃</button>
     </div>
   ` : `
     <div class="flex items-center gap-2">
       <button onclick="window.openAuthModal('login')" class="hover:underline text-white text-xs font-medium">로그인</button>
-      <span class="text-sky-200">•</span>
+      <span class="text-sky-200">|</span>
       <button onclick="window.openAuthModal('register')" class="hover:underline text-amber-200 font-bold text-xs">회원가입</button>
     </div>
   `;
@@ -55,29 +59,31 @@ function renderNavbar(activeKey = '') {
   // Desktop Main Auth Button
   const desktopAuthButtons = currentUser ? `
     <div class="flex items-center gap-2">
-      <div class="px-3 py-1.5 bg-slate-100 rounded-xl flex items-center gap-2 border border-slate-200 text-xs font-bold text-slate-800">
+      <button onclick="window.openMyPageModal('profile')" class="px-3.5 py-2 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-xl flex items-center gap-2 border border-sky-200 text-xs font-bold transition shadow-xs cursor-pointer">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <i data-lucide="user" class="w-3.5 h-3.5 text-sky-600"></i>
-        <span>${currentUser.name} 님</span>
-      </div>
-      <button onclick="window.logoutUser()" class="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-900 border border-slate-200 rounded-xl hover:bg-slate-50 transition">
+        <i data-lucide="user-check" class="w-3.5 h-3.5 text-sky-600"></i>
+        <span>${currentUser.name} 님 (마이페이지)</span>
+      </button>
+      <button onclick="window.logoutUser()" class="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-900 border border-slate-200 rounded-xl hover:bg-slate-50 transition cursor-pointer">
         로그아웃
       </button>
     </div>
   ` : `
-    <button onclick="window.openAuthModal('login')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-xs transition">
+    <button onclick="window.openAuthModal('login')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-xs transition cursor-pointer">
       <i data-lucide="log-in" class="w-3.5 h-3.5 text-sky-600"></i> 로그인
     </button>
-    <button onclick="window.openAuthModal('register')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-sm transition">
+    <button onclick="window.openAuthModal('register')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-sm transition cursor-pointer">
       <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> 회원가입
     </button>
   `;
 
   // Mobile Auth Buttons
   const mobileAuthHtml = currentUser ? `
-    <div class="p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-800 flex items-center justify-between border border-slate-200">
-      <span class="flex items-center gap-1.5"><i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i> ${currentUser.name} 님 (${currentUser.email})</span>
-      <button onclick="window.logoutUser()" class="text-rose-600 hover:underline">로그아웃</button>
+    <div class="p-3 bg-sky-50/80 rounded-xl text-xs font-bold text-slate-800 flex items-center justify-between border border-sky-200">
+      <button onclick="window.openMyPageModal('profile')" class="flex items-center gap-1.5 text-sky-800 hover:underline cursor-pointer">
+        <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i> ${currentUser.name} 님 (회원정보 관리)
+      </button>
+      <button onclick="window.logoutUser()" class="text-rose-600 hover:underline cursor-pointer">로그아웃</button>
     </div>
   ` : `
     <div class="grid grid-cols-2 gap-2 pt-2">
@@ -1323,3 +1329,515 @@ window.useFoundIdToLogin = function() {
 document.addEventListener('DOMContentLoaded', () => {
   renderAuthModal();
 });
+
+
+
+// ==========================================
+// MY PAGE & MEMBER MANAGEMENT MODAL
+// ==========================================
+
+function renderMyPageModal() {
+  if (document.getElementById('mypage-modal')) return;
+
+  const modalHtml = `
+    <div id="mypage-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity hidden">
+      <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+        
+        <!-- Modal Header -->
+        <div class="bg-gradient-to-r from-sky-600 via-sky-700 to-teal-700 p-5 sm:p-6 text-white flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl font-black text-white shadow-inner" id="mypage-avatar">
+              👤
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-lg font-black" id="mypage-header-name">회원님</h3>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-slate-900" id="mypage-header-role">일반회원</span>
+              </div>
+              <p class="text-xs text-sky-100 font-mono mt-0.5" id="mypage-header-email">user@toureasy.com</p>
+            </div>
+          </div>
+          <button onclick="window.closeMyPageModal()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="bg-slate-100 p-2 flex items-center gap-1 border-b border-slate-200 text-xs font-bold overflow-x-auto shrink-0" id="mypage-tabs">
+          <button onclick="window.switchMyPageTab('profile')" id="mypage-tab-btn-profile" class="flex-1 min-w-[90px] py-2.5 px-3 rounded-xl bg-white text-sky-700 shadow-xs flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="user" class="w-4 h-4"></i> 내 정보
+          </button>
+          <button onclick="window.switchMyPageTab('password')" id="mypage-tab-btn-password" class="flex-1 min-w-[90px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="lock" class="w-4 h-4"></i> 비밀번호
+          </button>
+          <button onclick="window.switchMyPageTab('bookings')" id="mypage-tab-btn-bookings" class="flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="calendar" class="w-4 h-4"></i> 내 예약 <span id="mypage-badge-bookings" class="px-1.5 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800">0</span>
+          </button>
+          <button onclick="window.switchMyPageTab('inquiries')" id="mypage-tab-btn-inquiries" class="flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="message-square" class="w-4 h-4"></i> 내 문의 <span id="mypage-badge-inquiries" class="px-1.5 py-0.5 rounded-full text-[10px] bg-teal-100 text-teal-800">0</span>
+          </button>
+          <button onclick="window.switchMyPageTab('withdraw')" id="mypage-tab-btn-withdraw" class="py-2.5 px-3 rounded-xl text-rose-500 hover:text-rose-700 flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="user-minus" class="w-4 h-4"></i> 탈퇴
+          </button>
+        </div>
+
+        <!-- Tab Contents Area -->
+        <div class="p-6 overflow-y-auto flex-1 bg-slate-50/50">
+          
+          <!-- 1. TAB: Profile Edit -->
+          <div id="mypage-pane-profile" class="space-y-5">
+            <form id="form-mypage-profile" onsubmit="window.handleMyPageProfileSubmit(event)" class="space-y-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">아이디 (이메일)</label>
+                  <input type="text" id="mypage-profile-email" disabled class="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold text-slate-500 cursor-not-allowed">
+                  <p class="text-[11px] text-slate-400 mt-1">이메일은 회원 고유 식별자로 수정할 수 없습니다.</p>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">회원 이름 <span class="text-rose-500">*</span></label>
+                  <input type="text" id="mypage-profile-name" required placeholder="이름을 입력하세요" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">휴대폰 번호 <span class="text-rose-500">*</span></label>
+                  <input type="tel" id="mypage-profile-phone" required placeholder="010-1234-5678" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-slate-400 block text-[11px]">회원 등급</span>
+                    <strong class="text-slate-800 font-bold" id="mypage-profile-role-txt">일반회원 (MEMBER)</strong>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-slate-400 block text-[11px]">가입일자</span>
+                    <strong class="text-slate-800 font-bold" id="mypage-profile-created-txt">-</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div id="mypage-profile-msg" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+
+              <button type="submit" id="btn-mypage-save-profile" class="w-full py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-black rounded-xl shadow-md text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="check" class="w-4 h-4"></i> 회원 정보 수정 저장
+              </button>
+            </form>
+          </div>
+
+          <!-- 2. TAB: Password Change -->
+          <div id="mypage-pane-password" class="hidden space-y-4">
+            <form id="form-mypage-password" onsubmit="window.handleMyPagePasswordSubmit(event)" class="space-y-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">현재 비밀번호 <span class="text-rose-500">*</span></label>
+                  <input type="password" id="mypage-pwd-current" required placeholder="현재 비밀번호를 입력하세요" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 <span class="text-rose-500">*</span></label>
+                  <input type="password" id="mypage-pwd-new" required placeholder="8자 이상 특수문자/영문/숫자 조합" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                  <p class="text-[11px] text-slate-400 mt-1">영문, 숫자, 특수문자(!@#$%^&* 등)를 포함하여 8자 이상 입력해 주세요.</p>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 확인 <span class="text-rose-500">*</span></label>
+                  <input type="password" id="mypage-pwd-confirm" required placeholder="새 비밀번호를 다시 입력하세요" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                </div>
+              </div>
+
+              <div id="mypage-pwd-msg" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+
+              <button type="submit" id="btn-mypage-change-pwd" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-black rounded-xl shadow-md text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="lock" class="w-4 h-4"></i> 비밀번호 안전 변경
+              </button>
+            </form>
+          </div>
+
+          <!-- 3. TAB: Bookings -->
+          <div id="mypage-pane-bookings" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-black text-slate-800 flex items-center gap-1.5">
+                <i data-lucide="plane-takeoff" class="w-4 h-4 text-sky-600"></i> 나의 여행 예약 목록
+              </h4>
+              <button onclick="window.loadMyBookingsList()" class="text-xs font-bold text-sky-600 hover:underline flex items-center gap-1">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i> 새로고침
+              </button>
+            </div>
+            <div id="mypage-bookings-list" class="space-y-3">
+              <!-- Rendered dynamically -->
+              <div class="p-8 text-center text-slate-400 text-xs">예약 내역을 불러오는 중...</div>
+            </div>
+          </div>
+
+          <!-- 4. TAB: Inquiries -->
+          <div id="mypage-pane-inquiries" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-black text-slate-800 flex items-center gap-1.5">
+                <i data-lucide="help-circle" class="w-4 h-4 text-teal-600"></i> 나의 1:1 상담 및 문의 내역
+              </h4>
+              <button onclick="window.loadMyInquiriesList()" class="text-xs font-bold text-teal-600 hover:underline flex items-center gap-1">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i> 새로고침
+              </button>
+            </div>
+            <div id="mypage-inquiries-list" class="space-y-3">
+              <!-- Rendered dynamically -->
+              <div class="p-8 text-center text-slate-400 text-xs">문의 내역을 불러오는 중...</div>
+            </div>
+          </div>
+
+          <!-- 5. TAB: Withdraw -->
+          <div id="mypage-pane-withdraw" class="hidden space-y-4">
+            <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl text-rose-900 space-y-2 text-xs">
+              <h4 class="font-black flex items-center gap-1.5 text-rose-700 text-sm">
+                <i data-lucide="alert-triangle" class="w-4 h-4"></i> 회원 탈퇴 안내
+              </h4>
+              <p class="text-slate-700 leading-relaxed">
+                탈퇴 시 고객님의 회원 정보는 안전하게 삭제되며, 기존 예약 및 문의 내역과의 계정 연동이 해제됩니다.
+              </p>
+              <ul class="list-disc list-inside text-rose-800 font-semibold space-y-1 pt-1 text-[11px]">
+                <li>현재 진행 중인 여행 예약이 있는 경우 탈퇴 전 고객센터(1588-7799)로 문의 바랍니다.</li>
+                <li>탈퇴 후에는 동일한 이메일로 재가입이 가능합니다.</li>
+              </ul>
+            </div>
+
+            <form id="form-mypage-withdraw" onsubmit="window.handleMyPageWithdrawSubmit(event)" class="space-y-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+                <label class="block text-xs font-bold text-slate-700">비밀번호 확인 <span class="text-rose-500">*</span></label>
+                <input type="password" id="mypage-withdraw-pwd" required placeholder="본인 확인을 위해 현재 비밀번호를 입력하세요" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-rose-500">
+              </div>
+
+              <div id="mypage-withdraw-msg" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+
+              <button type="submit" id="btn-mypage-withdraw" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-black rounded-xl shadow-md text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="user-x" class="w-4 h-4"></i> 회원 탈퇴 최종 완료
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  if (window.lucide) lucide.createIcons();
+}
+
+window.openMyPageModal = async function(tab = 'profile') {
+  renderMyPageModal();
+  const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+  if (!user) {
+    showToast('로그인이 필요한 서비스입니다.', 'warning');
+    window.openAuthModal('login');
+    return;
+  }
+
+  const modal = document.getElementById('mypage-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  // Populate user header
+  const nameEl = document.getElementById('mypage-header-name');
+  const roleEl = document.getElementById('mypage-header-role');
+  const emailEl = document.getElementById('mypage-header-email');
+  const avatarEl = document.getElementById('mypage-avatar');
+
+  if (nameEl) nameEl.textContent = `${user.name} 회원님`;
+  if (roleEl) roleEl.textContent = (user.role || 'MEMBER').toUpperCase() === 'ADMIN' ? '관리자' : '일반회원';
+  if (emailEl) emailEl.textContent = user.email || '';
+  if (avatarEl) avatarEl.textContent = (user.name || '회').slice(0, 1);
+
+  // Populate profile form inputs
+  const pEmail = document.getElementById('mypage-profile-email');
+  const pName = document.getElementById('mypage-profile-name');
+  const pPhone = document.getElementById('mypage-profile-phone');
+  const pRole = document.getElementById('mypage-profile-role-txt');
+  const pCreated = document.getElementById('mypage-profile-created-txt');
+
+  if (pEmail) pEmail.value = user.email || '';
+  if (pName) pName.value = user.name || '';
+  if (pPhone) pPhone.value = user.phone || '';
+  if (pRole) pRole.textContent = (user.role || 'MEMBER').toUpperCase() === 'ADMIN' ? '관리자 (ADMIN)' : '일반회원 (MEMBER)';
+  if (pCreated) pCreated.textContent = user.createdAt ? (TourAPI.formatDate ? TourAPI.formatDate(user.createdAt) : user.createdAt.slice(0, 10)) : '-';
+
+  window.switchMyPageTab(tab);
+  if (window.lucide) lucide.createIcons();
+};
+
+window.closeMyPageModal = function() {
+  const modal = document.getElementById('mypage-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+};
+
+window.switchMyPageTab = function(tabName) {
+  const tabs = ['profile', 'password', 'bookings', 'inquiries', 'withdraw'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`mypage-tab-btn-${t}`);
+    const pane = document.getElementById(`mypage-pane-${t}`);
+    if (t === tabName) {
+      if (btn) {
+        btn.className = 'flex-1 min-w-[90px] py-2.5 px-3 rounded-xl bg-white text-sky-700 shadow-xs flex items-center justify-center gap-1.5 font-bold transition cursor-pointer';
+      }
+      if (pane) pane.classList.remove('hidden');
+    } else {
+      if (btn) {
+        const color = t === 'withdraw' ? 'text-rose-500 hover:text-rose-700' : 'text-slate-600 hover:text-slate-900';
+        btn.className = `flex-1 min-w-[90px] py-2.5 px-3 rounded-xl ${color} flex items-center justify-center gap-1.5 font-bold transition cursor-pointer`;
+      }
+      if (pane) pane.classList.add('hidden');
+    }
+  });
+
+  if (tabName === 'bookings') {
+    window.loadMyBookingsList();
+  } else if (tabName === 'inquiries') {
+    window.loadMyInquiriesList();
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.handleMyPageProfileSubmit = async function(e) {
+  e.preventDefault();
+  const user = TourAPI.getCurrentUser();
+  if (!user) return;
+
+  const name = document.getElementById('mypage-profile-name')?.value.trim();
+  const phone = document.getElementById('mypage-profile-phone')?.value.trim();
+  const msgEl = document.getElementById('mypage-profile-msg');
+  const btn = document.getElementById('btn-mypage-save-profile');
+
+  if (!name) {
+    alert('이름을 입력해 주세요.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 저장 중...</span>';
+
+  try {
+    const res = await TourAPI.updateProfile({ id: user.id, email: user.email, name, phone });
+    if (res.success) {
+      showToast('회원 정보가 성공적으로 수정되었습니다.', 'success');
+      msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 block';
+      msgEl.textContent = '✓ 회원 정보가 안전하게 저장되었습니다.';
+      renderNavbar();
+      // Update header in modal
+      const nameEl = document.getElementById('mypage-header-name');
+      if (nameEl) nameEl.textContent = `${name} 회원님`;
+    } else {
+      msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+      msgEl.textContent = res.message || '수정 중 오류가 발생했습니다.';
+    }
+  } catch (err) {
+    msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+    msgEl.textContent = '서버 통신 오류가 발생했습니다.';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 회원 정보 수정 저장';
+    if (window.lucide) lucide.createIcons();
+  }
+};
+
+window.handleMyPagePasswordSubmit = async function(e) {
+  e.preventDefault();
+  const currentPassword = document.getElementById('mypage-pwd-current')?.value;
+  const newPassword = document.getElementById('mypage-pwd-new')?.value;
+  const confirmPassword = document.getElementById('mypage-pwd-confirm')?.value;
+  const msgEl = document.getElementById('mypage-pwd-msg');
+  const btn = document.getElementById('btn-mypage-change-pwd');
+
+  if (newPassword !== confirmPassword) {
+    msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+    msgEl.textContent = '새 비밀번호와 비밀번호 확인이 일치하지 않습니다.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 변경 중...</span>';
+
+  try {
+    const res = await TourAPI.changePassword(currentPassword, newPassword);
+    if (res.success) {
+      showToast('비밀번호가 성공적으로 변경되었습니다.', 'success');
+      msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 block';
+      msgEl.textContent = '✓ 비밀번호가 성공적으로 변경되었습니다.';
+      document.getElementById('form-mypage-password')?.reset();
+    } else {
+      msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+      msgEl.textContent = res.message || '비밀번호 변경 실패';
+    }
+  } catch (err) {
+    msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+    msgEl.textContent = '서버 통신 오류가 발생했습니다.';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="lock" class="w-4 h-4"></i> 비밀번호 안전 변경';
+    if (window.lucide) lucide.createIcons();
+  }
+};
+
+window.loadMyBookingsList = async function() {
+  const user = TourAPI.getCurrentUser();
+  const container = document.getElementById('mypage-bookings-list');
+  const badge = document.getElementById('mypage-badge-bookings');
+  if (!user || !container) return;
+
+  container.innerHTML = '<div class="p-8 text-center text-slate-400 text-xs">예약 내역을 조회 중입니다...</div>';
+
+  try {
+    const res = await TourAPI.getMyBookings(user.email, user.phone);
+    const bookings = (res && res.data) ? res.data : [];
+    if (badge) badge.textContent = bookings.length;
+
+    if (bookings.length === 0) {
+      container.innerHTML = `
+        <div class="p-8 text-center bg-white rounded-2xl border border-slate-200">
+          <i data-lucide="calendar-x" class="w-10 h-10 mx-auto mb-2 text-slate-300"></i>
+          <p class="text-xs font-bold text-slate-700">신청하신 예약 내역이 없습니다.</p>
+          <p class="text-[11px] text-slate-400 mt-1">투어이지의 다양한 여행 패키지를 둘러보세요!</p>
+          <a href="packages.html" class="inline-block mt-3 px-4 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold hover:bg-sky-700 transition">
+            여행 상품 보러가기
+          </a>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    container.innerHTML = bookings.map(b => {
+      const statusColors = {
+        '접수완료': 'bg-amber-100 text-amber-800 border-amber-200',
+        '상담중': 'bg-sky-100 text-sky-800 border-sky-200',
+        '예약확정': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+        '취소': 'bg-slate-100 text-slate-600 border-slate-200'
+      };
+      const stColor = statusColors[b.status] || 'bg-slate-100 text-slate-700';
+
+      return `
+        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-2 hover:border-sky-300 transition">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-[11px] font-bold text-slate-400">#${b.id}</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black border ${stColor}">${b.status || '접수완료'}</span>
+          </div>
+          <h5 class="font-black text-slate-900 text-sm">${b.packageTitle || b.packageName || '여행 패키지'}</h5>
+          <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 pt-1 border-t border-slate-100">
+            <div><span class="text-slate-400">출발일:</span> ${b.departureDate || '-'}</div>
+            <div><span class="text-slate-400">인원:</span> 성인 ${b.adults || 1}명 ${b.children ? `, 아동 ${b.children}명` : ''}</div>
+            <div><span class="text-slate-400">예약일시:</span> ${TourAPI.formatDateTime ? TourAPI.formatDateTime(b.createdAt) : (b.createdAt || '-')}</div>
+            <div class="font-bold text-sky-600"><span class="text-slate-400 font-normal">총 금액:</span> ${TourAPI.formatPrice ? TourAPI.formatPrice(b.totalPrice) : b.totalPrice}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    container.innerHTML = '<div class="p-8 text-center text-rose-500 text-xs font-bold">예약 목록을 불러오지 못했습니다.</div>';
+  }
+};
+
+window.loadMyInquiriesList = async function() {
+  const user = TourAPI.getCurrentUser();
+  const container = document.getElementById('mypage-inquiries-list');
+  const badge = document.getElementById('mypage-badge-inquiries');
+  if (!user || !container) return;
+
+  container.innerHTML = '<div class="p-8 text-center text-slate-400 text-xs">문의 내역을 조회 중입니다...</div>';
+
+  try {
+    const res = await TourAPI.getMyInquiries(user.email, user.phone);
+    const inquiries = (res && res.data) ? res.data : [];
+    if (badge) badge.textContent = inquiries.length;
+
+    if (inquiries.length === 0) {
+      container.innerHTML = `
+        <div class="p-8 text-center bg-white rounded-2xl border border-slate-200">
+          <i data-lucide="message-circle-off" class="w-10 h-10 mx-auto mb-2 text-slate-300"></i>
+          <p class="text-xs font-bold text-slate-700">작성하신 1:1 문의 내역이 없습니다.</p>
+          <a href="contact.html" class="inline-block mt-3 px-4 py-2 bg-teal-600 text-white rounded-xl text-xs font-bold hover:bg-teal-700 transition">
+            1:1 맞춤 상담 문의하기
+          </a>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    container.innerHTML = inquiries.map(inq => {
+      const isAnswered = inq.status === '답변완료' || inq.isAnswered;
+      const stBadge = isAnswered
+        ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">답변완료</span>'
+        : '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-200">답변대기</span>';
+
+      return `
+        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-2.5 hover:border-teal-300 transition">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-[11px] font-bold text-slate-400">#${inq.id}</span>
+            ${stBadge}
+          </div>
+          <h5 class="font-bold text-slate-900 text-xs">${inq.subject || inq.title || inq.destination || '맞춤 여행 상담 문의'}</h5>
+          <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl leading-relaxed whitespace-pre-wrap">${inq.message || inq.content || '-'}</p>
+          ${inq.reply ? `
+            <div class="p-3 bg-teal-50/80 rounded-xl border border-teal-100 space-y-1">
+              <span class="text-[11px] font-black text-teal-800 flex items-center gap-1">
+                <i data-lucide="corner-down-right" class="w-3 h-3"></i> 투어이지 담당자 답변:
+              </span>
+              <p class="text-xs text-teal-900 whitespace-pre-wrap leading-relaxed">${inq.reply}</p>
+            </div>
+          ` : ''}
+          <div class="text-[11px] text-slate-400 text-right pt-1">
+            문의일시: ${TourAPI.formatDateTime ? TourAPI.formatDateTime(inq.createdAt) : (inq.createdAt || '-')}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    container.innerHTML = '<div class="p-8 text-center text-rose-500 text-xs font-bold">문의 목록을 불러오지 못했습니다.</div>';
+  }
+};
+
+window.handleMyPageWithdrawSubmit = async function(e) {
+  e.preventDefault();
+  const password = document.getElementById('mypage-withdraw-pwd')?.value;
+  const msgEl = document.getElementById('mypage-withdraw-msg');
+  const btn = document.getElementById('btn-mypage-withdraw');
+
+  if (!password) {
+    alert('비밀번호를 입력해 주세요.');
+    return;
+  }
+
+  if (!confirm('정말로 탈퇴하시겠습니까? 탈퇴 후 복구할 수 없습니다.')) {
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 탈퇴 처리 중...</span>';
+
+  try {
+    const res = await TourAPI.deleteAccount(password);
+    if (res.success) {
+      alert('회원 탈퇴가 안전하게 완료되었습니다. 그동안 투어이지를 이용해 주셔서 감사합니다.');
+      window.closeMyPageModal();
+      renderNavbar();
+      window.location.reload();
+    } else {
+      msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+      msgEl.textContent = res.message || '비밀번호가 일치하지 않습니다.';
+    }
+  } catch (err) {
+    msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 block';
+    msgEl.textContent = '서버 통신 오류가 발생했습니다.';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="user-x" class="w-4 h-4"></i> 회원 탈퇴 최종 완료';
+    if (window.lucide) lucide.createIcons();
+  }
+};
