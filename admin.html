@@ -1252,6 +1252,10 @@
           if (elPkgSub) elPkgSub.textContent = `운영 중 ${s.activePackageCount !== undefined ? s.activePackageCount : 74}개 · 미운영 ${s.inactivePackageCount !== undefined ? s.inactivePackageCount : 1}개`;
           const elRevenue = document.getElementById('stat-total-revenue');
           if (elRevenue) elRevenue.textContent = TourAPI.formatPrice(s.totalRevenue || 0);
+          const elUserCount = document.getElementById('stat-user-count');
+          if (elUserCount) elUserCount.textContent = `${s.userCount !== undefined ? s.userCount : 9}명`;
+          const elUserSub = document.getElementById('stat-user-subtext');
+          if (elUserSub) elUserSub.textContent = `일반 ${s.memberCount !== undefined ? s.memberCount : 7} · 관리자 ${s.adminCount !== undefined ? s.adminCount : 2}`;
         }
 
         // 2. Fetch Bookings
