@@ -5394,12 +5394,12 @@ const TourAPI = {
       data: {
         enabled: true,
         isConfigured: true,
-        provider: 'naver',
-        host: 'smtp.naver.com',
+        provider: 'daum',
+        host: 'smtp.daum.net',
         port: 465,
         enableSsl: true,
-        user: 'kmagick',
-        fromEmail: 'kmagick@naver.com',
+        user: 'kwangsoo-kim@daum.net',
+        fromEmail: 'kwangsoo-kim@daum.net',
         fromName: '투어이지(TourEasy)',
         hasPassword: true
       }

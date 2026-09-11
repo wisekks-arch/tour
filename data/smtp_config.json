@@ -1,12 +1,33 @@
 {
   "enabled": true,
-  "provider": "naver",
-  "host": "smtp.naver.com",
+  "isConfigured": true,
+  "provider": "daum",
+  "host": "smtp.daum.net",
   "port": 465,
   "enableSsl": true,
-  "user": "kmagick",
-  "password": "HZGQF6H25BSF",
-  "fromEmail": "kmagick@naver.com",
+  "user": "kwangsoo-kim@daum.net",
+  "password": "culsppnqwxwvvdko",
+  "fromEmail": "kwangsoo-kim@daum.net",
   "fromName": "투어이지(TourEasy)",
-  "updatedAt": "2026-09-11T07:16:08.330Z"
+  "accounts": {
+    "daum": {
+      "host": "smtp.daum.net",
+      "port": 465,
+      "enableSsl": true,
+      "user": "kwangsoo-kim@daum.net",
+      "password": "culsppnqwxwvvdko",
+      "fromEmail": "kwangsoo-kim@daum.net",
+      "fromName": "투어이지(TourEasy)"
+    },
+    "naver": {
+      "host": "smtp.naver.com",
+      "port": 465,
+      "enableSsl": true,
+      "user": "kmagick",
+      "password": "HZGQF6H25BSF",
+      "fromEmail": "kmagick@naver.com",
+      "fromName": "투어이지(TourEasy)"
+    }
+  },
+  "updatedAt": "2026-09-11T07:47:00.000Z"
 }
