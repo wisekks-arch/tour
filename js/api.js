@@ -4103,20 +4103,11 @@ const DEFAULT_USERS = [
   {
     id: "usr-admin-wisekks",
     email: "wisekks@gmail.com",
-    name: "관리자",
+    name: "최고관리자",
     phone: "010-8754-9373",
     role: "ADMIN",
     createdAt: "2026-09-01T13:18:00",
     password: "#wisesoo7337"
-  },
-  {
-    id: "usr-admin",
-    email: "admin@toureasy.co.kr",
-    password: "TourAdmin2026!",
-    name: "최고관리자",
-    phone: "010-9876-5432",
-    role: "ADMIN",
-    createdAt: "2026-09-01T09:00:00"
   },
   {
     id: "usr-001",
@@ -4902,14 +4893,9 @@ const TourAPI = {
 
       // Hardcoded initial defaults if not in mockUsers
       if (cleanEmail === 'wisekks@gmail.com' && (password === '#wises7337' || password === '#wisesoo7337')) {
-        const userObj = { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' };
+        const userObj = { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '최고관리자', phone: '010-8754-9373', role: 'ADMIN' };
         this.setCurrentUser(userObj);
-        return { success: true, message: `관리자님, 환영합니다!`, user: userObj };
-      }
-      if (cleanEmail === 'admin@toureasy.co.kr' && password === 'TourAdmin2026!') {
-        const userObj = { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' };
-        this.setCurrentUser(userObj);
-        return { success: true, message: `관리자님, 환영합니다!`, user: userObj };
+        return { success: true, message: '최고관리자님, 환영합니다!', user: userObj };
       }
       if (cleanEmail === 'user@toureasy.com' && password === 'TourEasy1234!') {
         const userObj = { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' };
@@ -5030,8 +5016,7 @@ const TourAPI = {
         target.password = tempPassword;
       } else {
         const defaultUsersMap = {
-          'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' },
-          'admin@toureasy.co.kr': { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' },
+          'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '최고관리자', phone: '010-8754-9373', role: 'ADMIN' },
           'user@toureasy.com': { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' },
           'hong@toureasy.com': { id: 'usr-1788235251531', email: 'hong@toureasy.com', name: '홍길동', phone: '010-7777-8888', role: 'MEMBER' },
           'kks@do-best.co.kr': { id: 'usr-1788236092470', email: 'kks@do-best.co.kr', name: '김길동', phone: '010-8754-9373', role: 'MEMBER' },
@@ -5209,8 +5194,7 @@ const TourAPI = {
 
       // Default built-in users fallback
       const defaultUsersMap = {
-        'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' },
-        'admin@toureasy.co.kr': { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' },
+        'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '최고관리자', phone: '010-8754-9373', role: 'ADMIN' },
         'user@toureasy.com': { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' },
         'hong@toureasy.com': { id: 'usr-1788235251531', email: 'hong@toureasy.com', name: '홍길동', phone: '010-7777-8888', role: 'MEMBER' },
         'kks@do-best.co.kr': { id: 'usr-1788236092470', email: 'kks@do-best.co.kr', name: '김길동', phone: '010-8754-9373', role: 'MEMBER' },
@@ -5249,11 +5233,12 @@ const TourAPI = {
       console.warn('getUsers network call failed, using merged local fallback:', e);
     }
 
-    // Merge DEFAULT_USERS (9 members) with localStorage users
+    // Merge DEFAULT_USERS (8 members) with localStorage users (excluding deleted admin@toureasy.co.kr)
     let merged = typeof DEFAULT_USERS !== 'undefined' ? JSON.parse(JSON.stringify(DEFAULT_USERS)) : [];
     try {
-      const local = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
+      let local = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
       if (Array.isArray(local) && local.length > 0) {
+        local = local.filter(u => (u.email || '').toLowerCase() !== 'admin@toureasy.co.kr');
         local.forEach(u => {
           const idx = merged.findIndex(m => (m.email || '').toLowerCase() === (u.email || '').toLowerCase());
           if (idx >= 0) {

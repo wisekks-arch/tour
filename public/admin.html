@@ -924,8 +924,8 @@
   <div id="footer-root"></div>
 
   <!-- Scripts -->
-  <script src="js/api.js?v=20260828_3"></script>
-  <script src="js/components.js?v=20260828_3"></script>
+  <script src="js/api.js?v=20260911_v8admin"></script>
+  <script src="js/components.js?v=20260911_v8admin"></script>
   <script>
     let cachedBookings = [];
     let cachedInquiries = [];
@@ -1253,9 +1253,9 @@
           const elRevenue = document.getElementById('stat-total-revenue');
           if (elRevenue) elRevenue.textContent = TourAPI.formatPrice(s.totalRevenue || 0);
           const elUserCount = document.getElementById('stat-user-count');
-          if (elUserCount) elUserCount.textContent = `${s.userCount !== undefined ? s.userCount : 9}명`;
+          if (elUserCount) elUserCount.textContent = `${s.userCount !== undefined ? s.userCount : 8}명`;
           const elUserSub = document.getElementById('stat-user-subtext');
-          if (elUserSub) elUserSub.textContent = `일반 ${s.memberCount !== undefined ? s.memberCount : 7} · 관리자 ${s.adminCount !== undefined ? s.adminCount : 2}`;
+          if (elUserSub) elUserSub.textContent = `일반 ${s.memberCount !== undefined ? s.memberCount : 7} · 관리자 ${s.adminCount !== undefined ? s.adminCount : 1}`;
         }
 
         // 2. Fetch Bookings
@@ -2578,13 +2578,20 @@
     async function loadUsersData() {
       try {
         const res = await TourAPI.getUsers();
-        if (res && res.data) {
-          cachedUsers = res.data;
+        if (res && res.data && res.data.length > 0) {
+          cachedUsers = res.data.filter(u => (u.email || '').toLowerCase() !== 'admin@toureasy.co.kr');
+        } else if (typeof DEFAULT_USERS !== 'undefined' && Array.isArray(DEFAULT_USERS)) {
+          cachedUsers = DEFAULT_USERS.filter(u => (u.email || '').toLowerCase() !== 'admin@toureasy.co.kr');
+        }
+        updateUserBadgeCounts(cachedUsers);
+        applyUserFilters();
+      } catch (err) {
+        console.error('Error loading users data:', err);
+        if (typeof DEFAULT_USERS !== 'undefined' && Array.isArray(DEFAULT_USERS)) {
+          cachedUsers = DEFAULT_USERS.filter(u => (u.email || '').toLowerCase() !== 'admin@toureasy.co.kr');
           updateUserBadgeCounts(cachedUsers);
           applyUserFilters();
         }
-      } catch (err) {
-        console.error('Error loading users data:', err);
       }
     }
     window.loadUsersData = loadUsersData;
