@@ -776,76 +776,52 @@ function renderAuthModal() {
           </div>
         </div>
 
-        <!-- 4. RESET PASSWORD TAB -->
+        <!-- 4. RESET PASSWORD TAB (임시 비밀번호 발급 및 실제 이메일 발송) -->
         <div id="auth-pane-reset-password" class="space-y-4 hidden">
-          <p class="text-xs text-slate-500 leading-relaxed">
-            가입하신 <strong>아이디(이메일)</strong>로 <strong>인증번호를 발송</strong>받아 본인확인 후 새로운 비밀번호를 설정합니다.
-          </p>
+          <div class="p-3.5 bg-sky-50 rounded-2xl border border-sky-100 flex items-start gap-2.5">
+            <i data-lucide="mail-check" class="w-5 h-5 text-sky-600 shrink-0 mt-0.5"></i>
+            <p class="text-xs text-sky-900 leading-relaxed font-medium">
+              가입하신 <strong>아이디(이메일)</strong>를 입력하시면, 안전한 <strong>임시 비밀번호를 발생하여 회원님의 실제 이메일함으로 즉시 발송</strong>해 드립니다.
+            </p>
+          </div>
 
           <form id="form-auth-reset-password" class="space-y-3.5">
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">아이디 (가입 이메일) <span class="text-rose-500">*</span></label>
-              <div class="flex gap-2">
-                <input type="email" id="reset-email" required placeholder="user@toureasy.com" class="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
-                <button type="button" onclick="window.triggerEmailVerification('reset-email', 'reset-timer', 'btn-reset-sendcode', '비밀번호 재설정')" id="btn-reset-sendcode" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl shrink-0 transition flex items-center gap-1.5">
-                  <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-                  <span>인증번호 발송</span>
-                </button>
+              <label class="block text-xs font-bold text-slate-700 mb-1">가입 아이디 (이메일 주소) <span class="text-rose-500">*</span></label>
+              <div class="relative">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="email" id="reset-email" required placeholder="user@toureasy.com" class="w-full pl-10 pr-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
               </div>
-              <p class="text-[10.5px] text-slate-400 mt-1">입력하신 이메일로 6자리 보안 인증번호가 즉시 발송됩니다.</p>
-            </div>
-
-            <!-- Verification Code Input Box -->
-            <div>
-              <div class="flex justify-between items-center mb-1">
-                <label class="text-xs font-bold text-slate-700">이메일 인증번호 (6자리) <span class="text-rose-500">*</span></label>
-                <span id="reset-timer" class="text-xs font-bold text-rose-500 font-mono"></span>
-              </div>
-              <div class="flex gap-2">
-                <input type="text" id="reset-code" maxlength="6" placeholder="이메일로 온 6자리 번호" class="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-800 tracking-wider focus:outline-none focus:border-sky-500">
-                <button type="button" onclick="window.confirmEmailCode('reset-email', 'reset-code', 'reset-verify-status')" id="btn-reset-verify" class="px-3.5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-xl shrink-0 transition flex items-center gap-1.5">
-                  <i data-lucide="check" class="w-3.5 h-3.5"></i>
-                  <span>인증 확인</span>
-                </button>
-              </div>
-              <p id="reset-verify-status" class="text-[11px] mt-1 font-bold"></p>
-            </div>
-
-            <!-- New Password Section (Unlocked after verification) -->
-            <div id="reset-newpwd-section" class="space-y-3 pt-2 border-t border-slate-200 opacity-60 pointer-events-none transition-all">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 설정 <span class="text-rose-500">*</span></label>
-                <input type="password" id="reset-newpwd" placeholder="특수문자+영문+숫자 8자 이상" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
-
-                <div class="grid grid-cols-2 gap-1.5 mt-2 p-2 bg-slate-50 rounded-xl border border-slate-200 text-[10.5px]">
-                  <div id="reset-rule-len" class="flex items-center gap-1 text-slate-400 font-bold">
-                    <i data-lucide="circle" class="w-3 h-3"></i> 8자 이상
-                  </div>
-                  <div id="reset-rule-letter" class="flex items-center gap-1 text-slate-400 font-bold">
-                    <i data-lucide="circle" class="w-3 h-3"></i> 영문자 포함
-                  </div>
-                  <div id="reset-rule-number" class="flex items-center gap-1 text-slate-400 font-bold">
-                    <i data-lucide="circle" class="w-3 h-3"></i> 숫자 포함
-                  </div>
-                  <div id="reset-rule-special" class="flex items-center gap-1 text-slate-400 font-bold">
-                    <i data-lucide="circle" class="w-3 h-3"></i> 특수문자(!@#$%)
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">새 비밀번호 확인</label>
-                <input type="password" id="reset-newpwd-confirm" placeholder="동일하게 한 번 더 입력" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
-                <p id="reset-pwd-match-msg" class="text-[10px] mt-1 font-bold"></p>
-              </div>
+              <p class="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1 font-medium">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                회원님의 실제 이메일함(스팸함 포함)으로 임시 비밀번호가 안전하게 발송됩니다.
+              </p>
             </div>
 
             <div id="reset-error-msg" class="hidden p-3 bg-rose-50 text-rose-700 rounded-xl text-xs border border-rose-200 font-medium"></div>
 
-            <button type="submit" id="btn-submit-resetpwd" disabled class="w-full py-3.5 bg-slate-400 text-white font-black rounded-xl shadow-md text-sm transition cursor-not-allowed">
-              새 비밀번호로 재설정 완료
+            <button type="submit" id="btn-submit-resetpwd" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-black rounded-xl shadow-md text-sm transition flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>임시 비밀번호 발생 및 이메일 발송</span>
             </button>
           </form>
+
+          <!-- Success Info Box (Hidden by default) -->
+          <div id="reset-success-box" class="hidden p-4 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-3 text-center animate-in fade-in zoom-in-95">
+            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600">
+              <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900">임시 비밀번호 발송 완료!</h4>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+              <strong id="reset-sent-email-label" class="text-emerald-700 font-bold"></strong> 으로<br>
+              새로운 임시 비밀번호가 안전하게 발송되었습니다.<br>
+              <span class="text-slate-500 text-[11px]">(메일함 또는 스팸함을 확인 후 로그인해 주세요)</span>
+            </p>
+            <button type="button" onclick="window.switchAuthTab('login')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5">
+              <i data-lucide="log-in" class="w-4 h-4"></i>
+              <span>발급받은 임시 비밀번호로 로그인하기</span>
+            </button>
+          </div>
         </div>
 
       </div>
@@ -1049,60 +1025,62 @@ function setupAuthModalListeners() {
     });
   }
 
-  // Reset Password Form Submit
+  // Reset Password Form Submit (임시 비밀번호 발생 및 실제 이메일 발송)
   const resetForm = document.getElementById('form-auth-reset-password');
   if (resetForm) {
     resetForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('reset-email')?.value.trim() || '';
-      const newPassword = document.getElementById('reset-newpwd')?.value || '';
-      const confirm = document.getElementById('reset-newpwd-confirm')?.value || '';
       const errEl = document.getElementById('reset-error-msg');
       const submitBtn = document.getElementById('btn-submit-resetpwd');
+      const successBox = document.getElementById('reset-success-box');
+      const emailLabel = document.getElementById('reset-sent-email-label');
 
-      errEl.classList.add('hidden');
+      if (errEl) errEl.classList.add('hidden');
 
-      if (!email) {
-        errEl.textContent = '가입 아이디(이메일)를 입력해주세요.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      if (newPassword !== confirm) {
-        errEl.textContent = '새 비밀번호가 일치하지 않습니다.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      const v = TourAPI.validatePassword(newPassword);
-      if (!v.isValid) {
-        errEl.textContent = '비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = '비밀번호 재설정 중...';
-
-      try {
-        const res = await TourAPI.resetPassword(email, newPassword);
-        if (res.success) {
-          showToast('🎉 비밀번호가 변경되었습니다! 새 비밀번호로 로그인해주세요.', 'success');
-          window.switchAuthTab('login');
-          const loginEmailEl = document.getElementById('login-email');
-          if (loginEmailEl) loginEmailEl.value = email;
-          const loginPwdEl = document.getElementById('login-password');
-          if (loginPwdEl) loginPwdEl.focus();
-        } else {
-          errEl.textContent = res.message || '비밀번호 재설정에 실패했습니다.';
+      if (!email || !email.includes('@')) {
+        if (errEl) {
+          errEl.textContent = '올바른 가입 아이디(이메일 주소)를 입력해주세요.';
           errEl.classList.remove('hidden');
         }
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 임시 비밀번호 생성 및 발송 중...</span>`;
+      }
+
+      try {
+        const res = await TourAPI.issueTemporaryPasswordToEmail(email);
+        if (res.success) {
+          showToast(`✉️ ${email} 회원님의 메일함으로 임시 비밀번호가 발송되었습니다!`, 'success');
+          resetForm.classList.add('hidden');
+          if (emailLabel) emailLabel.textContent = email;
+          if (successBox) successBox.classList.remove('hidden');
+
+          // Pre-fill login form
+          const loginEmailEl = document.getElementById('login-email');
+          if (loginEmailEl) loginEmailEl.value = email;
+
+          if (window.lucide) lucide.createIcons();
+        } else {
+          if (errEl) {
+            errEl.textContent = res.message || '임시 비밀번호 발송에 실패했습니다.';
+            errEl.classList.remove('hidden');
+          }
+        }
       } catch (err) {
-        errEl.textContent = '비밀번호 재설정 처리 중 오류가 발생했습니다.';
-        errEl.classList.remove('hidden');
+        if (errEl) {
+          errEl.textContent = '임시 비밀번호 발송 처리 중 통신 오류가 발생했습니다.';
+          errEl.classList.remove('hidden');
+        }
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = '새 비밀번호로 재설정 완료';
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i> <span>임시 비밀번호 발생 및 이메일 발송</span>`;
+          if (window.lucide) lucide.createIcons();
+        }
       }
     });
   }
@@ -1183,7 +1161,7 @@ window.switchAuthTab = function(tabName) {
     'login': { title: '회원 로그인', desc: '투어이지 계정으로 안전하고 편리하게 로그인하세요.' },
     'register': { title: '간편 회원가입', desc: '특수문자+영문+숫자 8자 이상 비밀번호로 안전하게 가입하세요.' },
     'find-id': { title: '아이디 찾기', desc: '성명과 등록 정보로 가입 아이디(이메일)를 확인합니다.' },
-    'reset-password': { title: '비밀번호 재설정', desc: '가입 이메일로 인증번호를 전송받아 확인 후 새로운 비밀번호를 설정하세요.' }
+    'reset-password': { title: '비밀번호 찾기 (임시 비밀번호)', desc: '가입하신 이메일로 새로운 임시 비밀번호를 발생하여 안전하게 발송해 드립니다.' }
   };
 
   const titleEl = document.getElementById('auth-modal-title');
@@ -1203,6 +1181,16 @@ window.switchAuthTab = function(tabName) {
     }
   });
 
+  // If opening reset-password tab, reset form/success view state
+  if (tabName === 'reset-password') {
+    const resetForm = document.getElementById('form-auth-reset-password');
+    const successBox = document.getElementById('reset-success-box');
+    const errEl = document.getElementById('reset-error-msg');
+    if (resetForm) resetForm.classList.remove('hidden');
+    if (successBox) successBox.classList.add('hidden');
+    if (errEl) errEl.classList.add('hidden');
+  }
+
   if (window.lucide) lucide.createIcons();
 };
 
@@ -1213,7 +1201,7 @@ window.logoutUser = function() {
   window.dispatchEvent(new CustomEvent('toureasy_logged_out'));
 };
 
-window.triggerEmailVerification = async function(emailInputId, timerElId, btnId, purpose = '비밀번호 재설정') {
+window.triggerEmailVerification = async function(emailInputId, timerElId, btnId, purpose = '본인인증') {
   const email = document.getElementById(emailInputId)?.value.trim();
   if (!email || !email.includes('@')) {
     alert('올바른 이메일 주소를 입력해주세요.');
@@ -1230,7 +1218,7 @@ window.triggerEmailVerification = async function(emailInputId, timerElId, btnId,
     const res = await TourAPI.sendEmailVerification(email, purpose);
     if (res.success) {
       showToast(`✉️ ${res.message}`, 'success');
-      alert(`[이메일 발송 완료]\n\n[ ${email} ] 으로 6자리 인증번호가 발송되었습니다.\n(스팸메일함 포함 확인 후 3분 이내 입력해주세요)\n\n※ 테스트용 인증번호: [ ${res.code} ]`);
+      alert(`[이메일 발송 완료]\n\n[ ${email} ] 으로 본인인증 6자리 인증번호가 발송되었습니다.\n(스팸메일함 포함 확인 후 3분 이내에 입력해주세요)`);
 
       // Start 3-min countdown
       let remaining = 180;

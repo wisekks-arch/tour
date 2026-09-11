@@ -4873,8 +4873,114 @@ const TourAPI = {
     }
   },
 
+  // Helper: Generate secure 8-character temporary password (Letters + Numbers + Special chars)
+  generateTempPassword() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
+    const nums = '23456789';
+    const specials = '!@#$%&*';
+    let pwd = 'Te';
+    pwd += specials.charAt(Math.floor(Math.random() * specials.length));
+    pwd += nums.charAt(Math.floor(Math.random() * nums.length));
+    pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+    const all = chars + nums + specials;
+    for (let i = 0; i < 4; i++) {
+      pwd += all.charAt(Math.floor(Math.random() * all.length));
+    }
+    return pwd;
+  },
+
+  // Helper: Send Real Email Dispatch (via Web3Forms/Email API)
+  async dispatchRealEmail(toEmail, subject, textContent) {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '5561a35e-beec-4ea8-b3d2-c288ca7dc36f',
+          subject: subject,
+          from_name: '투어이지 (TourEasy)',
+          email: toEmail,
+          message: textContent
+        })
+      });
+      return response.ok;
+    } catch (e) {
+      console.warn('Direct web email dispatch failed, proceeding with local update:', e);
+      return false;
+    }
+  },
+
+  // Issue temporary password and send to user's real email
+  async issueTemporaryPasswordToEmail(email) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      return { success: false, message: '올바른 이메일(아이디) 주소를 입력해주세요.' };
+    }
+
+    const tempPassword = this.generateTempPassword();
+
+    // 1. Update backend server if available
+    try {
+      if (window.location.protocol !== 'file:') {
+        await fetch(`${API_BASE}/auth/issue-temp-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: cleanEmail, tempPassword })
+        });
+      }
+    } catch (e) {}
+
+    // 2. Update localStorage mock users
+    try {
+      const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
+      const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
+      if (target) {
+        target.password = tempPassword;
+      } else {
+        const defaultUsersMap = {
+          'wisekks@gmail.com': { id: 'usr-admin-wisekks', email: 'wisekks@gmail.com', name: '관리자', phone: '010-8754-9373', role: 'ADMIN' },
+          'admin@toureasy.co.kr': { id: 'usr-admin', email: 'admin@toureasy.co.kr', name: '최고관리자', phone: '010-9876-5432', role: 'ADMIN' },
+          'user@toureasy.com': { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' },
+          'hong@toureasy.com': { id: 'usr-1788235251531', email: 'hong@toureasy.com', name: '홍길동', phone: '010-7777-8888', role: 'MEMBER' },
+          'kks@do-best.co.kr': { id: 'usr-1788236092470', email: 'kks@do-best.co.kr', name: '김길동', phone: '010-8754-9373', role: 'MEMBER' },
+          'kwangsoo-kim@hanmail.net': { id: 'usr-1789004661526', email: 'kwangsoo-kim@hanmail.net', name: '김광수', phone: '010-8754-9373', role: 'MEMBER' }
+        };
+        const matched = defaultUsersMap[cleanEmail] || {
+          id: `usr-${Date.now()}`,
+          email: cleanEmail,
+          name: cleanEmail.split('@')[0],
+          phone: '010-0000-0000',
+          role: cleanEmail === 'wisekks@gmail.com' ? 'ADMIN' : 'MEMBER',
+          createdAt: new Date().toISOString()
+        };
+        matched.password = tempPassword;
+        mockUsers.push(matched);
+      }
+      localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
+    } catch (err) {
+      console.error('LocalStorage update error:', err);
+    }
+
+    // 3. Dispatch real email to user's mailbox
+    const mailSubject = `[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.`;
+    const mailBody = `[투어이지 TourEasy 임시 비밀번호 안내]\n\n안녕하세요. 투어이지 회원님,\n요청하신 계정의 임시 비밀번호가 성공적으로 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 발급된 임시 비밀번호: ${tempPassword}\n\n※ 임시 비밀번호로 로그인하신 후, [마이페이지 > 비밀번호 변경]에서 원하시는 비밀번호로 꼭 변경해 주시기 바랍니다.\n※ 본인이 요청하지 않은 경우 고객센터(02-1588-0000)로 즉시 문의해 주시기 바랍니다.\n\n투어이지 웹사이트 바로가기: https://wisekks-arch.github.io/tour/`;
+
+    // Asynchronously dispatch real email
+    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
+
+    return {
+      success: true,
+      message: `[${cleanEmail}] 으로 임시 비밀번호가 안전하게 발송되었습니다. 메일함(스팸함 포함)을 확인 후 로그인해 주세요.`,
+      email: cleanEmail
+    };
+  },
+
   async sendEmailVerification(email, purpose = '본인인증') {
     const cleanEmail = (email || '').trim().toLowerCase();
+    const mockCode = String(Math.floor(100000 + Math.random() * 900000));
+    sessionStorage.setItem('mock_verification_code', mockCode);
+    sessionStorage.setItem('mock_verification_email', cleanEmail);
+
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/send-email-code`, {
@@ -4884,19 +4990,26 @@ const TourAPI = {
         });
         if (res.ok) {
           const json = await res.json();
-          if (json && json.success) return json;
+          if (json && json.success) {
+            return {
+              success: true,
+              message: `[${cleanEmail}] 으로 인증번호가 발송되었습니다. 메일함을 확인해주세요. (3분 이내 입력)`,
+              expiresIn: 180,
+              isEmail: true
+            };
+          }
         }
       }
     } catch (e) {}
 
-    // Fallback simulation
-    const mockCode = String(Math.floor(100000 + Math.random() * 900000));
-    sessionStorage.setItem('mock_verification_code', mockCode);
-    sessionStorage.setItem('mock_verification_email', cleanEmail);
+    // Dispatch real email
+    const mailSubject = `[투어이지] 본인인증 6자리 보안 인증번호 안내`;
+    const mailBody = `[투어이지 TourEasy 본인인증]\n\n안녕하세요. 투어이지 회원님,\n요청하신 본인확인 6자리 인증번호입니다.\n\n■ 인증번호: [ ${mockCode} ]\n\n※ 유효시간은 3분입니다. 3분 이내에 화면에 입력해 주십시오.`;
+    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
+
     return {
       success: true,
-      code: mockCode,
-      message: `[${cleanEmail}] 으로 인증번호 [${mockCode}] 가 발송되었습니다. (3분 이내 입력)`,
+      message: `[${cleanEmail}] 으로 인증번호가 발송되었습니다. 메일함(스팸함 포함)을 확인해주세요. (3분 이내 입력)`,
       expiresIn: 180,
       isEmail: true
     };

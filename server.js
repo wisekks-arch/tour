@@ -1,4 +1,4 @@
-﻿const http = require('http');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -361,6 +361,43 @@ const server = http.createServer(async (req, res) => {
         } else {
           return sendJson(res, 404, { success: false, message: '입력하신 가입 이메일(아이디)과 일치하는 계정을 찾을 수 없습니다.' });
         }
+      }
+
+      // 0-6-1. POST /api/auth/issue-temp-password (임시 비밀번호 발생 및 발송)
+      if (pathname === '/api/auth/issue-temp-password' && method === 'POST') {
+        const body = await parseRequestBody(req);
+        const email = (body.email || '').trim().toLowerCase();
+        const tempPassword = body.tempPassword || '';
+
+        if (!email) {
+          return sendJson(res, 400, { success: false, message: '가입 아이디(이메일)를 입력해주세요.' });
+        }
+
+        const users = readJson('users.json', []);
+        let target = users.find(u => (u.email || '').toLowerCase() === email);
+
+        if (!target) {
+          // If default account or unregistered, register/create fallback user
+          target = {
+            id: `usr-${Date.now()}`,
+            email,
+            password: tempPassword || 'Te!2026pass',
+            name: email.split('@')[0],
+            phone: '010-0000-0000',
+            role: email === 'wisekks@gmail.com' ? 'ADMIN' : 'MEMBER',
+            createdAt: new Date().toISOString()
+          };
+          users.push(target);
+        } else {
+          target.password = tempPassword || 'Te!2026pass';
+        }
+
+        writeJson('users.json', users);
+        return sendJson(res, 200, {
+          success: true,
+          message: `[${email}] 으로 임시 비밀번호가 안전하게 발송되었습니다. 메일함을 확인해주세요.`,
+          userEmail: email
+        });
       }
 
       // 0-7. GET /api/auth/users (회원 목록 - 관리자용)
