@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "isConfigured": true,
-  "provider": "daum",
-  "host": "smtp.daum.net",
+  "provider": "naver",
+  "host": "smtp.naver.com",
   "port": 465,
   "enableSsl": true,
-  "user": "kwangsoo-kim@daum.net",
-  "password": "culsppnqwxwvvdko",
-  "fromEmail": "kwangsoo-kim@daum.net",
+  "user": "kmagick",
+  "password": "HZGQF6H25BSF",
+  "fromEmail": "kmagick@naver.com",
   "fromName": "투어이지(TourEasy)",
   "accounts": {
     "daum": {

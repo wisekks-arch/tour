@@ -55,10 +55,17 @@ function writeJson(filename, data) {
 }
 
 
-// Helper: Send Real SMTP Email via pure TLS/Socket
 function sendSmtpMail(options) {
   return new Promise((resolve, reject) => {
-    const { host, port, user, password, fromEmail, fromName, toEmail, subject, html, text } = options;
+    const { host, port, user, password, fromName, subject, html, text } = options;
+    const toEmail = (options.toEmail || options.recipientEmail || '').trim();
+    let fromEmail = (options.fromEmail || '').trim();
+    if (!fromEmail || !fromEmail.includes('@')) {
+      if (user && user.includes('@')) fromEmail = user;
+      else if (host && host.includes('naver')) fromEmail = `${user}@naver.com`;
+      else if (host && host.includes('daum')) fromEmail = `${user}@daum.net`;
+      else if (host && host.includes('gmail')) fromEmail = `${user}@gmail.com`;
+    }
     const isSecurePort = Number(port) === 465;
     let socket;
     let log = [];
@@ -229,6 +236,98 @@ async function sendReliableEmail(emailOptions) {
     }
     throw primaryErr;
   }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function generateInquiryEmailHtml(inq, reply) {
+  const custName = escapeHtml(inq?.name || '고객');
+  const destination = escapeHtml(inq?.destination || '맞춤 여행');
+  const expectedDate = escapeHtml(inq?.expectedDate || '즉시');
+  const groupSize = inq?.groupSize || 1;
+  const adminName = escapeHtml(reply?.adminName || '투어이지 시스템 관리자');
+  const quotedPrice = escapeHtml(reply?.quotedPrice || '');
+  const pkgTitle = escapeHtml(reply?.recommendedPackageTitle || '');
+  const content = reply?.content || '';
+  const contentHtml = escapeHtml(content).replace(/\r?\n/g, '<br>');
+
+  let priceHtml = '';
+  if (quotedPrice) {
+    priceHtml = `
+      <div style="background-color:#f0f9ff;border-left:4px solid #0284c7;padding:14px 18px;margin:16px 0;border-radius:8px;">
+        <div style="color:#0369a1;font-size:13px;font-weight:bold;">제안 맞춤 견적 금액</div>
+        <div style="font-size:17px;font-weight:800;color:#0f172a;margin-top:4px;">${quotedPrice}</div>
+      </div>
+    `;
+  }
+
+  let pkgHtml = '';
+  if (pkgTitle) {
+    pkgHtml = `
+      <div style="background-color:#fffbeb;border-left:4px solid #d97706;padding:14px 18px;margin:16px 0;border-radius:8px;">
+        <div style="color:#b45309;font-size:13px;font-weight:bold;">추천 연계 여행 상품</div>
+        <div style="font-size:15px;font-weight:700;color:#1e293b;margin-top:4px;">${pkgTitle}</div>
+      </div>
+    `;
+  }
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>투어이지 맞춤 여행 상담 답변</title>
+</head>
+<body style="margin:0;padding:20px 10px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:640px;margin:0 auto;background-color:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0f172a 0%,#0369a1 100%);padding:32px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:24px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#bae6fd;">프리미엄 1:1 맞춤 여행 컨설팅 & 안심 케어</div>
+    </div>
+    
+    <!-- Body Content -->
+    <div style="padding:32px 24px;">
+      <h2 style="margin:0 0 14px 0;font-size:18px;color:#0f172a;font-weight:800;">안녕하세요, <span style="color:#0284c7;">${custName}</span> 고객님!</h2>
+      <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">투어이지에 보내주신 <strong>[${destination} / ${expectedDate} / ${groupSize}인]</strong> 맞춤 여행 상담에 대해 전담 플래너의 맞춤 일정 및 견적 답변을 안내해 드립니다.</p>
+      
+      ${priceHtml}
+      ${pkgHtml}
+      
+      <div style="background-color:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
+        <div style="font-weight:bold;font-size:13px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;">담당 플래너 (${adminName}) 상담 및 견적 안내:</div>
+        <div style="font-size:13.5px;color:#1e293b;line-height:1.8;">${contentHtml}</div>
+      </div>
+      
+      <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin:24px 0;font-size:12.5px;color:#166534;line-height:1.7;">
+        <strong style="color:#14532d;font-size:13px;">🛡️ 투어이지 4대 안심 약속</strong><br>
+        • 전 일정 4~5성급 프리미엄 숙소 엄선 및 단독 전용 차량 제공<br>
+        • 불필요한 의무 쇼핑/옵션 강요 없는 100% 순수 맞춤 일정<br>
+        • 현지 24시간 한국인 베테랑 매니저 긴급 안심 케어 지원<br>
+        • 최고 5억원 영업배상 및 여행자 안심 공제보험 가입
+      </div>
+      
+      <div style="text-align:center;margin:30px 0 10px 0;">
+        <a href="https://wisekks-arch.github.io/tour/" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문하기</a>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:22px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 여행사 | 대표전화: 1588-0000 | 이메일: help@toureasy.co.kr<br>
+      서울특별시 중구 세종대로 110 투어타워 12층 | 통신판매업신고: 제2026-서울중구-0123호<br>
+      본 메일은 투어이지 온라인 맞춤 상담에 등록해주신 고객님의 이메일 주소로 발송되었습니다.
+    </div>
+  </div>
+</body>
+</html>`;
 }
 
 // In-memory verification code store
@@ -1103,7 +1202,40 @@ const server = http.createServer(async (req, res) => {
         if (!target) {
           return sendJson(res, 404, { success: false, message: '문의 내역을 찾을 수 없습니다.' });
         }
-        return sendJson(res, 200, { success: true, message: `[${body.recipientEmail || target.email}] 고객님께 이메일이 발송되었습니다.` });
+        const recipientEmail = (body.recipientEmail || target.email || '').trim();
+        if (!recipientEmail) {
+          return sendJson(res, 400, { success: false, message: '수신자 이메일 주소가 없습니다.' });
+        }
+
+        const replyData = {
+          adminName: body.adminName || '김투어 수석 여행플래너',
+          quotedPrice: body.quotedPrice || '',
+          recommendedPackageTitle: body.recommendedPackageTitle || '',
+          content: body.content || ''
+        };
+
+        try {
+          const emailHtml = generateInquiryEmailHtml(target, replyData);
+          const emailSubject = `[투어이지] ${target.destination || '맞춤 여행'} 맞춤 일정 및 견적 안내 (${target.name || '고객'} 님)`;
+
+          await sendReliableEmail({
+            recipientEmail: recipientEmail,
+            subject: emailSubject,
+            html: emailHtml,
+            text: replyData.content
+          });
+
+          return sendJson(res, 200, {
+            success: true,
+            message: `[${recipientEmail}] 고객님께 맞춤 견적 이메일이 성공적으로 발송되었습니다!`
+          });
+        } catch (err) {
+          console.error('Inquiry email send error:', err);
+          return sendJson(res, 500, {
+            success: false,
+            message: `이메일 발송 실패: ${err.message}`
+          });
+        }
       }
 
       // 10-2. GET /api/smtp-config
@@ -1225,21 +1357,19 @@ const server = http.createServer(async (req, res) => {
         }
 
         try {
-          const testHtml = `
-            <div style="font-family: 'Pretendard', sans-serif; padding: 24px; background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; max-width: 600px;">
-              <h2 style="color: #0284c7; margin-top: 0;">🎉 투어이지(TourEasy) SMTP 발송 테스트 완료</h2>
-              <p style="color: #334155; font-size: 14px; line-height: 1.6;">
-                안녕하세요! 투어이지 이메일 발송 서버(SMTP)가 정상적으로 연동되었습니다.
-              </p>
-              <div style="background: #ffffff; padding: 16px; border-radius: 12px; border: 1px solid #cbd5e1; margin: 16px 0;">
-                <p style="margin: 4px 0; color: #475569; font-size: 13px;"><strong>발신 호스트:</strong> ${host}:${port}</p>
-                <p style="margin: 4px 0; color: #475569; font-size: 13px;"><strong>발신자:</strong> ${fromName} &lt;${fromEmail}&gt;</p>
-                <p style="margin: 4px 0; color: #475569; font-size: 13px;"><strong>수신자:</strong> ${targetEmail}</p>
-                <p style="margin: 4px 0; color: #475569; font-size: 13px;"><strong>발송 일시:</strong> ${new Date().toLocaleString('ko-KR')}</p>
-              </div>
-              <p style="color: #64748b; font-size: 12px; margin-bottom: 0;">본 메일은 투어이지 관리자 센터의 SMTP 설정 정상 동작 검증 메일입니다.</p>
-            </div>
-          `;
+          const testInq = {
+            name: '관리자/테스트 수신자',
+            destination: 'SMTP 연동 테스트',
+            expectedDate: '즉시',
+            groupSize: 1
+          };
+          const testReply = {
+            adminName: '투어이지 시스템 관리자',
+            quotedPrice: '테스트 연동 정상',
+            recommendedPackageTitle: '투어이지 전용 안심 메일 서비스',
+            content: '투어이지(TourEasy) 관리자 시스템에서 발송된 SMTP 연동 테스트 메일입니다. 본 메일이 정상 수신되었다면 고객 맞춤 견적 및 상담 답변 메일이 정상적으로 발송됩니다.'
+          };
+          const testHtml = generateInquiryEmailHtml(testInq, testReply);
 
           const result = await sendSmtpMail({
             host,
@@ -1248,9 +1378,11 @@ const server = http.createServer(async (req, res) => {
             password,
             fromEmail,
             fromName,
-            toEmail: targetEmail,
-            subject: '[투어이지] SMTP 메일 발송 테스트 성공 안내',
-            html: testHtml
+            recipientEmail: targetEmail,
+            recipientName: '테스트 수신자',
+            subject: '[투어이지] SMTP 이메일 발송 연동 테스트 성공 안내',
+            html: testHtml,
+            text: `${testReply.content}\n\n제안 맞춤 견적 금액: ${testReply.quotedPrice}\n추천 연계 여행 상품: ${testReply.recommendedPackageTitle}`
           });
 
           return sendJson(res, 200, {
