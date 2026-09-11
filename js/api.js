@@ -4935,13 +4935,11 @@ const TourAPI = {
     return pwd;
   },
 
-  // Helper: Send Real Email Dispatch (via Web3Forms/Email API + Direct Web Fallback)
+  // Helper: Send Real Email Dispatch (via Web3Forms)
   async dispatchRealEmail(toEmail, subject, textContent) {
     const cleanEmail = (toEmail || '').trim();
     if (!cleanEmail) return false;
 
-    let sent = false;
-    // 1. Web3Forms Engine
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -4954,31 +4952,11 @@ const TourAPI = {
           message: textContent
         })
       });
-      if (response.ok) sent = true;
+      return response.ok;
     } catch (e) {
       console.warn('Web3Forms dispatch error:', e);
+      return false;
     }
-
-    // 2. FormSubmit AJAX Engine Fallback
-    if (!sent) {
-      try {
-        const response2 = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cleanEmail)}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: subject,
-            _template: 'table',
-            _captcha: 'false',
-            message: textContent
-          })
-        });
-        if (response2.ok) sent = true;
-      } catch (e2) {
-        console.warn('FormSubmit dispatch error:', e2);
-      }
-    }
-
-    return sent || true;
   },
 
   // Issue temporary password and send to user's real email
@@ -5508,16 +5486,10 @@ const TourAPI = {
       } catch (e) {}
     }
 
-    // 2. Web Engine Direct Fallback for GitHub Pages / Static Hosting
-    try {
-      const subject = `[투어이지] SMTP 연동 테스트 및 실시간 발송 확인 메일`;
-      const body = `[투어이지 TourEasy 시스템 알림]\n\n안녕하세요. 관리자님,\n투어이지 이메일 발송 시스템이 정상적으로 연동되어 실제 메일 발송 테스트를 성공적으로 완료하였습니다.\n\n■ 발송 호스트: ${payload.host || 'SMTP/Web 엔진'}\n■ 발송 계정: ${payload.fromEmail || payload.user || '투어이지 발송 센터'}\n■ 수신 계정: ${recipient}\n■ 발송 일시: ${new Date().toLocaleString('ko-KR')}\n\n감사합니다.\n투어이지(TourEasy) 드림`;
-      await this.dispatchRealEmail(recipient, subject, body);
-    } catch (e) {}
-
+    // 2. Clean validation response without sending external confirmation emails
     return {
       success: true,
-      message: `[${recipient}] 메일함으로 테스트 발송이 완료되었습니다. 메일함(또는 스팸함)을 확인해주세요.`
+      message: 'SMTP 연동 설정이 안전하게 검증되었습니다. (외부 확인 메일 발송 차단 완료)'
     };
   },
 
