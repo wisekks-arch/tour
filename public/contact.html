@@ -368,9 +368,38 @@
   <div id="footer-root"></div>
 
   <!-- Scripts -->
-  <script src="js/api.js?v=20260911_v9inquiry"></script>
-  <script src="js/components.js?v=20260911_v9inquiry"></script>
+  <script src="js/api.js?v=20260911_v9custom"></script>
+  <script src="js/components.js?v=20260911_v9custom"></script>
   <script>
+    
+    function autofillFromUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const pkg = params.get('package');
+      const dest = params.get('dest');
+      const date = params.get('date');
+      const group = params.get('group');
+
+      if (dest) {
+        const destInput = document.getElementById('inq-destination');
+        if (destInput) destInput.value = decodeURIComponent(dest);
+      }
+      if (date) {
+        const dateInput = document.getElementById('inq-date');
+        if (dateInput) dateInput.value = decodeURIComponent(date);
+      }
+      if (group) {
+        const groupInput = document.getElementById('inq-group-size');
+        if (groupInput) groupInput.value = group;
+      }
+      if (pkg) {
+        const msgInput = document.getElementById('inq-message');
+        const decodedPkg = decodeURIComponent(pkg);
+        if (msgInput && !msgInput.value) {
+          msgInput.value = `[${decodedPkg}] 상품을 보고 문의드립니다.\n일정 조율 및 프라이빗 맞춤 투어 견적 상담 요청합니다.`;
+        }
+      }
+    }
+  
     function autofillInquiryUserInfo() {
       const user = TourAPI.getCurrentUser();
       const badge = document.getElementById('inquiry-user-badge');
@@ -421,6 +450,7 @@
       renderNavbar('contact');
       renderFooter();
       autofillInquiryUserInfo();
+      autofillFromUrlParams();
 
       // Listen for login/logout events across tabs or modals
       window.addEventListener('toureasy_auth_changed', autofillInquiryUserInfo);
