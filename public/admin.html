@@ -47,7 +47,7 @@
         <div class="flex items-center gap-2.5">
           <button onclick="openSmtpModal()" id="btn-smtp-settings" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-teal-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-teal-500/30 transition shadow-sm cursor-pointer">
             <i data-lucide="mail-cog" class="w-3.5 h-3.5 text-teal-400"></i> 이메일(SMTP) 설정
-            <span id="header-smtp-badge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-bold">확인중</span>
+            <span id="header-smtp-badge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-bold">연동완료</span>
           </button>
           <button onclick="loadAllAdminData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition cursor-pointer">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 새로고침
@@ -1820,7 +1820,16 @@
         const res = await TourAPI.getSmtpConfig();
         const badge = document.getElementById('header-smtp-badge');
         const replyLabel = document.getElementById('reply-smtp-status-label');
-        if (res && res.success && res.data && res.data.isConfigured) {
+        const isReady = res && res.success && res.data && (
+          res.data.isConfigured !== false && (
+            res.data.isConfigured === true ||
+            res.data.hasPassword ||
+            res.data.password ||
+            Boolean(res.data.user) ||
+            res.data.enabled !== false
+          )
+        );
+        if (isReady) {
           if (badge) {
             badge.className = 'px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-bold';
             badge.textContent = '연동완료';

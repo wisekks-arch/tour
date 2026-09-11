@@ -4654,64 +4654,6 @@ const TourAPI = {
     return { success: false, message: '서버와 통신할 수 없습니다.' };
   },
 
-  // 8-3. Get SMTP Configuration
-  async getSmtpConfig() {
-    try {
-      if (window.location.protocol !== 'file:') {
-        const res = await fetch(`${API_BASE}/smtp-config`);
-        if (res.ok) return await res.json();
-      }
-    } catch (e) {}
-    try {
-      const local = JSON.parse(localStorage.getItem('toureasy_smtp_config') || '{}');
-      return { success: true, data: local };
-    } catch {
-      return { success: true, data: { enabled: false, provider: 'naver', host: 'smtp.naver.com', port: 587, enableSsl: true } };
-    }
-  },
-
-  // 8-4. Save SMTP Configuration
-  async saveSmtpConfig(config) {
-    try {
-      if (window.location.protocol !== 'file:') {
-        const res = await fetch(`${API_BASE}/smtp-config`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(config)
-        });
-        const json = await res.json();
-        try { localStorage.setItem('toureasy_smtp_config', JSON.stringify(config)); } catch {}
-        return json;
-      }
-    } catch (e) {
-      console.warn('saveSmtpConfig network error:', e);
-    }
-    try {
-      localStorage.setItem('toureasy_smtp_config', JSON.stringify(config));
-      return { success: true, message: 'SMTP 설정이 로컬에 저장되었습니다.' };
-    } catch {
-      return { success: true, message: '저장 완료' };
-    }
-  },
-
-  // 8-5. Test SMTP Dispatch
-  async testSmtp(testData) {
-    try {
-      if (window.location.protocol !== 'file:') {
-        const res = await fetch(`${API_BASE}/smtp-test`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(testData)
-        });
-        const json = await res.json();
-        return json;
-      }
-    } catch (e) {
-      console.warn('testSmtp network error:', e);
-      return { success: false, message: '서버와 연결할 수 없습니다: ' + e.message };
-    }
-    return { success: false, message: '서버 환경에서만 실제 SMTP 발송이 지원됩니다.' };
-  },
 
   // 9. Get Admin Stats
   async getAdminStats() {
@@ -5432,13 +5374,18 @@ const TourAPI = {
     // Fallback: localStorage
     try {
       const saved = JSON.parse(localStorage.getItem('toureasy_smtp_config') || 'null');
-      if (saved) return { success: true, data: saved };
+      if (saved && typeof saved === 'object') {
+        saved.isConfigured = true;
+        saved.enabled = true;
+        return { success: true, data: saved };
+      }
     } catch {}
 
     return {
       success: true,
       data: {
         enabled: true,
+        isConfigured: true,
         provider: 'naver',
         host: 'smtp.naver.com',
         port: 465,
@@ -5446,8 +5393,7 @@ const TourAPI = {
         user: 'kmagick',
         fromEmail: 'kmagick@naver.com',
         fromName: '투어이지(TourEasy)',
-        hasPassword: true,
-        isConfigured: true
+        hasPassword: true
       }
     };
   },

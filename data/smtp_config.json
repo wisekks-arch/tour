@@ -1,5 +1,6 @@
 {
   "enabled": true,
+  "isConfigured": true,
   "provider": "naver",
   "host": "smtp.naver.com",
   "port": 465,
