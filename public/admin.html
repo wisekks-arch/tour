@@ -45,9 +45,11 @@
           </div>
         </div>
         <div class="flex items-center gap-2.5">
-          <button onclick="openSmtpModal()" id="btn-smtp-settings" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-teal-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-teal-500/30 transition shadow-sm cursor-pointer">
-            <i data-lucide="mail-cog" class="w-3.5 h-3.5 text-teal-400"></i> 이메일(SMTP) 설정
-            <span id="header-smtp-badge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-bold">연동완료</span>
+          <button onclick="openSmtpModal()" id="btn-smtp-settings" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-emerald-500/40 transition shadow-sm cursor-pointer">
+            <i data-lucide="mail-cog" class="w-3.5 h-3.5 text-emerald-400"></i> 이메일(SMTP) 설정
+            <span id="header-smtp-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold border border-emerald-400/40 inline-flex items-center gap-1 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>연동완료
+            </span>
           </button>
           <button onclick="loadAllAdminData()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition cursor-pointer">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> 새로고침
@@ -654,8 +656,8 @@
               </label>
             </div>
             <div class="flex items-center gap-2">
-              <button type="button" onclick="openSmtpModal()" class="text-[10px] px-2.5 py-1 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-full font-bold border border-teal-400/30 flex items-center gap-1 transition cursor-pointer">
-                <i data-lucide="settings" class="w-3 h-3"></i> <span id="reply-smtp-status-label">SMTP 설정</span>
+              <button type="button" onclick="openSmtpModal()" id="reply-smtp-btn" class="text-[10px] px-2.5 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-full font-bold border border-emerald-400/40 flex items-center gap-1 transition cursor-pointer">
+                <i data-lucide="settings" class="w-3 h-3"></i> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-0.5"></span><span id="reply-smtp-status-label">SMTP 연동완료</span>
               </button>
             </div>
           </div>
@@ -1824,32 +1826,51 @@
         }
         const badge = document.getElementById('header-smtp-badge');
         const replyLabel = document.getElementById('reply-smtp-status-label');
-        const isReady = res && res.success && res.data && (
-          res.data.isConfigured !== false && (
-            res.data.isConfigured === true ||
-            res.data.hasPassword ||
-            res.data.password ||
-            Boolean(res.data.user) ||
-            res.data.enabled !== false
-          )
+        const btnSmtp = document.getElementById('btn-smtp-settings');
+        const replySmtpBtn = document.getElementById('reply-smtp-btn');
+
+        const d = (res && res.success && res.data) ? res.data : null;
+        const hasActiveAccount = d && d.accounts && Object.values(d.accounts).some(acc => acc && acc.user && (acc.hasPassword || acc.password));
+        const isReady = Boolean(
+          d &&
+          d.enabled !== false &&
+          d.isConfigured === true &&
+          d.user &&
+          (d.hasPassword === true || Boolean(d.password) || hasActiveAccount)
         );
+
         if (isReady) {
           if (badge) {
-            badge.className = 'px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-bold';
-            badge.textContent = '연동완료';
+            badge.className = 'px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold border border-emerald-400/40 inline-flex items-center gap-1 shadow-xs';
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>연동완료`;
+          }
+          if (btnSmtp) {
+            btnSmtp.className = 'px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-emerald-500/40 transition shadow-sm cursor-pointer';
           }
           if (replyLabel) {
             replyLabel.textContent = 'SMTP 연동완료';
           }
+          if (replySmtpBtn) {
+            replySmtpBtn.className = 'text-[10px] px-2.5 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-full font-bold border border-emerald-400/40 flex items-center gap-1 transition cursor-pointer';
+            replySmtpBtn.innerHTML = `<i data-lucide="settings" class="w-3 h-3"></i> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-0.5"></span><span id="reply-smtp-status-label">SMTP 연동완료</span>`;
+          }
         } else {
           if (badge) {
-            badge.className = 'px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-bold';
-            badge.textContent = '설정필요';
+            badge.className = 'px-2 py-0.5 rounded-full text-[10px] bg-rose-500/20 text-rose-300 font-extrabold border border-rose-400/40 inline-flex items-center gap-1 shadow-xs';
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse shadow-[0_0_8px_#f43f5e]"></span>설정필요`;
+          }
+          if (btnSmtp) {
+            btnSmtp.className = 'px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-rose-500/40 transition shadow-sm cursor-pointer';
           }
           if (replyLabel) {
             replyLabel.textContent = 'SMTP 설정필요';
           }
+          if (replySmtpBtn) {
+            replySmtpBtn.className = 'text-[10px] px-2.5 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-full font-bold border border-rose-400/40 flex items-center gap-1 transition cursor-pointer';
+            replySmtpBtn.innerHTML = `<i data-lucide="settings" class="w-3 h-3"></i> <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse inline-block mr-0.5"></span><span id="reply-smtp-status-label">SMTP 설정필요</span>`;
+          }
         }
+        if (window.lucide) lucide.createIcons();
       } catch {}
     }
 
