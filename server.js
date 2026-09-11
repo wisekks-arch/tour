@@ -190,6 +190,47 @@ function sendSmtpMail(options) {
   });
 }
 
+// Automatic Dual-Provider Resilient Mail Dispatch
+async function sendReliableEmail(emailOptions) {
+  const smtpCfg = readJson('smtp_config.json', {});
+  const accounts = smtpCfg.accounts || {};
+
+  const primaryOpts = {
+    host: smtpCfg.host || 'smtp.daum.net',
+    port: smtpCfg.port || 465,
+    user: smtpCfg.user || 'kwangsoo-kim@daum.net',
+    password: smtpCfg.password || 'culsppnqwxwvvdko',
+    fromEmail: smtpCfg.fromEmail || 'kwangsoo-kim@daum.net',
+    fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+    ...emailOptions
+  };
+
+  try {
+    return await sendSmtpMail(primaryOpts);
+  } catch (primaryErr) {
+    console.warn(`Primary SMTP [${smtpCfg.provider || 'primary'}] failed, attempting automatic backup failover:`, primaryErr.message);
+
+    // Failover to secondary verified account
+    const backupKey = (smtpCfg.provider === 'daum') ? 'naver' : 'daum';
+    const backupAcc = accounts[backupKey];
+
+    if (backupAcc && backupAcc.user && backupAcc.password) {
+      const backupOpts = {
+        host: backupAcc.host,
+        port: backupAcc.port || 465,
+        user: backupAcc.user,
+        password: backupAcc.password,
+        fromEmail: backupAcc.fromEmail,
+        fromName: backupAcc.fromName || '투어이지(TourEasy)',
+        ...emailOptions
+      };
+      console.log(`[Failover] Dispatching email via secondary verified account (${backupKey})...`);
+      return await sendSmtpMail(backupOpts);
+    }
+    throw primaryErr;
+  }
+}
+
 // In-memory verification code store
 const verificationCodes = new Map();
 
@@ -565,13 +606,7 @@ const server = http.createServer(async (req, res) => {
               </div>
             `;
 
-            await sendSmtpMail({
-              host: smtpCfg.host || 'smtp.naver.com',
-              port: smtpCfg.port || 465,
-              user: smtpCfg.user,
-              password: smtpCfg.password,
-              fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
-              fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+            await sendReliableEmail({
               toEmail: email,
               subject: '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
               html: htmlContent,
@@ -626,13 +661,7 @@ const server = http.createServer(async (req, res) => {
                 </div>
               </div>
             `;
-            await sendSmtpMail({
-              host: smtpCfg.host || 'smtp.naver.com',
-              port: smtpCfg.port || 465,
-              user: smtpCfg.user,
-              password: smtpCfg.password,
-              fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
-              fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+            await sendReliableEmail({
               toEmail: email,
               subject: `[투어이지] ${purpose} 인증번호는 [${code}] 입니다.`,
               html: htmlContent
@@ -1079,21 +1108,38 @@ const server = http.createServer(async (req, res) => {
 
       // 10-2. GET /api/smtp-config
       if (pathname === '/api/smtp-config' && method === 'GET') {
-        const smtpCfg = readJson('smtp_config.json', { enabled: false, provider: 'naver', host: 'smtp.naver.com', port: 587, enableSsl: true });
+        const smtpCfg = readJson('smtp_config.json', { enabled: true, isConfigured: true, provider: 'daum', host: 'smtp.daum.net', port: 465, enableSsl: true });
         const hasPwd = Boolean(smtpCfg.password);
+        
+        // Sanitize accounts dictionary for client
+        const accounts = smtpCfg.accounts || {};
+        const safeAccounts = {};
+        for (const [p, acc] of Object.entries(accounts)) {
+          safeAccounts[p] = {
+            host: acc.host,
+            port: acc.port,
+            enableSsl: acc.enableSsl,
+            user: acc.user,
+            fromEmail: acc.fromEmail,
+            fromName: acc.fromName,
+            hasPassword: Boolean(acc.password)
+          };
+        }
+
         return sendJson(res, 200, {
           success: true,
           data: {
-            enabled: smtpCfg.enabled || false,
-            provider: smtpCfg.provider || 'naver',
-            host: smtpCfg.host || 'smtp.naver.com',
-            port: smtpCfg.port || 587,
+            enabled: smtpCfg.enabled !== false,
+            provider: smtpCfg.provider || 'daum',
+            host: smtpCfg.host || 'smtp.daum.net',
+            port: smtpCfg.port || 465,
             enableSsl: smtpCfg.enableSsl !== false,
             user: smtpCfg.user || '',
             fromEmail: smtpCfg.fromEmail || '',
-            fromName: smtpCfg.fromName || '투어이지(TourEasy) 맞춤여행팀',
+            fromName: smtpCfg.fromName || '투어이지(TourEasy)',
             hasPassword: hasPwd,
-            isConfigured: Boolean(hasPwd && smtpCfg.user)
+            isConfigured: Boolean(hasPwd && smtpCfg.user),
+            accounts: safeAccounts
           }
         });
       }
@@ -1102,13 +1148,16 @@ const server = http.createServer(async (req, res) => {
       if (pathname === '/api/smtp-config' && method === 'POST') {
         const body = await parseRequestBody(req);
         const existing = readJson('smtp_config.json', {});
+        const provider = body.provider || existing.provider || 'daum';
+        const accounts = existing.accounts || {};
+
         let newPwd = body.password;
         if (!newPwd || newPwd === '******') {
-          newPwd = existing.password || '';
+          newPwd = accounts[provider]?.password || existing.password || '';
         }
         let rawU = (body.user || '').trim();
         let rawF = (body.fromEmail || '').trim();
-        const h = body.host || 'smtp.naver.com';
+        const h = body.host || 'smtp.daum.net';
 
         if (rawU.includes('/')) {
           const parts = rawU.split('/');
@@ -1125,20 +1174,34 @@ const server = http.createServer(async (req, res) => {
           else if (h.includes('gmail')) rawF = `${rawU}@gmail.com`;
         }
 
-        const newCfg = {
-          enabled: body.enabled !== false,
-          provider: body.provider || 'naver',
+        // Update provider account slot
+        accounts[provider] = {
           host: h,
-          port: body.port || 587,
+          port: body.port || 465,
           enableSsl: body.enableSsl !== false,
           user: rawU,
           password: newPwd,
           fromEmail: rawF,
-          fromName: body.fromName || '투어이지(TourEasy) 맞춤여행팀',
+          fromName: body.fromName || '투어이지(TourEasy)'
+        };
+
+        const newCfg = {
+          enabled: body.enabled !== false,
+          isConfigured: Boolean(newPwd && rawU),
+          provider: provider,
+          host: h,
+          port: body.port || 465,
+          enableSsl: body.enableSsl !== false,
+          user: rawU,
+          password: newPwd,
+          fromEmail: rawF,
+          fromName: body.fromName || '투어이지(TourEasy)',
+          accounts: accounts,
           updatedAt: new Date().toISOString()
         };
+
         writeJson('smtp_config.json', newCfg);
-        return sendJson(res, 200, { success: true, message: 'SMTP 설정이 저장되었습니다.', isConfigured: Boolean(newPwd && newCfg.user) });
+        return sendJson(res, 200, { success: true, message: 'SMTP 설정이 안전하게 저장되었습니다.', isConfigured: Boolean(newPwd && newCfg.user), accounts });
       }
 
       // 10-4. POST /api/smtp-test

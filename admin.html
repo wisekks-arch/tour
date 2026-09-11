@@ -1814,10 +1814,14 @@
     }
 
     let currentSmtpProvider = 'naver';
+    let savedSmtpAccounts = {};
 
     async function checkSmtpStatus() {
       try {
         const res = await TourAPI.getSmtpConfig();
+        if (res && res.success && res.data) {
+          if (res.data.accounts) savedSmtpAccounts = res.data.accounts;
+        }
         const badge = document.getElementById('header-smtp-badge');
         const replyLabel = document.getElementById('reply-smtp-status-label');
         const isReady = res && res.success && res.data && (
@@ -1854,6 +1858,7 @@
         const res = await TourAPI.getSmtpConfig();
         if (res && res.success && res.data) {
           const d = res.data;
+          savedSmtpAccounts = d.accounts || {};
           currentSmtpProvider = d.provider || 'naver';
           selectSmtpPreset(currentSmtpProvider, false);
           if (d.host) document.getElementById('smtp-host').value = d.host;
@@ -1863,7 +1868,8 @@
           if (d.fromEmail) document.getElementById('smtp-from-email').value = d.fromEmail;
           if (d.enableSsl !== undefined) document.getElementById('smtp-enable-ssl').checked = d.enableSsl;
           if (d.hasPassword) {
-            document.getElementById('smtp-password').placeholder = '설정됨 (변경 시에만 입력하세요)';
+            document.getElementById('smtp-password').value = '';
+            document.getElementById('smtp-password').placeholder = '설정됨 (보존 중 - 변경 시에만 입력)';
           }
         }
       } catch {}
@@ -1931,11 +1937,29 @@
         document.getElementById('smtp-guide-title').textContent = info.title;
         document.getElementById('smtp-guide-desc').textContent = info.desc;
         if (fillDefaults) {
-          document.getElementById('smtp-host').value = info.host;
-          document.getElementById('smtp-port').value = info.port;
-          document.getElementById('smtp-enable-ssl').checked = info.ssl;
-          document.getElementById('smtp-user').placeholder = info.userPlaceholder;
-          document.getElementById('smtp-password').placeholder = info.pwdPlaceholder;
+          const acc = savedSmtpAccounts[provider];
+          if (acc && acc.user) {
+            document.getElementById('smtp-host').value = acc.host || info.host;
+            document.getElementById('smtp-port').value = acc.port || info.port;
+            document.getElementById('smtp-enable-ssl').checked = acc.enableSsl !== undefined ? acc.enableSsl : info.ssl;
+            document.getElementById('smtp-user').value = acc.user || '';
+            document.getElementById('smtp-from-email').value = acc.fromEmail || (acc.user.includes('@') ? acc.user : '');
+            if (acc.hasPassword || acc.password) {
+              document.getElementById('smtp-password').value = '';
+              document.getElementById('smtp-password').placeholder = '설정됨 (보존 중 - 변경 시에만 입력)';
+            } else {
+              document.getElementById('smtp-password').value = '';
+              document.getElementById('smtp-password').placeholder = info.pwdPlaceholder;
+            }
+          } else {
+            document.getElementById('smtp-host').value = info.host;
+            document.getElementById('smtp-port').value = info.port;
+            document.getElementById('smtp-enable-ssl').checked = info.ssl;
+            document.getElementById('smtp-user').value = '';
+            document.getElementById('smtp-password').value = '';
+            document.getElementById('smtp-user').placeholder = info.userPlaceholder;
+            document.getElementById('smtp-password').placeholder = info.pwdPlaceholder;
+          }
         }
       }
     }
