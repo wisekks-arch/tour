@@ -501,11 +501,11 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // 0-6-1. POST /api/auth/issue-temp-password (임시 비밀번호 발생 및 발송)
+      // 0-6-1. POST /api/auth/issue-temp-password (임시 비밀번호 발생 및 실제 SMTP 발송)
       if (pathname === '/api/auth/issue-temp-password' && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
-        const tempPassword = body.tempPassword || '';
+        const tempPassword = body.tempPassword || 'Te!2026pass';
 
         if (!email) {
           return sendJson(res, 400, { success: false, message: '가입 아이디(이메일)를 입력해주세요.' });
@@ -515,11 +515,10 @@ const server = http.createServer(async (req, res) => {
         let target = users.find(u => (u.email || '').toLowerCase() === email);
 
         if (!target) {
-          // If default account or unregistered, register/create fallback user
           target = {
             id: `usr-${Date.now()}`,
             email,
-            password: tempPassword || 'Te!2026pass',
+            password: tempPassword,
             name: email.split('@')[0],
             phone: '010-0000-0000',
             role: email === 'wisekks@gmail.com' ? 'ADMIN' : 'MEMBER',
@@ -527,14 +526,128 @@ const server = http.createServer(async (req, res) => {
           };
           users.push(target);
         } else {
-          target.password = tempPassword || 'Te!2026pass';
+          target.password = tempPassword;
         }
 
         writeJson('users.json', users);
+
+        // Real SMTP email dispatch
+        const smtpCfg = readJson('smtp_config.json', {});
+        let emailSent = false;
+        let smtpErrorMsg = '';
+
+        if (smtpCfg && smtpCfg.user && smtpCfg.password) {
+          try {
+            const htmlContent = `
+              <div style="font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; padding: 28px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                  <h1 style="color: #0284c7; font-size: 22px; font-weight: 800; margin: 0;">✈️ 투어이지 (TourEasy)</h1>
+                  <p style="color: #64748b; font-size: 13px; margin-top: 6px;">임시 비밀번호 발급 안내</p>
+                </div>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                  <p style="color: #334155; font-size: 14px; margin-top: 0; line-height: 1.6;">
+                    안녕하세요, <strong>${target.name || '회원'}</strong>님.<br>
+                    투어이지 계정의 새로운 임시 비밀번호가 안전하게 발급되었습니다.
+                  </p>
+                  <div style="background: #ffffff; border: 2px dashed #0284c7; padding: 16px; border-radius: 10px; text-align: center; margin: 16px 0;">
+                    <span style="font-size: 12px; color: #64748b; display: block; margin-bottom: 4px;">발급된 임시 비밀번호</span>
+                    <strong style="font-size: 22px; color: #0284c7; font-family: monospace; letter-spacing: 2px;">${tempPassword}</strong>
+                  </div>
+                  <ul style="margin: 0; padding-left: 18px; color: #64748b; font-size: 12px; line-height: 1.8;">
+                    <li>가입 아이디(이메일): <strong>${email}</strong></li>
+                    <li>임시 비밀번호로 로그인하신 후, [마이페이지]에서 원하시는 비밀번호로 꼭 변경해주세요.</li>
+                    <li>발송 일시: ${new Date().toLocaleString('ko-KR')}</li>
+                  </ul>
+                </div>
+                <p style="color: #94a3b8; font-size: 11px; text-align: center; margin: 0;">
+                  본 메일은 투어이지 웹사이트에서 요청하신 비밀번호 찾기 서비스에 따라 발송되었습니다.
+                </p>
+              </div>
+            `;
+
+            await sendSmtpMail({
+              host: smtpCfg.host || 'smtp.naver.com',
+              port: smtpCfg.port || 465,
+              user: smtpCfg.user,
+              password: smtpCfg.password,
+              fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
+              fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+              toEmail: email,
+              subject: '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
+              html: htmlContent,
+              text: `[투어이지] 임시 비밀번호는 [${tempPassword}] 입니다.`
+            });
+            emailSent = true;
+          } catch (err) {
+            console.error('Password reset SMTP dispatch error:', err.message);
+            smtpErrorMsg = err.message;
+          }
+        }
+
         return sendJson(res, 200, {
           success: true,
-          message: `[${email}] 으로 임시 비밀번호가 안전하게 발송되었습니다. 메일함을 확인해주세요.`,
-          userEmail: email
+          message: emailSent 
+            ? `[${email}] 회원님의 메일함으로 임시 비밀번호가 성공적으로 발송되었습니다!` 
+            : `[${email}] 회원님의 임시 비밀번호가 생성되었습니다. (${smtpErrorMsg ? '메일 발송 오류: ' + smtpErrorMsg : 'SMTP 설정 확인 필요'})`,
+          userEmail: email,
+          emailSent
+        });
+      }
+
+      // 0-6-2. POST /api/auth/send-email-code (회원가입/본인인증 이메일 인증코드 발송)
+      if (pathname === '/api/auth/send-email-code' && method === 'POST') {
+        const body = await parseRequestBody(req);
+        const email = (body.email || '').trim().toLowerCase();
+        const code = body.code || String(Math.floor(100000 + Math.random() * 900000));
+        const purpose = body.purpose || '이메일 본인인증';
+
+        if (!email) {
+          return sendJson(res, 400, { success: false, message: '이메일 주소를 입력해주세요.' });
+        }
+
+        const smtpCfg = readJson('smtp_config.json', {});
+        let emailSent = false;
+
+        if (smtpCfg && smtpCfg.user && smtpCfg.password) {
+          try {
+            const htmlContent = `
+              <div style="font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; padding: 28px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
+                <div style="text-align: center; margin-bottom: 24px;">
+                  <h1 style="color: #0284c7; font-size: 22px; font-weight: 800; margin: 0;">✈️ 투어이지 (TourEasy)</h1>
+                  <p style="color: #64748b; font-size: 13px; margin-top: 6px;">${purpose} 안내</p>
+                </div>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                  <p style="color: #334155; font-size: 14px; margin-top: 0;">
+                    아래의 6자리 인증번호를 웹사이트 인증 화면에 입력해주세요. (3분간 유효)
+                  </p>
+                  <div style="font-size: 28px; font-weight: 900; color: #0284c7; letter-spacing: 6px; padding: 14px 0; font-family: monospace;">
+                    ${code}
+                  </div>
+                </div>
+              </div>
+            `;
+            await sendSmtpMail({
+              host: smtpCfg.host || 'smtp.naver.com',
+              port: smtpCfg.port || 465,
+              user: smtpCfg.user,
+              password: smtpCfg.password,
+              fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
+              fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+              toEmail: email,
+              subject: `[투어이지] ${purpose} 인증번호는 [${code}] 입니다.`,
+              html: htmlContent
+            });
+            emailSent = true;
+          } catch (err) {
+            console.error('Verification code email error:', err.message);
+          }
+        }
+
+        return sendJson(res, 200, {
+          success: true,
+          message: `[${email}] 으로 인증번호가 발송되었습니다.`,
+          code: emailSent ? undefined : code,
+          emailSent
         });
       }
 

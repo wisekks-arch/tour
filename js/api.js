@@ -4939,18 +4939,32 @@ const TourAPI = {
 
     const tempPassword = this.generateTempPassword();
 
-    // 1. Update backend server if available
+    // 1. Send via backend server
     try {
       if (window.location.protocol !== 'file:') {
-        await fetch(`${API_BASE}/auth/issue-temp-password`, {
+        const res = await fetch(`${API_BASE}/auth/issue-temp-password`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: cleanEmail, tempPassword })
         });
+        if (res.ok) {
+          const json = await res.json();
+          try {
+            const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
+            const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
+            if (target) {
+              target.password = tempPassword;
+              localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
+            }
+          } catch {}
+          return json;
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Backend temp password request error:', e);
+    }
 
-    // 2. Update localStorage mock users
+    // 2. Fallback: Update localStorage mock users
     try {
       const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
       const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
@@ -4980,17 +4994,11 @@ const TourAPI = {
       console.error('LocalStorage update error:', err);
     }
 
-    // 3. Dispatch real email to user's mailbox
-    const mailSubject = `[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.`;
-    const mailBody = `[투어이지 TourEasy 임시 비밀번호 안내]\n\n안녕하세요. 투어이지 회원님,\n요청하신 계정의 임시 비밀번호가 성공적으로 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 발급된 임시 비밀번호: ${tempPassword}\n\n※ 임시 비밀번호로 로그인하신 후, [마이페이지 > 비밀번호 변경]에서 원하시는 비밀번호로 꼭 변경해 주시기 바랍니다.\n※ 본인이 요청하지 않은 경우 고객센터(02-1588-0000)로 즉시 문의해 주시기 바랍니다.\n\n투어이지 웹사이트 바로가기: https://wisekks-arch.github.io/tour/`;
-
-    // Asynchronously dispatch real email
-    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
-
     return {
       success: true,
-      message: `[${cleanEmail}] 으로 임시 비밀번호가 안전하게 발송되었습니다. 메일함(스팸함 포함)을 확인 후 로그인해 주세요.`,
-      email: cleanEmail
+      message: `[${cleanEmail}] 회원님의 임시 비밀번호가 생성되었습니다. (임시 비밀번호: ${tempPassword})`,
+      email: cleanEmail,
+      tempPassword
     };
   },
 
