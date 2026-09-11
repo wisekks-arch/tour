@@ -159,9 +159,18 @@ function sendSmtpMail(options) {
           cleanup();
           let guide = '';
           if (code === '535') {
-            guide = ' [인증 실패: 네이버/다음 메일 환경설정에서 IMAP/SMTP를 사용함으로 설정하거나, 2단계 인증 시 애플리케이션 비밀번호를 입력해주세요.]';
+            const h = (host || '').toLowerCase();
+            if (h.includes('naver')) {
+              guide = ' ▶ [해결방법] 1) mail.naver.com 환경설정 > POP3/IMAP > IMAP/SMTP [사용함] 저장 2) 네이버 보안설정(nid.naver.com)에서 생성한 16자리 [애플리케이션 비밀번호(종류: 메일)]를 비밀번호란에 입력하세요.';
+            } else if (h.includes('gmail') || h.includes('google')) {
+              guide = ' ▶ [해결방법] 구글 계정 보안(myaccount.google.com/apppasswords)에서 생성한 16자리 [앱 비밀번호]를 비밀번호란에 입력하세요.';
+            } else if (h.includes('daum') || h.includes('hanmail') || h.includes('kakao')) {
+              guide = ' ▶ [해결방법] 1) mail.daum.net 환경설정 > IMAP/POP3 > IMAP/SMTP [사용함] 저장 2) 카카오계정 보안설정에서 생성한 [앱 비밀번호]를 비밀번호란에 입력하세요.';
+            } else {
+              guide = ' ▶ [해결방법] 아이디 및 비밀번호(또는 포털 전용 앱 비밀번호)를 다시 확인해주세요.';
+            }
           }
-          return reject(new Error(`SMTP 오류 [${code}]: ${line}${guide}`));
+          return reject(new Error(`SMTP 인증/발송 오류 [${code}]: ${line}${guide}`));
         }
       }
     });

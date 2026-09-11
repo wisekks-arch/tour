@@ -4620,8 +4620,8 @@ const TourAPI = {
         localStorage.setItem('toureasy_inquiries', JSON.stringify(local));
         return { 
           success: true, 
-          message: '답변이 성공적으로 등록되었으며, 고객 이메일로 발송되었습니다.', 
-          emailSent: true,
+          message: '답변이 성공적으로 등록되었습니다. (로컬 저장소 저장 완료)', 
+          emailSent: false,
           recipientEmail: replyData.recipientEmail || item.email,
           data: item 
         };
@@ -4630,8 +4630,8 @@ const TourAPI = {
 
     return { 
       success: true, 
-      message: '답변 및 이메일 발송이 완료되었습니다.', 
-      emailSent: true,
+      message: '답변이 등록되었습니다.', 
+      emailSent: false,
       recipientEmail: replyData.recipientEmail 
     };
   },
@@ -5422,7 +5422,7 @@ const TourAPI = {
   async testSmtp(payload) {
     const recipient = (payload.recipientEmail || payload.email || 'wisekks@gmail.com').trim();
     
-    // 1. Try backend server if available
+    // 1. Try backend server
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/smtp-test`, {
@@ -5430,30 +5430,25 @@ const TourAPI = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (res.ok) {
-          const text = await res.text();
-          if (text && !text.trim().startsWith('<')) {
+        const text = await res.text();
+        if (text && !text.trim().startsWith('<')) {
+          try {
             const json = JSON.parse(text);
-            if (json && json.success) return json;
-          }
+            return json;
+          } catch {}
         }
       }
     } catch (e) {
-      console.warn('Backend SMTP test failed, proceeding with direct client dispatch:', e);
+      console.warn('Backend SMTP test failed:', e);
+      return {
+        success: false,
+        message: '서버 백엔드와 통신할 수 없습니다: ' + e.message
+      };
     }
 
-    // 2. Client-side Real Email Dispatch (Web3Forms/Real Mail Delivery)
-    const host = payload.host || 'smtp.naver.com';
-    const fromEmail = payload.fromEmail || 'kmagick@naver.com';
-    const fromName = payload.fromName || '투어이지(TourEasy)';
-    const mailSubject = `[투어이지] SMTP 이메일 발송 연동 테스트 성공 안내`;
-    const mailBody = `[투어이지 TourEasy - SMTP 이메일 발송 테스트]\n\n안녕하세요! 투어이지 관리자님,\n이메일 발송 시스템(SMTP)이 성공적으로 연동되었습니다.\n\n■ 발신 호스트: ${host}:${payload.port || 465}\n■ 발신 계정: ${fromEmail}\n■ 발신자명: ${fromName}\n■ 수신 이메일: ${recipient}\n■ 발송 일시: ${new Date().toLocaleString('ko-KR')}\n\n본 메일이 정상 수신되었다면 웹사이트의 회원가입 인증, 임시비밀번호, 1:1 상담 알림이 정상 발송됩니다.`;
-
-    await this.dispatchRealEmail(recipient, mailSubject, mailBody);
-
     return {
-      success: true,
-      message: `[${recipient}] 메일함으로 테스트 메일이 성공적으로 발송되었습니다! (메일함 및 스팸함을 확인해주세요)`
+      success: false,
+      message: '정적 웹(GitHub Pages) 호스팅 환경에서는 백엔드 서버(localhost:3000 / 터널 서버)를 통해서만 실제 SMTP 메일 발송이 지원됩니다.'
     };
   },
 
