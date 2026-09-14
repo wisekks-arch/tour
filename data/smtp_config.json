@@ -6,9 +6,9 @@
   "port": 465,
   "enableSsl": true,
   "user": "kmagick",
-  "password": "HZGQF6H25BSF",
+  "password": "T655SN17TSK7",
   "fromEmail": "kmagick@naver.com",
-  "fromName": "투어이지(TourEasy)",
+  "fromName": "투어이지(TourEasy) 맞춤여행팀",
   "accounts": {
     "daum": {
       "host": "smtp.daum.net",
@@ -24,10 +24,10 @@
       "port": 465,
       "enableSsl": true,
       "user": "kmagick",
-      "password": "HZGQF6H25BSF",
+      "password": "T655SN17TSK7",
       "fromEmail": "kmagick@naver.com",
-      "fromName": "투어이지(TourEasy)"
+      "fromName": "투어이지(TourEasy) 맞춤여행팀"
     }
   },
-  "updatedAt": "2026-09-11T07:47:00.000Z"
+  "updatedAt": "2026-09-14T06:51:09.033Z"
 }
