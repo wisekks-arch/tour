@@ -5,8 +5,8 @@
   "host": "smtp.naver.com",
   "port": 465,
   "enableSsl": true,
-  "user": "kmagick",
-  "password": "T655SN17TSK7",
+  "user": "kmagick@naver.com",
+  "password": "YR7Y55BS91WR",
   "fromEmail": "kmagick@naver.com",
   "fromName": "투어이지(TourEasy) 맞춤여행팀",
   "accounts": {
@@ -23,11 +23,11 @@
       "host": "smtp.naver.com",
       "port": 465,
       "enableSsl": true,
-      "user": "kmagick",
-      "password": "T655SN17TSK7",
+      "user": "kmagick@naver.com",
+      "password": "YR7Y55BS91WR",
       "fromEmail": "kmagick@naver.com",
       "fromName": "투어이지(TourEasy) 맞춤여행팀"
     }
   },
-  "updatedAt": "2026-09-14T06:51:09.033Z"
+  "updatedAt": "2026-09-14T07:03:46.229Z"
 }
