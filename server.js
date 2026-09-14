@@ -71,7 +71,12 @@ function sendSmtpMail(options) {
       return reject(new Error('수신자 이메일 주소가 지정되지 않았습니다.'));
     }
 
-    const portNum = Number(port) || 465;
+    const hostLow = (host || '').toLowerCase();
+    let portNum = Number(port) || 465;
+    // Standardize Naver and Daum SMTP to Port 465 Direct TLS for 100% reliability
+    if ((hostLow.includes('naver') || hostLow.includes('daum')) && portNum === 587) {
+      portNum = 465;
+    }
     const isDirectTls = portNum === 465;
     let socket;
     let log = [];
@@ -1588,12 +1593,17 @@ const server = http.createServer(async (req, res) => {
         const smtpCfg = readJson('smtp_config.json', {});
         const targetEmail = (body.recipientEmail || body.email || smtpCfg.fromEmail || 'wisekks@gmail.com').trim();
 
+        const accounts = smtpCfg.accounts || {};
         const host = body.host || smtpCfg.host || 'smtp.naver.com';
         const port = body.port || smtpCfg.port || 465;
-        const user = body.user || smtpCfg.user || '';
-        const password = body.password && body.password !== '******' ? body.password : (smtpCfg.password || '');
+        const user = body.user || smtpCfg.user || 'kmagick';
+        let password = (body.password && body.password !== '******') ? body.password : '';
+        if (!password) {
+          const prov = (host.includes('naver') ? 'naver' : (host.includes('daum') ? 'daum' : smtpCfg.provider)) || 'naver';
+          password = (accounts[prov] && accounts[prov].password) || smtpCfg.password || '';
+        }
         const fromEmail = body.fromEmail || smtpCfg.fromEmail || (user.includes('@') ? user : `${user}@naver.com`);
-        const fromName = body.fromName || smtpCfg.fromName || '투어이지(TourEasy)';
+        const fromName = body.fromName || smtpCfg.fromName || '투어이지(TourEasy) 맞춤여행팀';
 
         if (!user || !password) {
           return sendJson(res, 400, {

@@ -2081,15 +2081,28 @@
       }
       if (window.lucide) lucide.createIcons();
 
+      const hostInput = (document.getElementById('smtp-host')?.value || '').trim();
+      let portInput = parseInt(document.getElementById('smtp-port')?.value, 10) || 465;
+      if (hostInput.toLowerCase().includes('naver') || hostInput.toLowerCase().includes('daum')) {
+        portInput = 465;
+        if (document.getElementById('smtp-port')) document.getElementById('smtp-port').value = '465';
+        if (document.getElementById('smtp-enable-ssl')) document.getElementById('smtp-enable-ssl').checked = true;
+      }
+
+      let pwdInput = (document.getElementById('smtp-password')?.value || '').trim();
+      if (!pwdInput || pwdInput === '******' || pwdInput.length > 30) {
+        pwdInput = '';
+      }
+
       const payload = {
         recipientEmail: recipient,
-        host: document.getElementById('smtp-host').value.trim(),
-        port: parseInt(document.getElementById('smtp-port').value, 10) || 465,
-        enableSsl: document.getElementById('smtp-enable-ssl').checked,
-        user: sanitized.user,
-        password: document.getElementById('smtp-password').value,
-        fromName: document.getElementById('smtp-from-name').value.trim() || '투어이지(TourEasy)',
-        fromEmail: sanitized.fromEmail
+        host: hostInput || 'smtp.naver.com',
+        port: portInput,
+        enableSsl: true,
+        user: sanitized.user || 'kmagick',
+        password: pwdInput,
+        fromName: document.getElementById('smtp-from-name')?.value.trim() || '투어이지(TourEasy) 맞춤여행팀',
+        fromEmail: sanitized.fromEmail || 'kmagick@naver.com'
       };
 
       try {
