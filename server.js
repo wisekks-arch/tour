@@ -326,7 +326,7 @@ function generateVerificationEmailHtml(code, email, purpose = '본인인증') {
       </div>
 
       <div style="text-align:center;">
-        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 28px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 바로가기</a>
+        <a href="https://wisekks-arch.github.io/tour/admin.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 28px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 바로가기</a>
       </div>
     </div>
     <!-- Footer -->
@@ -376,7 +376,7 @@ function generateTempPasswordEmailHtml(tempPassword, email, userName) {
       </div>
 
       <div style="text-align:center;margin-top:28px;">
-        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 로그인하기</a>
+        <a href="https://wisekks-arch.github.io/tour/admin.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 로그인하기</a>
       </div>
     </div>
     <!-- Footer -->
@@ -469,7 +469,7 @@ function generateBookingConfirmationEmailHtml(booking) {
       </div>
 
       <div style="text-align:center;margin-top:28px;">
-        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
+        <a href="https://wisekks-arch.github.io/tour/admin.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
       </div>
     </div>
     <!-- Footer -->
@@ -546,7 +546,7 @@ function generateInquiryReceiptEmailHtml(inquiry) {
       </div>
 
       <div style="text-align:center;margin-top:28px;">
-        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
+        <a href="https://wisekks-arch.github.io/tour/admin.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
       </div>
     </div>
     <!-- Footer -->
@@ -626,8 +626,8 @@ function generateInquiryEmailHtml(inq, reply) {
         • 최고 5억원 영업배상 및 여행자 안심 공제보험 가입
       </div>
       
-      <div style="text-align:center;margin:30px 0 10px 0;">
-        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문하기</a>
+      <div style="text-align:center;margin-30px 0 10px 0;">
+        <a href="https://wisekks-arch.github.io/tour/admin.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문하기</a>
       </div>
     </div>
     
