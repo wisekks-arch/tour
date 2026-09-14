@@ -4652,6 +4652,7 @@ const TourAPI = {
       `http://127.0.0.1:3000/api/inquiries/${id}/send-email`
     ];
 
+    let lastErrorMsg = '';
     for (const ep of endpoints) {
       try {
         const res = await fetch(ep, {
@@ -4659,24 +4660,23 @@ const TourAPI = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(emailData)
         });
-        if (res.ok) {
-          const text = await res.text();
-          if (text && !text.trim().startsWith('<')) {
+        const text = await res.text();
+        if (text && !text.trim().startsWith('<')) {
+          try {
             const json = JSON.parse(text);
-            if (json && json.success) return json;
-          }
+            if (json) return json;
+          } catch {}
+        } else {
+          lastErrorMsg = `HTTP ${res.status}`;
         }
-      } catch (e) {}
+      } catch (e) {
+        lastErrorMsg = e.message || '서버 통신 실패';
+      }
     }
 
-    // 2. Direct Web Dispatch Fallback
-    try {
-      await this.dispatchRealEmail(recipient, subject, body);
-    } catch (e) {}
-
     return { 
-      success: true, 
-      message: `[${recipient}] 고객님께 실제 이메일이 발송되었습니다!` 
+      success: false, 
+      message: `메일 발송 서버(Node.js / start.bat) 연결 상태를 확인해주세요. (${lastErrorMsg || '서버 미응답'})` 
     };
   },
 
@@ -5467,6 +5467,8 @@ const TourAPI = {
       `http://127.0.0.1:3000/api/smtp-test`
     ];
 
+    let lastErrorMsg = '';
+
     for (const ep of endpoints) {
       try {
         const res = await fetch(ep, {
@@ -5474,22 +5476,23 @@ const TourAPI = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (res.ok) {
-          const text = await res.text();
-          if (text && !text.trim().startsWith('<')) {
-            try {
-              const json = JSON.parse(text);
-              if (json && json.success) return json;
-            } catch {}
-          }
+        const text = await res.text();
+        if (text && !text.trim().startsWith('<')) {
+          try {
+            const json = JSON.parse(text);
+            return json; // Returns actual server result (success: true / false)
+          } catch {}
+        } else {
+          lastErrorMsg = `서버 응답 오류 (HTTP ${res.status})`;
         }
-      } catch (e) {}
+      } catch (e) {
+        lastErrorMsg = e.message || '서버 통신 실패';
+      }
     }
 
-    // 2. Clean validation response without sending external confirmation emails
     return {
-      success: true,
-      message: 'SMTP 연동 설정이 안전하게 검증되었습니다. (외부 확인 메일 발송 차단 완료)'
+      success: false,
+      message: `SMTP 테스트 서버와 통신할 수 없습니다. (start.bat 서버 실행 확인 필요: ${lastErrorMsg})`
     };
   },
 

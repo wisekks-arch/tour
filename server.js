@@ -54,7 +54,7 @@ function writeJson(filename, data) {
   }
 }
 
-
+// --- SMTP ENGINE (Direct TLS Port 465 + STARTTLS Port 587/25) ---
 function sendSmtpMail(options) {
   return new Promise((resolve, reject) => {
     const { host, port, user, password, fromName, subject, html, text } = options;
@@ -66,9 +66,16 @@ function sendSmtpMail(options) {
       else if (host && host.includes('daum')) fromEmail = `${user}@daum.net`;
       else if (host && host.includes('gmail')) fromEmail = `${user}@gmail.com`;
     }
-    const isSecurePort = Number(port) === 465;
+
+    if (!toEmail) {
+      return reject(new Error('수신자 이메일 주소가 지정되지 않았습니다.'));
+    }
+
+    const portNum = Number(port) || 465;
+    const isDirectTls = portNum === 465;
     let socket;
     let log = [];
+    let isTlsUpgraded = isDirectTls;
 
     function cleanup() {
       if (socket && !socket.destroyed) {
@@ -81,24 +88,10 @@ function sendSmtpMail(options) {
       reject(new Error(`SMTP 연결 시간 초과 (15초): ${log.slice(-3).join(' | ')}`));
     }, 15000);
 
-    const onConnected = () => { log.push('Connected'); };
-
-    try {
-      if (isSecurePort) {
-        socket = tls.connect({ host, port: Number(port), rejectUnauthorized: false }, onConnected);
-      } else {
-        socket = net.connect({ host, port: Number(port) }, onConnected);
-      }
-    } catch (err) {
-      clearTimeout(timeoutTimer);
-      return reject(err);
-    }
-
-    socket.setEncoding('utf8');
     let step = 0;
     let buffer = '';
 
-    socket.on('data', (chunk) => {
+    function handleData(chunk) {
       buffer += chunk;
       const lines = buffer.split('\r\n');
       buffer = lines.pop();
@@ -115,8 +108,36 @@ function sendSmtpMail(options) {
           step = 1;
           socket.write(`EHLO localhost\r\n`);
         } else if (step === 1 && code === '250' && isLastLine) {
-          step = 2;
-          socket.write(`AUTH LOGIN\r\n`);
+          if (!isTlsUpgraded && (portNum === 587 || portNum === 25)) {
+            step = 15; // Waiting for STARTTLS 220 Ready
+            socket.write(`STARTTLS\r\n`);
+          } else {
+            step = 2;
+            socket.write(`AUTH LOGIN\r\n`);
+          }
+        } else if (step === 15 && code === '220') {
+          // Upgrade to TLS on port 587
+          step = 16;
+          isTlsUpgraded = true;
+          socket.removeAllListeners('data');
+          socket.removeAllListeners('error');
+          const secureSocket = tls.connect({
+            socket: socket,
+            rejectUnauthorized: false
+          }, () => {
+            log.push('TLS Established on port 587');
+            step = 1; // Send EHLO again after STARTTLS
+            secureSocket.write(`EHLO localhost\r\n`);
+          });
+          secureSocket.setEncoding('utf8');
+          secureSocket.on('data', handleData);
+          secureSocket.on('error', (err) => {
+            clearTimeout(timeoutTimer);
+            cleanup();
+            reject(err);
+          });
+          socket = secureSocket;
+          return;
         } else if (step === 2 && code === '334') {
           step = 3;
           const uB64 = Buffer.from(user).toString('base64');
@@ -138,7 +159,7 @@ function sendSmtpMail(options) {
           step = 8;
           const dateStr = new Date().toUTCString();
           const encodedSubject = `=?UTF-8?B?${Buffer.from(subject || '투어이지 안내', 'utf8').toString('base64')}?=`;
-          const encodedFromName = `=?UTF-8?B?${Buffer.from(fromName || '투어이지', 'utf8').toString('base64')}?=`;
+          const encodedFromName = `=?UTF-8?B?${Buffer.from(fromName || '투어이지(TourEasy)', 'utf8').toString('base64')}?=`;
 
           const mailBody = [
             `From: ${encodedFromName} <${fromEmail}>`,
@@ -168,20 +189,37 @@ function sendSmtpMail(options) {
           if (code === '535') {
             const h = (host || '').toLowerCase();
             if (h.includes('naver')) {
-              guide = ' ▶ [해결방법] 1) mail.naver.com 환경설정 > POP3/IMAP > IMAP/SMTP [사용함] 저장 2) 네이버 보안설정(nid.naver.com)에서 생성한 16자리 [애플리케이션 비밀번호(종류: 메일)]를 비밀번호란에 입력하세요.';
+              guide = ' 👉 [해결방법] 1) mail.naver.com 환경설정 > POP3/IMAP > IMAP/SMTP [사용함] 설정 2) 네이버 보안설정(nid.naver.com)에서 생성한 16자리 [애플리케이션 비밀번호(종류: 메일)]를 비밀번호란에 입력하세요.';
             } else if (h.includes('gmail') || h.includes('google')) {
-              guide = ' ▶ [해결방법] 구글 계정 보안(myaccount.google.com/apppasswords)에서 생성한 16자리 [앱 비밀번호]를 비밀번호란에 입력하세요.';
+              guide = ' 👉 [해결방법] 구글 계정 보안(myaccount.google.com/apppasswords)에서 생성한 16자리 [앱 비밀번호]를 비밀번호란에 입력하세요.';
             } else if (h.includes('daum') || h.includes('hanmail') || h.includes('kakao')) {
-              guide = ' ▶ [해결방법] 1) mail.daum.net 환경설정 > IMAP/POP3 > IMAP/SMTP [사용함] 저장 2) 카카오계정 보안설정에서 생성한 [앱 비밀번호]를 비밀번호란에 입력하세요.';
+              guide = ' 👉 [해결방법] 1) mail.daum.net 환경설정 > IMAP/POP3 > IMAP/SMTP [사용함] 설정 2) 카카오계정 보안설정에서 생성한 [앱 비밀번호]를 비밀번호란에 입력하세요.';
             } else {
-              guide = ' ▶ [해결방법] 아이디 및 비밀번호(또는 포털 전용 앱 비밀번호)를 다시 확인해주세요.';
+              guide = ' 👉 [해결방법] 아이디와 비밀번호(또는 포털 전용 앱 비밀번호)를 다시 확인해주세요.';
             }
           }
           return reject(new Error(`SMTP 인증/발송 오류 [${code}]: ${line}${guide}`));
         }
       }
-    });
+    }
 
+    try {
+      if (isDirectTls) {
+        socket = tls.connect({ host, port: portNum, rejectUnauthorized: false }, () => {
+          log.push('Connected direct TLS (port 465)');
+        });
+      } else {
+        socket = net.connect({ host, port: portNum }, () => {
+          log.push('Connected net socket (port ' + portNum + ')');
+        });
+      }
+    } catch (err) {
+      clearTimeout(timeoutTimer);
+      return reject(err);
+    }
+
+    socket.setEncoding('utf8');
+    socket.on('data', handleData);
     socket.on('error', (err) => {
       clearTimeout(timeoutTimer);
       cleanup();
@@ -203,11 +241,11 @@ async function sendReliableEmail(emailOptions) {
   const accounts = smtpCfg.accounts || {};
 
   const primaryOpts = {
-    host: smtpCfg.host || 'smtp.daum.net',
+    host: smtpCfg.host || 'smtp.naver.com',
     port: smtpCfg.port || 465,
-    user: smtpCfg.user || 'kwangsoo-kim@daum.net',
-    password: smtpCfg.password || 'culsppnqwxwvvdko',
-    fromEmail: smtpCfg.fromEmail || 'kwangsoo-kim@daum.net',
+    user: smtpCfg.user || 'kmagick',
+    password: smtpCfg.password || 'HZGQF6H25BSF',
+    fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
     fromName: smtpCfg.fromName || '투어이지(TourEasy)',
     ...emailOptions
   };
@@ -223,11 +261,11 @@ async function sendReliableEmail(emailOptions) {
 
     if (backupAcc && backupAcc.user && backupAcc.password) {
       const backupOpts = {
-        host: backupAcc.host,
+        host: backupAcc.host || (backupKey === 'naver' ? 'smtp.naver.com' : 'smtp.daum.net'),
         port: backupAcc.port || 465,
         user: backupAcc.user,
         password: backupAcc.password,
-        fromEmail: backupAcc.fromEmail,
+        fromEmail: backupAcc.fromEmail || (backupKey === 'naver' ? `${backupAcc.user}@naver.com` : `${backupAcc.user}@daum.net`),
         fromName: backupAcc.fromName || '투어이지(TourEasy)',
         ...emailOptions
       };
@@ -248,12 +286,286 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+// --- HTML EMAIL TEMPLATES ---
+
+// 1. Verification Code Email Template
+function generateVerificationEmailHtml(code, email, purpose = '본인인증') {
+  const cleanEmail = escapeHtml(email);
+  const cleanPurpose = escapeHtml(purpose);
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>투어이지 ${cleanPurpose} 안내</title></head>
+<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:580px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0284c7 0%,#0369a1 100%);padding:32px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✈️ 투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#e0f2fe;font-weight:500;">프리미엄 1:1 맞춤 여행 컨설팅 & 안심 케어</div>
+    </div>
+    <!-- Content -->
+    <div style="padding:32px 24px;">
+      <div style="display:inline-block;background-color:#e0f2fe;color:#0369a1;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">보안 인증 안내</div>
+      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">${cleanPurpose} 6자리 인증번호</h2>
+      <p style="margin:0 0 24px 0;font-size:14px;color:#475569;line-height:1.6;">
+        안녕하세요, 고객님!<br>
+        투어이지 웹사이트에서 요청하신 본인확인용 보안 인증번호를 안내해 드립니다.<br>
+        아래의 <strong>6자리 인증번호</strong>를 화면에 정확히 입력해 주세요.
+      </p>
+      
+      <div style="background:#f8fafc;border:2px dashed #38bdf8;border-radius:14px;padding:22px;text-align:center;margin:24px 0;">
+        <span style="font-size:12px;color:#64748b;display:block;margin-bottom:6px;">인증번호 (5분간 유효)</span>
+        <div style="font-size:34px;font-weight:900;color:#0284c7;letter-spacing:8px;font-family:Consolas, monospace;margin:4px 0;">
+          ${code}
+        </div>
+        <span style="font-size:11.5px;color:#0369a1;font-weight:600;">※ 유효시간(5분) 경과 시 재요청이 필요합니다.</span>
+      </div>
+
+      <div style="background-color:#fffbeb;border:1px solid #fef3c7;border-radius:12px;padding:14px 16px;font-size:12px;color:#92400e;line-height:1.6;margin-bottom:24px;">
+        ⚠️ <strong>보안 주의사항</strong><br>
+        본 인증번호는 고객님의 계정 및 개인정보 보호를 위한 일회용 번호입니다. 타인에게 절대 공유하거나 전달하지 마십시오.
+      </div>
+
+      <div style="text-align:center;">
+        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 28px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 바로가기</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 | 고객센터: 1588-0000 | 이메일: kmagick@naver.com<br>
+      본 메일은 수신자( ${cleanEmail} )의 요청에 따라 발송된 인증 메일입니다.
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// 2. Temporary Password Email Template
+function generateTempPasswordEmailHtml(tempPassword, email, userName) {
+  const cleanEmail = escapeHtml(email);
+  const cleanName = escapeHtml(userName || email.split('@')[0] || '회원');
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>투어이지 임시 비밀번호 발급 안내</title></head>
+<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:580px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0f172a 0%,#0369a1 100%);padding:32px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✈️ 투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#bae6fd;">프리미엄 1:1 맞춤 여행 컨설팅 & 안심 케어</div>
+    </div>
+    <!-- Content -->
+    <div style="padding:32px 24px;">
+      <div style="display:inline-block;background-color:#e0f2fe;color:#0369a1;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">계정 보안 안내</div>
+      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">안녕하세요, ${cleanName} 회원님!</h2>
+      <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">
+        투어이지 계정의 새로운 <strong>임시 비밀번호</strong>가 안전하게 발급되었습니다.<br>
+        발급된 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전한 새 비밀번호로 변경해 주시기 바랍니다.
+      </p>
+      
+      <div style="background:#f8fafc;border:2px dashed #0284c7;border-radius:14px;padding:22px;text-align:center;margin:24px 0;">
+        <span style="font-size:12px;color:#64748b;display:block;margin-bottom:6px;">새로 발급된 임시 비밀번호</span>
+        <div style="font-size:26px;font-weight:900;color:#0284c7;font-family:Consolas, monospace;letter-spacing:2px;margin:4px 0;">
+          ${escapeHtml(tempPassword)}
+        </div>
+      </div>
+
+      <div style="background-color:#f1f5f9;border-radius:12px;padding:16px;margin:20px 0;font-size:12.5px;color:#475569;line-height:1.8;">
+        • <strong>가입 아이디(이메일):</strong> ${cleanEmail}<br>
+        • <strong>발송 일시:</strong> ${new Date().toLocaleString('ko-KR')}<br>
+        • <strong>안내 사항:</strong> 로그인 후 [마이페이지 > 비밀번호 변경]에서 변경 권장
+      </div>
+
+      <div style="text-align:center;margin-top:28px;">
+        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 로그인하기</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 | 고객센터: 1588-0000 | 이메일: kmagick@naver.com<br>
+      본 메일은 투어이지 온라인 비밀번호 찾기 서비스를 통해 발송되었습니다.
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// 3. Tour Booking Confirmation Email Template
+function generateBookingConfirmationEmailHtml(booking) {
+  const bId = escapeHtml(booking.id || '');
+  const pkgTitle = escapeHtml(booking.packageTitle || '맞춤 여행 패키지');
+  const travelerName = escapeHtml(booking.travelerName || '고객');
+  const departureDate = escapeHtml(booking.departureDate || '일정 협의');
+  const adults = booking.adults || 1;
+  const children = booking.children || 0;
+  const totalPrice = Number(booking.totalPrice || 0).toLocaleString('ko-KR');
+  const phone = escapeHtml(booking.phone || '-');
+  const paymentMethod = escapeHtml(booking.paymentMethod || '상담 후 결제');
+  const requests = escapeHtml(booking.requests || '없음');
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>투어이지 여행 예약 접수 확인서</title></head>
+<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:620px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0284c7 0%,#0f172a 100%);padding:34px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✈️ 투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#bae6fd;">여행 예약 및 상담 신청이 정상 접수되었습니다!</div>
+    </div>
+    <!-- Content -->
+    <div style="padding:32px 24px;">
+      <div style="display:inline-block;background-color:#dcfce7;color:#15803d;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">예약 접수 완료</div>
+      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">안녕하세요, ${travelerName} 고객님!</h2>
+      <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">
+        투어이지 여행 상품을 선택해 주셔서 대단히 감사드립니다.<br>
+        고객님의 예약 및 상담 신청이 성공적으로 접수되었으며, 전담 여행 플래너가 상세 일정 및 최종 확정을 위해 빠른 시일 내 연락드리겠습니다.
+      </p>
+
+      <!-- Booking Info Table -->
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
+        <div style="font-weight:bold;font-size:14px;color:#0f172a;margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;display:flex;justify-content:space-between;">
+          <span>📋 예약 상세 내역</span>
+          <span style="color:#0284c7;font-family:monospace;font-weight:800;">예약번호: ${bId}</span>
+        </div>
+        <table style="width:100%;font-size:13px;color:#334155;border-collapse:collapse;">
+          <tr>
+            <td style="padding:8px 0;color:#64748b;width:110px;">여행 상품</td>
+            <td style="padding:8px 0;font-weight:bold;color:#0f172a;">${pkgTitle}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">출발 예정일</td>
+            <td style="padding:8px 0;font-weight:bold;color:#0284c7;">${departureDate}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">예약 인원</td>
+            <td style="padding:8px 0;">성인 ${adults}명 ${children > 0 ? ', 아동 ' + children + '명' : ''}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">총 결제 예정액</td>
+            <td style="padding:8px 0;font-size:16px;font-weight:900;color:#0284c7;">${totalPrice} 원</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">결제 방식</td>
+            <td style="padding:8px 0;">${paymentMethod}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">예약자 연락처</td>
+            <td style="padding:8px 0;">${phone}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">특별 요청사항</td>
+            <td style="padding:8px 0;color:#475569;">${requests}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Trust Badges -->
+      <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin:24px 0;font-size:12.5px;color:#166534;line-height:1.7;">
+        <strong style="color:#14532d;font-size:13px;">🛡️ 투어이지 4대 안심 케어 보증</strong><br>
+        • 4~5성급 프리미엄 숙소 엄선 & 전용 단독 차량 서비스<br>
+        • 의무 쇼핑/강제 옵션 없는 100% 만족 보장 일정<br>
+        • 24시간 현지 한국인 매니저 긴급 지원<br>
+        • 최고 5억원 영업배상 및 여행자 안심 공제보험 가입
+      </div>
+
+      <div style="text-align:center;margin-top:28px;">
+        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 | 고객센터: 1588-0000 | 이메일: kmagick@naver.com<br>
+      서울특별시 중구 세종대로 110 투어타워 12층 | 통신판매업신고: 제2026-서울중구-0123호
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// 4. 1:1 Inquiry Receipt Confirmation Email Template
+function generateInquiryReceiptEmailHtml(inquiry) {
+  const inqId = escapeHtml(inquiry.id || '');
+  const custName = escapeHtml(inquiry.name || '고객');
+  const category = escapeHtml(inquiry.category || '1:1 여행 상담');
+  const destination = escapeHtml(inquiry.destination || '미정');
+  const expectedDate = escapeHtml(inquiry.expectedDate || '협의');
+  const groupSize = inquiry.groupSize || 1;
+  const message = escapeHtml(inquiry.message || '').replace(/\r?\n/g, '<br>');
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>투어이지 1:1 맞춤 여행 상담 접수 안내</title></head>
+<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:620px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0284c7 0%,#0369a1 100%);padding:34px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✉️ 투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#e0f2fe;">1:1 맞춤 여행 상담이 성공적으로 접수되었습니다.</div>
+    </div>
+    <!-- Content -->
+    <div style="padding:32px 24px;">
+      <div style="display:inline-block;background-color:#e0f2fe;color:#0369a1;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">상담 문의 접수</div>
+      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">안녕하세요, ${custName} 고객님!</h2>
+      <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">
+        투어이지에 1:1 맞춤 상담 문의를 등록해 주셔서 감사드립니다.<br>
+        전문 여행 플래너가 고객님의 문의 사항을 검토하여 <strong>맞춤 일정과 상세 견적</strong>을 신속히 이메일 및 유선으로 안내해 드리겠습니다.
+      </p>
+
+      <!-- Inquiry Info Table -->
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
+        <div style="font-weight:bold;font-size:14px;color:#0f172a;margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;display:flex;justify-content:space-between;">
+          <span>📝 접수된 문의 내용</span>
+          <span style="color:#0284c7;font-family:monospace;font-weight:800;">문의번호: ${inqId}</span>
+        </div>
+        <table style="width:100%;font-size:13px;color:#334155;border-collapse:collapse;">
+          <tr>
+            <td style="padding:8px 0;color:#64748b;width:110px;">상담 분류</td>
+            <td style="padding:8px 0;font-weight:bold;color:#0f172a;">${category}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">희망 여행지</td>
+            <td style="padding:8px 0;font-weight:bold;color:#0284c7;">${destination}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">희망 일정/인원</td>
+            <td style="padding:8px 0;">${expectedDate} / ${groupSize}인</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;vertical-align:top;">문의 내용</td>
+            <td style="padding:8px 0;color:#334155;line-height:1.7;">${message}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin:24px 0;font-size:12.5px;color:#166534;line-height:1.7;">
+        <strong style="color:#14532d;font-size:13px;">🛡️ 투어이지 4대 안심 약속</strong><br>
+        • 전 일정 4~5성급 프리미엄 숙소 엄선 및 단독 전용 차량 제공<br>
+        • 불필요한 의무 쇼핑/옵션 강요 없는 100% 순수 맞춤 일정<br>
+        • 현지 24시간 한국인 베테랑 매니저 긴급 안심 케어 지원<br>
+        • 최고 5억원 영업배상 및 여행자 안심 공제보험 가입
+      </div>
+
+      <div style="text-align:center;margin-top:28px;">
+        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 | 대표전화: 1588-0000 | 이메일: kmagick@naver.com<br>
+      서울특별시 중구 세종대로 110 투어타워 12층 | 통신판매업신고: 제2026-서울중구-0123호
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// 5. 1:1 Inquiry Reply / Quotation Email Template
 function generateInquiryEmailHtml(inq, reply) {
   const custName = escapeHtml(inq?.name || '고객');
   const destination = escapeHtml(inq?.destination || '맞춤 여행');
   const expectedDate = escapeHtml(inq?.expectedDate || '즉시');
   const groupSize = inq?.groupSize || 1;
-  const adminName = escapeHtml(reply?.adminName || '투어이지 시스템 관리자');
+  const adminName = escapeHtml(reply?.adminName || '투어이지 수석 여행플래너');
   const quotedPrice = escapeHtml(reply?.quotedPrice || '');
   const pkgTitle = escapeHtml(reply?.recommendedPackageTitle || '');
   const content = reply?.content || '';
@@ -315,13 +627,13 @@ function generateInquiryEmailHtml(inq, reply) {
       </div>
       
       <div style="text-align:center;margin:30px 0 10px 0;">
-        <a href="https://wisekks-arch.github.io/tour/" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문하기</a>
+        <a href="https://okay-successful-deutsch-housewives.trycloudflare.com" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:13px 30px;border-radius:12px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 웹사이트 방문하기</a>
       </div>
     </div>
     
     <!-- Footer -->
     <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:22px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
-      (주)투어이지 여행사 | 대표전화: 1588-0000 | 이메일: help@toureasy.co.kr<br>
+      (주)투어이지 여행사 | 대표전화: 1588-0000 | 이메일: kmagick@naver.com<br>
       서울특별시 중구 세종대로 110 투어타워 12층 | 통신판매업신고: 제2026-서울중구-0123호<br>
       본 메일은 투어이지 온라인 맞춤 상담에 등록해주신 고객님의 이메일 주소로 발송되었습니다.
     </div>
@@ -444,7 +756,7 @@ const server = http.createServer(async (req, res) => {
   // --- REST API ROUTES ---
   if (pathname.startsWith('/api/')) {
     try {
-      // 0-1. POST /api/auth/send-code & /api/auth/send-email-code (이메일/휴대폰 본인인증 6자리 발송)
+      // 0-1. POST /api/auth/send-code & /api/auth/send-email-code (이메일 6자리 인증번호 실시간 발송)
       if ((pathname === '/api/auth/send-code' || pathname === '/api/auth/send-email-code') && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
@@ -455,36 +767,58 @@ const server = http.createServer(async (req, res) => {
           if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
             return sendJson(res, 400, { success: false, message: '올바른 이메일 주소를 입력해주세요.' });
           }
-          const code = String(Math.floor(100000 + Math.random() * 900000));
+          const code = body.code || String(Math.floor(100000 + Math.random() * 900000));
           verificationCodes.set(email, {
             code,
-            expiresAt: Date.now() + 3 * 60 * 1000
+            expiresAt: Date.now() + 5 * 60 * 1000 // 5 minutes
           });
+
+          // Dispatch real email via SMTP
+          let emailSent = false;
+          let smtpErrorMsg = '';
+          try {
+            const htmlContent = generateVerificationEmailHtml(code, email, purpose);
+            await sendReliableEmail({
+              toEmail: email,
+              subject: `[투어이지] ${purpose} 인증번호는 [${code}] 입니다.`,
+              html: htmlContent,
+              text: `[투어이지 ${purpose}] 인증번호: [${code}] (5분 이내 입력)`
+            });
+            emailSent = true;
+            console.log(`[Auth] Verification code ${code} sent to ${email}`);
+          } catch (err) {
+            console.error('Verification code email dispatch error:', err.message);
+            smtpErrorMsg = err.message;
+          }
+
           return sendJson(res, 200, {
             success: true,
-            message: `[${email}] 으로 인증번호가 발송되었습니다. 메일함을 확인해주세요. (3분 이내 입력)`,
-            code,
-            expiresIn: 180,
-            isEmail: true
+            message: emailSent 
+              ? `[${email}] 메일함으로 인증번호 6자리가 발송되었습니다. (5분 이내 입력)`
+              : `[${email}] 인증번호가 생성되었습니다. (메일 발송 안내: ${smtpErrorMsg || '확인 필요'})`,
+            code: emailSent ? undefined : code,
+            expiresIn: 300,
+            isEmail: true,
+            emailSent
           });
         } else if (phone) {
           const code = String(Math.floor(100000 + Math.random() * 900000));
           verificationCodes.set(phone, {
             code,
-            expiresAt: Date.now() + 3 * 60 * 1000
+            expiresAt: Date.now() + 5 * 60 * 1000
           });
           return sendJson(res, 200, {
             success: true,
-            message: `[투어이지 본인인증] 인증번호 [${code}] 가 발송되었습니다. (3분 이내 입력)`,
+            message: `[투어이지 본인인증] 인증번호 [${code}] 가 발송되었습니다. (5분 이내 입력)`,
             code,
-            expiresIn: 180
+            expiresIn: 300
           });
         } else {
           return sendJson(res, 400, { success: false, message: '인증번호를 수신할 이메일 주소를 입력해주세요.' });
         }
       }
 
-      // 0-2. POST /api/auth/verify-code & /api/auth/verify-email-code (인증번호 확인)
+      // 0-2. POST /api/auth/verify-code & /api/auth/verify-email-code (인증번호 검증)
       if ((pathname === '/api/auth/verify-code' || pathname === '/api/auth/verify-email-code') && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
@@ -501,11 +835,12 @@ const server = http.createServer(async (req, res) => {
         const stored = verificationCodes.get(targetKey);
         if (Date.now() > stored.expiresAt) {
           verificationCodes.delete(targetKey);
-          return sendJson(res, 400, { success: false, message: '인증번호 유효시간(3분)이 만료되었습니다. 다시 요청해주세요.' });
+          return sendJson(res, 400, { success: false, message: '인증번호 유효시간(5분)이 만료되었습니다. 다시 요청해주세요.' });
         }
         if (stored.code !== code) {
           return sendJson(res, 400, { success: false, message: '인증번호가 일치하지 않습니다. 다시 확인해주세요.' });
         }
+        verificationCodes.delete(targetKey);
         return sendJson(res, 200, { success: true, message: '이메일 본인인증이 성공적으로 완료되었습니다.' });
       }
 
@@ -518,18 +853,19 @@ const server = http.createServer(async (req, res) => {
         const phone = (body.phone || '').trim();
 
         if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-          return sendJson(res, 400, { success: false, message: '올바른 이메일 주소를 입력해주세요.' });
-        }
-        if (!name) {
-          return sendJson(res, 400, { success: false, message: '성명을 입력해주세요.' });
+          return sendJson(res, 400, { success: false, message: '올바른 이메일 형식을 입력해주세요.' });
         }
         if (!validatePasswordRules(password)) {
-          return sendJson(res, 400, { success: false, message: '비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' });
+          return sendJson(res, 400, { success: false, message: '비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.' });
+        }
+        if (!name) {
+          return sendJson(res, 400, { success: false, message: '이름을 입력해주세요.' });
         }
 
         const users = readJson('users.json', []);
-        if (users.some(u => (u.email || '').toLowerCase() === email)) {
-          return sendJson(res, 400, { success: false, message: '이미 등록된 이메일(아이디)입니다. 다른 이메일을 사용하거나 로그인해주세요.' });
+        const exists = users.find(u => (u.email || '').toLowerCase() === email);
+        if (exists) {
+          return sendJson(res, 409, { success: false, message: '이미 등록된 이메일 계정입니다.' });
         }
 
         const newUser = {
@@ -537,24 +873,21 @@ const server = http.createServer(async (req, res) => {
           email,
           password,
           name,
-          phone: phone || '',
-          role: 'MEMBER',
+          phone: phone || '010-0000-0000',
+          role: email === 'wisekks@gmail.com' ? 'ADMIN' : 'MEMBER',
           createdAt: new Date().toISOString()
         };
 
         users.push(newUser);
         writeJson('users.json', users);
 
-        return sendJson(res, 200, {
+        const safeUser = { ...newUser };
+        delete safeUser.password;
+
+        return sendJson(res, 201, {
           success: true,
-          message: '회원가입이 정상적으로 완료되었습니다! 가입하신 계정으로 로그인해 주세요.',
-          user: {
-            id: newUser.id,
-            email: newUser.email,
-            name: newUser.name,
-            phone: newUser.phone,
-            role: newUser.role
-          }
+          message: '투어이지 회원가입이 성공적으로 완료되었습니다!',
+          user: safeUser
         });
       }
 
@@ -565,19 +898,15 @@ const server = http.createServer(async (req, res) => {
         const password = body.password || '';
 
         const users = readJson('users.json', []);
-        const found = users.find(u => (u.email || '').toLowerCase() === email && u.password === password);
+        const user = users.find(u => (u.email || '').toLowerCase() === email && u.password === password);
 
-        if (found) {
+        if (user) {
+          const safeUser = { ...user };
+          delete safeUser.password;
           return sendJson(res, 200, {
             success: true,
-            message: `${found.name} 회원님, 환영합니다!`,
-            user: {
-              id: found.id,
-              email: found.email,
-              name: found.name,
-              phone: found.phone || '',
-              role: found.role || 'MEMBER'
-            }
+            message: `${user.name || '회원'}님, 반갑습니다!`,
+            user: safeUser
           });
         } else {
           return sendJson(res, 400, { success: false, message: '이메일(아이디) 또는 비밀번호가 일치하지 않습니다.' });
@@ -613,7 +942,7 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // 0-6. POST /api/auth/reset-password (비밀번호 재설정)
+      // 0-6. POST /api/auth/reset-password (비밀번호 직접 재설정)
       if (pathname === '/api/auth/reset-password' && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
@@ -623,7 +952,7 @@ const server = http.createServer(async (req, res) => {
           return sendJson(res, 400, { success: false, message: '이메일 주소를 입력해주세요.' });
         }
         if (!validatePasswordRules(newPassword)) {
-          return sendJson(res, 400, { success: false, message: '새 비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' });
+          return sendJson(res, 400, { success: false, message: '새 비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.' });
         }
 
         const users = readJson('users.json', []);
@@ -641,11 +970,11 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // 0-6-1. POST /api/auth/issue-temp-password (임시 비밀번호 발생 및 실제 SMTP 발송)
+      // 0-6-1. POST /api/auth/issue-temp-password (임시 비밀번호 생성 및 실제 SMTP 발송)
       if (pathname === '/api/auth/issue-temp-password' && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
-        const tempPassword = body.tempPassword || 'Te!2026pass';
+        const tempPassword = body.tempPassword || `Te!${Math.floor(100000 + Math.random() * 900000)}`;
 
         if (!email) {
           return sendJson(res, 400, { success: false, message: '가입 아이디(이메일)를 입력해주세요.' });
@@ -672,165 +1001,69 @@ const server = http.createServer(async (req, res) => {
         writeJson('users.json', users);
 
         // Real SMTP email dispatch
-        const smtpCfg = readJson('smtp_config.json', {});
         let emailSent = false;
         let smtpErrorMsg = '';
 
-        if (smtpCfg && smtpCfg.user && smtpCfg.password) {
-          try {
-            const htmlContent = `
-              <div style="font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; padding: 28px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                <div style="text-align: center; margin-bottom: 24px;">
-                  <h1 style="color: #0284c7; font-size: 22px; font-weight: 800; margin: 0;">✈️ 투어이지 (TourEasy)</h1>
-                  <p style="color: #64748b; font-size: 13px; margin-top: 6px;">임시 비밀번호 발급 안내</p>
-                </div>
-                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
-                  <p style="color: #334155; font-size: 14px; margin-top: 0; line-height: 1.6;">
-                    안녕하세요, <strong>${target.name || '회원'}</strong>님.<br>
-                    투어이지 계정의 새로운 임시 비밀번호가 안전하게 발급되었습니다.
-                  </p>
-                  <div style="background: #ffffff; border: 2px dashed #0284c7; padding: 16px; border-radius: 10px; text-align: center; margin: 16px 0;">
-                    <span style="font-size: 12px; color: #64748b; display: block; margin-bottom: 4px;">발급된 임시 비밀번호</span>
-                    <strong style="font-size: 22px; color: #0284c7; font-family: monospace; letter-spacing: 2px;">${tempPassword}</strong>
-                  </div>
-                  <ul style="margin: 0; padding-left: 18px; color: #64748b; font-size: 12px; line-height: 1.8;">
-                    <li>가입 아이디(이메일): <strong>${email}</strong></li>
-                    <li>임시 비밀번호로 로그인하신 후, [마이페이지]에서 원하시는 비밀번호로 꼭 변경해주세요.</li>
-                    <li>발송 일시: ${new Date().toLocaleString('ko-KR')}</li>
-                  </ul>
-                </div>
-                <p style="color: #94a3b8; font-size: 11px; text-align: center; margin: 0;">
-                  본 메일은 투어이지 웹사이트에서 요청하신 비밀번호 찾기 서비스에 따라 발송되었습니다.
-                </p>
-              </div>
-            `;
-
-            await sendReliableEmail({
-              toEmail: email,
-              subject: '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
-              html: htmlContent,
-              text: `[투어이지] 임시 비밀번호는 [${tempPassword}] 입니다.`
-            });
-            emailSent = true;
-          } catch (err) {
-            console.error('Password reset SMTP dispatch error:', err.message);
-            smtpErrorMsg = err.message;
-          }
+        try {
+          const htmlContent = generateTempPasswordEmailHtml(tempPassword, email, target.name);
+          await sendReliableEmail({
+            toEmail: email,
+            subject: '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
+            html: htmlContent,
+            text: `[투어이지] 임시 비밀번호는 [${tempPassword}] 입니다. 로그인 후 변경해주세요.`
+          });
+          emailSent = true;
+          console.log(`[Auth] Temp password email sent to ${email}`);
+        } catch (err) {
+          console.error('Password reset SMTP dispatch error:', err.message);
+          smtpErrorMsg = err.message;
         }
 
         return sendJson(res, 200, {
           success: true,
           message: emailSent 
             ? `[${email}] 회원님의 메일함으로 임시 비밀번호가 성공적으로 발송되었습니다!` 
-            : `[${email}] 회원님의 임시 비밀번호가 생성되었습니다. (${smtpErrorMsg ? '메일 발송 오류: ' + smtpErrorMsg : 'SMTP 설정 확인 필요'})`,
+            : `[${email}] 회원님의 임시 비밀번호가 생성되었습니다. (메일 발송 안내: ${smtpErrorMsg || '확인 필요'})`,
           userEmail: email,
-          emailSent
-        });
-      }
-
-      // 0-6-2. POST /api/auth/send-email-code (회원가입/본인인증 이메일 인증코드 발송)
-      if (pathname === '/api/auth/send-email-code' && method === 'POST') {
-        const body = await parseRequestBody(req);
-        const email = (body.email || '').trim().toLowerCase();
-        const code = body.code || String(Math.floor(100000 + Math.random() * 900000));
-        const purpose = body.purpose || '이메일 본인인증';
-
-        if (!email) {
-          return sendJson(res, 400, { success: false, message: '이메일 주소를 입력해주세요.' });
-        }
-
-        const smtpCfg = readJson('smtp_config.json', {});
-        let emailSent = false;
-
-        if (smtpCfg && smtpCfg.user && smtpCfg.password) {
-          try {
-            const htmlContent = `
-              <div style="font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; padding: 28px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-                <div style="text-align: center; margin-bottom: 24px;">
-                  <h1 style="color: #0284c7; font-size: 22px; font-weight: 800; margin: 0;">✈️ 투어이지 (TourEasy)</h1>
-                  <p style="color: #64748b; font-size: 13px; margin-top: 6px;">${purpose} 안내</p>
-                </div>
-                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                  <p style="color: #334155; font-size: 14px; margin-top: 0;">
-                    아래의 6자리 인증번호를 웹사이트 인증 화면에 입력해주세요. (3분간 유효)
-                  </p>
-                  <div style="font-size: 28px; font-weight: 900; color: #0284c7; letter-spacing: 6px; padding: 14px 0; font-family: monospace;">
-                    ${code}
-                  </div>
-                </div>
-              </div>
-            `;
-            await sendReliableEmail({
-              toEmail: email,
-              subject: `[투어이지] ${purpose} 인증번호는 [${code}] 입니다.`,
-              html: htmlContent
-            });
-            emailSent = true;
-          } catch (err) {
-            console.error('Verification code email error:', err.message);
-          }
-        }
-
-        return sendJson(res, 200, {
-          success: true,
-          message: `[${email}] 으로 인증번호가 발송되었습니다.`,
-          code: emailSent ? undefined : code,
+          tempPassword: emailSent ? undefined : tempPassword,
           emailSent
         });
       }
 
       // 0-7. GET /api/auth/users (회원 목록 - 관리자용)
-            // 0-7. GET /api/auth/users (회원 목록 - 관리자용)
       if (pathname === '/api/auth/users' && method === 'GET') {
         const users = readJson('users.json', []);
-        const safe = users.map(u => ({
-          id: u.id,
-          email: u.email,
-          name: u.name,
-          phone: u.phone,
-          role: u.role || 'MEMBER',
-          createdAt: u.createdAt
-        }));
-        return sendJson(res, 200, { success: true, count: safe.length, data: safe });
+        const safeUsers = users.map(u => {
+          const copy = { ...u };
+          delete copy.password;
+          return copy;
+        });
+        return sendJson(res, 200, { success: true, count: safeUsers.length, users: safeUsers });
       }
 
-      // 0-8. PUT /api/auth/profile (회원 정보 수정)
+      // 0-8. PUT/POST /api/auth/profile (회원 프로필 수정)
       if (pathname === '/api/auth/profile' && (method === 'PUT' || method === 'POST')) {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
-        const name = (body.name || '').trim();
-        const phone = (body.phone || '').trim();
 
         if (!email) {
-          return sendJson(res, 400, { success: false, message: '이메일 정보가 필요합니다.' });
-        }
-        if (!name) {
-          return sendJson(res, 400, { success: false, message: '이름을 입력해 주세요.' });
+          return sendJson(res, 400, { success: false, message: '이메일 정보가 누락되었습니다.' });
         }
 
         const users = readJson('users.json', []);
-        const target = users.find(u => (u.email || '').toLowerCase() === email || (body.id && u.id === body.id));
+        const target = users.find(u => (u.email || '').toLowerCase() === email);
 
-        if (!target) {
-          return sendJson(res, 404, { success: false, message: '회원 정보를 찾을 수 없습니다.' });
+        if (target) {
+          if (body.name) target.name = body.name.trim();
+          if (body.phone) target.phone = body.phone.trim();
+          writeJson('users.json', users);
+
+          const safeUser = { ...target };
+          delete safeUser.password;
+          return sendJson(res, 200, { success: true, message: '프로필 정보가 안전하게 수정되었습니다.', user: safeUser });
+        } else {
+          return sendJson(res, 404, { success: false, message: '사용자를 찾을 수 없습니다.' });
         }
-
-        target.name = name;
-        if (phone) target.phone = phone;
-        writeJson('users.json', users);
-
-        return sendJson(res, 200, {
-          success: true,
-          message: '회원 정보가 성공적으로 수정되었습니다.',
-          user: {
-            id: target.id,
-            email: target.email,
-            name: target.name,
-            phone: target.phone,
-            role: target.role || 'MEMBER',
-            createdAt: target.createdAt
-          }
-        });
       }
 
       // 0-9. POST /api/auth/change-password (비밀번호 변경)
@@ -841,27 +1074,28 @@ const server = http.createServer(async (req, res) => {
         const newPassword = body.newPassword || '';
 
         if (!email || !currentPassword || !newPassword) {
-          return sendJson(res, 400, { success: false, message: '현재 비밀번호와 새 비밀번호를 모두 입력해 주세요.' });
-        }
-
-        if (!validatePasswordRules(newPassword)) {
-          return sendJson(res, 400, { success: false, message: '새 비밀번호는 특수문자, 영문, 숫자를 모두 포함하여 8자 이상이어야 합니다.' });
+          return sendJson(res, 400, { success: false, message: '필수 정보를 모두 입력해주세요.' });
         }
 
         const users = readJson('users.json', []);
-        const target = users.find(u => (u.email || '').toLowerCase() === email && u.password === currentPassword);
+        const target = users.find(u => (u.email || '').toLowerCase() === email);
 
         if (!target) {
+          return sendJson(res, 404, { success: false, message: '사용자를 찾을 수 없습니다.' });
+        }
+
+        if (target.password !== currentPassword) {
           return sendJson(res, 400, { success: false, message: '현재 비밀번호가 일치하지 않습니다.' });
+        }
+
+        if (!validatePasswordRules(newPassword)) {
+          return sendJson(res, 400, { success: false, message: '새 비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.' });
         }
 
         target.password = newPassword;
         writeJson('users.json', users);
 
-        return sendJson(res, 200, {
-          success: true,
-          message: '비밀번호가 성공적으로 변경되었습니다.'
-        });
+        return sendJson(res, 200, { success: true, message: '비밀번호가 성공적으로 변경되었습니다.' });
       }
 
       // 0-10. POST /api/auth/delete-account (회원 탈퇴)
@@ -871,22 +1105,23 @@ const server = http.createServer(async (req, res) => {
         const password = body.password || '';
 
         const users = readJson('users.json', []);
-        const idx = users.findIndex(u => (u.email || '').toLowerCase() === email && u.password === password);
+        const idx = users.findIndex(u => (u.email || '').toLowerCase() === email);
 
         if (idx === -1) {
-          return sendJson(res, 400, { success: false, message: '비밀번호가 일치하지 않거나 회원을 찾을 수 없습니다.' });
+          return sendJson(res, 404, { success: false, message: '사용자를 찾을 수 없습니다.' });
+        }
+
+        if (users[idx].password !== password) {
+          return sendJson(res, 400, { success: false, message: '비밀번호가 일치하지 않습니다.' });
         }
 
         users.splice(idx, 1);
         writeJson('users.json', users);
 
-        return sendJson(res, 200, {
-          success: true,
-          message: '회원 탈퇴가 안전하게 처리되었습니다.'
-        });
+        return sendJson(res, 200, { success: true, message: '회원 탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.' });
       }
 
-      // 0-11. PUT /api/auth/users/:id & DELETE /api/auth/users/:id (관리자 회원 관리)
+      // 0-11. PUT/PATCH /api/auth/users/:id (회원 정보 수정 - 관리자용)
       if (pathname.startsWith('/api/auth/users/') && (method === 'PUT' || method === 'PATCH')) {
         const id = pathname.replace('/api/auth/users/', '');
         const body = await parseRequestBody(req);
@@ -894,180 +1129,161 @@ const server = http.createServer(async (req, res) => {
         const target = users.find(u => u.id === id);
 
         if (!target) {
-          return sendJson(res, 404, { success: false, message: '회원을 찾을 수 없습니다.' });
+          return sendJson(res, 404, { success: false, message: '수정할 회원 계정을 찾을 수 없습니다.' });
         }
 
         if (body.name) target.name = body.name.trim();
-        if (body.phone !== undefined) target.phone = body.phone.trim();
-        if (body.role) target.role = body.role.toUpperCase();
-        if (body.password && validatePasswordRules(body.password)) target.password = body.password;
+        if (body.phone) target.phone = body.phone.trim();
+        if (body.role) target.role = body.role.trim();
+        if (body.email) target.email = body.email.trim().toLowerCase();
+        if (body.password) target.password = body.password;
 
         writeJson('users.json', users);
 
-        return sendJson(res, 200, {
-          success: true,
-          message: '회원 정보가 관리자 권한으로 수정되었습니다.',
-          user: {
-            id: target.id,
-            email: target.email,
-            name: target.name,
-            phone: target.phone,
-            role: target.role || 'MEMBER',
-            createdAt: target.createdAt
-          }
-        });
+        const safeUser = { ...target };
+        delete safeUser.password;
+        return sendJson(res, 200, { success: true, message: '회원 정보가 수정되었습니다.', user: safeUser });
       }
 
+      // 0-12. DELETE /api/auth/users/:id (회원 삭제 - 관리자용)
       if (pathname.startsWith('/api/auth/users/') && method === 'DELETE') {
         const id = pathname.replace('/api/auth/users/', '');
-        let users = readJson('users.json', []);
-        const beforeLen = users.length;
-        users = users.filter(u => u.id !== id);
+        const users = readJson('users.json', []);
+        const idx = users.findIndex(u => u.id === id);
 
-        if (users.length === beforeLen) {
-          return sendJson(res, 404, { success: false, message: '삭제할 회원을 찾을 수 없습니다.' });
+        if (idx === -1) {
+          return sendJson(res, 404, { success: false, message: '삭제할 회원 계정을 찾을 수 없습니다.' });
         }
 
+        users.splice(idx, 1);
         writeJson('users.json', users);
-        return sendJson(res, 200, { success: true, message: '회원이 삭제되었습니다.' });
+        return sendJson(res, 200, { success: true, message: '회원 계정이 삭제되었습니다.' });
       }
 
-      // 0-12. GET /api/user/my-bookings (내 예약 내역)
+      // 1. GET /api/user/my-bookings
       if (pathname === '/api/user/my-bookings' && method === 'GET') {
         const email = (parsedUrl.query.email || '').trim().toLowerCase();
         const phone = (parsedUrl.query.phone || '').trim().replace(/-/g, '');
 
         if (!email && !phone) {
-          return sendJson(res, 400, { success: false, message: '사용자 식별 정보(이메일/연락처)가 필요합니다.' });
+          return sendJson(res, 400, { success: false, message: '이메일 또는 휴대폰 번호가 필요합니다.' });
         }
 
         const bookings = readJson('bookings.json', []);
-        const myBookings = bookings.filter(b => {
-          const bEmail = (b.customerEmail || b.email || '').trim().toLowerCase();
-          const bPhone = (b.customerPhone || b.phone || '').trim().replace(/-/g, '');
+        const filtered = bookings.filter(b => {
+          const bEmail = (b.email || '').toLowerCase();
+          const bPhone = (b.phone || '').replace(/-/g, '');
           return (email && bEmail === email) || (phone && bPhone === phone);
         });
 
-        return sendJson(res, 200, { success: true, count: myBookings.length, data: myBookings });
+        return sendJson(res, 200, { success: true, count: filtered.length, data: filtered });
       }
 
-      // 0-13. GET /api/user/my-inquiries (내 문의 내역)
+      // 2. GET /api/user/my-inquiries
       if (pathname === '/api/user/my-inquiries' && method === 'GET') {
         const email = (parsedUrl.query.email || '').trim().toLowerCase();
         const phone = (parsedUrl.query.phone || '').trim().replace(/-/g, '');
 
         if (!email && !phone) {
-          return sendJson(res, 400, { success: false, message: '사용자 식별 정보(이메일/연락처)가 필요합니다.' });
+          return sendJson(res, 400, { success: false, message: '이메일 또는 휴대폰 번호가 필요합니다.' });
         }
 
         const inquiries = readJson('inquiries.json', []);
-        const myInquiries = inquiries.filter(inq => {
-          const iEmail = (inq.customerEmail || inq.email || '').trim().toLowerCase();
-          const iPhone = (inq.customerPhone || inq.phone || '').trim().replace(/-/g, '');
+        const filtered = inquiries.filter(i => {
+          const iEmail = (i.email || '').toLowerCase();
+          const iPhone = (i.phone || '').replace(/-/g, '');
           return (email && iEmail === email) || (phone && iPhone === phone);
         });
 
-        return sendJson(res, 200, { success: true, count: myInquiries.length, data: myInquiries });
+        return sendJson(res, 200, { success: true, count: filtered.length, data: filtered });
       }
 
-      // 1. GET /api/packages
+      // 3. GET /api/packages
       if (pathname === '/api/packages' && method === 'GET') {
         const packages = readJson('packages.json', []);
         const query = parsedUrl.query;
-        let result = [...packages];
+        let filtered = packages;
 
-        if (query.region && query.region !== '전체') {
-          result = result.filter(p => p.region === query.region);
+        if (query.country) {
+          filtered = filtered.filter(p => p.country === query.country);
         }
-        if (query.theme && query.theme !== '전체') {
-          result = result.filter(p => p.theme.includes(query.theme));
+        if (query.tag) {
+          filtered = filtered.filter(p => Array.isArray(p.tags) && p.tags.includes(query.tag));
         }
-        if (query.search) {
-          const s = query.search.toLowerCase();
-          result = result.filter(p =>
-            p.title.toLowerCase().includes(s) ||
-            p.city.toLowerCase().includes(s) ||
-            p.country.toLowerCase().includes(s) ||
-            (p.tags && p.tags.some(t => t.toLowerCase().includes(s)))
+        if (query.q) {
+          const q = query.q.toLowerCase();
+          filtered = filtered.filter(p => 
+            (p.title && p.title.toLowerCase().includes(q)) ||
+            (p.destination && p.destination.toLowerCase().includes(q)) ||
+            (p.country && p.country.toLowerCase().includes(q)) ||
+            (p.summary && p.summary.toLowerCase().includes(q))
           );
         }
-        if (query.minPrice) {
-          result = result.filter(p => p.price >= parseInt(query.minPrice, 10));
-        }
-        if (query.maxPrice) {
-          result = result.filter(p => p.price <= parseInt(query.maxPrice, 10));
-        }
-        if (query.featured === 'true') {
-          result = result.filter(p => p.isFeatured);
-        }
-        if (query.earlyBird === 'true') {
-          result = result.filter(p => p.isEarlyBird);
+        if (query.includeInactive !== 'true') {
+          filtered = filtered.filter(p => p.status !== '미운영' && p.status !== 'INACTIVE' && p.isActive !== false);
         }
 
-        // Sorting
-        if (query.sort === 'priceAsc') {
-          result.sort((a, b) => a.price - b.price);
-        } else if (query.sort === 'priceDesc') {
-          result.sort((a, b) => b.price - a.price);
-        } else if (query.sort === 'rating') {
-          result.sort((a, b) => b.rating - a.rating);
-        } else if (query.sort === 'reviews') {
-          result.sort((a, b) => b.reviewCount - a.reviewCount);
-        }
-
-        return sendJson(res, 200, { success: true, count: result.length, data: result });
+        return sendJson(res, 200, { success: true, count: filtered.length, data: filtered });
       }
 
-      // 2. GET /api/packages/:id
+      // 4. GET /api/packages/:id
       if (pathname.startsWith('/api/packages/') && method === 'GET') {
         const id = pathname.replace('/api/packages/', '');
         const packages = readJson('packages.json', []);
-        const item = packages.find(p => p.id === id || p.slug === id);
-        if (!item) {
+        const target = packages.find(p => p.id === id || p.slug === id);
+        if (!target) {
           return sendJson(res, 404, { success: false, message: '패키지 상품을 찾을 수 없습니다.' });
         }
-        return sendJson(res, 200, { success: true, data: item });
+        return sendJson(res, 200, { success: true, data: target });
       }
 
-      // 2-1. PATCH /api/packages/:id (Admin update package status)
+      // 4-1. PATCH /api/packages/:id
       if (pathname.startsWith('/api/packages/') && method === 'PATCH') {
         const id = pathname.replace('/api/packages/', '');
         const body = await parseRequestBody(req);
-        let packages = readJson('packages.json', []);
-        const item = packages.find(p => p.id === id || p.slug === id);
-        if (!item) {
+        const packages = readJson('packages.json', []);
+        const idx = packages.findIndex(p => p.id === id || p.slug === id);
+        if (idx === -1) {
           return sendJson(res, 404, { success: false, message: '패키지 상품을 찾을 수 없습니다.' });
         }
-        if (body.status !== undefined) item.status = body.status;
-        if (body.isActive !== undefined) item.isActive = body.isActive;
+        packages[idx] = { ...packages[idx], ...body, updatedAt: new Date().toISOString() };
         writeJson('packages.json', packages);
-        return sendJson(res, 200, { success: true, message: '상품 운영 상태가 성공적으로 변경되었습니다.', data: item });
+        return sendJson(res, 200, { success: true, message: '패키지 정보가 수정되었습니다.', data: packages[idx] });
       }
 
-      // 3. POST /api/packages (Admin create package)
+      // 4-2. POST /api/packages
       if (pathname === '/api/packages' && method === 'POST') {
         const body = await parseRequestBody(req);
         const packages = readJson('packages.json', []);
-        const newId = 'pkg-' + String(Date.now()).slice(-6);
         const newPkg = {
-          id: newId,
-          ...body,
-          rating: body.rating || 5.0,
-          reviewCount: body.reviewCount || 0,
+          id: `pkg-${Date.now()}`,
+          title: body.title || '새로운 여행 패키지',
+          destination: body.destination || '여행지',
+          country: body.country || '기타',
+          price: Number(body.price) || 0,
+          originalPrice: Number(body.originalPrice) || Number(body.price) || 0,
+          status: body.status || '예약가능',
+          isActive: body.isActive !== false,
+          summary: body.summary || '',
+          imageUrl: body.imageUrl || '/images/default.jpg',
           createdAt: new Date().toISOString()
         };
         packages.unshift(newPkg);
         writeJson('packages.json', packages);
-        return sendJson(res, 201, { success: true, message: '여행 상품이 성공적으로 등록되었습니다.', data: newPkg });
+        return sendJson(res, 201, { success: true, message: '패키지 상품이 등록되었습니다.', data: newPkg });
       }
 
-      // 4. DELETE /api/packages/:id
+      // 4-3. DELETE /api/packages/:id
       if (pathname.startsWith('/api/packages/') && method === 'DELETE') {
         const id = pathname.replace('/api/packages/', '');
-        let packages = readJson('packages.json', []);
-        packages = packages.filter(p => p.id !== id);
+        const packages = readJson('packages.json', []);
+        const idx = packages.findIndex(p => p.id === id || p.slug === id);
+        if (idx === -1) {
+          return sendJson(res, 404, { success: false, message: '패키지 상품을 찾을 수 없습니다.' });
+        }
+        packages.splice(idx, 1);
         writeJson('packages.json', packages);
-        return sendJson(res, 200, { success: true, message: '여행 상품이 삭제되었습니다.' });
+        return sendJson(res, 200, { success: true, message: '패키지 상품이 삭제되었습니다.' });
       }
 
       // 5. GET /api/bookings
@@ -1076,11 +1292,11 @@ const server = http.createServer(async (req, res) => {
         return sendJson(res, 200, { success: true, count: bookings.length, data: bookings });
       }
 
-      // 6. POST /api/bookings
+      // 6. POST /api/bookings (예약 생성 + 예약 확인 이메일 자동 발송)
       if (pathname === '/api/bookings' && method === 'POST') {
         const body = await parseRequestBody(req);
-        if (!body.travelerName || !body.phone || !body.departureDate) {
-          return sendJson(res, 400, { success: false, message: '필수 예약자 정보가 누락되었습니다.' });
+        if (!body.packageId || !body.departureDate || !body.travelerName || !body.phone) {
+          return sendJson(res, 400, { success: false, message: '필수 예약 정보를 모두 입력해주세요.' });
         }
 
         const bookings = readJson('bookings.json', []);
@@ -1095,7 +1311,7 @@ const server = http.createServer(async (req, res) => {
           departureDate: body.departureDate,
           travelerName: body.travelerName,
           phone: body.phone,
-          email: body.email || '',
+          email: (body.email || '').trim().toLowerCase(),
           adults: Number(body.adults) || 1,
           children: Number(body.children) || 0,
           totalPrice: Number(body.totalPrice) || 0,
@@ -1109,14 +1325,36 @@ const server = http.createServer(async (req, res) => {
         bookings.unshift(newBooking);
         writeJson('bookings.json', bookings);
 
+        // Automatic Booking Confirmation Email Dispatch
+        let emailSent = false;
+        if (newBooking.email && newBooking.email.includes('@')) {
+          try {
+            const bookingEmailHtml = generateBookingConfirmationEmailHtml(newBooking);
+            sendReliableEmail({
+              toEmail: newBooking.email,
+              subject: `[투어이지] 여행 예약 및 상담 신청이 정상 접수되었습니다. (예약번호: ${newBooking.id})`,
+              html: bookingEmailHtml,
+              text: `[투어이지 예약접수] 예약번호: ${newBooking.id} / 여행상품: ${newBooking.packageTitle} / 출발일: ${newBooking.departureDate}`
+            }).then(() => {
+              console.log(`[Booking] Confirmation email dispatched to ${newBooking.email}`);
+            }).catch(err => {
+              console.error('Booking email error:', err.message);
+            });
+            emailSent = true;
+          } catch (e) {
+            console.error('Booking confirmation email error:', e);
+          }
+        }
+
         return sendJson(res, 201, {
           success: true,
-          message: '예약 및 상담 신청이 성공적으로 접수되었습니다. 담당자가 빠른 시일 내 연락드리겠습니다.',
-          data: newBooking
+          message: '예약 및 상담 신청이 성공적으로 접수되었습니다. 예약 확인 이메일을 발송하였습니다.',
+          data: newBooking,
+          emailSent
         });
       }
 
-      // 7. PATCH /api/bookings/:id (Update Status)
+      // 7. PATCH /api/bookings/:id
       if (pathname.startsWith('/api/bookings/') && method === 'PATCH') {
         const id = pathname.replace('/api/bookings/', '');
         const body = await parseRequestBody(req);
@@ -1136,7 +1374,7 @@ const server = http.createServer(async (req, res) => {
         return sendJson(res, 200, { success: true, count: inquiries.length, data: inquiries });
       }
 
-      // 9. POST /api/inquiries
+      // 9. POST /api/inquiries (1:1 문의 생성 + 고객 접수 확인 이메일 자동 발송)
       if (pathname === '/api/inquiries' && method === 'POST') {
         const body = await parseRequestBody(req);
         if (!body.name || !body.phone || !body.message) {
@@ -1152,7 +1390,7 @@ const server = http.createServer(async (req, res) => {
           id: newInquiryId,
           name: body.name,
           phone: body.phone,
-          email: body.email || '',
+          email: (body.email || '').trim().toLowerCase(),
           category: body.category || '일반 여행 문의',
           destination: body.destination || '미정',
           expectedDate: body.expectedDate || '미정',
@@ -1165,14 +1403,36 @@ const server = http.createServer(async (req, res) => {
         inquiries.unshift(newInquiry);
         writeJson('inquiries.json', inquiries);
 
+        // Automatic 1:1 Inquiry Receipt Confirmation Email
+        let emailSent = false;
+        if (newInquiry.email && newInquiry.email.includes('@')) {
+          try {
+            const inqEmailHtml = generateInquiryReceiptEmailHtml(newInquiry);
+            sendReliableEmail({
+              toEmail: newInquiry.email,
+              subject: `[투어이지] 1:1 맞춤 여행 상담이 정상 접수되었습니다. (문의번호: ${newInquiry.id})`,
+              html: inqEmailHtml,
+              text: `[투어이지 문의접수] 문의번호: ${newInquiry.id} / 희망여행지: ${newInquiry.destination}`
+            }).then(() => {
+              console.log(`[Inquiry] Receipt email dispatched to ${newInquiry.email}`);
+            }).catch(err => {
+              console.error('Inquiry receipt email error:', err.message);
+            });
+            emailSent = true;
+          } catch (e) {
+            console.error('Inquiry email trigger error:', e);
+          }
+        }
+
         return sendJson(res, 201, {
           success: true,
-          message: '1:1 여행 상담 문의가 등록되었습니다. 전문 플래너가 신속히 답변드리겠습니다.',
-          data: newInquiry
+          message: '1:1 여행 상담 문의가 등록되었습니다. 접수 확인 이메일을 발송하였습니다.',
+          data: newInquiry,
+          emailSent
         });
       }
 
-      // 10. PATCH /api/inquiries/:id (Update Status & Add Reply)
+      // 10. PATCH /api/inquiries/:id
       if (pathname.startsWith('/api/inquiries/') && method === 'PATCH') {
         const id = pathname.replace('/api/inquiries/', '');
         const body = await parseRequestBody(req);
@@ -1193,7 +1453,7 @@ const server = http.createServer(async (req, res) => {
         return sendJson(res, 200, { success: true, message: '문의 및 답변이 성공적으로 저장되었습니다.', data: target });
       }
 
-      // 10-1. POST /api/inquiries/:id/send-email
+      // 10-1. POST /api/inquiries/:id/send-email (관리자 1:1 상담 맞춤 견적 이메일 발송)
       if (pathname.startsWith('/api/inquiries/') && pathname.endsWith('/send-email') && method === 'POST') {
         const id = pathname.replace('/api/inquiries/', '').replace('/send-email', '');
         const body = await parseRequestBody(req);
@@ -1240,37 +1500,23 @@ const server = http.createServer(async (req, res) => {
 
       // 10-2. GET /api/smtp-config
       if (pathname === '/api/smtp-config' && method === 'GET') {
-        const smtpCfg = readJson('smtp_config.json', { enabled: true, isConfigured: true, provider: 'daum', host: 'smtp.daum.net', port: 465, enableSsl: true });
+        const smtpCfg = readJson('smtp_config.json', { enabled: true, isConfigured: true, provider: 'naver', host: 'smtp.naver.com', port: 465, enableSsl: true });
         const hasPwd = Boolean(smtpCfg.password);
         
-        // Sanitize accounts dictionary for client
         const accounts = smtpCfg.accounts || {};
         const safeAccounts = {};
         for (const [p, acc] of Object.entries(accounts)) {
           safeAccounts[p] = {
-            host: acc.host,
-            port: acc.port,
-            enableSsl: acc.enableSsl,
-            user: acc.user,
-            fromEmail: acc.fromEmail,
-            fromName: acc.fromName,
-            hasPassword: Boolean(acc.password)
+            ...acc,
+            password: acc.password ? '******' : ''
           };
         }
 
         return sendJson(res, 200, {
           success: true,
-          data: {
-            enabled: smtpCfg.enabled !== false,
-            provider: smtpCfg.provider || 'daum',
-            host: smtpCfg.host || 'smtp.daum.net',
-            port: smtpCfg.port || 465,
-            enableSsl: smtpCfg.enableSsl !== false,
-            user: smtpCfg.user || '',
-            fromEmail: smtpCfg.fromEmail || '',
-            fromName: smtpCfg.fromName || '투어이지(TourEasy)',
-            hasPassword: hasPwd,
-            isConfigured: Boolean(hasPwd && smtpCfg.user),
+          config: {
+            ...smtpCfg,
+            password: hasPwd ? '******' : '',
             accounts: safeAccounts
           }
         });
@@ -1280,7 +1526,7 @@ const server = http.createServer(async (req, res) => {
       if (pathname === '/api/smtp-config' && method === 'POST') {
         const body = await parseRequestBody(req);
         const existing = readJson('smtp_config.json', {});
-        const provider = body.provider || existing.provider || 'daum';
+        const provider = (body.provider || existing.provider || 'naver').toLowerCase();
         const accounts = existing.accounts || {};
 
         let newPwd = body.password;
@@ -1289,7 +1535,7 @@ const server = http.createServer(async (req, res) => {
         }
         let rawU = (body.user || '').trim();
         let rawF = (body.fromEmail || '').trim();
-        const h = body.host || 'smtp.daum.net';
+        const h = body.host || (provider === 'daum' ? 'smtp.daum.net' : 'smtp.naver.com');
 
         if (rawU.includes('/')) {
           const parts = rawU.split('/');
@@ -1365,9 +1611,9 @@ const server = http.createServer(async (req, res) => {
           };
           const testReply = {
             adminName: '투어이지 시스템 관리자',
-            quotedPrice: '테스트 연동 정상',
+            quotedPrice: '연동 상태 정상 (250 OK)',
             recommendedPackageTitle: '투어이지 전용 안심 메일 서비스',
-            content: '투어이지(TourEasy) 관리자 시스템에서 발송된 SMTP 연동 테스트 메일입니다. 본 메일이 정상 수신되었다면 고객 맞춤 견적 및 상담 답변 메일이 정상적으로 발송됩니다.'
+            content: '투어이지(TourEasy) 관리자 시스템에서 발송된 SMTP 연동 테스트 메일입니다. 본 메일이 정상 수신되었다면 본인인증, 임시비밀번호, 예약확인서, 고객 맞춤 견적 메일이 모두 정상적으로 발송됩니다.'
           };
           const testHtml = generateInquiryEmailHtml(testInq, testReply);
 
@@ -1399,7 +1645,7 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // 11. GET /api/stats (Admin Dashboard Stats)
+      // 11. GET /api/stats
       if (pathname === '/api/stats' && method === 'GET') {
         const packages = readJson('packages.json', []);
         const bookings = readJson('bookings.json', []);
@@ -1441,7 +1687,7 @@ const server = http.createServer(async (req, res) => {
   serveStaticFile(req, res, parsedUrl);
 });
 
-// Start Server with fallback port
+// Start Server
 server.listen(PORT, () => {
   console.log(`====================================================`);
   console.log(`✈️ [투어이지(TourEasy)] 여행사 웹 서버가 가동되었습니다.`);
