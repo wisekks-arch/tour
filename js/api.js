@@ -5082,8 +5082,9 @@ const TourAPI = {
     let backendSuccess = false;
     let backendResult = null;
 
-    // Dedicated backend SMTP candidate endpoints
+    // Dedicated backend SMTP candidate endpoints (HTTPS Tunnel + Local API)
     const backendEndpoints = [
+      'https://extraction-stocks-mold-hat.trycloudflare.com/api/auth/issue-temp-password',
       `${API_BASE}/auth/issue-temp-password`,
       'http://localhost:3000/api/auth/issue-temp-password',
       'https://okay-successful-deutsch-housewives.trycloudflare.com/api/auth/issue-temp-password'
