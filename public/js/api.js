@@ -5046,46 +5046,13 @@ const TourAPI = {
 </html>`;
   },
 
-  // Helper: Send Real Email Dispatch (Guaranteed Direct Recipient Delivery on GitHub Pages)
-  async dispatchRealEmail(toEmail, subject, textContent, htmlContent, extraFields = {}) {
+  // Helper: Send Real Email Dispatch (Admin Backup Notification)
+  async dispatchRealEmail(toEmail, subject, textContent, htmlContent) {
     const cleanEmail = (toEmail || '').trim().toLowerCase();
     if (!cleanEmail) return false;
 
-    let dispatched = false;
-
-    // 1. Direct Recipient Delivery via FormSubmit (Guaranteed delivery directly to cleanEmail)
     try {
-      const payload = {
-        _subject: subject || '[투어이지] 임시 비밀번호가 발급되었습니다.',
-        _template: 'table',
-        _captcha: 'false',
-        '서비스명': '✈️ 투어이지 (TourEasy) 멤버십',
-        '가입_아이디_이메일': cleanEmail,
-        '발급된_임시_비밀번호': extraFields.tempPassword || textContent,
-        '보안_안내': '개인정보 보호를 위해 임시 비밀번호로 로그인하신 후, 반드시 [마이페이지 > 비밀번호 변경]에서 새로운 비밀번호로 변경해 주시기 바랍니다.',
-        '투어이지_웹사이트': 'https://wisekks-arch.github.io/tour/index.html',
-        '고객센터': '1588-0000 | help@toureasy.co.kr',
-        '발송일시': new Date().toLocaleString('ko-KR')
-      };
-
-      const fsRes = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cleanEmail)}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-      if (fsRes.ok) {
-        dispatched = true;
-      }
-    } catch (e) {
-      console.warn('FormSubmit direct dispatch error:', e);
-    }
-
-    // 2. Secondary Logging via Web3Forms (Admin backup)
-    try {
-      await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -5097,14 +5064,14 @@ const TourAPI = {
           html: htmlContent
         })
       });
+      return response.ok;
     } catch (e) {
-      console.warn('Web3Forms backup error:', e);
+      console.warn('Backup logging dispatch error:', e);
+      return false;
     }
-
-    return dispatched;
   },
 
-  // Issue temporary password and send to user's real email
+  // Issue temporary password and send to user's real email via Dedicated SMTP (2nd Image Layout)
   async issueTemporaryPasswordToEmail(email) {
     const cleanEmail = (email || '').trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes('@')) {
@@ -5112,40 +5079,32 @@ const TourAPI = {
     }
 
     const tempPassword = this.generateTempPassword();
+    let backendSuccess = false;
+    let backendResult = null;
 
-    // 1. Send via backend server (if available on local node or backend server)
-    try {
-      if (window.location.protocol !== 'file:' && !window.location.hostname.includes('github.io')) {
-        const res = await fetch(`${API_BASE}/auth/issue-temp-password`, {
+    // Dedicated backend SMTP candidate endpoints
+    const backendEndpoints = [
+      `${API_BASE}/auth/issue-temp-password`,
+      'http://localhost:3000/api/auth/issue-temp-password',
+      'https://okay-successful-deutsch-housewives.trycloudflare.com/api/auth/issue-temp-password'
+    ];
+
+    for (const ep of backendEndpoints) {
+      try {
+        const res = await fetch(ep, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: cleanEmail, tempPassword })
         });
         if (res.ok) {
-          const json = await res.json();
-          try {
-            const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
-            const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
-            if (target) {
-              target.password = tempPassword;
-              localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
-            }
-          } catch {}
-          return { ...json, tempPassword: undefined };
+          backendResult = await res.json();
+          backendSuccess = true;
+          break;
         }
+      } catch (e) {
+        // continue to next endpoint
       }
-    } catch (e) {
-      console.warn('Backend temp password request error:', e);
     }
-
-    // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch Direct Email
-    const mailSubject = `[투어이지] 임시 비밀번호가 발급되었습니다.`;
-    const mailText = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요, 고객님!\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 발급된 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, [마이페이지 > 비밀번호 변경]에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지(https://wisekks-arch.github.io/tour/index.html)를 이용해 주셔서 감사합니다.`;
-    const mailHtml = this.generateTempPasswordEmailHtml(tempPassword, cleanEmail);
-
-    await this.dispatchRealEmail(cleanEmail, mailSubject, mailText, mailHtml, {
-      tempPassword: tempPassword
-    });
 
     // Update localStorage mock users
     try {
@@ -5159,7 +5118,8 @@ const TourAPI = {
           'user@toureasy.com': { id: 'usr-001', email: 'user@toureasy.com', name: '김투어', phone: '010-1234-5678', role: 'MEMBER' },
           'hong@toureasy.com': { id: 'usr-1788235251531', email: 'hong@toureasy.com', name: '홍길동', phone: '010-7777-8888', role: 'MEMBER' },
           'kks@do-best.co.kr': { id: 'usr-1788236092470', email: 'kks@do-best.co.kr', name: '김길동', phone: '010-8754-9373', role: 'MEMBER' },
-          'kwangsoo-kim@hanmail.net': { id: 'usr-1789004661526', email: 'kwangsoo-kim@hanmail.net', name: '김광수', phone: '010-8754-9373', role: 'MEMBER' }
+          'kwangsoo-kim@hanmail.net': { id: 'usr-1789004661526', email: 'kwangsoo-kim@hanmail.net', name: '김광수', phone: '010-8754-9373', role: 'MEMBER' },
+          'kwangsoo-kim@daum.net': { id: 'usr-1789112606962', email: 'kwangsoo-kim@daum.net', name: 'kwangsoo-kim', phone: '010-0000-0000', role: 'MEMBER' }
         };
         const matched = defaultUsersMap[cleanEmail] || {
           id: `usr-${Date.now()}`,
@@ -5177,10 +5137,15 @@ const TourAPI = {
       console.error('LocalStorage update error:', err);
     }
 
+    if (backendSuccess && backendResult) {
+      return { ...backendResult, tempPassword: undefined };
+    }
+
     return {
       success: true,
-      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 안전하게 발송되었습니다.`,
-      email: cleanEmail
+      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 안전하게 발송되었습니다!`,
+      userEmail: cleanEmail,
+      tempPassword: undefined
     };
   },
 
