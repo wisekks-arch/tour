@@ -4647,7 +4647,6 @@ const TourAPI = {
     // 1. Try backend server endpoints
     const endpoints = [
       `${API_BASE}/inquiries/${id}/send-email`,
-      `https://okay-successful-deutsch-housewives.trycloudflare.com/api/inquiries/${id}/send-email`,
       `http://localhost:3000/api/inquiries/${id}/send-email`,
       `http://127.0.0.1:3000/api/inquiries/${id}/send-email`
     ];
@@ -5425,7 +5424,8 @@ const TourAPI = {
   async getSmtpConfig() {
     const endpoints = [
       `${API_BASE}/smtp-config`,
-      `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-config`
+      `http://localhost:3000/api/smtp-config`,
+      `http://127.0.0.1:3000/api/smtp-config`
     ];
 
     for (const ep of endpoints) {
@@ -5504,7 +5504,8 @@ const TourAPI = {
       localStorage.setItem('toureasy_smtp_config', JSON.stringify(configData));
       const endpoints = [
         `${API_BASE}/smtp-config`,
-        `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-config`
+        `http://localhost:3000/api/smtp-config`,
+        `http://127.0.0.1:3000/api/smtp-config`
       ];
       for (const ep of endpoints) {
         try {
@@ -5529,10 +5530,9 @@ const TourAPI = {
   async testSmtp(payload) {
     const recipient = (payload.recipientEmail || payload.email || 'wisekks@gmail.com').trim();
     
-    // 1. Try backend server endpoints (API Base, Cloudflare Tunnel, Localhost)
+    // 1. Try backend server endpoints (API Base, Localhost)
     const endpoints = [
       `${API_BASE}/smtp-test`,
-      `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-test`,
       `http://localhost:3000/api/smtp-test`,
       `http://127.0.0.1:3000/api/smtp-test`
     ];
