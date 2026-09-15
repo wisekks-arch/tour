@@ -5047,7 +5047,7 @@ const TourAPI = {
               localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
             }
           } catch {}
-          return { ...json, tempPassword: json.tempPassword || tempPassword };
+          return { ...json, tempPassword: undefined };
         }
       }
     } catch (e) {
@@ -5055,8 +5055,8 @@ const TourAPI = {
     }
 
     // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch real email
-    const mailSubject = `[투어이지] 임시 비밀번호 안내 (${tempPassword})`;
-    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 발급된 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n감사합니다.`;
+    const mailSubject = `[투어이지] 임시 비밀번호 안내`;
+    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지를 이용해 주셔서 감사합니다.`;
     this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
 
     // Update localStorage mock users
@@ -5091,9 +5091,8 @@ const TourAPI = {
 
     return {
       success: true,
-      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 발송되었습니다.`,
-      email: cleanEmail,
-      tempPassword
+      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 안전하게 발송되었습니다.`,
+      email: cleanEmail
     };
   },
 
