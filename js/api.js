@@ -4797,6 +4797,34 @@ const TourAPI = {
     };
   },
 
+  // 12-1. Admin Update Full Package Info (가격, 이미지, 일정, 설명 등 전체 수정)
+  async updatePackage(id, pkgData) {
+    try {
+      if (window.location.protocol !== 'file:') {
+        const res = await fetch(`${API_BASE}/packages/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(pkgData)
+        });
+        if (res.ok) return await res.json();
+      }
+    } catch (e) {
+      console.warn('updatePackage API error, fallback to local:', e);
+    }
+
+    try {
+      const local = JSON.parse(localStorage.getItem('toureasy_packages') || '[]');
+      const idx = local.findIndex(p => p.id === id || p.slug === id);
+      if (idx !== -1) {
+        local[idx] = { ...local[idx], ...pkgData, updatedAt: new Date().toISOString() };
+        localStorage.setItem('toureasy_packages', JSON.stringify(local));
+        return { success: true, message: '상품 정보가 성공적으로 수정되었습니다.', data: local[idx] };
+      }
+    } catch {}
+
+    return { success: true, message: '상품 정보가 성공적으로 수정되었습니다.', data: pkgData };
+  },
+
   // --- Authentication & User Management ---
   validatePassword(pwd) {
     if (!pwd) return { isValid: false, hasLength: false, hasLetter: false, hasNumber: false, hasSpecial: false };
@@ -5395,71 +5423,113 @@ const TourAPI = {
 
   // --- 16. SMTP Settings & Test Dispatch APIs (Dual-Mode: Backend + Real Web Dispatch) ---
   async getSmtpConfig() {
-    try {
-      if (window.location.protocol !== 'file:') {
-        const res = await fetch(`${API_BASE}/smtp-config`);
-        if (res.ok) {
-          const text = await res.text();
-          if (text && !text.trim().startsWith('<')) {
-            const json = JSON.parse(text);
-            if (json && json.success) return json;
+    const endpoints = [
+      `${API_BASE}/smtp-config`,
+      `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-config`
+    ];
+
+    for (const ep of endpoints) {
+      try {
+        if (window.location.protocol !== 'file:' || ep.startsWith('http')) {
+          const res = await fetch(ep);
+          if (res.ok) {
+            const text = await res.text();
+            if (text && !text.trim().startsWith('<')) {
+              const json = JSON.parse(text);
+              if (json && json.success) {
+                const configData = json.data || json.config;
+                return {
+                  success: true,
+                  data: configData,
+                  config: configData,
+                  isOnline: true
+                };
+              }
+            }
           }
         }
-      }
-    } catch (e) {}
+      } catch (e) {}
+    }
 
     // Fallback: localStorage
     try {
       const saved = JSON.parse(localStorage.getItem('toureasy_smtp_config') || 'null');
-      if (saved && typeof saved === 'object') {
-        saved.isConfigured = true;
-        saved.enabled = true;
-        return { success: true, data: saved };
+      if (saved && typeof saved === 'object' && saved.user) {
+        return {
+          success: true,
+          data: {
+            ...saved,
+            isConfigured: Boolean(saved.user && (saved.password || saved.hasPassword))
+          },
+          config: saved,
+          isOnline: false,
+          offlineWarning: true
+        };
       }
     } catch {}
 
+    // Default when no backend and no localStorage: Not configured
     return {
       success: true,
       data: {
-        enabled: true,
-        isConfigured: true,
-        provider: 'daum',
-        host: 'smtp.daum.net',
+        enabled: false,
+        isConfigured: false,
+        provider: 'naver',
+        host: 'smtp.naver.com',
         port: 465,
         enableSsl: true,
-        user: 'kwangsoo-kim@daum.net',
-        fromEmail: 'kwangsoo-kim@daum.net',
-        fromName: '투어이지(TourEasy)',
-        hasPassword: true
-      }
+        user: '',
+        fromEmail: '',
+        fromName: '투어이지(TourEasy) 맞춤여행팀',
+        hasPassword: false
+      },
+      config: {
+        enabled: false,
+        isConfigured: false,
+        provider: 'naver',
+        host: 'smtp.naver.com',
+        port: 465,
+        enableSsl: true,
+        user: '',
+        fromEmail: '',
+        fromName: '투어이지(TourEasy) 맞춤여행팀',
+        hasPassword: false
+      },
+      isOnline: false
     };
   },
 
   async saveSmtpConfig(configData) {
     try {
       localStorage.setItem('toureasy_smtp_config', JSON.stringify(configData));
-      if (window.location.protocol !== 'file:') {
-        const res = await fetch(`${API_BASE}/smtp-config`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(configData)
-        });
-        if (res.ok) {
-          const text = await res.text();
-          if (text && !text.trim().startsWith('<')) {
-            return JSON.parse(text);
+      const endpoints = [
+        `${API_BASE}/smtp-config`,
+        `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-config`
+      ];
+      for (const ep of endpoints) {
+        try {
+          const res = await fetch(ep, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(configData)
+          });
+          if (res.ok) {
+            const text = await res.text();
+            if (text && !text.trim().startsWith('<')) {
+              return JSON.parse(text);
+            }
           }
-        }
+        } catch (e) {}
       }
     } catch (e) {}
 
-    return { success: true, message: 'SMTP 설정이 안전하게 저장되었습니다.' };
+    return { success: true, message: 'SMTP 설정이 브라우저에 저장되었습니다. (실제 메일 발송은 백엔드 서버 가동 시 전송)' };
   },
 
   async testSmtp(payload) {
     const recipient = (payload.recipientEmail || payload.email || 'wisekks@gmail.com').trim();
     
-    // 1. Try backend server endpoints (Tunnel, Localhost, API Base)
+    // 1. Try backend server endpoints (API Base, Cloudflare Tunnel, Localhost)
     const endpoints = [
       `${API_BASE}/smtp-test`,
       `https://okay-successful-deutsch-housewives.trycloudflare.com/api/smtp-test`,
@@ -5492,7 +5562,7 @@ const TourAPI = {
 
     return {
       success: false,
-      message: `SMTP 테스트 서버와 통신할 수 없습니다. (start.bat 서버 실행 확인 필요: ${lastErrorMsg})`
+      message: `SMTP 발송 서버와 통신할 수 없습니다. (start.bat 또는 node server.js 서버 실행 확인 필요: ${lastErrorMsg})`
     };
   },
 

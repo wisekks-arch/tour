@@ -1242,8 +1242,8 @@ const server = http.createServer(async (req, res) => {
         return sendJson(res, 200, { success: true, data: target });
       }
 
-      // 4-1. PATCH /api/packages/:id
-      if (pathname.startsWith('/api/packages/') && method === 'PATCH') {
+      // 4-1. PATCH or PUT /api/packages/:id
+      if (pathname.startsWith('/api/packages/') && (method === 'PATCH' || method === 'PUT')) {
         const id = pathname.replace('/api/packages/', '');
         const body = await parseRequestBody(req);
         const packages = readJson('packages.json', []);
@@ -1251,9 +1251,23 @@ const server = http.createServer(async (req, res) => {
         if (idx === -1) {
           return sendJson(res, 404, { success: false, message: '패키지 상품을 찾을 수 없습니다.' });
         }
-        packages[idx] = { ...packages[idx], ...body, updatedAt: new Date().toISOString() };
+
+        const current = packages[idx];
+        const updated = {
+          ...current,
+          ...body,
+          price: body.price !== undefined ? (Number(body.price) || 0) : current.price,
+          originalPrice: body.originalPrice !== undefined ? (body.originalPrice === null || body.originalPrice === '' ? null : Number(body.originalPrice)) : current.originalPrice,
+          durationNights: body.durationNights !== undefined ? (parseInt(body.durationNights, 10) || current.durationNights || 3) : current.durationNights,
+          durationDays: body.durationDays !== undefined ? (parseInt(body.durationDays, 10) || current.durationDays || 4) : current.durationDays,
+          status: body.status !== undefined ? body.status : current.status,
+          isActive: body.status !== undefined ? (body.status !== '미운영' && body.status !== 'INACTIVE') : (body.isActive !== undefined ? body.isActive : current.isActive),
+          updatedAt: new Date().toISOString()
+        };
+
+        packages[idx] = updated;
         writeJson('packages.json', packages);
-        return sendJson(res, 200, { success: true, message: '패키지 정보가 수정되었습니다.', data: packages[idx] });
+        return sendJson(res, 200, { success: true, message: '패키지 정보가 성공적으로 수정되었습니다.', data: packages[idx] });
       }
 
       // 4-2. POST /api/packages
@@ -1517,13 +1531,17 @@ const server = http.createServer(async (req, res) => {
           };
         }
 
+        const safeData = {
+          ...smtpCfg,
+          password: hasPwd ? '******' : '',
+          hasPassword: hasPwd,
+          accounts: safeAccounts
+        };
+
         return sendJson(res, 200, {
           success: true,
-          config: {
-            ...smtpCfg,
-            password: hasPwd ? '******' : '',
-            accounts: safeAccounts
-          }
+          data: safeData,
+          config: safeData
         });
       }
 

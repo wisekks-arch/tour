@@ -922,6 +922,190 @@
     </div>
   </div>
 
+  <!-- Modal: Edit Package -->
+  <div id="modal-edit-package" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white max-w-3xl w-full rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-100 my-8 max-h-[90vh] overflow-y-auto">
+      
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100 sticky top-0 bg-white z-10">
+        <div>
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center">
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
+            </span>
+            여행 상품 정보 수정
+          </h3>
+          <p id="edit-pkg-id-badge" class="text-[11px] text-slate-400 font-mono mt-0.5">ID: pkg-xxx</p>
+        </div>
+        <button type="button" onclick="closeModal('modal-edit-package')" class="text-slate-400 hover:text-slate-700 p-1 rounded-lg transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="form-edit-package" class="space-y-4 text-xs">
+        <input type="hidden" id="ep-id">
+
+        <!-- 1. Basic Info -->
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">상품 제목 <span class="text-rose-500">*</span></label>
+          <input type="text" id="ep-title" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:border-sky-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">지역 권역</label>
+            <select id="ep-region" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:border-sky-500 focus:outline-none">
+              <option value="동남아">동남아</option>
+              <option value="일본">일본</option>
+              <option value="유럽">유럽</option>
+              <option value="미주/하와이">미주/하와이</option>
+              <option value="국내">국내</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">국가 / 도시 <span class="text-rose-500">*</span></label>
+            <input type="text" id="ep-city" required placeholder="예: 베트남 / 다낭" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">테마 / 태그</label>
+            <input type="text" id="ep-theme" placeholder="예: 휴양/힐링, 5성급호텔" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:border-sky-500 focus:outline-none">
+          </div>
+        </div>
+
+        <!-- 2. Pricing & Duration & Status -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-sky-50/50 border border-sky-100 rounded-2xl">
+          <div>
+            <label class="block font-bold text-sky-900 mb-1">판매 가격 (원) <span class="text-rose-500">*</span></label>
+            <input type="number" id="ep-price" required placeholder="699000" class="w-full p-2 bg-white border border-sky-200 rounded-xl text-xs font-black text-sky-600 focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">정상 가격 (원)</label>
+            <input type="number" id="ep-original-price" placeholder="890000" class="w-full p-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-500 focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">일정 (박 / 일)</label>
+            <div class="flex items-center gap-1">
+              <input type="number" id="ep-nights" min="0" placeholder="4" class="w-1/2 p-2 bg-white border border-slate-200 rounded-xl text-xs text-center font-bold">
+              <span class="text-slate-400 font-bold">박</span>
+              <input type="number" id="ep-days" min="1" placeholder="5" class="w-1/2 p-2 bg-white border border-slate-200 rounded-xl text-xs text-center font-bold">
+              <span class="text-slate-400 font-bold">일</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">운영 노출 상태</label>
+            <select id="ep-status" class="w-full p-2 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:border-sky-500 focus:outline-none">
+              <option value="운영중">🟢 운영중 (고객 노출)</option>
+              <option value="미운영">⚪ 미운영 (고객 숨김)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 3. Main Thumbnail Image (PC Upload or URL) -->
+        <div class="space-y-2.5 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+          <div class="flex items-center justify-between">
+            <label class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4 text-sky-600"></i> 대표 썸네일 이미지 변경 <span class="text-rose-500">*</span>
+            </label>
+            <!-- Tab switch: PC File vs Web URL -->
+            <div class="flex bg-slate-200/80 p-0.5 rounded-xl text-[11px] font-bold">
+              <button type="button" id="edit-img-tab-file" onclick="switchEditImageInputMode('file')" class="px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold">
+                💻 PC 파일 업로드
+              </button>
+              <button type="button" id="edit-img-tab-url" onclick="switchEditImageInputMode('url')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold">
+                🌐 웹 URL 입력
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode 1: PC File Input Area -->
+          <div id="edit-img-mode-file" class="space-y-2">
+            <label for="ep-image-file" class="border-2 border-dashed border-sky-200 hover:border-sky-500 bg-sky-50/50 hover:bg-sky-50 rounded-2xl p-3.5 flex flex-col items-center justify-center gap-1.5 cursor-pointer transition group">
+              <div class="w-8 h-8 rounded-xl bg-white text-sky-600 shadow-sm flex items-center justify-center group-hover:scale-105 transition">
+                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+              </div>
+              <div class="text-center">
+                <span class="text-xs font-bold text-slate-800 block group-hover:text-sky-600">내 PC에서 새 대표 이미지 선택 (클릭)</span>
+                <span class="text-[10.5px] text-slate-400 block mt-0.5">JPG, PNG, WEBP, GIF 이미지 지원</span>
+              </div>
+              <input type="file" id="ep-image-file" accept="image/*" onchange="handleEditPackageFileSelect(event)" class="hidden">
+            </label>
+          </div>
+
+          <!-- Mode 2: Web URL Input Area -->
+          <div id="edit-img-mode-url" class="hidden space-y-1">
+            <input type="url" id="ep-thumbnail" oninput="handleEditPackageUrlInput(this.value)" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-xs focus:border-sky-500 focus:outline-none">
+            <span class="text-[11px] text-slate-400 block pl-1">외부 고화질 이미지 URL을 직접 입력하세요.</span>
+          </div>
+
+          <!-- Image Preview Card -->
+          <div id="ep-preview-container" class="relative rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-950 aspect-video max-h-44 flex items-center justify-center shadow-inner">
+            <img id="ep-preview-img" src="" alt="Preview" class="w-full h-full object-cover">
+            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold flex items-center gap-1 shadow-sm">
+              <i data-lucide="eye" class="w-3 h-3 text-teal-400"></i> 대표 이미지 미리보기
+            </div>
+            <div id="ep-file-info" class="absolute bottom-2.5 left-2.5 right-2.5 px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md text-white text-[11px] flex items-center justify-between">
+              <span id="ep-file-name" class="truncate max-w-[240px] text-slate-200 font-mono">현재 적용된 이미지</span>
+              <button type="button" onclick="clearEditPackageImage()" class="text-rose-400 hover:text-rose-300 font-bold ml-2 shrink-0 cursor-pointer text-xs">
+                초기화
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Additional Gallery Images -->
+        <div class="space-y-2.5 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+          <div class="flex items-center justify-between">
+            <label class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+              <i data-lucide="images" class="w-4 h-4 text-purple-600"></i> 상세 갤러리 추가 이미지 (<span id="ep-gallery-count">0</span>개)
+            </label>
+            <div class="flex items-center gap-2">
+              <label for="ep-gallery-file-input" class="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-lg text-[11px] border border-purple-200 cursor-pointer transition flex items-center gap-1">
+                <i data-lucide="plus" class="w-3 h-3"></i> PC 사진 추가
+                <input type="file" id="ep-gallery-file-input" accept="image/*" multiple onchange="handleEditGalleryFiles(event)" class="hidden">
+              </label>
+              <button type="button" onclick="promptAddGalleryUrl()" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] border border-slate-200 cursor-pointer transition flex items-center gap-1">
+                <i data-lucide="link" class="w-3 h-3"></i> URL 추가
+              </button>
+            </div>
+          </div>
+
+          <!-- Gallery List Grid -->
+          <div id="ep-gallery-list" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2.5 pt-1">
+            <!-- Dynamic Gallery Thumbnails with Delete Button -->
+          </div>
+        </div>
+
+        <!-- 5. Description & Highlights -->
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">상품 요약 설명</label>
+          <textarea id="ep-summary" rows="3" placeholder="상품에 대한 매력적인 핵심 요약 설명을 작성해주세요." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">포함 사항 (줄바꿈으로 구분)</label>
+            <textarea id="ep-included" rows="3" placeholder="왕복 항공권&#10;5성급 리조트 숙박&#10;전 일정 전용 차량" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none"></textarea>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">불포함 사항 (줄바꿈으로 구분)</label>
+            <textarea id="ep-excluded" rows="3" placeholder="개인 경비&#10;가이드/기사 팁" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none"></textarea>
+          </div>
+        </div>
+
+        <!-- Submit & Cancel Buttons -->
+        <div class="pt-3 flex gap-3 sticky bottom-0 bg-white py-2 border-t border-slate-100">
+          <button type="button" onclick="closeModal('modal-edit-package')" class="flex-1 py-3 bg-slate-100 font-bold rounded-xl text-slate-700 hover:bg-slate-200 transition cursor-pointer">
+            취소
+          </button>
+          <button type="submit" id="btn-submit-edit-pkg" class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md transition cursor-pointer flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i> 수정 내용 저장하기
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
   
   <!-- SMTP Configuration Modal -->
   <div id="modal-smtp" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
@@ -1210,6 +1394,89 @@
           alert('상품 등록 처리 중 오류가 발생했습니다.');
         }
       });
+
+      // Edit Package Form Submit Handler
+      const editPkgForm = document.getElementById('form-edit-package');
+      if (editPkgForm) {
+        editPkgForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('btn-submit-edit-pkg');
+          const originalBtnText = btn ? btn.innerHTML : '수정 내용 저장하기';
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline"></i> 저장 중...`;
+            if (window.lucide) lucide.createIcons();
+          }
+
+          const id = document.getElementById('ep-id').value;
+          const titleVal = document.getElementById('ep-title').value.trim();
+          const thumbnailVal = window.currentEditPackageThumbnail || document.getElementById('ep-thumbnail')?.value?.trim() || currentEditPackageOriginalThumbnail;
+
+          const includedStr = document.getElementById('ep-included').value.trim();
+          const excludedStr = document.getElementById('ep-excluded').value.trim();
+
+          const statusVal = document.getElementById('ep-status').value;
+          const isActive = statusVal === '운영중';
+
+          const payload = {
+            title: titleVal,
+            region: document.getElementById('ep-region').value,
+            city: document.getElementById('ep-city').value.trim(),
+            theme: document.getElementById('ep-theme').value.trim(),
+            durationNights: parseInt(document.getElementById('ep-nights').value, 10) || 3,
+            durationDays: parseInt(document.getElementById('ep-days').value, 10) || 4,
+            price: parseInt(document.getElementById('ep-price').value, 10) || 0,
+            originalPrice: parseInt(document.getElementById('ep-original-price').value, 10) || null,
+            status: statusVal,
+            isActive: isActive,
+            thumbnail: thumbnailVal,
+            images: currentEditPackageImages.length > 0 ? currentEditPackageImages : [thumbnailVal],
+            summary: document.getElementById('ep-summary').value.trim(),
+            included: includedStr ? includedStr.split('\n').map(s => s.trim()).filter(Boolean) : [],
+            excluded: excludedStr ? excludedStr.split('\n').map(s => s.trim()).filter(Boolean) : []
+          };
+
+          try {
+            const res = await TourAPI.updatePackage(id, payload);
+            if (res && res.success) {
+              showToast(`✅ [${titleVal}] 상품 정보가 성공적으로 수정되었습니다!`);
+              closeModal('modal-edit-package');
+
+              // Update cachedPackages in memory
+              const idx = cachedPackages.findIndex(p => p.id === id || p.slug === id);
+              if (idx !== -1) {
+                cachedPackages[idx] = { ...cachedPackages[idx], ...payload, ...(res.data || {}) };
+              }
+
+              // Re-render and update UI
+              renderPackagesAdmin(cachedPackages);
+              updatePackageFilterCounts(cachedPackages);
+
+              // Update KPI stats dynamically
+              const statsRes = await TourAPI.getAdminStats();
+              if (statsRes && statsRes.data) {
+                const s = statsRes.data;
+                const elPkgCount = document.getElementById('stat-package-count');
+                if (elPkgCount) elPkgCount.textContent = `${s.packageCount || 75}개`;
+                const elPkgSub = document.getElementById('stat-package-subtext');
+                if (elPkgSub) elPkgSub.textContent = `운영 중 ${s.activePackageCount !== undefined ? s.activePackageCount : 74}개 · 미운영 ${s.inactivePackageCount !== undefined ? s.inactivePackageCount : 1}개`;
+              }
+              if (window.lucide) lucide.createIcons();
+            } else {
+              alert(res?.message || '상품 정보 수정에 실패했습니다.');
+            }
+          } catch (err) {
+            console.error('Error updating package:', err);
+            alert('상품 수정 처리 중 오류가 발생했습니다.');
+          } finally {
+            if (btn) {
+              btn.disabled = false;
+              btn.innerHTML = originalBtnText;
+              if (window.lucide) lucide.createIcons();
+            }
+          }
+        });
+      }
 
       // SMTP Settings Form Submission
       const smtpForm = document.getElementById('form-smtp-settings');
@@ -1821,25 +2088,27 @@
     async function checkSmtpStatus() {
       try {
         const res = await TourAPI.getSmtpConfig();
-        if (res && res.success && res.data) {
-          if (res.data.accounts) savedSmtpAccounts = res.data.accounts;
+        const d = (res && res.success && (res.data || res.config)) ? (res.data || res.config) : null;
+        if (d && d.accounts) {
+          savedSmtpAccounts = d.accounts;
         }
         const badge = document.getElementById('header-smtp-badge');
         const replyLabel = document.getElementById('reply-smtp-status-label');
         const btnSmtp = document.getElementById('btn-smtp-settings');
         const replySmtpBtn = document.getElementById('reply-smtp-btn');
 
-        const d = (res && res.success && res.data) ? res.data : null;
         const hasActiveAccount = d && d.accounts && Object.values(d.accounts).some(acc => acc && acc.user && (acc.hasPassword || acc.password));
-        const isReady = Boolean(
+        const isConfigured = Boolean(
           d &&
           d.enabled !== false &&
-          d.isConfigured === true &&
-          d.user &&
+          (d.isConfigured === true || hasActiveAccount) &&
+          (d.user || hasActiveAccount) &&
           (d.hasPassword === true || Boolean(d.password) || hasActiveAccount)
         );
 
-        if (isReady) {
+        const isOnline = Boolean(res && res.isOnline !== false);
+
+        if (isConfigured && isOnline) {
           if (badge) {
             badge.className = 'px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold border border-emerald-400/40 inline-flex items-center gap-1 shadow-xs';
             badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>연동완료`;
@@ -1853,6 +2122,21 @@
           if (replySmtpBtn) {
             replySmtpBtn.className = 'text-[10px] px-2.5 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-full font-bold border border-emerald-400/40 flex items-center gap-1 transition cursor-pointer';
             replySmtpBtn.innerHTML = `<i data-lucide="settings" class="w-3 h-3"></i> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-0.5"></span><span id="reply-smtp-status-label">SMTP 연동완료</span>`;
+          }
+        } else if (isConfigured && !isOnline) {
+          if (badge) {
+            badge.className = 'px-2 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-300 font-extrabold border border-amber-400/40 inline-flex items-center gap-1 shadow-xs';
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]"></span>서버대기`;
+          }
+          if (btnSmtp) {
+            btnSmtp.className = 'px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold rounded-xl flex items-center gap-1.5 border border-amber-500/40 transition shadow-sm cursor-pointer';
+          }
+          if (replyLabel) {
+            replyLabel.textContent = '서버 실행 필요';
+          }
+          if (replySmtpBtn) {
+            replySmtpBtn.className = 'text-[10px] px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-full font-bold border border-amber-400/40 flex items-center gap-1 transition cursor-pointer';
+            replySmtpBtn.innerHTML = `<i data-lucide="settings" class="w-3 h-3"></i> <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block mr-0.5"></span><span id="reply-smtp-status-label">서버 실행 필요</span>`;
           }
         } else {
           if (badge) {
@@ -1877,8 +2161,8 @@
     async function openSmtpModal() {
       try {
         const res = await TourAPI.getSmtpConfig();
-        if (res && res.success && res.data) {
-          const d = res.data;
+        const d = (res && res.success && (res.data || res.config)) ? (res.data || res.config) : null;
+        if (d) {
           savedSmtpAccounts = d.accounts || {};
           currentSmtpProvider = d.provider || 'naver';
           selectSmtpPreset(currentSmtpProvider, false);
@@ -1888,7 +2172,7 @@
           if (d.fromName) document.getElementById('smtp-from-name').value = d.fromName;
           if (d.fromEmail) document.getElementById('smtp-from-email').value = d.fromEmail;
           if (d.enableSsl !== undefined) document.getElementById('smtp-enable-ssl').checked = d.enableSsl;
-          if (d.hasPassword) {
+          if (d.hasPassword || d.password) {
             document.getElementById('smtp-password').value = '';
             document.getElementById('smtp-password').placeholder = '설정됨 (보존 중 - 변경 시에만 입력)';
           }
@@ -2689,11 +2973,18 @@
                 </select>
               </div>
 
-              <div class="flex justify-between items-center px-1 text-[11px]">
-                <a href="package-detail.html?id=${p.id}" target="_blank" class="text-sky-600 font-bold hover:underline flex items-center gap-1">
+              <!-- Edit & Action Buttons -->
+              <div class="pt-0.5 flex items-center gap-2">
+                <button onclick="openEditPackageModal('${p.id}')" class="flex-1 py-1.5 px-3 bg-sky-50 hover:bg-sky-100 text-sky-700 font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 transition border border-sky-200/80 shadow-2xs cursor-pointer">
+                  <i data-lucide="edit-3" class="w-3.5 h-3.5 text-sky-600"></i> 상품 정보 수정
+                </button>
+              </div>
+
+              <div class="flex justify-between items-center px-1 text-[11px] pt-0.5">
+                <a href="package-detail.html?id=${p.id}" target="_blank" class="text-slate-500 hover:text-sky-600 font-bold hover:underline flex items-center gap-1 transition">
                   <i data-lucide="external-link" class="w-3 h-3"></i> 상세 미리보기
                 </a>
-                <button onclick="handleDeletePackage('${p.id}')" class="text-rose-500 font-bold hover:underline flex items-center gap-1">
+                <button onclick="handleDeletePackage('${p.id}')" class="text-rose-500 hover:text-rose-600 font-bold hover:underline flex items-center gap-1 transition cursor-pointer">
                   <i data-lucide="trash-2" class="w-3 h-3"></i> 삭제
                 </button>
               </div>
@@ -3078,6 +3369,185 @@
       document.getElementById('modal-new-package').classList.remove('hidden');
       lucide.createIcons();
     }
+
+    let currentEditPackageImages = [];
+    let currentEditPackageOriginalThumbnail = '';
+
+    function switchEditImageInputMode(mode) {
+      const modeFile = document.getElementById('edit-img-mode-file');
+      const modeUrl = document.getElementById('edit-img-mode-url');
+      const tabFile = document.getElementById('edit-img-tab-file');
+      const tabUrl = document.getElementById('edit-img-tab-url');
+      if (!modeFile || !modeUrl) return;
+      if (mode === 'file') {
+        modeFile.classList.remove('hidden');
+        modeUrl.classList.add('hidden');
+        if (tabFile) tabFile.className = 'px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold';
+        if (tabUrl) tabUrl.className = 'px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold';
+      } else {
+        modeFile.classList.add('hidden');
+        modeUrl.classList.remove('hidden');
+        if (tabFile) tabFile.className = 'px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer font-bold';
+        if (tabUrl) tabUrl.className = 'px-2.5 py-1 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer font-bold';
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+    window.switchEditImageInputMode = switchEditImageInputMode;
+
+    function handleEditPackageFileSelect(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드할 수 있습니다.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64 = e.target.result;
+        window.currentEditPackageThumbnail = base64;
+        const prevImg = document.getElementById('ep-preview-img');
+        if (prevImg) prevImg.src = base64;
+        const fn = document.getElementById('ep-file-name');
+        if (fn) fn.textContent = `💻 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        const urlInput = document.getElementById('ep-thumbnail');
+        if (urlInput) urlInput.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    window.handleEditPackageFileSelect = handleEditPackageFileSelect;
+
+    function handleEditPackageUrlInput(val) {
+      const trimmed = (val || '').trim();
+      if (!trimmed) return;
+      window.currentEditPackageThumbnail = trimmed;
+      const prevImg = document.getElementById('ep-preview-img');
+      if (prevImg) prevImg.src = trimmed;
+      const fn = document.getElementById('ep-file-name');
+      if (fn) fn.textContent = '🌐 웹 이미지 URL 적용됨';
+    }
+    window.handleEditPackageUrlInput = handleEditPackageUrlInput;
+
+    function clearEditPackageImage() {
+      window.currentEditPackageThumbnail = currentEditPackageOriginalThumbnail;
+      const prevImg = document.getElementById('ep-preview-img');
+      if (prevImg) prevImg.src = currentEditPackageOriginalThumbnail;
+      const fn = document.getElementById('ep-file-name');
+      if (fn) fn.textContent = '기존 원본 이미지로 복원됨';
+      const fileInput = document.getElementById('ep-image-file');
+      if (fileInput) fileInput.value = '';
+      const urlInput = document.getElementById('ep-thumbnail');
+      if (urlInput) urlInput.value = currentEditPackageOriginalThumbnail;
+    }
+    window.clearEditPackageImage = clearEditPackageImage;
+
+    function renderEditGalleryImages() {
+      const container = document.getElementById('ep-gallery-list');
+      const countEl = document.getElementById('ep-gallery-count');
+      if (countEl) countEl.textContent = currentEditPackageImages.length;
+      if (!container) return;
+
+      if (currentEditPackageImages.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-3 text-center text-slate-400 text-[11px] bg-slate-100/60 rounded-xl border border-dashed border-slate-200">
+            등록된 추가 갤러리 이미지가 없습니다. 상단 버튼으로 사진을 추가해보세요.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = currentEditPackageImages.map((img, idx) => `
+        <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-900 aspect-video shadow-2xs">
+          <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" alt="Gallery image">
+          <button type="button" onclick="removeEditGalleryImage(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600/90 hover:bg-rose-600 text-white rounded-md flex items-center justify-center shadow-sm opacity-90 group-hover:opacity-100 transition cursor-pointer" title="이미지 삭제">
+            <i data-lucide="trash-2" class="w-3 h-3"></i>
+          </button>
+          <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[9px] font-mono font-bold">#${idx + 1}</span>
+        </div>
+      `).join('');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.renderEditGalleryImages = renderEditGalleryImages;
+
+    function removeEditGalleryImage(index) {
+      currentEditPackageImages.splice(index, 1);
+      renderEditGalleryImages();
+    }
+    window.removeEditGalleryImage = removeEditGalleryImage;
+
+    function handleEditGalleryFiles(event) {
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0) return;
+      let loaded = 0;
+      files.forEach(f => {
+        if (!f.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          currentEditPackageImages.push(e.target.result);
+          loaded++;
+          if (loaded >= files.length) {
+            renderEditGalleryImages();
+          }
+        };
+        reader.readAsDataURL(f);
+      });
+      event.target.value = '';
+    }
+    window.handleEditGalleryFiles = handleEditGalleryFiles;
+
+    function promptAddGalleryUrl() {
+      const url = prompt('추가할 갤러리 이미지 웹 URL을 입력해주세요:\n(예: https://images.unsplash.com/...)');
+      if (url && url.trim().startsWith('http')) {
+        currentEditPackageImages.push(url.trim());
+        renderEditGalleryImages();
+      }
+    }
+    window.promptAddGalleryUrl = promptAddGalleryUrl;
+
+    function openEditPackageModal(id) {
+      const pkg = cachedPackages.find(p => p.id === id || p.slug === id);
+      if (!pkg) {
+        alert('상품 정보를 찾을 수 없습니다.');
+        return;
+      }
+
+      document.getElementById('ep-id').value = pkg.id;
+      document.getElementById('edit-pkg-id-badge').textContent = `상품 ID: ${pkg.id} · 슬러그: ${pkg.slug || pkg.id}`;
+      document.getElementById('ep-title').value = pkg.title || '';
+      document.getElementById('ep-region').value = pkg.region || '동남아';
+      document.getElementById('ep-city').value = pkg.city || pkg.country || '';
+      document.getElementById('ep-theme').value = pkg.theme || (pkg.tags ? pkg.tags.join(', ') : '');
+      document.getElementById('ep-price').value = pkg.price || 0;
+      document.getElementById('ep-original-price').value = pkg.originalPrice || '';
+      document.getElementById('ep-nights').value = pkg.durationNights || 3;
+      document.getElementById('ep-days').value = pkg.durationDays || 4;
+
+      const isOperating = pkg.status !== '미운영' && pkg.status !== 'INACTIVE' && pkg.isActive !== false;
+      document.getElementById('ep-status').value = isOperating ? '운영중' : '미운영';
+
+      // Thumbnail
+      const thumb = pkg.thumbnail || (pkg.images && pkg.images[0]) || 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1000&q=80';
+      window.currentEditPackageThumbnail = thumb;
+      currentEditPackageOriginalThumbnail = thumb;
+      document.getElementById('ep-preview-img').src = thumb;
+      document.getElementById('ep-thumbnail').value = thumb;
+      document.getElementById('ep-file-name').textContent = '기존 대표 썸네일 이미지';
+      document.getElementById('ep-image-file').value = '';
+
+      // Gallery Images
+      currentEditPackageImages = Array.isArray(pkg.images) ? [...pkg.images] : (pkg.thumbnail ? [pkg.thumbnail] : []);
+      renderEditGalleryImages();
+
+      // Summary & Included / Excluded
+      document.getElementById('ep-summary').value = pkg.summary || '';
+      document.getElementById('ep-included').value = Array.isArray(pkg.included) ? pkg.included.join('\n') : (pkg.included || '');
+      document.getElementById('ep-excluded').value = Array.isArray(pkg.excluded) ? pkg.excluded.join('\n') : (pkg.excluded || '');
+
+      switchEditImageInputMode('file');
+
+      document.getElementById('modal-edit-package').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.openEditPackageModal = openEditPackageModal;
 
     function closeModal(modalId) {
       document.getElementById(modalId).classList.add('hidden');
