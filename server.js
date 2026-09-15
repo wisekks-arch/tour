@@ -344,74 +344,75 @@ function generateVerificationEmailHtml(code, email, purpose = '본인인증') {
 </html>`;
 }
 
-// 2. Temporary Password Email Template (Matches Image 2 Signature Design)
+// 2. Temporary Password Email Template (100% Matches Attached Image Layout)
 function generateTempPasswordEmailHtml(tempPassword, email, userName) {
   const cleanEmail = escapeHtml(email);
   const cleanName = escapeHtml(userName || email.split('@')[0] || '고객');
   return `<!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="UTF-8"><title>투어이지 임시 비밀번호 발급 안내</title></head>
-<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
-  <div style="max-width:620px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+<head>
+  <meta charset="UTF-8">
+  <title>투어이지 임시 비밀번호 발급 안내</title>
+</head>
+<body style="margin:0;padding:20px 10px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:640px;margin:0 auto;background-color:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e2e8f0;">
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#0284c7 0%,#0f172a 100%);padding:34px 24px;text-align:center;color:#ffffff;">
-      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✈️ 투어이지 (TourEasy)</div>
-      <div style="font-size:13px;color:#bae6fd;">임시 비밀번호가 안전하게 발급되었습니다!</div>
+    <div style="background:linear-gradient(135deg,#0f172a 0%,#0369a1 100%);padding:32px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:24px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#bae6fd;">프리미엄 1:1 맞춤 여행 컨설팅 & 안심 케어</div>
     </div>
-    <!-- Content -->
+    
+    <!-- Body Content -->
     <div style="padding:32px 24px;">
-      <div style="display:inline-block;background-color:#dcfce7;color:#15803d;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">비밀번호 발급 완료</div>
-      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">안녕하세요, ${cleanName} 고객님!</h2>
+      <h2 style="margin:0 0 14px 0;font-size:18px;color:#0f172a;font-weight:800;">안녕하세요, <span style="color:#0284c7;">${cleanName}</span> 고객님!</h2>
       <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">
-        투어이지 계정의 새로운 <strong>임시 비밀번호</strong>가 안전하게 발급되었습니다.<br>
-        발급된 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전한 새 비밀번호로 변경해 주시기 바랍니다.
+        투어이지에 보내주신 <strong>[임시 비밀번호 발급 요청]</strong>에 대해 전담 플래너의 안내를 전달해 드립니다.
       </p>
-
-      <!-- Info Table -->
-      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
-        <div style="font-weight:bold;font-size:14px;color:#0f172a;margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;display:flex;justify-content:space-between;">
-          <span>🔐 임시 비밀번호 발급 내역</span>
-          <span style="color:#0284c7;font-family:monospace;font-weight:800;">안내번호: AUTH-${Date.now().toString().slice(-6)}</span>
+      
+      <!-- 제안 맞춤 견적 금액 스타일 (블루 박스) -->
+      <div style="background-color:#f0f9ff;border-left:4px solid #0284c7;padding:14px 18px;margin:16px 0;border-radius:8px;">
+        <div style="color:#0369a1;font-size:13px;font-weight:bold;">발급된 임시 비밀번호</div>
+        <div style="font-size:18px;font-weight:800;color:#0284c7;margin-top:4px;font-family:Consolas, monospace;letter-spacing:1.5px;">${escapeHtml(tempPassword)}</div>
+      </div>
+      
+      <!-- 추천 연계 여행 상품 스타일 (오렌지 박스) -->
+      <div style="background-color:#fffbeb;border-left:4px solid #d97706;padding:14px 18px;margin:16px 0;border-radius:8px;">
+        <div style="color:#b45309;font-size:13px;font-weight:bold;">가입 계정 (아이디)</div>
+        <div style="font-size:15px;font-weight:700;color:#1e293b;margin-top:4px;">${cleanEmail}</div>
+      </div>
+      
+      <!-- 담당 플래너 안내 스타일 박스 -->
+      <div style="background-color:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
+        <div style="font-weight:bold;font-size:13px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;">
+          담당 플래너 (투어이지 시스템 관리자) 상담 및 견적 안내:
         </div>
-        <table style="width:100%;font-size:13px;color:#334155;border-collapse:collapse;">
-          <tr>
-            <td style="padding:8px 0;color:#64748b;width:130px;">가입 아이디(이메일)</td>
-            <td style="padding:8px 0;font-weight:bold;color:#0f172a;">${cleanEmail}</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 0;color:#64748b;">발급된 임시 비밀번호</td>
-            <td style="padding:8px 0;">
-              <span style="font-size:17px;font-weight:900;color:#0284c7;font-family:Consolas, Monaco, monospace;letter-spacing:1.5px;background:#e0f2fe;padding:4px 14px;border-radius:8px;display:inline-block;border:1px solid #bae6fd;">${escapeHtml(tempPassword)}</span>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:8px 0;color:#64748b;">발송 일시</td>
-            <td style="padding:8px 0;color:#475569;">${new Date().toLocaleString('ko-KR')}</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 0;color:#64748b;">보안 권장사항</td>
-            <td style="padding:8px 0;color:#0369a1;font-weight:600;">로그인 즉시 마이페이지에서 새 비밀번호로 변경 권장</td>
-          </tr>
-        </table>
+        <div style="font-size:13px;color:#334155;line-height:1.8;">
+          투어이지(TourEasy) 관리자 시스템에서 발송된 임시 비밀번호 안내 메일입니다. 본 메일의 임시 비밀번호로 로그인하신 후, [마이페이지 > 비밀번호 변경]에서 회원님만의 새로운 비밀번호로 안전하게 변경해 주시기 바랍니다.
+        </div>
       </div>
-
-      <!-- Trust Badges -->
+      
+      <!-- 투어이지 4대 안심 약속 연두색 박스 -->
       <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin:24px 0;font-size:12.5px;color:#166534;line-height:1.7;">
-        <strong style="color:#14532d;font-size:13px;">🛡️ 투어이지 계정 보안 안심 가이드</strong><br>
-        • 본 임시 비밀번호는 1회성 접속을 위한 보안 비밀번호입니다.<br>
-        • 로그인 후 [마이페이지 > 비밀번호 변경]에서 회원님만의 안전한 비밀번호로 재설정해 주세요.<br>
-        • 본인이 요청하지 않은 경우 고객센터(1588-0000)로 즉시 문의해 주시기 바랍니다.
+        <strong style="color:#14532d;font-size:13px;">투어이지 4대 안심 약속</strong><br>
+        • 전 일정 4~5성급 프리미엄 숙소 엄선 및 단독 전용 차량 제공<br>
+        • 불필요한 의무 쇼핑/옵션 강요 없는 100% 순수 맞춤 일정<br>
+        • 현지 24시간 한국인 베테랑 매니저 긴급 안심 케어 지원<br>
+        • 최고 5억원 영업배상 및 여행자 안심 공제보험 가입
       </div>
-
+      
+      <!-- 투어이지 웹사이트 방문하기 버튼 -->
       <div style="text-align:center;margin-top:28px;">
-        <a href="https://wisekks-arch.github.io/tour/index.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 로그인하러 가기 ➔</a>
+        <a href="https://wisekks-arch.github.io/tour/index.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">
+          투어이지 웹사이트 방문하기
+        </a>
       </div>
     </div>
+    
     <!-- Footer -->
-    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
-      (주)투어이지 (TourEasy) | 고객센터: 1588-0000 | 이메일: wisekks@gmail.com<br>
-      본 메일은 투어이지 온라인 비밀번호 찾기 서비스를 통해 안전하게 발송되었습니다.<br>
-      © 2026 TourEasy Inc. All Rights Reserved.
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 여행사 | 대표전화: 1588-0000 | 이메일: help@toureasy.co.kr<br>
+      서울특별시 중구 세종대로 110 투어타워 12층 | 통신판매업신고: 제2026-서울중구-0123호<br>
+      본 메일은 투어이지 온라인 맞춤 상담에 등록해주신 고객님의 이메일 주소로 발송되었습니다.
     </div>
   </div>
 </body>
