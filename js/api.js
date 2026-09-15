@@ -4975,14 +4975,85 @@ const TourAPI = {
     return pwdChars.join('');
   },
 
-  // Helper: Send Real Email Dispatch (via Web3Forms & FormSubmit with branded structured fields)
-  async dispatchRealEmail(toEmail, subject, textContent, structuredData = {}) {
+  // Helper: Generate Image 2 Signature HTML Email Template
+  generateTempPasswordEmailHtml(tempPassword, email, userName) {
+    const cleanEmail = (email || '').trim();
+    const cleanName = (userName || email.split('@')[0] || '고객').trim();
+    return `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>투어이지 임시 비밀번호 발급 안내</title></head>
+<body style="margin:0;padding:24px 12px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:620px;margin:0 auto;background-color:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#0284c7 0%,#0f172a 100%);padding:34px 24px;text-align:center;color:#ffffff;">
+      <div style="font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;">✈️ 투어이지 (TourEasy)</div>
+      <div style="font-size:13px;color:#bae6fd;">임시 비밀번호가 안전하게 발급되었습니다!</div>
+    </div>
+    <!-- Content -->
+    <div style="padding:32px 24px;">
+      <div style="display:inline-block;background-color:#dcfce7;color:#15803d;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;margin-bottom:12px;">비밀번호 발급 완료</div>
+      <h2 style="margin:0 0 12px 0;font-size:20px;color:#0f172a;font-weight:800;">안녕하세요, ${cleanName} 고객님!</h2>
+      <p style="margin:0 0 20px 0;font-size:14px;color:#475569;line-height:1.6;">
+        투어이지 계정의 새로운 <strong>임시 비밀번호</strong>가 안전하게 발급되었습니다.<br>
+        발급된 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전한 새 비밀번호로 변경해 주시기 바랍니다.
+      </p>
+
+      <!-- Info Table -->
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin:20px 0;">
+        <div style="font-weight:bold;font-size:14px;color:#0f172a;margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed #cbd5e1;display:flex;justify-content:space-between;">
+          <span>🔐 임시 비밀번호 발급 내역</span>
+          <span style="color:#0284c7;font-family:monospace;font-weight:800;">안내번호: AUTH-${Date.now().toString().slice(-6)}</span>
+        </div>
+        <table style="width:100%;font-size:13px;color:#334155;border-collapse:collapse;">
+          <tr>
+            <td style="padding:8px 0;color:#64748b;width:130px;">가입 아이디(이메일)</td>
+            <td style="padding:8px 0;font-weight:bold;color:#0f172a;">${cleanEmail}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">발급된 임시 비밀번호</td>
+            <td style="padding:8px 0;">
+              <span style="font-size:17px;font-weight:900;color:#0284c7;font-family:Consolas, Monaco, monospace;letter-spacing:1.5px;background:#e0f2fe;padding:4px 14px;border-radius:8px;display:inline-block;border:1px solid #bae6fd;">${tempPassword}</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">발송 일시</td>
+            <td style="padding:8px 0;color:#475569;">${new Date().toLocaleString('ko-KR')}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:#64748b;">보안 권장사항</td>
+            <td style="padding:8px 0;color:#0369a1;font-weight:600;">로그인 즉시 마이페이지에서 새 비밀번호로 변경 권장</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Trust Badges -->
+      <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin:24px 0;font-size:12.5px;color:#166534;line-height:1.7;">
+        <strong style="color:#14532d;font-size:13px;">🛡️ 투어이지 계정 보안 안심 가이드</strong><br>
+        • 본 임시 비밀번호는 1회성 접속을 위한 보안 비밀번호입니다.<br>
+        • 로그인 후 [마이페이지 > 비밀번호 변경]에서 회원님만의 안전한 비밀번호로 재설정해 주세요.<br>
+        • 본인이 요청하지 않은 경우 고객센터(1588-0000)로 즉시 문의해 주시기 바랍니다.
+      </div>
+
+      <div style="text-align:center;margin-top:28px;">
+        <a href="https://wisekks-arch.github.io/tour/index.html" target="_blank" style="display:inline-block;background-color:#0284c7;color:#ffffff;font-weight:bold;font-size:14px;text-decoration:none;padding:12px 30px;border-radius:10px;box-shadow:0 4px 12px rgba(2,132,199,0.3);">투어이지 로그인하러 가기 ➔</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background-color:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 24px;font-size:11.5px;color:#94a3b8;line-height:1.7;text-align:center;">
+      (주)투어이지 (TourEasy) | 고객센터: 1588-0000 | 이메일: wisekks@gmail.com<br>
+      본 메일은 투어이지 온라인 비밀번호 찾기 서비스를 통해 안전하게 발송되었습니다.<br>
+      © 2026 TourEasy Inc. All Rights Reserved.
+    </div>
+  </div>
+</body>
+</html>`;
+  },
+
+  // Helper: Send Real Email Dispatch (via Web3Forms Clean Direct Email API)
+  async dispatchRealEmail(toEmail, subject, textContent, htmlContent) {
     const cleanEmail = (toEmail || '').trim();
     if (!cleanEmail) return false;
 
-    let dispatched = false;
-
-    // 1. Web3Forms Dispatch
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -4993,40 +5064,14 @@ const TourAPI = {
           from_name: '투어이지 (TourEasy)',
           email: cleanEmail,
           message: textContent,
-          ...structuredData
+          html: htmlContent
         })
       });
-      if (response.ok) dispatched = true;
+      return response.ok;
     } catch (e) {
       console.warn('Web3Forms dispatch error:', e);
+      return false;
     }
-
-    // 2. FormSubmit Dispatch (Structured Brand Box Layout)
-    try {
-      const formPayload = {
-        _subject: subject,
-        _template: 'box',
-        _captcha: 'false',
-        '✈️ 서비스명': '투어이지 (TourEasy) - 프리미엄 맞춤 여행 플래너',
-        '📋 안내 구분': structuredData['안내구분'] || '임시 비밀번호 발급 안내',
-        '👤 가입 아이디(이메일)': cleanEmail,
-        '🔑 발급된 임시 비밀번호': structuredData['임시비밀번호'] || textContent,
-        '🌐 투어이지 로그인': 'https://wisekks-arch.github.io/tour/index.html',
-        '💡 보안 권장사항': '로그인 후 마이페이지에서 새 비밀번호로 안전하게 변경해 주시기 바랍니다.',
-        '📞 고객센터': '1588-0000 (평일 09:00 ~ 18:00)'
-      };
-
-      await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cleanEmail)}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(formPayload)
-      });
-      dispatched = true;
-    } catch (e) {
-      console.warn('FormSubmit dispatch error:', e);
-    }
-
-    return dispatched;
   },
 
   // Issue temporary password and send to user's real email
@@ -5063,13 +5108,12 @@ const TourAPI = {
       console.warn('Backend temp password request error:', e);
     }
 
-    // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch real email
-    const mailSubject = `[투어이지] 임시 비밀번호 안내`;
-    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지(https://wisekks-arch.github.io/tour/index.html)를 이용해 주셔서 감사합니다.`;
-    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody, {
-      '안내구분': '비밀번호 찾기 임시 비밀번호 발급',
-      '임시비밀번호': tempPassword
-    });
+    // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch Image 2 Signature HTML Email
+    const mailSubject = `[투어이지] 임시 비밀번호가 발급되었습니다.`;
+    const mailText = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 고객님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지(https://wisekks-arch.github.io/tour/index.html)를 이용해 주셔서 감사합니다.`;
+    const mailHtml = this.generateTempPasswordEmailHtml(tempPassword, cleanEmail);
+
+    this.dispatchRealEmail(cleanEmail, mailSubject, mailText, mailHtml);
 
     // Update localStorage mock users
     try {
