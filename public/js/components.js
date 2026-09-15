@@ -811,15 +811,31 @@ function renderAuthModal() {
             <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600">
               <i data-lucide="check-circle-2" class="w-7 h-7"></i>
             </div>
-            <h4 class="text-sm font-bold text-slate-900">임시 비밀번호 발송 완료!</h4>
+            <h4 class="text-base font-black text-slate-900">임시 비밀번호 발송 완료!</h4>
             <p class="text-xs text-slate-600 leading-relaxed font-medium">
               <strong id="reset-sent-email-label" class="text-emerald-700 font-bold"></strong> 으로<br>
-              새로운 임시 비밀번호가 안전하게 발송되었습니다.<br>
-              <span class="text-slate-500 text-[11px]">(메일함 또는 스팸함을 확인 후 로그인해 주세요)</span>
+              새로운 임시 비밀번호가 안전하게 발송되었습니다.
             </p>
-            <button type="button" onclick="window.switchAuthTab('login')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5">
+
+            <!-- Temp Password Display & Copy Box -->
+            <div class="p-3.5 bg-white border-2 border-dashed border-emerald-300 rounded-xl flex items-center justify-between gap-2 shadow-sm my-1">
+              <div class="text-left">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">발급된 임시 비밀번호</span>
+                <span id="reset-temp-password-val" class="text-base font-black font-mono text-emerald-700 select-all tracking-wider"></span>
+              </div>
+              <button type="button" id="btn-copy-temp-password" onclick="window.copyTempPassword()" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-lg border border-emerald-200 transition flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span id="copy-btn-text">복사</span>
+              </button>
+            </div>
+
+            <p class="text-[11px] text-slate-500 font-medium">
+              ※ 메일함(스팸함 포함)으로 발송되었으며, 위 비밀번호를 복사하여 즉시 로그인하실 수 있습니다.
+            </p>
+
+            <button type="button" onclick="window.goToLoginWithTempPassword()" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer">
               <i data-lucide="log-in" class="w-4 h-4"></i>
-              <span>발급받은 임시 비밀번호로 로그인하기</span>
+              <span>발급받은 임시 비밀번호로 즉시 로그인하기</span>
             </button>
           </div>
         </div>
@@ -1057,11 +1073,17 @@ function setupAuthModalListeners() {
           showToast(`✉️ ${email} 회원님의 메일함으로 임시 비밀번호가 발송되었습니다!`, 'success');
           resetForm.classList.add('hidden');
           if (emailLabel) emailLabel.textContent = email;
+          const pwdValEl = document.getElementById('reset-temp-password-val');
+          if (pwdValEl && res.tempPassword) {
+            pwdValEl.textContent = res.tempPassword;
+          }
           if (successBox) successBox.classList.remove('hidden');
 
           // Pre-fill login form
           const loginEmailEl = document.getElementById('login-email');
+          const loginPwdEl = document.getElementById('login-password');
           if (loginEmailEl) loginEmailEl.value = email;
+          if (loginPwdEl && res.tempPassword) loginPwdEl.value = res.tempPassword;
 
           if (window.lucide) lucide.createIcons();
         } else {
@@ -1085,6 +1107,54 @@ function setupAuthModalListeners() {
     });
   }
 }
+
+// Global helpers for Reset Password UX
+window.copyTempPassword = function() {
+  const pwdVal = document.getElementById('reset-temp-password-val')?.textContent || '';
+  if (!pwdVal) return;
+  const copyBtnText = document.getElementById('copy-btn-text');
+  
+  const finishCopy = () => {
+    if (copyBtnText) copyBtnText.textContent = '복사됨!';
+    showToast('📋 임시 비밀번호가 클립보드에 복사되었습니다.', 'success');
+    setTimeout(() => {
+      if (copyBtnText) copyBtnText.textContent = '복사';
+    }, 2000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(pwdVal).then(finishCopy).catch(() => {
+      fallbackCopy(pwdVal, finishCopy);
+    });
+  } else {
+    fallbackCopy(pwdVal, finishCopy);
+  }
+};
+
+function fallbackCopy(text, callback) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    if (callback) callback();
+  } catch {}
+  document.body.removeChild(ta);
+}
+
+window.goToLoginWithTempPassword = function() {
+  const email = document.getElementById('reset-sent-email-label')?.textContent || '';
+  const pwd = document.getElementById('reset-temp-password-val')?.textContent || '';
+  window.switchAuthTab('login');
+  const loginEmail = document.getElementById('login-email');
+  const loginPwd = document.getElementById('login-password');
+  if (loginEmail && email) loginEmail.value = email;
+  if (loginPwd && pwd) loginPwd.value = pwd;
+  if (loginPwd) loginPwd.focus();
+};
 
 function updateRuleBadge(elId, isPassed) {
   const el = document.getElementById(elId);

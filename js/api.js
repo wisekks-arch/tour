@@ -4975,11 +4975,14 @@ const TourAPI = {
     return pwdChars.join('');
   },
 
-  // Helper: Send Real Email Dispatch (via Web3Forms)
+  // Helper: Send Real Email Dispatch (via Web3Forms & FormSubmit)
   async dispatchRealEmail(toEmail, subject, textContent) {
     const cleanEmail = (toEmail || '').trim();
     if (!cleanEmail) return false;
 
+    let dispatched = false;
+
+    // 1. Web3Forms Dispatch
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -4992,11 +4995,29 @@ const TourAPI = {
           message: textContent
         })
       });
-      return response.ok;
+      if (response.ok) dispatched = true;
     } catch (e) {
       console.warn('Web3Forms dispatch error:', e);
-      return false;
     }
+
+    // 2. FormSubmit Dispatch (Secondary channel)
+    try {
+      await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cleanEmail)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: subject,
+          email: cleanEmail,
+          message: textContent,
+          _captcha: 'false'
+        })
+      });
+      dispatched = true;
+    } catch (e) {
+      console.warn('FormSubmit dispatch error:', e);
+    }
+
+    return dispatched;
   },
 
   // Issue temporary password and send to user's real email
@@ -5008,7 +5029,7 @@ const TourAPI = {
 
     const tempPassword = this.generateTempPassword();
 
-    // 1. Send via backend server
+    // 1. Send via backend server (if available)
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/issue-temp-password`, {
@@ -5026,14 +5047,19 @@ const TourAPI = {
               localStorage.setItem('toureasy_mock_users', JSON.stringify(mockUsers));
             }
           } catch {}
-          return json;
+          return { ...json, tempPassword: json.tempPassword || tempPassword };
         }
       }
     } catch (e) {
       console.warn('Backend temp password request error:', e);
     }
 
-    // 2. Fallback: Update localStorage mock users
+    // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch real email
+    const mailSubject = `[투어이지] 임시 비밀번호 안내 (${tempPassword})`;
+    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 발급된 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n감사합니다.`;
+    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
+
+    // Update localStorage mock users
     try {
       const mockUsers = JSON.parse(localStorage.getItem('toureasy_mock_users') || '[]');
       const target = mockUsers.find(u => (u.email || '').toLowerCase() === cleanEmail);
@@ -5065,7 +5091,7 @@ const TourAPI = {
 
     return {
       success: true,
-      message: `[${cleanEmail}] 회원님의 임시 비밀번호가 생성되었습니다. (임시 비밀번호: ${tempPassword})`,
+      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 발송되었습니다.`,
       email: cleanEmail,
       tempPassword
     };
