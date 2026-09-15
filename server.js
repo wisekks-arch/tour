@@ -658,6 +658,33 @@ function validatePasswordRules(pwd) {
   return hasLetter && hasNumber && hasSpecial;
 }
 
+// Helper: Generate secure 8-character temporary password (lowercase letters + numbers + @/# only)
+function generateTempPasswordServer() {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  const nums = '0123456789';
+  const specials = '@#';
+  
+  const pwdChars = [
+    letters.charAt(Math.floor(Math.random() * letters.length)),
+    nums.charAt(Math.floor(Math.random() * nums.length)),
+    specials.charAt(Math.floor(Math.random() * specials.length))
+  ];
+  
+  const all = letters + nums + specials;
+  for (let i = 0; i < 5; i++) {
+    pwdChars.push(all.charAt(Math.floor(Math.random() * all.length)));
+  }
+  
+  for (let i = pwdChars.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = pwdChars[i];
+    pwdChars[i] = pwdChars[j];
+    pwdChars[j] = temp;
+  }
+  
+  return pwdChars.join('');
+}
+
 // Helper: parse request body
 function parseRequestBody(req) {
   return new Promise((resolve, reject) => {
@@ -979,7 +1006,7 @@ const server = http.createServer(async (req, res) => {
       if (pathname === '/api/auth/issue-temp-password' && method === 'POST') {
         const body = await parseRequestBody(req);
         const email = (body.email || '').trim().toLowerCase();
-        const tempPassword = body.tempPassword || `Te!${Math.floor(100000 + Math.random() * 900000)}`;
+        const tempPassword = body.tempPassword || generateTempPasswordServer();
 
         if (!email) {
           return sendJson(res, 400, { success: false, message: '가입 아이디(이메일)를 입력해주세요.' });

@@ -4946,20 +4946,33 @@ const TourAPI = {
     }
   },
 
-  // Helper: Generate secure 8-character temporary password (Letters + Numbers + Special chars)
+  // Helper: Generate secure 8-character temporary password (lowercase letters + numbers + @/# only)
   generateTempPassword() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
-    const nums = '23456789';
-    const specials = '!@#$%&*';
-    let pwd = 'Te';
-    pwd += specials.charAt(Math.floor(Math.random() * specials.length));
-    pwd += nums.charAt(Math.floor(Math.random() * nums.length));
-    pwd += chars.charAt(Math.floor(Math.random() * chars.length));
-    const all = chars + nums + specials;
-    for (let i = 0; i < 4; i++) {
-      pwd += all.charAt(Math.floor(Math.random() * all.length));
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    const nums = '0123456789';
+    const specials = '@#';
+    
+    // Ensure at least one lowercase letter, one number, and one special char (@ or #)
+    const pwdChars = [
+      letters.charAt(Math.floor(Math.random() * letters.length)),
+      nums.charAt(Math.floor(Math.random() * nums.length)),
+      specials.charAt(Math.floor(Math.random() * specials.length))
+    ];
+    
+    const all = letters + nums + specials;
+    for (let i = 0; i < 5; i++) {
+      pwdChars.push(all.charAt(Math.floor(Math.random() * all.length)));
     }
-    return pwd;
+    
+    // Shuffle characters (Fisher-Yates)
+    for (let i = pwdChars.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = pwdChars[i];
+      pwdChars[i] = pwdChars[j];
+      pwdChars[j] = temp;
+    }
+    
+    return pwdChars.join('');
   },
 
   // Helper: Send Real Email Dispatch (via Web3Forms)
