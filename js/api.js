@@ -4975,8 +4975,8 @@ const TourAPI = {
     return pwdChars.join('');
   },
 
-  // Helper: Send Real Email Dispatch (via Web3Forms & FormSubmit)
-  async dispatchRealEmail(toEmail, subject, textContent) {
+  // Helper: Send Real Email Dispatch (via Web3Forms & FormSubmit with branded structured fields)
+  async dispatchRealEmail(toEmail, subject, textContent, structuredData = {}) {
     const cleanEmail = (toEmail || '').trim();
     if (!cleanEmail) return false;
 
@@ -4992,7 +4992,8 @@ const TourAPI = {
           subject: subject,
           from_name: '투어이지 (TourEasy)',
           email: cleanEmail,
-          message: textContent
+          message: textContent,
+          ...structuredData
         })
       });
       if (response.ok) dispatched = true;
@@ -5000,17 +5001,25 @@ const TourAPI = {
       console.warn('Web3Forms dispatch error:', e);
     }
 
-    // 2. FormSubmit Dispatch (Secondary channel)
+    // 2. FormSubmit Dispatch (Structured Brand Box Layout)
     try {
+      const formPayload = {
+        _subject: subject,
+        _template: 'box',
+        _captcha: 'false',
+        '✈️ 서비스명': '투어이지 (TourEasy) - 프리미엄 맞춤 여행 플래너',
+        '📋 안내 구분': structuredData['안내구분'] || '임시 비밀번호 발급 안내',
+        '👤 가입 아이디(이메일)': cleanEmail,
+        '🔑 발급된 임시 비밀번호': structuredData['임시비밀번호'] || textContent,
+        '🌐 투어이지 로그인': 'https://wisekks-arch.github.io/tour/index.html',
+        '💡 보안 권장사항': '로그인 후 마이페이지에서 새 비밀번호로 안전하게 변경해 주시기 바랍니다.',
+        '📞 고객센터': '1588-0000 (평일 09:00 ~ 18:00)'
+      };
+
       await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cleanEmail)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: subject,
-          email: cleanEmail,
-          message: textContent,
-          _captcha: 'false'
-        })
+        body: JSON.stringify(formPayload)
       });
       dispatched = true;
     } catch (e) {
@@ -5056,8 +5065,11 @@ const TourAPI = {
 
     // 2. Static / Fallback Mode (GitHub Pages, etc.) - Dispatch real email
     const mailSubject = `[투어이지] 임시 비밀번호 안내`;
-    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지를 이용해 주셔서 감사합니다.`;
-    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody);
+    const mailBody = `[투어이지 (TourEasy) 임시 비밀번호 안내]\n\n안녕하세요. 회원님,\n요청하신 새로운 임시 비밀번호가 안전하게 발급되었습니다.\n\n■ 가입 아이디(이메일): ${cleanEmail}\n■ 임시 비밀번호: [ ${tempPassword} ]\n\n※ 위 임시 비밀번호로 로그인하신 후, 마이페이지에서 안전하게 새 비밀번호로 변경해 주시기 바랍니다.\n투어이지(https://wisekks-arch.github.io/tour/index.html)를 이용해 주셔서 감사합니다.`;
+    this.dispatchRealEmail(cleanEmail, mailSubject, mailBody, {
+      '안내구분': '비밀번호 찾기 임시 비밀번호 발급',
+      '임시비밀번호': tempPassword
+    });
 
     // Update localStorage mock users
     try {
