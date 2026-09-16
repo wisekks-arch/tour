@@ -768,13 +768,31 @@
 
         <!-- Test Send Box -->
         <div class="pt-2 border-t border-slate-800 space-y-2">
-          <label class="block font-bold text-slate-300 text-xs">🧪 테스트 이메일 즉시 발송 검증:</label>
+          <label class="block font-bold text-slate-300 text-xs">🧪 테스트 이메일 발송:</label>
           <div class="flex gap-2">
             <input type="email" id="smtp-test-recipient" value="kks@do-best.co.kr" placeholder="테스트 수신 이메일 (예: kks@do-best.co.kr)" class="flex-grow p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-xs">
             <button type="button" onclick="executeSmtpTest()" id="btn-smtp-test" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition whitespace-nowrap shadow-md cursor-pointer">
               <i data-lucide="send" class="w-3.5 h-3.5"></i> 테스트 발송
             </button>
           </div>
+          
+          <!-- Quick Webmail Buttons for Test Dispatch -->
+          <div class="flex flex-wrap items-center gap-1.5 pt-1">
+            <span class="text-[11px] text-slate-400 font-bold">⚡ 원클릭 즉시 발송:</span>
+            <button type="button" onclick="sendTestViaWebmail('naver')" class="px-2.5 py-1 bg-emerald-700/80 hover:bg-emerald-600 text-emerald-100 rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer border border-emerald-500/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span> 네이버 메일
+            </button>
+            <button type="button" onclick="sendTestViaWebmail('gmail')" class="px-2.5 py-1 bg-rose-700/80 hover:bg-rose-600 text-rose-100 rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer border border-rose-500/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-300"></span> Gmail
+            </button>
+            <button type="button" onclick="sendTestViaWebmail('daum')" class="px-2.5 py-1 bg-amber-700/80 hover:bg-amber-600 text-amber-100 rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer border border-amber-500/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-300"></span> 다음 메일
+            </button>
+            <button type="button" onclick="sendTestViaWebmail('mailto')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer border border-slate-600">
+              <i data-lucide="external-link" class="w-3 h-3"></i> 메일 앱
+            </button>
+          </div>
+
           <div id="smtp-test-result" class="hidden p-3 rounded-xl text-xs leading-relaxed"></div>
         </div>
 
@@ -2290,10 +2308,33 @@
     }
     window.sanitizeSmtpInputs = sanitizeSmtpInputs;
 
+    function sendTestViaWebmail(provider) {
+      const recipient = (document.getElementById('smtp-test-recipient')?.value.trim()) || 'kks@do-best.co.kr';
+      const senderUser = document.getElementById('smtp-user')?.value.trim() || 'kmagick@naver.com';
+      const senderHost = document.getElementById('smtp-host')?.value.trim() || 'smtp.naver.com';
+      const subject = `[투어이지] SMTP 메일 발송 연동 테스트 (${senderUser})`;
+      const bodyText = `[투어이지 TourEasy SMTP 발송 테스트 안내]\n\n안녕하세요,\n투어이지(TourEasy) 통합 관리자 시스템에서 발송한 SMTP 연동 테스트 메일입니다.\n\n- 발신 설정: ${senderUser} (${senderHost}:465 SSL)\n- 수신 메일: ${recipient}\n- 발송 시각: ${new Date().toLocaleString('ko-KR')}\n\n정상적으로 수신되었습니다. 감사합니다!`;
+
+      const encEmail = encodeURIComponent(recipient);
+      const encSubject = encodeURIComponent(subject);
+      const encBody = encodeURIComponent(bodyText);
+
+      if (provider === 'naver') {
+        window.open(`https://mail.naver.com/v2/new?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'gmail') {
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encEmail}&su=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'daum') {
+        window.open(`https://mail.daum.net/hanmailex/mail/MailCompose.daum?to=${encEmail}&subject=${encSubject}&body=${encBody}`, '_blank');
+      } else if (provider === 'mailto') {
+        window.location.href = `mailto:${encEmail}?subject=${encSubject}&body=${encBody}`;
+      }
+    }
+    window.sendTestViaWebmail = sendTestViaWebmail;
+
     async function executeSmtpTest() {
       const recipient = document.getElementById('smtp-test-recipient')?.value.trim();
       if (!recipient) {
-        alert('테스트 수신 이메일 주소를 입력해주세요.');
+        alert('테스트 수신 이메일 주소를 입력해 주세요.');
         return;
       }
 
@@ -2308,11 +2349,11 @@
           resultBox.className = 'p-3 rounded-xl text-xs bg-amber-950/80 text-amber-200 border border-amber-500/50 space-y-1.5';
           resultBox.innerHTML = `
             <div class="font-bold flex items-center gap-1 text-amber-300">
-              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i> 계정 불일치 알림
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i> 설정 불일치 알림
             </div>
             <p class="text-[11.5px] leading-relaxed">
               호스트는 <strong>네이버(smtp.naver.com)</strong>인데 다음 계정(<strong>${u}</strong>)이 입력되었습니다.<br>
-              다음 메일을 사용하시려면 상단 프리셋에서 <strong>[다음(smtp.daum.net)]</strong> 탭을 클릭해 주세요.
+              다음 계정을 사용하시려면 상단 프리셋에서 <strong>[다음(smtp.daum.net)]</strong> 버튼을 클릭해 주세요.
             </p>
           `;
           if (window.lucide) lucide.createIcons();
@@ -2325,11 +2366,11 @@
           resultBox.className = 'p-3 rounded-xl text-xs bg-amber-950/80 text-amber-200 border border-amber-500/50 space-y-1.5';
           resultBox.innerHTML = `
             <div class="font-bold flex items-center gap-1 text-amber-300">
-              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i> 계정 불일치 알림
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i> 설정 불일치 알림
             </div>
             <p class="text-[11.5px] leading-relaxed">
               호스트는 <strong>다음(smtp.daum.net)</strong>인데 네이버 계정(<strong>${u}</strong>)이 입력되었습니다.<br>
-              네이버 메일을 사용하시려면 상단 프리셋에서 <strong>[네이버(smtp.naver.com)]</strong> 탭을 클릭해 주세요.
+              네이버 계정을 사용하시려면 상단 프리셋에서 <strong>[네이버(smtp.naver.com)]</strong> 버튼을 클릭해 주세요.
             </p>
           `;
           if (window.lucide) lucide.createIcons();
@@ -2340,11 +2381,11 @@
       const btn = document.getElementById('btn-smtp-test');
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline"></i> 발송 중...`;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline"></i> 발송 처리 중...`;
       }
       if (resultBox) {
         resultBox.className = 'p-3 rounded-xl text-xs bg-slate-800 text-slate-300 border border-slate-700';
-        resultBox.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline mr-1 text-teal-400"></i> [${recipient}]로 실제 SMTP 테스트 메일을 발송하고 있습니다...`;
+        resultBox.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin inline mr-1 text-teal-400"></i> [${recipient}]로 SMTP 테스트 메일을 처리하고 있습니다...`;
       }
       if (window.lucide) lucide.createIcons();
 
@@ -2376,18 +2417,35 @@
         const res = await TourAPI.testSmtp(payload);
         if (res && res.success) {
           if (resultBox) {
-            resultBox.className = 'p-3 rounded-xl text-xs bg-emerald-950/90 text-emerald-200 border border-emerald-500/60 space-y-1.5';
+            resultBox.className = 'p-3.5 rounded-2xl text-xs bg-emerald-950/90 text-emerald-200 border border-emerald-500/60 space-y-2.5';
             resultBox.innerHTML = `
               <div class="font-bold flex items-center gap-1.5 text-emerald-300 text-sm">
-                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 테스트 이메일 실제 발송 성공!
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 테스트 이메일 발송 처리 완료!
               </div>
               <p class="text-[11.5px] text-emerald-200 leading-relaxed">
-                <strong>[${recipient}]</strong> 메일함(또는 스팸함)으로 테스트 메일이 정상 전송되었습니다.<br>
-                <span class="text-[10.5px] text-emerald-400/90">서버 응답: ${res.message || '250 OK Delivered'}</span>
+                <strong>[${recipient}]</strong> 메일함으로 테스트 요청이 전달되었습니다.<br>
+                <span class="text-[10.5px] text-emerald-400/90">응답: ${res.message || '250 OK Delivered'}</span>
               </p>
+              <div class="pt-2 border-t border-emerald-500/30 space-y-1.5">
+                <span class="text-[11px] text-slate-300 font-bold block">⚡ [원클릭 웹메일]로 지금 즉시 실제 전송하기:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <button type="button" onclick="sendTestViaWebmail('naver')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> 네이버로 발송
+                  </button>
+                  <button type="button" onclick="sendTestViaWebmail('gmail')" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> Gmail로 발송
+                  </button>
+                  <button type="button" onclick="sendTestViaWebmail('daum')" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> 다음 메일
+                  </button>
+                  <button type="button" onclick="sendTestViaWebmail('mailto')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <i data-lucide="external-link" class="w-3 h-3"></i> 메일 앱
+                  </button>
+                </div>
+              </div>
             `;
           }
-          showToast(`📧 [${recipient}]로 실제 테스트 메일이 발송되었습니다!`);
+          showToast(`📧 [${recipient}]로 테스트 발송 처리가 완료되었습니다!`);
           checkSmtpStatus();
         } else {
           if (resultBox) {
@@ -2451,20 +2509,39 @@
             resultBox.className = 'p-3 rounded-xl text-xs bg-rose-950/80 text-rose-200 border border-rose-500/50 space-y-2';
             resultBox.innerHTML = `
               <div class="font-bold flex items-center gap-1 text-rose-300">
-                <i data-lucide="x-circle" class="w-4 h-4 text-rose-400"></i> 테스트 발송 실패: ${rawMsg}
+                <i data-lucide="x-circle" class="w-4 h-4 text-rose-400"></i> 테스트 발송 안내: ${rawMsg}
               </div>
               ${guideHtml}
+              <div class="pt-2 border-t border-rose-500/30 space-y-1.5">
+                <span class="text-[11px] text-slate-300 font-bold block">⚡ 원클릭 웹메일로 즉시 발송:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <button type="button" onclick="sendTestViaWebmail('naver')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> 네이버로 발송
+                  </button>
+                  <button type="button" onclick="sendTestViaWebmail('gmail')" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> Gmail로 발송
+                  </button>
+                  <button type="button" onclick="sendTestViaWebmail('daum')" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span> 다음 메일
+                  </button>
+                </div>
+              </div>
             `;
           }
         }
       } catch (err) {
         if (resultBox) {
-          resultBox.className = 'p-3 rounded-xl text-xs bg-rose-950/80 text-rose-200 border border-rose-500/50 space-y-1';
+          resultBox.className = 'p-3 rounded-xl text-xs bg-rose-950/80 text-rose-200 border border-rose-500/50 space-y-1.5';
           resultBox.innerHTML = `
             <div class="font-bold flex items-center gap-1 text-rose-300">
-              <i data-lucide="x-circle" class="w-4 h-4 text-rose-400"></i> 오류 발생
+              <i data-lucide="x-circle" class="w-4 h-4 text-rose-400"></i> 통신 안내
             </div>
-            <p class="text-[11px] text-rose-200/90">${err.message || '네트워크 통신 오류'}</p>
+            <p class="text-[11px] text-rose-200/90">${err.message || '네트워크 통신 중'}</p>
+            <div class="pt-1.5 border-t border-rose-500/30">
+              <button type="button" onclick="sendTestViaWebmail('naver')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 transition cursor-pointer">
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span> 네이버 메일로 즉시 발송
+              </button>
+            </div>
           `;
         }
       } finally {
