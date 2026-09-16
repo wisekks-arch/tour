@@ -1,85 +1,131 @@
-[
-  {
-    "orderId": "ORD-20260907-8812",
-    "orderDate": "2026-09-07 09:30:15",
-    "customerName": "김민준",
-    "customerPhone": "010-3849-1290",
-    "customerEmail": "minjun.kim@example.com",
-    "shippingAddress": "서울특별시 강남구 테헤란로 152 강남파이낸스센터 18층",
-    "shippingNote": "부재 시 문 앞에 놓아주세요.",
-    "paymentMethod": "신용카드 (현대카드)",
-    "totalAmount": 289000,
-    "shippingFee": 0,
-    "discountAmount": 10000,
-    "status": "배송중",
-    "trackingNumber": "CJ68291039841",
-    "items": [
-      {
-        "productId": "prod-01",
-        "name": "프리미엄 캐시미어 블렌드 오버핏 코트",
-        "option": "오트밀 베이지 / L(105)",
-        "quantity": 1,
-        "price": 289000,
-        "thumbnail": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
-  },
-  {
-    "orderId": "ORD-20260906-5521",
-    "orderDate": "2026-09-06 18:42:10",
-    "customerName": "이지은",
-    "customerPhone": "010-9921-7734",
-    "customerEmail": "jieun.lee@example.com",
-    "shippingAddress": "경기도 성남시 분당구 판교역로 235 에이치스퀘어 N동 5층",
-    "shippingNote": "배송 전 연락 부탁드립니다.",
-    "paymentMethod": "카카오페이",
-    "totalAmount": 244000,
-    "shippingFee": 0,
-    "discountAmount": 0,
-    "status": "상품준비",
-    "trackingNumber": "",
-    "items": [
-      {
-        "productId": "prod-02",
-        "name": "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
-        "option": "스페이스 그레이",
-        "quantity": 1,
-        "price": 198000,
-        "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        "productId": "prod-03",
-        "name": "글로우 리바이탈라이징 나이트 앰플 세럼 50ml",
-        "option": "단품 50ml",
-        "quantity": 1,
-        "price": 46000,
-        "thumbnail": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
-  },
-  {
-    "orderId": "ORD-20260906-3109",
-    "orderDate": "2026-09-06 14:15:30",
-    "customerName": "박서준",
-    "customerPhone": "010-4412-8876",
-    "customerEmail": "seojun.park@example.com",
-    "shippingAddress": "부산광역시 해운대구 센텀중앙로 90 큐비이센텀 1201호",
-    "shippingNote": "경비실에 맡겨주세요.",
-    "paymentMethod": "토스페이",
-    "totalAmount": 129000,
-    "shippingFee": 0,
-    "discountAmount": 5000,
-    "status": "결제완료",
-    "trackingNumber": "",
-    "items": [
-      {
-        "productId": "prod-08",
-        "name": "울트라 슬림 기계식 무선 블루투스 키보드",
-        "option": "저소음 갈축 (부드러운 구분감)",
-        "quantity": 1,
-        "price": 129000,
-        "thumbnail": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
-  }
+﻿[
+    {
+        "customerName":  "홍길동",
+        "customerPhone":  "010-1234-5678",
+        "customerEmail":  "customer@example.com",
+        "shippingName":  "홍길동",
+        "shippingPhone":  "010-1234-5678",
+        "shippingAddress":  "서울특별시 강남구 테헤란로 152 강남파이낸스센터 18층 1802호",
+        "shippingNote":  "부재 시 문 앞에 놓아주세요.",
+        "paymentMethod":  "가상계좌 (무통장)",
+        "items":  [
+                      {
+                          "id":  "prod-02",
+                          "name":  "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
+                          "category":  "디지털 / 가전",
+                          "price":  198000,
+                          "originalPrice":  269000,
+                          "thumbnail":  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+                          "selectedOption":  "스페이스 그레이",
+                          "quantity":  1,
+                          "selected":  true
+                      },
+                      {
+                          "id":  "prod-10",
+                          "name":  "비건 세라마이드 보습 장벽 수분크림 100ml",
+                          "category":  "뷰티 / 케어",
+                          "price":  34000,
+                          "originalPrice":  48000,
+                          "thumbnail":  "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+                          "selectedOption":  "본품 100ml 튜브형",
+                          "quantity":  1,
+                          "selected":  true
+                      }
+                  ],
+        "totalAmount":  232000,
+        "shippingFee":  0,
+        "discountAmount":  85000,
+        "orderId":  "ORD-20260916-5866",
+        "orderDate":  "2026-09-16 13:12:09",
+        "status":  "결제완료",
+        "trackingNumber":  ""
+    },
+    {
+        "value":  [
+                      {
+                          "orderId":  "ORD-20260907-8812",
+                          "orderDate":  "2026-09-07 09:30:15",
+                          "customerName":  "김민준",
+                          "customerPhone":  "010-3849-1290",
+                          "customerEmail":  "minjun.kim@example.com",
+                          "shippingAddress":  "서울특별시 강남구 테헤란로 152 강남파이낸스센터 18층",
+                          "shippingNote":  "부재 시 문 앞에 놓아주세요.",
+                          "paymentMethod":  "신용카드 (현대카드)",
+                          "totalAmount":  289000,
+                          "shippingFee":  0,
+                          "discountAmount":  10000,
+                          "status":  "배송중",
+                          "trackingNumber":  "CJ68291039841",
+                          "items":  [
+                                        {
+                                            "productId":  "prod-01",
+                                            "name":  "프리미엄 캐시미어 블렌드 오버핏 코트",
+                                            "option":  "오트밀 베이지 / L(105)",
+                                            "quantity":  1,
+                                            "price":  289000,
+                                            "thumbnail":  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+                                        }
+                                    ]
+                      },
+                      {
+                          "orderId":  "ORD-20260906-5521",
+                          "orderDate":  "2026-09-06 18:42:10",
+                          "customerName":  "이지은",
+                          "customerPhone":  "010-9921-7734",
+                          "customerEmail":  "jieun.lee@example.com",
+                          "shippingAddress":  "경기도 성남시 분당구 판교역로 235 에이치스퀘어 N동 5층",
+                          "shippingNote":  "배송 전 연락 부탁드립니다.",
+                          "paymentMethod":  "카카오페이",
+                          "totalAmount":  244000,
+                          "shippingFee":  0,
+                          "discountAmount":  0,
+                          "status":  "상품준비",
+                          "trackingNumber":  "",
+                          "items":  [
+                                        {
+                                            "productId":  "prod-02",
+                                            "name":  "에어사운드 노이즈캔슬링 무선 헤드폰 프로",
+                                            "option":  "스페이스 그레이",
+                                            "quantity":  1,
+                                            "price":  198000,
+                                            "thumbnail":  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+                                        },
+                                        {
+                                            "productId":  "prod-03",
+                                            "name":  "글로우 리바이탈라이징 나이트 앰플 세럼 50ml",
+                                            "option":  "단품 50ml",
+                                            "quantity":  1,
+                                            "price":  46000,
+                                            "thumbnail":  "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+                                        }
+                                    ]
+                      },
+                      {
+                          "orderId":  "ORD-20260906-3109",
+                          "orderDate":  "2026-09-06 14:15:30",
+                          "customerName":  "박서준",
+                          "customerPhone":  "010-4412-8876",
+                          "customerEmail":  "seojun.park@example.com",
+                          "shippingAddress":  "부산광역시 해운대구 센텀중앙로 90 큐비이센텀 1201호",
+                          "shippingNote":  "경비실에 맡겨주세요.",
+                          "paymentMethod":  "토스페이",
+                          "totalAmount":  129000,
+                          "shippingFee":  0,
+                          "discountAmount":  5000,
+                          "status":  "결제완료",
+                          "trackingNumber":  "",
+                          "items":  [
+                                        {
+                                            "productId":  "prod-08",
+                                            "name":  "울트라 슬림 기계식 무선 블루투스 키보드",
+                                            "option":  "저소음 갈축 (부드러운 구분감)",
+                                            "quantity":  1,
+                                            "price":  129000,
+                                            "thumbnail":  "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+                                        }
+                                    ]
+                      }
+                  ],
+        "Count":  3
+    }
 ]
