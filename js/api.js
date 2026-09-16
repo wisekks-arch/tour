@@ -5597,7 +5597,7 @@ const TourAPI = {
       port: 465,
       enableSsl: true,
       user: 'kmagick@naver.com',
-      password: 'YR7Y55BS91WR',
+      password: 'ZLT5NNC8182W',
       fromEmail: 'kmagick@naver.com',
       fromName: '투어이지(TourEasy) 맞춤여행팀',
       hasPassword: true,
@@ -5607,7 +5607,7 @@ const TourAPI = {
           port: 465,
           enableSsl: true,
           user: 'kmagick@naver.com',
-          password: 'YR7Y55BS91WR',
+          password: 'ZLT5NNC8182W',
           fromEmail: 'kmagick@naver.com',
           fromName: '투어이지(TourEasy) 맞춤여행팀',
           hasPassword: true
