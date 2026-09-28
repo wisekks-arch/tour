@@ -1186,21 +1186,22 @@ const DEFAULT_HOTELS = [
     "reviewCount": 190,
     "pricePerNight": 410000,
     "originalPrice": 500000,
-    "thumbnail": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=85",
     "images": [
       {
-            "url": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 계곡 설경 속 전통 노천온천"
+            "url": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 천연 온천 료칸 전통 정원 및 외관"
       },
       {
-            "url": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 프리미엄 다다미 화양실 & 프라이빗 히노키탕"
+            "url": "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 계곡 설경 조망 프라이빗 노천 온천탕"
       },
       {
             "url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 홋카이도 제철 해산물 & 특선 가이세키 정찬"
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 홋카이도 제철 해산물 & 명품 가이세키 요리"
       }
 ],
+    
     
     
     "amenities": [
@@ -1685,21 +1686,22 @@ const DEFAULT_HOTELS = [
     "reviewCount": 390,
     "pricePerNight": 890000,
     "originalPrice": 1100000,
-    "thumbnail": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
     "images": [
       {
-            "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[할레쿨라니 하와이 오아후] 와이키키 해변 카틀레야 난초 모자이크 풀 & 비치"
+            "url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[할레쿨라니 하와이 오아후] 와이키키 해변 카틀레야 모자이크 수영장 & 에메랄드 오션"
       },
       {
-            "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[할레쿨라니 하와이 오아후] 다이아몬드헤드 오션프론트 프라임 스위트"
+            "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[할레쿨라니 하와이 오아후] 다이아몬드헤드 조망 오션프론트 프라임 스위트"
       },
       {
-            "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+            "url": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
             "caption": "[할레쿨라니 하와이 오아후] 라 메르(La Mer) 프렌치 오션뷰 선셋 다이닝"
       }
 ],
+    
     
     "amenities": [
       "카틀레야 난초 모자이크 수영장",
@@ -8013,12 +8015,12 @@ const TourAPI = {
     if (!hotels || hotels.length === 0) {
       let localHotels = [];
       try {
-        const stored = localStorage.getItem('toureasy_hotels');
+        const stored = localStorage.getItem('toureasy_hotels_v4');
         if (stored) {
           localHotels = JSON.parse(stored);
         } else {
           localHotels = DEFAULT_HOTELS;
-          localStorage.setItem('toureasy_hotels', JSON.stringify(localHotels));
+          localStorage.setItem('toureasy_hotels_v4', JSON.stringify(localHotels));
         }
       } catch {
         localHotels = DEFAULT_HOTELS;
@@ -8133,10 +8135,10 @@ const TourAPI = {
     } catch {}
 
     try {
-      let stored = localStorage.getItem('toureasy_hotels');
+      let stored = localStorage.getItem('toureasy_hotels_v4');
       let list = stored ? JSON.parse(stored) : [...DEFAULT_HOTELS];
       list.unshift(newHotel);
-      localStorage.setItem('toureasy_hotels', JSON.stringify(list));
+      localStorage.setItem('toureasy_hotels_v4', JSON.stringify(list));
       window.dispatchEvent(new CustomEvent('toureasy_hotels_changed', { detail: newHotel }));
       return { success: true, message: '호텔 상품이 성공적으로 등록되었습니다.', data: newHotel };
     } catch (err) {
@@ -8157,7 +8159,7 @@ const TourAPI = {
     } catch {}
 
     try {
-      let stored = localStorage.getItem('toureasy_hotels');
+      let stored = localStorage.getItem('toureasy_hotels_v4');
       let list = stored ? JSON.parse(stored) : [...DEFAULT_HOTELS];
       const idx = list.findIndex(h => h.id === id);
       if (idx !== -1) {
@@ -8169,7 +8171,7 @@ const TourAPI = {
           star: hotelData.star !== undefined ? Number(hotelData.star) : list[idx].star,
           isActive: hotelData.status ? (hotelData.status !== '미운영') : list[idx].isActive
         };
-        localStorage.setItem('toureasy_hotels', JSON.stringify(list));
+        localStorage.setItem('toureasy_hotels_v4', JSON.stringify(list));
         window.dispatchEvent(new CustomEvent('toureasy_hotels_changed', { detail: list[idx] }));
         return { success: true, message: '호텔 상품 정보가 수정되었습니다.', data: list[idx] };
       }
@@ -8192,13 +8194,13 @@ const TourAPI = {
     } catch {}
 
     try {
-      let stored = localStorage.getItem('toureasy_hotels');
+      let stored = localStorage.getItem('toureasy_hotels_v4');
       let list = stored ? JSON.parse(stored) : [...DEFAULT_HOTELS];
       const idx = list.findIndex(h => h.id === id);
       if (idx !== -1) {
         list[idx].status = newStatus;
         list[idx].isActive = (newStatus !== '미운영');
-        localStorage.setItem('toureasy_hotels', JSON.stringify(list));
+        localStorage.setItem('toureasy_hotels_v4', JSON.stringify(list));
         window.dispatchEvent(new CustomEvent('toureasy_hotels_changed', { detail: list[idx] }));
         return { success: true, message: '호텔 운영 상태가 변경되었습니다.', data: list[idx] };
       }
@@ -8217,10 +8219,10 @@ const TourAPI = {
     } catch {}
 
     try {
-      let stored = localStorage.getItem('toureasy_hotels');
+      let stored = localStorage.getItem('toureasy_hotels_v4');
       let list = stored ? JSON.parse(stored) : [...DEFAULT_HOTELS];
       list = list.filter(h => h.id !== id);
-      localStorage.setItem('toureasy_hotels', JSON.stringify(list));
+      localStorage.setItem('toureasy_hotels_v4', JSON.stringify(list));
       window.dispatchEvent(new CustomEvent('toureasy_hotels_changed', { detail: { id } }));
       return { success: true, message: '호텔 상품이 삭제되었습니다.' };
     } catch (err) {
