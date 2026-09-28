@@ -6,6 +6,7 @@ const files = [
   'index.html',
   'admin.html',
   'hotels.html',
+  'hotel-detail.html',
   'reviews.html',
   'packages.html',
   'package-detail.html',
@@ -15,6 +16,7 @@ const files = [
   'public/index.html',
   'public/admin.html',
   'public/hotels.html',
+  'public/hotel-detail.html',
   'public/reviews.html',
   'public/packages.html',
   'public/package-detail.html',
@@ -23,7 +25,7 @@ const files = [
   'public/about.html'
 ];
 
-const newVersion = '20260928_hotels';
+const newVersion = '20260928_hotel_detail';
 
 for (const file of files) {
   const fullPath = path.join(baseDir, file);

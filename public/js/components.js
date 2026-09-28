@@ -2627,7 +2627,7 @@ window.renderHotelBookingModal = function() {
   if (window.lucide) lucide.createIcons();
 };
 
-window.openHotelBookingModal = async function(hotelId) {
+window.openHotelBookingModal = async function(hotelId, roomTypeIndex = 0) {
   window.renderHotelBookingModal();
 
   const modal = document.getElementById('hotel-booking-modal');
@@ -2676,10 +2676,13 @@ window.openHotelBookingModal = async function(hotelId) {
       const roomSelect = document.getElementById('hb-room-type-select');
       if (roomSelect && Array.isArray(h.roomTypes)) {
         roomSelect.innerHTML = h.roomTypes.map((r, i) => `
-          <option value="${i}" data-price="${r.price}" data-name="${r.name}">
+          <option value="${i}" data-price="${r.price}" data-name="${r.name}" ${i === Number(roomTypeIndex) ? 'selected' : ''}>
             ${r.name} (${TourAPI.formatPrice ? TourAPI.formatPrice(r.price) : r.price} / 1박) - [${r.bed || ''}, 최대 ${r.maxGuests || 2}인]
           </option>
         `).join('');
+        if (roomTypeIndex !== undefined && Number(roomTypeIndex) < h.roomTypes.length) {
+          roomSelect.selectedIndex = Number(roomTypeIndex);
+        }
       }
     }
   } catch {}

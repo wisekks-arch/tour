@@ -205,8 +205,8 @@
   <div id="footer-root" class="w-full"></div>
 
   <!-- Scripts -->
-  <script src="js/api.js?v=20260928_hotels"></script>
-  <script src="js/components.js?v=20260928_hotels"></script>
+  <script src="js/api.js?v=20260928_hotel_detail"></script>
+  <script src="js/components.js?v=20260928_hotel_detail"></script>
   <script>
     let allHotels = [];
 
@@ -327,7 +327,7 @@
             <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden flex flex-col group">
               
               <!-- Image Banner with Badge -->
-              <div class="relative aspect-video sm:h-52 overflow-hidden bg-slate-900">
+              <a href="hotel-detail.html?id=${h.id}" class="block relative aspect-video sm:h-52 overflow-hidden bg-slate-900">
                 <img 
                   src="${h.thumbnail || (h.images && h.images[0]) || ''}" 
                   alt="${h.name}" 
@@ -355,7 +355,7 @@
                 <!-- City / Country Bottom Overlay -->
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
                   <div class="flex items-center gap-1 font-bold drop-shadow">
-                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-400"></i>
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-teal-400"></i>
                     <span>${h.country} · ${h.city}</span>
                   </div>
                   <div class="flex items-center gap-1 bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-md font-bold text-amber-300">
@@ -364,15 +364,17 @@
                     <span class="text-slate-300 text-[10px]">(${h.reviewCount || 100}+)</span>
                   </div>
                 </div>
-              </div>
+              </a>
 
               <!-- Body Content -->
               <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                 
                 <div>
-                  <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-sky-600 transition line-clamp-1" title="${h.name}">
-                    ${h.name}
-                  </h3>
+                  <a href="hotel-detail.html?id=${h.id}" class="block group/title">
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover/title:text-teal-600 transition line-clamp-1" title="${h.name}">
+                      ${h.name}
+                    </h3>
+                  </a>
                   <p class="text-[11px] text-slate-400 font-medium truncate mt-0.5">${h.nameEn || ''}</p>
                   
                   <p class="text-xs text-slate-600 line-clamp-2 mt-2 leading-relaxed">
@@ -385,28 +387,37 @@
                   </div>
                 </div>
 
-                <!-- Price & Booking CTA -->
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <!-- Price & Dual Action CTAs: 상세보기 + 예약하기 -->
+                <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <span class="text-[10.5px] text-slate-400 block">1박 기준 요금 (세금포함)</span>
+                    <span class="text-[10.5px] text-slate-400 block">1박 요금 (세금포함)</span>
                     <div class="flex items-baseline gap-1.5 mt-0.5">
                       ${h.originalPrice ? `
                         <span class="text-xs text-slate-400 line-through">${TourAPI.formatPrice(h.originalPrice)}</span>
                       ` : ''}
-                      <span class="text-base sm:text-lg font-black text-sky-600">
+                      <span class="text-base sm:text-lg font-black text-teal-600">
                         ${TourAPI.formatPrice(h.pricePerNight)}
                       </span>
                     </div>
                   </div>
 
-                  <button 
-                    type="button"
-                    onclick="openHotelBookingModal('${h.id}')" 
-                    class="px-4 py-2.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
-                    <span>예약하기</span>
-                  </button>
+                  <div class="flex items-center gap-1.5">
+                    <a 
+                      href="hotel-detail.html?id=${h.id}" 
+                      class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center gap-1 cursor-pointer"
+                    >
+                      <i data-lucide="info" class="w-3.5 h-3.5 text-slate-500"></i>
+                      <span>상세보기</span>
+                    </a>
+                    <button 
+                      type="button"
+                      onclick="openHotelBookingModal('${h.id}')" 
+                      class="px-3.5 py-2 bg-gradient-to-r from-teal-600 to-sky-600 hover:from-teal-700 hover:to-sky-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1 cursor-pointer"
+                    >
+                      <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
+                      <span>예약하기</span>
+                    </button>
+                  </div>
                 </div>
 
               </div>

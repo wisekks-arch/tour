@@ -7,6 +7,8 @@ const htmlFiles = [
   path.join(__dirname, '..', 'public', 'admin.html'),
   path.join(__dirname, '..', 'hotels.html'),
   path.join(__dirname, '..', 'public', 'hotels.html'),
+  path.join(__dirname, '..', 'hotel-detail.html'),
+  path.join(__dirname, '..', 'public', 'hotel-detail.html'),
   path.join(__dirname, '..', 'index.html'),
   path.join(__dirname, '..', 'public', 'index.html'),
   path.join(__dirname, '..', 'reviews.html'),
