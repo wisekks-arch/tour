@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = 'd:\\92.SW\\tour';
+const baseDir = path.join(__dirname, '..');
 const files = [
   'index.html',
   'admin.html',
+  'hotels.html',
+  'reviews.html',
   'packages.html',
   'package-detail.html',
   'booking.html',
@@ -12,6 +14,8 @@ const files = [
   'about.html',
   'public/index.html',
   'public/admin.html',
+  'public/hotels.html',
+  'public/reviews.html',
   'public/packages.html',
   'public/package-detail.html',
   'public/booking.html',
@@ -19,13 +23,14 @@ const files = [
   'public/about.html'
 ];
 
-const newVersion = '20260915_all_users_smtp';
+const newVersion = '20260928_hotels';
 
 for (const file of files) {
   const fullPath = path.join(baseDir, file);
   if (fs.existsSync(fullPath)) {
     let content = fs.readFileSync(fullPath, 'utf8');
     content = content.replace(/js\/api\.js(\?v=[^"]*)?/g, `js/api.js?v=${newVersion}`);
+    content = content.replace(/js\/components\.js(\?v=[^"]*)?/g, `js/components.js?v=${newVersion}`);
     fs.writeFileSync(fullPath, content, 'utf8');
     console.log('Updated cache version in:', file);
   }

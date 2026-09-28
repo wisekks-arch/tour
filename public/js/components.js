@@ -11,6 +11,7 @@ function renderNavbar(activeKey = '') {
   const links = [
     { key: 'home', label: '홈', href: 'index.html' },
     { key: 'packages', label: '여행상품', href: 'packages.html' },
+    { key: 'hotels', label: '호텔예약', href: 'hotels.html' },
     { key: 'theme', label: '테마여행', href: 'packages.html?theme=휴양' },
     { key: 'reviews', label: '여행후기', href: 'reviews.html' },
     { key: 'about', label: '회사소개', href: 'about.html' },
@@ -2482,3 +2483,316 @@ window.handleReviewSubmit = async function(e) {
     }
   }
 };
+
+// --- Hotel Booking Modal & Flow ---
+
+window.currentSelectedHotel = null;
+
+window.renderHotelBookingModal = function() {
+  if (document.getElementById('hotel-booking-modal')) return;
+
+  const modalHtml = `
+    <div id="hotel-booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs transition-opacity hidden">
+      <div class="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-teal-700 via-sky-700 to-indigo-800 p-5 text-white flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+              <i data-lucide="hotel" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black" id="hb-modal-hotel-name">호텔 예약 신청</h3>
+              <p class="text-[11px] text-teal-100" id="hb-modal-hotel-sub">투어이지 회원 특가 보장 & 안심 예약</p>
+            </div>
+          </div>
+          <button onclick="window.closeHotelBookingModal()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Form Body -->
+        <form id="form-hotel-booking" onsubmit="window.handleHotelBookingSubmit(event)" class="p-5 sm:p-6 overflow-y-auto space-y-4 flex-1">
+          <input type="hidden" id="hb-hotel-id" value="">
+          
+          <!-- Hotel Preview Banner -->
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+            <img id="hb-hotel-thumb" src="" alt="호텔" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shrink-0">
+            <div class="overflow-hidden flex-1">
+              <span id="hb-hotel-badge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-900 border border-amber-200 inline-block mb-1">5성급 호텔</span>
+              <h4 id="hb-hotel-title" class="font-black text-slate-900 text-xs sm:text-sm truncate">호텔명</h4>
+              <p id="hb-hotel-city" class="text-[11px] text-slate-500 truncate">도시 / 국가</p>
+            </div>
+          </div>
+
+          <!-- Room Type Select -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">객실 타입 선택 <span class="text-rose-500">*</span></label>
+            <select id="hb-room-type-select" required onchange="window.updateHotelBookingCalculation()" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <!-- Dates: Check-in / Check-out Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">체크인 날짜 <span class="text-rose-500">*</span></label>
+              <input type="date" id="hb-checkin-date" required onchange="window.updateHotelBookingCalculation()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">체크아웃 날짜 <span class="text-rose-500">*</span></label>
+              <input type="date" id="hb-checkout-date" required onchange="window.updateHotelBookingCalculation()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+            </div>
+          </div>
+
+          <!-- Rooms & Guests -->
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">객실 수</label>
+              <select id="hb-room-count" onchange="window.updateHotelBookingCalculation()" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800">
+                <option value="1">1개</option>
+                <option value="2">2개</option>
+                <option value="3">3개</option>
+                <option value="4">4개</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">성인 투숙객</label>
+              <select id="hb-adult-count" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800">
+                <option value="1">1명</option>
+                <option value="2" selected>2명</option>
+                <option value="3">3명</option>
+                <option value="4">4명</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">아동 투숙객</label>
+              <select id="hb-child-count" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800">
+                <option value="0" selected>0명</option>
+                <option value="1">1명</option>
+                <option value="2">2명</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Total Calculation Banner -->
+          <div class="p-4 bg-gradient-to-r from-sky-50 to-teal-50 rounded-2xl border border-sky-100 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-slate-500 block">숙박 기간 및 예상 총액</span>
+              <strong id="hb-calc-nights" class="text-xs font-bold text-sky-900">1박 (객실 1개)</strong>
+            </div>
+            <div class="text-right">
+              <span class="text-xl font-black text-sky-700" id="hb-total-price-txt">0원</span>
+              <span class="text-[10px] text-slate-400 block">세금 & 봉사료 포함</span>
+            </div>
+          </div>
+
+          <!-- Customer Info -->
+          <div class="space-y-3 pt-2 border-t border-slate-100">
+            <h5 class="text-xs font-black text-slate-800 flex items-center gap-1">
+              <i data-lucide="user-check" class="w-3.5 h-3.5 text-sky-600"></i> 예약자 및 투숙객 정보
+            </h5>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">예약자 성명 <span class="text-rose-500">*</span></label>
+                <input type="text" id="hb-cust-name" required placeholder="홍길동" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">휴대폰 번호 <span class="text-rose-500">*</span></label>
+                <input type="tel" id="hb-cust-phone" required placeholder="010-1234-5678" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">이메일 주소 <span class="text-rose-500">*</span></label>
+                <input type="email" id="hb-cust-email" required placeholder="user@example.com" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">특별 요청 사항 (선택)</label>
+              <input type="text" id="hb-special-req" placeholder="예: 고층 배정 희망, 금연실, 엑스트라 베드, 얼리 체크인 요청 등" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500">
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-2">
+            <button type="submit" id="btn-submit-hotel-booking" class="w-full py-3.5 bg-gradient-to-r from-teal-600 to-sky-600 hover:from-teal-700 hover:to-sky-700 text-white font-black rounded-xl shadow-md text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> 호텔 예약 신청 완료
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  if (window.lucide) lucide.createIcons();
+};
+
+window.openHotelBookingModal = async function(hotelId) {
+  window.renderHotelBookingModal();
+
+  const modal = document.getElementById('hotel-booking-modal');
+  const form = document.getElementById('form-hotel-booking');
+  if (form) form.reset();
+
+  // Populate Default dates: Tomorrow to Day after tomorrow
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dayAfter = new Date(today);
+  dayAfter.setDate(dayAfter.getDate() + 2);
+
+  const checkinEl = document.getElementById('hb-checkin-date');
+  const checkoutEl = document.getElementById('hb-checkout-date');
+  if (checkinEl) checkinEl.value = tomorrow.toISOString().slice(0, 10);
+  if (checkoutEl) checkoutEl.value = dayAfter.toISOString().slice(0, 10);
+
+  // Auto-fill logged in user
+  const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+  const nameInput = document.getElementById('hb-cust-name');
+  const phoneInput = document.getElementById('hb-cust-phone');
+  const emailInput = document.getElementById('hb-cust-email');
+
+  if (user) {
+    if (nameInput) nameInput.value = user.name || '';
+    if (phoneInput) phoneInput.value = user.phone || '';
+    if (emailInput) emailInput.value = user.email || '';
+  }
+
+  // Load Hotel Details
+  try {
+    const res = await TourAPI.getHotelById(hotelId);
+    if (res && res.data) {
+      window.currentSelectedHotel = res.data;
+      const h = res.data;
+
+      document.getElementById('hb-hotel-id').value = h.id;
+      document.getElementById('hb-hotel-title').textContent = h.name;
+      document.getElementById('hb-modal-hotel-name').textContent = h.name;
+      document.getElementById('hb-hotel-city').textContent = `${h.country || ''} · ${h.city || ''}`;
+      document.getElementById('hb-hotel-thumb').src = h.thumbnail || (h.images && h.images[0]) || '';
+      document.getElementById('hb-hotel-badge').textContent = `★ ${h.star || 5}성급 럭셔리`;
+
+      // Populate Room Types
+      const roomSelect = document.getElementById('hb-room-type-select');
+      if (roomSelect && Array.isArray(h.roomTypes)) {
+        roomSelect.innerHTML = h.roomTypes.map((r, i) => `
+          <option value="${i}" data-price="${r.price}" data-name="${r.name}">
+            ${r.name} (${TourAPI.formatPrice ? TourAPI.formatPrice(r.price) : r.price} / 1박) - [${r.bed || ''}, 최대 ${r.maxGuests || 2}인]
+          </option>
+        `).join('');
+      }
+    }
+  } catch {}
+
+  window.updateHotelBookingCalculation();
+
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.closeHotelBookingModal = function() {
+  const modal = document.getElementById('hotel-booking-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+};
+
+window.updateHotelBookingCalculation = function() {
+  const checkinVal = document.getElementById('hb-checkin-date')?.value;
+  const checkoutVal = document.getElementById('hb-checkout-date')?.value;
+  const roomSelect = document.getElementById('hb-room-type-select');
+  const roomCount = Number(document.getElementById('hb-room-count')?.value) || 1;
+
+  let nights = 1;
+  if (checkinVal && checkoutVal) {
+    const d1 = new Date(checkinVal);
+    const d2 = new Date(checkoutVal);
+    const diff = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+    nights = diff > 0 ? diff : 1;
+  }
+
+  const selectedOption = roomSelect?.options[roomSelect.selectedIndex];
+  const roomPrice = Number(selectedOption?.dataset?.price) || (window.currentSelectedHotel?.pricePerNight) || 300000;
+
+  const totalPrice = roomPrice * nights * roomCount;
+
+  const nightsEl = document.getElementById('hb-calc-nights');
+  const priceEl = document.getElementById('hb-total-price-txt');
+
+  if (nightsEl) nightsEl.textContent = `${nights}박 ${nights + 1}일 (객실 ${roomCount}개)`;
+  if (priceEl) priceEl.textContent = TourAPI.formatPrice ? TourAPI.formatPrice(totalPrice) : totalPrice + '원';
+};
+
+window.handleHotelBookingSubmit = async function(e) {
+  e.preventDefault();
+  const hotel = window.currentSelectedHotel;
+  if (!hotel) return;
+
+  const roomSelect = document.getElementById('hb-room-type-select');
+  const selectedOption = roomSelect?.options[roomSelect.selectedIndex];
+  const roomTypeName = selectedOption?.dataset?.name || '디럭스 룸';
+  const roomPricePerNight = Number(selectedOption?.dataset?.price) || hotel.pricePerNight;
+
+  const checkInDate = document.getElementById('hb-checkin-date')?.value;
+  const checkOutDate = document.getElementById('hb-checkout-date')?.value;
+  const roomCount = Number(document.getElementById('hb-room-count')?.value) || 1;
+  const adults = Number(document.getElementById('hb-adult-count')?.value) || 2;
+  const children = Number(document.getElementById('hb-child-count')?.value) || 0;
+
+  let nights = 1;
+  if (checkInDate && checkOutDate) {
+    const diff = Math.round((new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24));
+    nights = diff > 0 ? diff : 1;
+  }
+  const totalPrice = roomPricePerNight * nights * roomCount;
+
+  const customerName = document.getElementById('hb-cust-name')?.value.trim();
+  const customerPhone = document.getElementById('hb-cust-phone')?.value.trim();
+  const customerEmail = document.getElementById('hb-cust-email')?.value.trim();
+  const specialRequests = document.getElementById('hb-special-req')?.value.trim();
+
+  const submitBtn = document.getElementById('btn-submit-hotel-booking');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 예약 접수 중...</span>';
+  }
+
+  try {
+    const res = await TourAPI.createHotelBooking({
+      hotelId: hotel.id,
+      hotelName: hotel.name,
+      roomTypeName,
+      roomPricePerNight,
+      checkInDate,
+      checkOutDate,
+      nights,
+      roomCount,
+      adults,
+      children,
+      totalPrice,
+      customerName,
+      customerPhone,
+      customerEmail,
+      specialRequests
+    });
+
+    if (res && res.success) {
+      alert(`[${hotel.name}] 호텔 예약 신청이 성공적으로 접수되었습니다!\n\n- 예약번호: ${res.data.id}\n- 체크인: ${checkInDate} ~ 체크아웃: ${checkOutDate} (${nights}박)\n- 총 결제금액: ${TourAPI.formatPrice ? TourAPI.formatPrice(totalPrice) : totalPrice}\n\n상담원이 빠른 시일 내 확정 안내를 드릴 예정입니다.`);
+      window.closeHotelBookingModal();
+    } else {
+      alert((res && res.message) || '호텔 예약 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    alert('서버 통신 오류가 발생했습니다.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4"></i> 호텔 예약 신청 완료';
+    }
+  }
+};
+
