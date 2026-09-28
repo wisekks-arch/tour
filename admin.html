@@ -3922,9 +3922,244 @@
     }
     window.handleDeleteHotel = handleDeleteHotel;
 
+    
+    // --- Hotel 5-Photo Gallery & Thumbnail Upload State & Handlers ---
+    let currentNewHotelThumbnail = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85';
+    let currentNewHotelImages = [];
+
+    let currentEditHotelThumbnail = '';
+    let currentEditHotelImages = [];
+
+    // New Hotel Thumbnail Modes
+    function switchNewHotelThumbMode(mode) {
+      const fBtn = document.getElementById('nh-tab-thumb-file');
+      const uBtn = document.getElementById('nh-tab-thumb-url');
+      const fBox = document.getElementById('nh-thumb-file-box');
+      const uBox = document.getElementById('nh-thumb-url-box');
+      if (mode === 'file') {
+        if (fBtn) fBtn.className = 'px-2 py-0.5 rounded bg-teal-600 text-white font-bold';
+        if (uBtn) uBtn.className = 'px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100';
+        if (fBox) fBox.classList.remove('hidden');
+        if (uBox) uBox.classList.add('hidden');
+      } else {
+        if (uBtn) uBtn.className = 'px-2 py-0.5 rounded bg-teal-600 text-white font-bold';
+        if (fBtn) fBtn.className = 'px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100';
+        if (uBox) uBox.classList.remove('hidden');
+        if (fBox) fBox.classList.add('hidden');
+      }
+    }
+    window.switchNewHotelThumbMode = switchNewHotelThumbMode;
+
+    function handleNewHotelThumbFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentNewHotelThumbnail = e.target.result;
+        const img = document.getElementById('nh-preview-thumb');
+        if (img) img.src = currentNewHotelThumbnail;
+      };
+      reader.readAsDataURL(file);
+    }
+    window.handleNewHotelThumbFile = handleNewHotelThumbFile;
+
+    // New Hotel Gallery (Up to 5 images)
+    function renderNewHotelGalleryImages() {
+      const container = document.getElementById('nh-gallery-list');
+      const countEl = document.getElementById('nh-gallery-count');
+      if (countEl) countEl.textContent = currentNewHotelImages.length;
+      if (!container) return;
+
+      if (currentNewHotelImages.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-4 text-center text-slate-400 text-[11px] bg-white rounded-xl border border-dashed border-slate-200">
+            등록된 추가 갤러리 사진이 없습니다. 상단 버튼으로 사진을 등록해보세요.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = currentNewHotelImages.map((img, idx) => `
+        <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-900 aspect-video shadow-2xs">
+          <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" alt="Gallery">
+          <button type="button" onclick="removeNewHotelGalleryImage(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600/90 hover:bg-rose-600 text-white rounded-md flex items-center justify-center shadow-sm opacity-90 group-hover:opacity-100 transition cursor-pointer" title="삭제">
+            <i data-lucide="trash-2" class="w-3 h-3"></i>
+          </button>
+          <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[9px] font-mono font-bold">#${idx + 1}</span>
+        </div>
+      `).join('');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.renderNewHotelGalleryImages = renderNewHotelGalleryImages;
+
+    function handleNewHotelGalleryFiles(event) {
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0) return;
+
+      const remainingSlots = 5 - currentNewHotelImages.length;
+      if (remainingSlots <= 0) {
+        alert('갤러리 사진은 최대 5장까지만 등록 가능합니다.');
+        event.target.value = '';
+        return;
+      }
+
+      const filesToLoad = files.slice(0, remainingSlots);
+      let loaded = 0;
+      filesToLoad.forEach(f => {
+        if (!f.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          currentNewHotelImages.push(e.target.result);
+          loaded++;
+          if (loaded >= filesToLoad.length) {
+            renderNewHotelGalleryImages();
+          }
+        };
+        reader.readAsDataURL(f);
+      });
+      event.target.value = '';
+    }
+    window.handleNewHotelGalleryFiles = handleNewHotelGalleryFiles;
+
+    function promptAddNewHotelGalleryUrl() {
+      if (currentNewHotelImages.length >= 5) {
+        alert('갤러리 사진은 최대 5장까지만 등록 가능합니다.');
+        return;
+      }
+      const url = prompt('추가할 호텔 갤러리 이미지 웹 URL을 입력해주세요:');
+      if (url && url.trim().startsWith('http')) {
+        currentNewHotelImages.push(url.trim());
+        renderNewHotelGalleryImages();
+      }
+    }
+    window.promptAddNewHotelGalleryUrl = promptAddNewHotelGalleryUrl;
+
+    function removeNewHotelGalleryImage(idx) {
+      currentNewHotelImages.splice(idx, 1);
+      renderNewHotelGalleryImages();
+    }
+    window.removeNewHotelGalleryImage = removeNewHotelGalleryImage;
+
+
+    // Edit Hotel Thumbnail Modes
+    function switchEditHotelThumbMode(mode) {
+      const fBtn = document.getElementById('eh-tab-thumb-file');
+      const uBtn = document.getElementById('eh-tab-thumb-url');
+      const fBox = document.getElementById('eh-thumb-file-box');
+      const uBox = document.getElementById('eh-thumb-url-box');
+      if (mode === 'file') {
+        if (fBtn) fBtn.className = 'px-2 py-0.5 rounded bg-teal-600 text-white font-bold';
+        if (uBtn) uBtn.className = 'px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100';
+        if (fBox) fBox.classList.remove('hidden');
+        if (uBox) uBox.classList.add('hidden');
+      } else {
+        if (uBtn) uBtn.className = 'px-2 py-0.5 rounded bg-teal-600 text-white font-bold';
+        if (fBtn) fBtn.className = 'px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100';
+        if (uBox) uBox.classList.remove('hidden');
+        if (fBox) fBox.classList.add('hidden');
+      }
+    }
+    window.switchEditHotelThumbMode = switchEditHotelThumbMode;
+
+    function handleEditHotelThumbFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentEditHotelThumbnail = e.target.result;
+        const img = document.getElementById('eh-preview-thumb');
+        if (img) img.src = currentEditHotelThumbnail;
+      };
+      reader.readAsDataURL(file);
+    }
+    window.handleEditHotelThumbFile = handleEditHotelThumbFile;
+
+    // Edit Hotel Gallery (Up to 5 images)
+    function renderEditHotelGalleryImages() {
+      const container = document.getElementById('eh-gallery-list');
+      const countEl = document.getElementById('eh-gallery-count');
+      if (countEl) countEl.textContent = currentEditHotelImages.length;
+      if (!container) return;
+
+      if (currentEditHotelImages.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-4 text-center text-slate-400 text-[11px] bg-white rounded-xl border border-dashed border-slate-200">
+            등록된 추가 갤러리 사진이 없습니다. 상단 버튼으로 사진을 등록해보세요.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = currentEditHotelImages.map((img, idx) => `
+        <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-900 aspect-video shadow-2xs">
+          <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" alt="Gallery">
+          <button type="button" onclick="removeEditHotelGalleryImage(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600/90 hover:bg-rose-600 text-white rounded-md flex items-center justify-center shadow-sm opacity-90 group-hover:opacity-100 transition cursor-pointer" title="삭제">
+            <i data-lucide="trash-2" class="w-3 h-3"></i>
+          </button>
+          <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[9px] font-mono font-bold">#${idx + 1}</span>
+        </div>
+      `).join('');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.renderEditHotelGalleryImages = renderEditHotelGalleryImages;
+
+    function handleEditHotelGalleryFiles(event) {
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0) return;
+
+      const remainingSlots = 5 - currentEditHotelImages.length;
+      if (remainingSlots <= 0) {
+        alert('갤러리 사진은 최대 5장까지만 등록 가능합니다.');
+        event.target.value = '';
+        return;
+      }
+
+      const filesToLoad = files.slice(0, remainingSlots);
+      let loaded = 0;
+      filesToLoad.forEach(f => {
+        if (!f.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          currentEditHotelImages.push(e.target.result);
+          loaded++;
+          if (loaded >= filesToLoad.length) {
+            renderEditHotelGalleryImages();
+          }
+        };
+        reader.readAsDataURL(f);
+      });
+      event.target.value = '';
+    }
+    window.handleEditHotelGalleryFiles = handleEditHotelGalleryFiles;
+
+    function promptAddEditHotelGalleryUrl() {
+      if (currentEditHotelImages.length >= 5) {
+        alert('갤러리 사진은 최대 5장까지만 등록 가능합니다.');
+        return;
+      }
+      const url = prompt('추가할 호텔 갤러리 이미지 웹 URL을 입력해주세요:');
+      if (url && url.trim().startsWith('http')) {
+        currentEditHotelImages.push(url.trim());
+        renderEditHotelGalleryImages();
+      }
+    }
+    window.promptAddEditHotelGalleryUrl = promptAddEditHotelGalleryUrl;
+
+    function removeEditHotelGalleryImage(idx) {
+      currentEditHotelImages.splice(idx, 1);
+      renderEditHotelGalleryImages();
+    }
+    window.removeEditHotelGalleryImage = removeEditHotelGalleryImage;
+
+
     function openNewHotelModal() {
       const form = document.getElementById('form-new-hotel');
       if (form) form.reset();
+      currentNewHotelThumbnail = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85';
+      currentNewHotelImages = [];
+      document.getElementById('nh-preview-thumb').src = currentNewHotelThumbnail;
+      switchNewHotelThumbMode('file');
+      renderNewHotelGalleryImages();
       document.getElementById('modal-new-hotel').classList.remove('hidden');
       if (window.lucide) lucide.createIcons();
     }
@@ -3935,6 +4170,9 @@
       const amenitiesInput = document.getElementById('nh-amenities')?.value || '';
       const amenitiesArr = amenitiesInput.split(',').map(s => s.trim()).filter(Boolean);
 
+      const thumbVal = (document.getElementById('nh-thumbnail-url')?.value.trim()) || currentNewHotelThumbnail;
+      const imagesArr = currentNewHotelImages.length > 0 ? currentNewHotelImages.slice(0, 5) : [thumbVal];
+
       const payload = {
         name: document.getElementById('nh-name')?.value.trim(),
         nameEn: document.getElementById('nh-name-en')?.value.trim(),
@@ -3944,7 +4182,8 @@
         star: Number(document.getElementById('nh-star')?.value) || 5,
         pricePerNight: Number(document.getElementById('nh-price')?.value) || 300000,
         originalPrice: Number(document.getElementById('nh-original-price')?.value) || null,
-        thumbnail: document.getElementById('nh-thumbnail')?.value.trim(),
+        thumbnail: thumbVal,
+        images: imagesArr,
         amenities: amenitiesArr.length > 0 ? amenitiesArr : ['스파', '수영장', '다이닝'],
         summary: document.getElementById('nh-summary')?.value.trim(),
         status: document.getElementById('nh-status')?.value || '운영중'
@@ -3982,7 +4221,16 @@
       document.getElementById('eh-star').value = h.star || 5;
       document.getElementById('eh-price').value = h.pricePerNight || 0;
       document.getElementById('eh-original-price').value = h.originalPrice || '';
-      document.getElementById('eh-thumbnail').value = h.thumbnail || (h.images && h.images[0]) || '';
+      
+      const thumb = h.thumbnail || (h.images && h.images[0]) || '';
+      currentEditHotelThumbnail = thumb;
+      document.getElementById('eh-preview-thumb').src = thumb;
+      document.getElementById('eh-thumbnail-url').value = thumb;
+      switchEditHotelThumbMode('file');
+
+      currentEditHotelImages = Array.isArray(h.images) ? [...h.images].slice(0, 5) : (thumb ? [thumb] : []);
+      renderEditHotelGalleryImages();
+
       document.getElementById('eh-amenities').value = Array.isArray(h.amenities) ? h.amenities.join(', ') : (h.amenities || '');
       document.getElementById('eh-summary').value = h.summary || '';
       document.getElementById('eh-status').value = (h.status !== '미운영' && h.isActive !== false) ? '운영중' : '미운영';
@@ -4000,6 +4248,9 @@
       const amenitiesInput = document.getElementById('eh-amenities')?.value || '';
       const amenitiesArr = amenitiesInput.split(',').map(s => s.trim()).filter(Boolean);
 
+      const thumbVal = (document.getElementById('eh-thumbnail-url')?.value.trim()) || currentEditHotelThumbnail;
+      const imagesArr = currentEditHotelImages.length > 0 ? currentEditHotelImages.slice(0, 5) : [thumbVal];
+
       const payload = {
         name: document.getElementById('eh-name')?.value.trim(),
         nameEn: document.getElementById('eh-name-en')?.value.trim(),
@@ -4009,7 +4260,8 @@
         star: Number(document.getElementById('eh-star')?.value) || 5,
         pricePerNight: Number(document.getElementById('eh-price')?.value) || 300000,
         originalPrice: Number(document.getElementById('eh-original-price')?.value) || null,
-        thumbnail: document.getElementById('eh-thumbnail')?.value.trim(),
+        thumbnail: thumbVal,
+        images: imagesArr,
         amenities: amenitiesArr,
         summary: document.getElementById('eh-summary')?.value.trim(),
         status: document.getElementById('eh-status')?.value || '운영중'
@@ -4529,7 +4781,7 @@
   </div>
 
 
-  <!-- 1. New Hotel Modal -->
+  <!-- 1. New Hotel Modal with 5-Photo PC & URL Gallery Uploader -->
   <div id="modal-new-hotel" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200 overflow-hidden my-auto">
       <div class="p-5 bg-gradient-to-r from-teal-800 to-slate-900 text-white flex items-center justify-between shrink-0">
@@ -4542,11 +4794,11 @@
         </button>
       </div>
 
-      <form id="form-new-hotel" onsubmit="handleSaveNewHotel(event)" class="p-6 space-y-4 overflow-y-auto flex-grow text-xs">
+      <form id="form-new-hotel" onsubmit="handleSaveNewHotel(event)" class="p-6 space-y-5 overflow-y-auto flex-grow text-xs">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔명 (국문) *</label>
-            <input type="text" id="nh-name" required placeholder="예: 시그니엘 서울" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <input type="text" id="nh-name" required placeholder="예: 시그니엘 서울" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔 영문명</label>
@@ -4557,7 +4809,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">지역 구분 *</label>
-            <select id="nh-region" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <select id="nh-region" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
               <option value="국내">대한민국 / 제주</option>
               <option value="동남아">동남아 / 휴양지</option>
               <option value="일본/동아시아">일본 / 동아시아</option>
@@ -4578,7 +4830,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔 등급 (성급)</label>
-            <select id="nh-star" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <select id="nh-star" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
               <option value="5" selected>★★★★★ 5성급 럭셔리</option>
               <option value="4">★★★★ 4성급 프리미엄</option>
               <option value="3">★★★ 3성급 스탠다드</option>
@@ -4586,7 +4838,7 @@
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">1박 판매가 (원) *</label>
-            <input type="number" id="nh-price" required placeholder="예: 450000" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <input type="number" id="nh-price" required placeholder="예: 450000" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold text-teal-700">
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">정상가 (원)</label>
@@ -4594,14 +4846,63 @@
           </div>
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">대표 이미지 URL *</label>
-          <input type="url" id="nh-thumbnail" required placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+        <!-- 1. Representative Thumbnail Upload -->
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="block font-bold text-slate-800">대표 썸네일 이미지 *</label>
+            <div class="flex items-center gap-1 bg-white p-0.5 rounded-lg border border-slate-200 text-[11px]">
+              <button type="button" onclick="switchNewHotelThumbMode('file')" id="nh-tab-thumb-file" class="px-2 py-0.5 rounded bg-teal-600 text-white font-bold">내 PC 파일</button>
+              <button type="button" onclick="switchNewHotelThumbMode('url')" id="nh-tab-thumb-url" class="px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100">웹 URL</button>
+            </div>
+          </div>
+
+          <div id="nh-thumb-file-box" class="flex items-center gap-3">
+            <div class="w-20 h-16 rounded-xl bg-slate-200 overflow-hidden border border-slate-300 shrink-0">
+              <img id="nh-preview-thumb" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85" class="w-full h-full object-cover" alt="Preview">
+            </div>
+            <div class="flex-grow space-y-1">
+              <input type="file" id="nh-thumb-file-input" accept="image/*" onchange="handleNewHotelThumbFile(event)" class="text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer">
+              <p class="text-[10px] text-slate-400">내 PC에서 대표 사진을 선택하세요 (PNG, JPG, WebP)</p>
+            </div>
+          </div>
+
+          <div id="nh-thumb-url-box" class="hidden">
+            <input type="url" id="nh-thumbnail-url" placeholder="https://images.unsplash.com/..." oninput="document.getElementById('nh-preview-thumb').src = this.value;" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+          </div>
+        </div>
+
+        <!-- 2. Multi-Photo Gallery Uploader (Up to 5 images) -->
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <label class="block font-bold text-slate-800">호텔 갤러리 추가 사진 (최대 5장)</label>
+              <span class="text-[10.5px] text-slate-400">PC 내 사진을 다중 선택하여 최대 5장까지 등록할 수 있습니다.</span>
+            </div>
+            <span class="text-xs font-bold text-teal-700 font-mono"><span id="nh-gallery-count">0</span> / 5개</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            <label class="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+              <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i>
+              <span>📁 PC 사진 추가 (다중 선택)</span>
+              <input type="file" id="nh-gallery-file-input" multiple accept="image/*" onchange="handleNewHotelGalleryFiles(event)" class="hidden">
+            </label>
+            <button type="button" onclick="promptAddNewHotelGalleryUrl()" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-1.5 transition cursor-pointer">
+              <i data-lucide="link" class="w-3.5 h-3.5"></i> 웹 URL 추가
+            </button>
+          </div>
+
+          <!-- Gallery Thumbnails Grid -->
+          <div id="nh-gallery-list" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5 pt-1">
+            <div class="col-span-full py-4 text-center text-slate-400 text-[11px] bg-white rounded-xl border border-dashed border-slate-200">
+              등록된 추가 갤러리 사진이 없습니다. 상단 버튼으로 사진을 등록해보세요.
+            </div>
+          </div>
         </div>
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">부대시설 태그 (쉼표 구분)</label>
-          <input type="text" id="nh-amenities" placeholder="예: 인피니티풀, 미슐랭 다이닝, 스파, 전용 비치, 조식 포함" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+          <input type="text" id="nh-amenities" placeholder="예: 스카이라인 전망, 인피니티풀, 미슐랭 다이닝, 사우나 & 스파, 무료 발렛" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
         </div>
 
         <div>
@@ -4629,7 +4930,7 @@
     </div>
   </div>
 
-  <!-- 2. Edit Hotel Modal -->
+  <!-- 2. Edit Hotel Modal with 5-Photo PC & URL Gallery Uploader -->
   <div id="modal-edit-hotel" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200 overflow-hidden my-auto">
       <div class="p-5 bg-gradient-to-r from-teal-900 to-slate-900 text-white flex items-center justify-between shrink-0">
@@ -4645,13 +4946,13 @@
         </button>
       </div>
 
-      <form id="form-edit-hotel" onsubmit="handleSaveEditHotel(event)" class="p-6 space-y-4 overflow-y-auto flex-grow text-xs">
+      <form id="form-edit-hotel" onsubmit="handleSaveEditHotel(event)" class="p-6 space-y-5 overflow-y-auto flex-grow text-xs">
         <input type="hidden" id="eh-id">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔명 (국문) *</label>
-            <input type="text" id="eh-name" required class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <input type="text" id="eh-name" required class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔 영문명</label>
@@ -4662,7 +4963,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">지역 구분 *</label>
-            <select id="eh-region" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <select id="eh-region" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
               <option value="국내">대한민국 / 제주</option>
               <option value="동남아">동남아 / 휴양지</option>
               <option value="일본/동아시아">일본 / 동아시아</option>
@@ -4683,7 +4984,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-bold text-slate-700 mb-1">호텔 등급 (성급)</label>
-            <select id="eh-star" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <select id="eh-star" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold">
               <option value="5">★★★★★ 5성급 럭셔리</option>
               <option value="4">★★★★ 4성급 프리미엄</option>
               <option value="3">★★★ 3성급 스탠다드</option>
@@ -4691,7 +4992,7 @@
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">1박 판매가 (원) *</label>
-            <input type="number" id="eh-price" required class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+            <input type="number" id="eh-price" required class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500 font-bold text-teal-700">
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">정상가 (원)</label>
@@ -4699,9 +5000,56 @@
           </div>
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">대표 이미지 URL *</label>
-          <input type="url" id="eh-thumbnail" required class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+        <!-- 1. Edit Representative Thumbnail Upload -->
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="block font-bold text-slate-800">대표 썸네일 이미지 *</label>
+            <div class="flex items-center gap-1 bg-white p-0.5 rounded-lg border border-slate-200 text-[11px]">
+              <button type="button" onclick="switchEditHotelThumbMode('file')" id="eh-tab-thumb-file" class="px-2 py-0.5 rounded bg-teal-600 text-white font-bold">내 PC 파일</button>
+              <button type="button" onclick="switchEditHotelThumbMode('url')" id="eh-tab-thumb-url" class="px-2 py-0.5 rounded text-slate-600 hover:bg-slate-100">웹 URL</button>
+            </div>
+          </div>
+
+          <div id="eh-thumb-file-box" class="flex items-center gap-3">
+            <div class="w-20 h-16 rounded-xl bg-slate-200 overflow-hidden border border-slate-300 shrink-0">
+              <img id="eh-preview-thumb" src="" class="w-full h-full object-cover" alt="Preview">
+            </div>
+            <div class="flex-grow space-y-1">
+              <input type="file" id="eh-thumb-file-input" accept="image/*" onchange="handleEditHotelThumbFile(event)" class="text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer">
+              <p class="text-[10px] text-slate-400">내 PC에서 새로운 대표 사진을 선택하세요</p>
+            </div>
+          </div>
+
+          <div id="eh-thumb-url-box" class="hidden">
+            <input type="url" id="eh-thumbnail-url" placeholder="https://images.unsplash.com/..." oninput="document.getElementById('eh-preview-thumb').src = this.value;" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-teal-500">
+          </div>
+        </div>
+
+        <!-- 2. Edit Multi-Photo Gallery Uploader (Up to 5 images) -->
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <label class="block font-bold text-slate-800">호텔 갤러리 추가 사진 (최대 5장)</label>
+              <span class="text-[10.5px] text-slate-400">PC 내 사진을 다중 선택하여 최대 5장까지 등록할 수 있습니다.</span>
+            </div>
+            <span class="text-xs font-bold text-teal-700 font-mono"><span id="eh-gallery-count">0</span> / 5개</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            <label class="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+              <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i>
+              <span>📁 PC 사진 추가 (다중 선택)</span>
+              <input type="file" id="eh-gallery-file-input" multiple accept="image/*" onchange="handleEditHotelGalleryFiles(event)" class="hidden">
+            </label>
+            <button type="button" onclick="promptAddEditHotelGalleryUrl()" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-1.5 transition cursor-pointer">
+              <i data-lucide="link" class="w-3.5 h-3.5"></i> 웹 URL 추가
+            </button>
+          </div>
+
+          <!-- Gallery Thumbnails Grid -->
+          <div id="eh-gallery-list" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5 pt-1">
+            <!-- Rendered dynamically -->
+          </div>
         </div>
 
         <div>

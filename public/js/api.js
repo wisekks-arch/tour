@@ -86,18 +86,19 @@ const DEFAULT_HOTELS = [
     "name": "시그니엘 서울 (Signiel Seoul)",
     "nameEn": "Signiel Seoul",
     "region": "국내",
-    "city": "서울 송파구",
+    "city": "서울 송파구 잠실",
     "country": "대한민국",
     "star": 5,
     "rating": 4.96,
     "reviewCount": 320,
     "pricePerNight": 650000,
     "originalPrice": 750000,
-    "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "스카이라인 전망",
@@ -129,7 +130,7 @@ const DEFAULT_HOTELS = [
     ],
     "checkIn": "15:00",
     "checkOut": "11:00",
-    "summary": "롯데월드타워 76층~101층에 위치하여 서울의 파노라마 스카이라인을 조망할 수 있는 국내 최고층 럭셔리 랜드마크 호텔입니다.",
+    "summary": "롯데월드타워 76층~101층에 위치하여 서울의 파노라마 스카이라인을 조망할 수 있는 대한민국 최고층 럭셔리 랜드마크 호텔입니다.",
     "status": "운영중"
   },
   {
@@ -144,10 +145,10 @@ const DEFAULT_HOTELS = [
     "reviewCount": 428,
     "pricePerNight": 480000,
     "originalPrice": 580000,
-    "thumbnail": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
@@ -195,10 +196,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 310,
     "pricePerNight": 390000,
     "originalPrice": 460000,
-    "thumbnail": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
     "images": [
+      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "오션스파 씨메르",
@@ -248,6 +250,7 @@ const DEFAULT_HOTELS = [
     "thumbnail": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
     "images": [
       "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
@@ -298,7 +301,8 @@ const DEFAULT_HOTELS = [
     "thumbnail": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
     "images": [
       "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "인피니티 풀 2개",
@@ -345,10 +349,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 290,
     "pricePerNight": 420000,
     "originalPrice": 510000,
-    "thumbnail": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
     "images": [
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "남산 & 한강 전망",
@@ -388,7 +393,7 @@ const DEFAULT_HOTELS = [
     "name": "인터컨티넨탈 다낭 선 페닌슐라 리조트",
     "nameEn": "InterContinental Danang Sun Peninsula Resort",
     "region": "동남아",
-    "city": "베트남 다낭",
+    "city": "베트남 다낭 손트라",
     "country": "베트남",
     "star": 5,
     "rating": 4.98,
@@ -398,7 +403,8 @@ const DEFAULT_HOTELS = [
     "thumbnail": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
     "images": [
       "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "프라이빗 전용 비치",
@@ -447,7 +453,8 @@ const DEFAULT_HOTELS = [
     "thumbnail": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
     "images": [
       "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "세계적 명소 락바(Rock Bar)",
@@ -486,7 +493,7 @@ const DEFAULT_HOTELS = [
     "name": "더 페닌슐라 방콕 (The Peninsula Bangkok)",
     "nameEn": "The Peninsula Bangkok",
     "region": "동남아",
-    "city": "태국 방콕",
+    "city": "태국 방콕 차오프라야",
     "country": "태국",
     "star": 5,
     "rating": 4.94,
@@ -495,7 +502,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 470000,
     "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "전 객실 리버뷰",
@@ -543,7 +552,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 760000,
     "thumbnail": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "전 객실 단독 풀빌라",
@@ -591,7 +602,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 890000,
     "thumbnail": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "57층 옥상 인피니티 풀",
@@ -630,7 +643,7 @@ const DEFAULT_HOTELS = [
     "name": "샹그릴라 보라카이 리조트 & 스파 (Shangri-La Boracay)",
     "nameEn": "Shangri-La Boracay",
     "region": "동남아",
-    "city": "필리핀 보라카이",
+    "city": "필리핀 보라카이 야팍",
     "country": "필리핀",
     "star": 5,
     "rating": 4.93,
@@ -639,7 +652,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 600000,
     "thumbnail": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "2개 프라이빗 비치",
@@ -687,7 +702,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 710000,
     "thumbnail": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "논 테라스 전망",
@@ -735,7 +752,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 530000,
     "thumbnail": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "투몬베이 정면 오션뷰",
@@ -783,7 +802,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1050000,
     "thumbnail": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "도심 속 최상층 천연온천",
@@ -831,7 +852,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 630000,
     "thumbnail": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "40층 하늘 위의 로비",
@@ -877,9 +900,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 165,
     "pricePerNight": 690000,
     "originalPrice": 840000,
-    "thumbnail": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "객실 내 천연 편백나무 온천",
@@ -927,7 +952,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 500000,
     "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "설경 노천온천",
@@ -975,7 +1002,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 950000,
     "thumbnail": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "지하 천연 온천 수영장(서멀 스프링)",
@@ -1022,7 +1051,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 450000,
     "thumbnail": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "섬 전체 단독 리조트",
@@ -1071,7 +1102,8 @@ const DEFAULT_HOTELS = [
     "thumbnail": "https://images.unsplash.com/photo-1549294413-26f195200c16?auto=format&fit=crop&w=1200&q=85",
     "images": [
       "https://images.unsplash.com/photo-1549294413-26f195200c16?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "샤넬 스파(Chanel Spa)",
@@ -1117,9 +1149,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 310,
     "pricePerNight": 980000,
     "originalPrice": 1200000,
-    "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "템스강 파노라마 전망",
@@ -1158,7 +1192,7 @@ const DEFAULT_HOTELS = [
     "name": "호텔 몬테 로사 체르마트 (Hotel Monte Rosa)",
     "nameEn": "Hotel Monte Rosa Zermatt",
     "region": "유럽",
-    "city": "스위스 체르마트",
+    "city": "스위스 체르마트 마터호른",
     "country": "스위스",
     "star": 4,
     "rating": 4.93,
@@ -1167,7 +1201,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 640000,
     "thumbnail": "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "마터호른 황금빛 설경 조망",
@@ -1214,7 +1250,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1450000,
     "thumbnail": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "올림픽 규격 해수 수영장",
@@ -1259,9 +1297,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 230,
     "pricePerNight": 670000,
     "originalPrice": 820000,
-    "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "지중해 오션프론트 뷰",
@@ -1300,7 +1340,7 @@ const DEFAULT_HOTELS = [
     "name": "할레쿨라니 하와이 오아후 (Halekulani Oahu)",
     "nameEn": "Halekulani Oahu Waikiki",
     "region": "미주/대양주",
-    "city": "미국 하와이 호놀룰루",
+    "city": "미국 하와이 호놀룰루 와이키키",
     "country": "미국",
     "star": 5,
     "rating": 4.98,
@@ -1309,7 +1349,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1100000,
     "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "카틀레야 난초 모자이크 수영장",
@@ -1348,16 +1390,18 @@ const DEFAULT_HOTELS = [
     "name": "더 플라자 뉴욕 (The Plaza Hotel NYC)",
     "nameEn": "The Plaza Hotel New York",
     "region": "미주/대양주",
-    "city": "미국 뉴욕 맨해튼",
+    "city": "미국 뉴욕 맨해튼 5번가",
     "country": "미국",
     "star": 5,
     "rating": 4.96,
     "reviewCount": 340,
     "pricePerNight": 1150000,
     "originalPrice": 1400000,
-    "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "센트럴파크 정면 뷰",
@@ -1403,9 +1447,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 520,
     "pricePerNight": 390000,
     "originalPrice": 490000,
-    "thumbnail": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1581351123004-757df051db8e?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1581351123004-757df051db8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "벨라지오 분수쇼 정면 뷰",
@@ -1451,9 +1497,11 @@ const DEFAULT_HOTELS = [
     "reviewCount": 260,
     "pricePerNight": 920000,
     "originalPrice": 1150000,
-    "thumbnail": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "오페라하우스 정면 파노라마",
@@ -1501,7 +1549,9 @@ const DEFAULT_HOTELS = [
     "originalPrice": 390000,
     "thumbnail": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
     ],
     "amenities": [
       "리조파크 워터파크",
