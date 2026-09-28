@@ -95,10 +95,26 @@ const DEFAULT_HOTELS = [
     "originalPrice": 750000,
     "thumbnail": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[시그니엘 서울] 롯데월드타워 초고층 파노라마 시티뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[시그니엘 서울] 최고급 프리미어 시티뷰 스위트 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[시그니엘 서울] 서울 도심 조망 실내 인피니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[시그니엘 서울] 미슐랭 다이닝 & 투숙객 전용 라운지"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[시그니엘 서울] 럭셔리 스파 & 웰니스 사우나"
+      }
     ],
     "amenities": [
       "스카이라인 전망",
@@ -147,9 +163,26 @@ const DEFAULT_HOTELS = [
     "originalPrice": 580000,
     "thumbnail": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[제주 신라호텔] 중문 해변 조망 사계절 야외 온수풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[제주 신라호텔] 이국적인 야자수 정원 & 글램핑 빌리지"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[제주 신라호텔] 디럭스 오션뷰 테라스 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[제주 신라호텔] 더 파크뷰 프리미엄 뷔페 다이닝"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[제주 신라호텔] 성인 전용 어덜트 풀 카바나"
+      }
     ],
     "amenities": [
       "사계절 야외 온수풀",
@@ -198,9 +231,26 @@ const DEFAULT_HOTELS = [
     "originalPrice": 460000,
     "thumbnail": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파라다이스 호텔 부산] 해운대 오션스파 씨메르 야외 온천"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파라다이스 호텔 부산] 해운대 해변 인피니티 오션풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파라다이스 호텔 부산] 디럭스 오션 테라스 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파라다이스 호텔 부산] 온더플레이트 오션뷰 파인다이닝"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파라다이스 호텔 부산] 최고급 파라다이스 스위트룸"
+      }
     ],
     "amenities": [
       "오션스파 씨메르",
@@ -249,9 +299,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 420000,
     "thumbnail": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 조선 제주] 루프탑 성인 전용 피크풀 & 가든"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 조선 제주] 모던 럭셔리 디럭스 풀뷰 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 조선 제주] 아리아 프리미엄 뷔페 레스토랑"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 조선 제주] 사계절 가든 야외 온수 수영장"
+      }
     ],
     "amenities": [
       "루프탑 성인 전용 피크풀",
@@ -300,9 +363,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 280000,
     "thumbnail": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[세인트존스 호텔 강릉] 동해 바다 숲세권 오션 인피니티풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[세인트존스 호텔 강릉] 곰솔림 소나무숲 산책로 & 오션뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[세인트존스 호텔 강릉] 골져스 오션 더블 발코니 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[세인트존스 호텔 강릉] 파노라마 오션뷰 라운지 다이닝"
+      }
     ],
     "amenities": [
       "인피니티 풀 2개",
@@ -351,9 +427,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 510000,
     "thumbnail": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 하얏트 서울] 남산 & 한강 파노라마 야경 조망"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 하얏트 서울] 야외 가든 수영장 & 카바나"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 하얏트 서울] 프리미엄 한강뷰 킹 베드 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[그랜드 하얏트 서울] 더 테라스 뷔페 & 그랜드 클럽 라운지"
+      }
     ],
     "amenities": [
       "남산 & 한강 전망",
@@ -402,9 +491,26 @@ const DEFAULT_HOTELS = [
     "originalPrice": 680000,
     "thumbnail": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[인터컨티넨탈 다낭] 손트라 반도 절벽 럭셔리 오션 빌라"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[인터컨티넨탈 다낭] 프라이빗 전용 비치 & 롱풀 수영장"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[인터컨티넨탈 다낭] 클래식 오션뷰 테라스 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[인터컨티넨탈 다낭] 미슐랭 스타 라 메종 1888 다이닝"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[인터컨티넨탈 다낭] 하른 헤리티지 프라이빗 스파"
+      }
     ],
     "amenities": [
       "프라이빗 전용 비치",
@@ -452,9 +558,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 520000,
     "thumbnail": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[아야나 리조트 발리] 짐바란 절벽 인피니티 오션풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[아야나 리조트 발리] 세계적 명소 락바(Rock Bar) 선셋"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[아야나 리조트 발리] 더 빌라스 원베드룸 프라이빗 풀빌라"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[아야나 리조트 발리] 인도양 조망 쿠부 프라이빗 비치"
+      }
     ],
     "amenities": [
       "세계적 명소 락바(Rock Bar)",
@@ -502,9 +621,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 470000,
     "thumbnail": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 페닌슐라 방콕] 차오프라야 리버사이드 3단 야외 수영장"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 페닌슐라 방콕] 전 객실 리버뷰 발코니 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 페닌슐라 방콕] 페닌슐라 전용 전통 셔틀 보트 & 스파"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 페닌슐라 방콕] 리버사이드 테라스 조식 & 라운지"
+      }
     ],
     "amenities": [
       "전 객실 리버뷰",
@@ -552,9 +684,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 760000,
     "thumbnail": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[반얀트리 푸켓] 라군 뷰 전용 프라이빗 풀빌라"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[반얀트리 푸켓] 열대 정원에 둘러싸인 세레니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[반얀트리 푸켓] 반얀트리 스파 아카데미 웰니스"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[반얀트리 푸켓] 챔피언십 라구나 골프 클럽"
+      }
     ],
     "amenities": [
       "전 객실 단독 풀빌라",
@@ -602,9 +747,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 890000,
     "thumbnail": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[마리나 베이 샌즈 싱가포르] 57층 스카이파크 인피니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[마리나 베이 샌즈 싱가포르] 싱가포르 도심 파노라마 야경 조망"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[마리나 베이 샌즈 싱가포르] 샌즈 프리미어 가든뷰 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[마리나 베이 샌즈 싱가포르] 스카이라인 파인다이닝 & 라운지"
+      }
     ],
     "amenities": [
       "57층 옥상 인피니티 풀",
@@ -652,9 +810,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 600000,
     "thumbnail": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[샹그릴라 보라카이] 청정 에메랄드 프라이빗 비치"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[샹그릴라 보라카이] 절벽 위 트리하우스 오션 빌라"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[샹그릴라 보라카이] 인피니티 씨뷰 메인 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[샹그릴라 보라카이] 치 스파(CHI Spa) 웰니스 파빌리온"
+      }
     ],
     "amenities": [
       "2개 프라이빗 비치",
@@ -702,9 +873,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 710000,
     "thumbnail": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[포시즌스 리조트 치앙마이] 논 테라스(Rice Terrace) 인피니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[포시즌스 리조트 치앙마이] 전통 란나 스타일 가든 파빌리온"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[포시즌스 리조트 치앙마이] 프라이빗 정원 & 단독 풀빌라"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[포시즌스 리조트 치앙마이] 태국 정통 웰니스 스파 파빌리온"
+      }
     ],
     "amenities": [
       "논 테라스 전망",
@@ -752,9 +936,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 530000,
     "thumbnail": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[두짓타니 괌 리조트] 투몬베이 정면 에메랄드 오션뷰 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[두짓타니 괌 리조트] 디럭스 오션프론트 발코니 킹 룸"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[두짓타니 괌 리조트] 테바라나 럭셔리 스파 & 피트니스"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[두짓타니 괌 리조트] 알프레도 스테이크하우스 오션뷰 다이닝"
+      }
     ],
     "amenities": [
       "투몬베이 정면 오션뷰",
@@ -802,9 +999,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1050000,
     "thumbnail": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호시노야 도쿄] 도쿄 도심 최상층 천연온천 오차노마"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호시노야 도쿄] 최고급 다다미 플로어 유리(Yuri) 킹 룸"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호시노야 도쿄] 가이세키 갓포 요리 & 전통 다도 파빌리온"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호시노야 도쿄] 키쿠(Kiku) 프레스티지 스위트"
+      }
     ],
     "amenities": [
       "도심 속 최상층 천연온천",
@@ -852,9 +1062,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 630000,
     "thumbnail": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[콘래드 오사카] 나카노시마 40층 스카이 로비 360도 파노라마"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[콘래드 오사카] 오사카 도심 야경 조망 디럭스 킹 룸"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[콘래드 오사카] 하늘 위의 실내 온수 수영장 & 콘래드 스파"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[콘래드 오사카] 애트모스 다이닝 & 이그제큐티브 라운지"
+      }
     ],
     "amenities": [
       "40층 하늘 위의 로비",
@@ -902,9 +1125,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 840000,
     "thumbnail": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[후후 교토] 난젠지 일본식 정원 & 프라이빗 숲세권"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[후후 교토] 객실 내 천연 편백나무(히노키) 온천탕"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[후후 교토] 교토 제철 가이세키 요리 다이닝"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[후후 교토] 프레셔스 가든뷰 스위트 테라스"
+      }
     ],
     "amenities": [
       "객실 내 천연 편백나무 온천",
@@ -952,9 +1188,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 500000,
     "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[슈잔테이 조잔케이 삿포로] 홋카이도 설경 계곡 노천온천"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[슈잔테이 조잔케이 삿포로] 노천탕 딸린 디럭스 화양실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[슈잔테이 조잔케이 삿포로] 홋카이도 게 요리 & 사케 라운지"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[슈잔테이 조잔케이 삿포로] 프라이빗 대절 온천 파빌리온"
+      }
     ],
     "amenities": [
       "설경 노천온천",
@@ -1002,9 +1251,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 950000,
     "thumbnail": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 더 미츠이 교토] 지하 천연 온천 수영장 (서멀 스프링)"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 더 미츠이 교토] 300년 고택 대문 & 니조성 정원 뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 더 미츠이 교토] 온센 스위트 프라이빗 노천탕"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 더 미츠이 교토] 이탈리안 & 일식 파인다이닝 포키(FORNI)"
+      }
     ],
     "amenities": [
       "지하 천연 온천 수영장(서멀 스프링)",
@@ -1051,9 +1313,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 450000,
     "thumbnail": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[하얏트 리젠시 세라가키 오키나와] 세라가키 단독 섬 라군풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[하얏트 리젠시 세라가키 오키나와] 360도 청정 에메랄드 바다 오션뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[하얏트 리젠시 세라가키 오키나와] 오션프론트 트윈 발코니 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[하얏트 리젠시 세라가키 오키나와] 오키나와 로컬 파인다이닝 쿠치나"
+      }
     ],
     "amenities": [
       "섬 전체 단독 리조트",
@@ -1101,9 +1376,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1750000,
     "thumbnail": "https://images.unsplash.com/photo-1549294413-26f195200c16?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1549294413-26f195200c16?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1549294413-26f195200c16?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[리츠 파리] 방돔 광장 헤리티지 팰리스 전경"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[리츠 파리] 샤넬 스파 그리스풍 실내 수영장"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[리츠 파리] 클래식 프렌치 디럭스 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[리츠 파리] 전설적인 헤밍웨이 바 & 살롱 프루스트"
+      }
     ],
     "amenities": [
       "샤넬 스파(Chanel Spa)",
@@ -1151,9 +1439,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1200000,
     "thumbnail": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 사보이 런던] 템스 강변 랜드마크 브리티시 호텔"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 사보이 런던] 템스 리버뷰 럭셔리 킹 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 사보이 런던] 전설의 아메리칸 바 & 고든 램지 그릴"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 사보이 런던] 사보이 전통 로열 애프터눈 티 라운지"
+      }
     ],
     "amenities": [
       "템스강 파노라마 전망",
@@ -1201,9 +1502,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 640000,
     "thumbnail": "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 몬테 로사 체르마트] 알프스 마터호른 영봉 조망 발코니"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 몬테 로사 체르마트] 스위스 전통 샬레 목조 슈페리어 룸"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 몬테 로사 체르마트] 알프스 정통 온천 스파 & 사우나"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 몬테 로사 체르마트] 스위스 전통 치즈 퐁듀 다이닝"
+      }
     ],
     "amenities": [
       "마터호른 황금빛 설경 조망",
@@ -1250,9 +1564,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1450000,
     "thumbnail": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨몬드 치프리아니 베네치아] 베네치아 라군 & 전용 모터보트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨몬드 치프리아니 베네치아] 올림픽 규격 야외 해수 수영장"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨몬드 치프리아니 베네치아] 카사노바 비밀 정원 & 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨몬드 치프리아니 베네치아] 오로(Oro) 미슐랭 스타 레스토랑"
+      }
     ],
     "amenities": [
       "올림픽 규격 해수 수영장",
@@ -1299,9 +1626,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 820000,
     "thumbnail": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 아츠 바르셀로나] 바르셀로네타 지중해 오션프론트 타워"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 아츠 바르셀로나] 프랭크 게리 금붕어 조형물 & 인피니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 아츠 바르셀로나] 파노라마 지중해 뷰 이그제큐티브 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[호텔 아츠 바르셀로나] 43 더 스파(43 The Spa) 초고층 웰니스"
+      }
     ],
     "amenities": [
       "지중해 오션프론트 뷰",
@@ -1349,9 +1689,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1100000,
     "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[할레쿨라니 하와이] 와이키키 비치 카틀레야 난초 모자이크 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[할레쿨라니 하와이] 다이아몬드헤드 오션프론트 프라임 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[할레쿨라니 하와이] 라 메르(La Mer) 프렌치 오션뷰 다이닝"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[할레쿨라니 하와이] 스파 할레쿨라니 폴리네시안 리추얼"
+      }
     ],
     "amenities": [
       "카틀레야 난초 모자이크 수영장",
@@ -1399,9 +1752,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1400000,
     "thumbnail": "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 플라자 뉴욕] 센트럴파크 5번가 정면 조망 맨해튼 랜드마크"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 플라자 뉴욕] 팜 코트(The Palm Court) 로열 애프터눈 티"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 플라자 뉴욕] 에드워디안 럭셔리 센트럴파크 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[더 플라자 뉴욕] 겔랑 럭셔리 스파 & 화이트 글러브 버틀러"
+      }
     ],
     "amenities": [
       "센트럴파크 정면 뷰",
@@ -1449,9 +1815,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 490000,
     "thumbnail": "https://images.unsplash.com/photo-1581351123004-757df051db8e?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1581351123004-757df051db8e?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1581351123004-757df051db8e?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨라지오 라스베이거스] 벨라지오 분수쇼 정면 호수 뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨라지오 라스베이거스] 지중해풍 5개 야외 수영장 & 카바나"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨라지오 라스베이거스] 파운틴 뷰 킹 룸 & 스위트"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[벨라지오 라스베이거스] 실내 보태니컬 가든 & 태양의 서커스 'O' 극장"
+      }
     ],
     "amenities": [
       "벨라지오 분수쇼 정면 뷰",
@@ -1499,9 +1878,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 1150000,
     "thumbnail": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파크 하얏트 시드니] 시드니 오페라하우스 정면 워터프론트 조망"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파크 하얏트 시드니] 루프탑 온수 수영장 & 하버브리지 뷰"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파크 하얏트 시드니] 오페라 뷰 디럭스 룸 발코니"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[파크 하얏트 시드니] 하버사이드 프라이빗 다이닝 & 24시 버틀러"
+      }
     ],
     "amenities": [
       "오페라하우스 정면 파노라마",
@@ -1549,9 +1941,22 @@ const DEFAULT_HOTELS = [
     "originalPrice": 390000,
     "thumbnail": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
     "images": [
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+      {
+        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[힐튼 괌 리조트] 투몬베이 파노라마 오션뷰 & 리조파크 워터파크"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[힐튼 괌 리조트] 스노클링 비치 직결 인피니티 풀"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[힐튼 괌 리조트] 타시 클럽 오션프론트 럭셔리 객실"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85",
+        "caption": "[힐튼 괌 리조트] 로이즈(Roy's) 하와이안 다이닝 레스토랑"
+      }
     ],
     "amenities": [
       "리조파크 워터파크",

@@ -2669,7 +2669,7 @@ window.openHotelBookingModal = async function(hotelId, roomTypeIndex = 0) {
       document.getElementById('hb-hotel-title').textContent = h.name;
       document.getElementById('hb-modal-hotel-name').textContent = h.name;
       document.getElementById('hb-hotel-city').textContent = `${h.country || ''} · ${h.city || ''}`;
-      document.getElementById('hb-hotel-thumb').src = h.thumbnail || (h.images && h.images[0]) || '';
+      document.getElementById('hb-hotel-thumb').src = (h.thumbnail && (h.thumbnail.url || h.thumbnail)) || (h.images && h.images[0] && (h.images[0].url || h.images[0])) || '';
       document.getElementById('hb-hotel-badge').textContent = `★ ${h.star || 5}성급 럭셔리`;
 
       // Populate Room Types
