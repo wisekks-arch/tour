@@ -1186,21 +1186,22 @@ const DEFAULT_HOTELS = [
     "reviewCount": 190,
     "pricePerNight": 410000,
     "originalPrice": 500000,
-    "thumbnail": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
     "images": [
       {
-            "url": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 계곡 설경 속 노천온천"
+            "url": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 계곡 설경 속 전통 노천온천"
       },
       {
             "url": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
-            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 프리미엄 다다미 화양실 & 프라이빗 온천"
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 프리미엄 다다미 화양실 & 프라이빗 히노키탕"
       },
       {
             "url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
             "caption": "[슈잔테이 클럽 조잔케이 삿포로] 홋카이도 제철 해산물 & 특선 가이세키 정찬"
       }
 ],
+    
     
     "amenities": [
       "설경 노천온천",
@@ -1684,25 +1685,22 @@ const DEFAULT_HOTELS = [
     "reviewCount": 390,
     "pricePerNight": 890000,
     "originalPrice": 1100000,
-    "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[할레쿨라니 하와이] 와이키키 비치 카틀레야 난초 모자이크 풀"
+            "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[할레쿨라니 하와이 오아후] 와이키키 해변 카틀레야 난초 모자이크 풀 & 비치"
       },
       {
-        "url": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[할레쿨라니 하와이] 다이아몬드헤드 오션프론트 프라임 스위트"
+            "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[할레쿨라니 하와이 오아후] 다이아몬드헤드 오션프론트 프라임 스위트"
       },
       {
-        "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[할레쿨라니 하와이] 라 메르(La Mer) 프렌치 오션뷰 다이닝"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[할레쿨라니 하와이] 스파 할레쿨라니 폴리네시안 리추얼"
+            "url": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[할레쿨라니 하와이 오아후] 라 메르(La Mer) 프렌치 오션뷰 선셋 다이닝"
       }
-    ],
+],
+    
     "amenities": [
       "카틀레야 난초 모자이크 수영장",
       "라 메르(La Mer) 프렌치 다이닝",
