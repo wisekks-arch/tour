@@ -6,7 +6,19 @@ const htmlFiles = [
   path.join(__dirname, '..', 'admin.html'),
   path.join(__dirname, '..', 'public', 'admin.html'),
   path.join(__dirname, '..', 'index.html'),
-  path.join(__dirname, '..', 'public', 'index.html')
+  path.join(__dirname, '..', 'public', 'index.html'),
+  path.join(__dirname, '..', 'reviews.html'),
+  path.join(__dirname, '..', 'public', 'reviews.html'),
+  path.join(__dirname, '..', 'package-detail.html'),
+  path.join(__dirname, '..', 'public', 'package-detail.html'),
+  path.join(__dirname, '..', 'packages.html'),
+  path.join(__dirname, '..', 'public', 'packages.html'),
+  path.join(__dirname, '..', 'booking.html'),
+  path.join(__dirname, '..', 'public', 'booking.html'),
+  path.join(__dirname, '..', 'about.html'),
+  path.join(__dirname, '..', 'public', 'about.html'),
+  path.join(__dirname, '..', 'contact.html'),
+  path.join(__dirname, '..', 'public', 'contact.html')
 ];
 
 let totalScripts = 0;

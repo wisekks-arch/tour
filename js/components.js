@@ -12,6 +12,7 @@ function renderNavbar(activeKey = '') {
     { key: 'home', label: '홈', href: 'index.html' },
     { key: 'packages', label: '여행상품', href: 'packages.html' },
     { key: 'theme', label: '테마여행', href: 'packages.html?theme=휴양' },
+    { key: 'reviews', label: '여행후기', href: 'reviews.html' },
     { key: 'about', label: '회사소개', href: 'about.html' },
     { key: 'contact', label: '고객센터 & FAQ', href: 'contact.html' }
   ];
@@ -1373,6 +1374,9 @@ function renderMyPageModal() {
           <button onclick="window.switchMyPageTab('bookings')" id="mypage-tab-btn-bookings" class="flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
             <i data-lucide="calendar" class="w-4 h-4"></i> 내 예약 <span id="mypage-badge-bookings" class="px-1.5 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800">0</span>
           </button>
+          <button onclick="window.switchMyPageTab('reviews')" id="mypage-tab-btn-reviews" class="flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
+            <i data-lucide="star" class="w-4 h-4 text-amber-500"></i> 내 후기 <span id="mypage-badge-reviews" class="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-800 font-bold">0</span>
+          </button>
           <button onclick="window.switchMyPageTab('inquiries')" id="mypage-tab-btn-inquiries" class="flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5 transition cursor-pointer">
             <i data-lucide="message-square" class="w-4 h-4"></i> 내 문의 <span id="mypage-badge-inquiries" class="px-1.5 py-0.5 rounded-full text-[10px] bg-teal-100 text-teal-800">0</span>
           </button>
@@ -1469,6 +1473,30 @@ function renderMyPageModal() {
             </div>
           </div>
 
+          <!-- 4. TAB: Reviews -->
+          <div id="mypage-pane-reviews" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs font-black text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-500"></i> 나의 여행후기 관리
+                </h4>
+                <p class="text-[11px] text-slate-400 mt-0.5">내가 작성한 생생한 여행 후기를 확인하고 관리합니다.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="window.openWriteReviewModal()" class="px-3 py-1.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs cursor-pointer transition">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i> 후기 작성하기
+                </button>
+                <button onclick="window.loadMyReviewsList()" class="text-xs font-bold text-slate-500 hover:text-slate-900 flex items-center gap-1 p-1">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+            <div id="mypage-reviews-list" class="space-y-3">
+              <!-- Rendered dynamically -->
+              <div class="p-8 text-center text-slate-400 text-xs">후기 목록을 불러오는 중...</div>
+            </div>
+          </div>
+
           <!-- 4. TAB: Inquiries -->
           <div id="mypage-pane-inquiries" class="hidden space-y-4">
             <div class="flex items-center justify-between">
@@ -1562,6 +1590,24 @@ window.openMyPageModal = async function(tab = 'profile') {
   if (pRole) pRole.textContent = (user.role || 'MEMBER').toUpperCase() === 'ADMIN' ? '관리자 (ADMIN)' : '일반회원 (MEMBER)';
   if (pCreated) pCreated.textContent = user.createdAt ? (TourAPI.formatDate ? TourAPI.formatDate(user.createdAt) : user.createdAt.slice(0, 10)) : '-';
 
+  // Pre-fetch counts for badges
+  try {
+    TourAPI.getMyBookings(user.email, user.phone).then(res => {
+      const el = document.getElementById('mypage-badge-bookings');
+      if (el && res && res.data) el.textContent = res.data.length;
+    }).catch(() => {});
+
+    TourAPI.getReviews({ userId: user.id, userEmail: user.email }).then(res => {
+      const el = document.getElementById('mypage-badge-reviews');
+      if (el && res && res.data) el.textContent = res.data.length;
+    }).catch(() => {});
+
+    TourAPI.getMyInquiries(user.email, user.phone).then(res => {
+      const el = document.getElementById('mypage-badge-inquiries');
+      if (el && res && res.data) el.textContent = res.data.length;
+    }).catch(() => {});
+  } catch {}
+
   window.switchMyPageTab(tab);
   if (window.lucide) lucide.createIcons();
 };
@@ -1575,7 +1621,7 @@ window.closeMyPageModal = function() {
 };
 
 window.switchMyPageTab = function(tabName) {
-  const tabs = ['profile', 'password', 'bookings', 'inquiries', 'withdraw'];
+  const tabs = ['profile', 'password', 'bookings', 'reviews', 'inquiries', 'withdraw'];
   tabs.forEach(t => {
     const btn = document.getElementById(`mypage-tab-btn-${t}`);
     const pane = document.getElementById(`mypage-pane-${t}`);
@@ -1595,6 +1641,8 @@ window.switchMyPageTab = function(tabName) {
 
   if (tabName === 'bookings') {
     window.loadMyBookingsList();
+  } else if (tabName === 'reviews') {
+    window.loadMyReviewsList();
   } else if (tabName === 'inquiries') {
     window.loadMyInquiriesList();
   }
@@ -1839,5 +1887,393 @@ window.handleMyPageWithdrawSubmit = async function(e) {
     btn.disabled = false;
     btn.innerHTML = '<i data-lucide="user-x" class="w-4 h-4"></i> 회원 탈퇴 최종 완료';
     if (window.lucide) lucide.createIcons();
+  }
+};
+
+// --- Review Management Functions (MyPage & Global Modals) ---
+
+window.loadMyReviewsList = async function() {
+  const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+  const container = document.getElementById('mypage-reviews-list');
+  const badge = document.getElementById('mypage-badge-reviews');
+  if (!user || !container) return;
+
+  container.innerHTML = '<div class="p-8 text-center text-slate-400 text-xs">내가 작성한 후기를 불러오는 중...</div>';
+
+  try {
+    const res = await TourAPI.getReviews({ userId: user.id, userEmail: user.email });
+    const reviews = (res && res.data) ? res.data : [];
+    if (badge) badge.textContent = reviews.length;
+
+    if (reviews.length === 0) {
+      container.innerHTML = `
+        <div class="p-8 text-center bg-white rounded-2xl border border-slate-200 shadow-xs">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="star" class="w-6 h-6"></i>
+          </div>
+          <p class="text-xs font-bold text-slate-800">작성하신 여행 후기가 아직 없습니다.</p>
+          <p class="text-[11px] text-slate-400 mt-1">다녀오신 여행지의 소중한 추억과 유용한 팁을 공유해 보세요!</p>
+          <button onclick="window.openWriteReviewModal()" class="inline-flex items-center gap-1.5 mt-3 px-4 py-2.5 bg-gradient-to-r from-sky-600 to-teal-600 text-white rounded-xl text-xs font-bold hover:from-sky-700 hover:to-teal-700 shadow-sm transition cursor-pointer">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> 첫 여행후기 작성하기
+          </button>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    container.innerHTML = reviews.map(r => {
+      const stars = Array(5).fill(0).map((_, i) => `
+        <i data-lucide="star" class="w-3.5 h-3.5 ${i < (r.rating || 5) ? 'text-amber-400 fill-amber-400' : 'text-slate-200 fill-slate-200'}"></i>
+      `).join('');
+
+      return `
+        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-3 hover:border-sky-300 transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-sky-50 text-sky-700 border border-sky-200">${r.packageTitle || '투어이지 여행'}</span>
+                <span class="text-[11px] text-slate-400">여행시기: ${r.travelDate || '-'}</span>
+              </div>
+              <h5 class="font-black text-slate-900 text-sm mt-1">${r.title || '여행후기'}</h5>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="window.openWriteReviewModal('${r.id}')" class="px-2.5 py-1 text-[11px] font-bold text-slate-600 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 rounded-lg border border-slate-200 transition cursor-pointer flex items-center gap-1">
+                <i data-lucide="edit-2" class="w-3 h-3"></i> 수정
+              </button>
+              <button onclick="window.deleteMyReview('${r.id}')" class="px-2.5 py-1 text-[11px] font-bold text-rose-500 hover:text-rose-700 bg-rose-50/50 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer flex items-center gap-1">
+                <i data-lucide="trash-2" class="w-3 h-3"></i> 삭제
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            ${stars}
+            <span class="text-xs font-black text-slate-700 ml-1">${(r.rating || 5).toFixed(1)}</span>
+          </div>
+
+          <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">${r.content || ''}</p>
+
+          ${r.imageUrl ? `
+            <div class="w-full max-w-xs rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+              <img src="${r.imageUrl}" alt="${r.title || '후기 사진'}" class="w-full h-32 object-cover hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'">
+            </div>
+          ` : ''}
+
+          <div class="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-100">
+            <span class="flex items-center gap-1"><i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-400"></i> 추천 ${r.likes || 0}</span>
+            <span>작성일시: ${TourAPI.formatDateTime ? TourAPI.formatDateTime(r.createdAt) : (r.createdAt || '-')}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    container.innerHTML = '<div class="p-8 text-center text-rose-500 text-xs font-bold">후기 목록을 불러오지 못했습니다.</div>';
+  }
+};
+
+window.deleteMyReview = async function(id) {
+  if (!confirm('정말로 이 여행후기를 삭제하시겠습니까?')) return;
+  try {
+    const res = await TourAPI.deleteReview(id);
+    if (res && res.success) {
+      showToast('후기가 성공적으로 삭제되었습니다.', 'success');
+      window.loadMyReviewsList();
+      if (typeof window.loadAllReviewsPage === 'function') window.loadAllReviewsPage();
+      if (typeof window.loadPackageReviewsSection === 'function') window.loadPackageReviewsSection();
+    } else {
+      alert((res && res.message) || '삭제 실패');
+    }
+  } catch (e) {
+    alert('삭제 처리 중 오류가 발생했습니다.');
+  }
+};
+
+window.renderWriteReviewModal = function() {
+  if (document.getElementById('write-review-modal')) return;
+
+  const modalHtml = `
+    <div id="write-review-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity hidden">
+      <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-sky-600 via-sky-700 to-teal-700 p-5 text-white flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+              <i data-lucide="edit-3" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black" id="review-modal-title">여행 후기 작성</h3>
+              <p class="text-[11px] text-sky-100">소중한 여행 경험과 생생한 팁을 나눠주세요.</p>
+            </div>
+          </div>
+          <button onclick="window.closeWriteReviewModal()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Form Body -->
+        <form id="form-write-review" onsubmit="window.handleReviewSubmit(event)" class="p-5 sm:p-6 overflow-y-auto space-y-4 flex-1">
+          <input type="hidden" id="rev-edit-id" value="">
+          
+          <!-- Package Select -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">여행 상품 선택 <span class="text-rose-500">*</span></label>
+            <select id="rev-package-select" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <!-- Rating & Travel Date Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">만족도 평점 <span class="text-rose-500">*</span></label>
+              <div class="flex items-center gap-1.5 p-2 bg-slate-50 border border-slate-300 rounded-xl" id="rev-star-group">
+                <input type="hidden" id="rev-rating" value="5">
+                <button type="button" onclick="window.setReviewStarRating(1)" class="star-btn text-amber-400 p-0.5 hover:scale-110 transition cursor-pointer" data-star="1"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></button>
+                <button type="button" onclick="window.setReviewStarRating(2)" class="star-btn text-amber-400 p-0.5 hover:scale-110 transition cursor-pointer" data-star="2"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></button>
+                <button type="button" onclick="window.setReviewStarRating(3)" class="star-btn text-amber-400 p-0.5 hover:scale-110 transition cursor-pointer" data-star="3"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></button>
+                <button type="button" onclick="window.setReviewStarRating(4)" class="star-btn text-amber-400 p-0.5 hover:scale-110 transition cursor-pointer" data-star="4"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></button>
+                <button type="button" onclick="window.setReviewStarRating(5)" class="star-btn text-amber-400 p-0.5 hover:scale-110 transition cursor-pointer" data-star="5"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></button>
+                <span id="rev-rating-txt" class="text-xs font-black text-amber-600 ml-1.5">5.0점</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">여행 다녀온 시기</label>
+              <input type="month" id="rev-travel-date" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+            </div>
+          </div>
+
+          <!-- Review Title -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">후기 제목 <span class="text-rose-500">*</span></label>
+            <input type="text" id="rev-title" required placeholder="예: 다낭 4박 5일 가족 여행 대만족 후기!" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+          </div>
+
+          <!-- Review Content -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">상세 후기 내용 <span class="text-rose-500">*</span></label>
+            <textarea id="rev-content" required rows="4" placeholder="숙소 컨디션, 가이드 만족도, 일정 구성 등 좋았던 점이나 다른 여행자들에게 전하고 싶은 팁을 자세히 적어주세요." class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500 leading-relaxed resize-none"></textarea>
+          </div>
+
+          <!-- Image URL + Quick samples -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">여행 사진 URL (선택)</label>
+            <input type="url" id="rev-image-url" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500">
+            <div class="flex items-center gap-1.5 mt-1.5 text-[11px] text-slate-500 flex-wrap">
+              <span class="font-bold text-slate-400">추천 사진 샘플:</span>
+              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#다낭비치</button>
+              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#파리야경</button>
+              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#발리풀빌라</button>
+              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#일본온천</button>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-2">
+            <button type="submit" id="btn-submit-review" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-black rounded-xl shadow-md text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+              <i data-lucide="check" class="w-4 h-4"></i> 여행 후기 등록 완료
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  if (window.lucide) lucide.createIcons();
+};
+
+window.setReviewStarRating = function(rating) {
+  const ratingInput = document.getElementById('rev-rating');
+  const ratingTxt = document.getElementById('rev-rating-txt');
+  if (ratingInput) ratingInput.value = rating;
+  if (ratingTxt) ratingTxt.textContent = `${rating}.0점`;
+
+  const starBtns = document.querySelectorAll('#rev-star-group .star-btn');
+  starBtns.forEach(btn => {
+    const s = Number(btn.getAttribute('data-star'));
+    const icon = btn.querySelector('svg');
+    if (icon) {
+      if (s <= rating) {
+        icon.classList.add('fill-amber-400', 'text-amber-400');
+        icon.classList.remove('fill-slate-200', 'text-slate-200');
+      } else {
+        icon.classList.remove('fill-amber-400', 'text-amber-400');
+        icon.classList.add('fill-slate-200', 'text-slate-200');
+      }
+    }
+  });
+};
+
+window.openWriteReviewModal = async function(editReviewId = null, defaultPackageId = null) {
+  window.renderWriteReviewModal();
+
+  const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+  if (!user) {
+    showToast('로그인 후 여행 후기를 작성하실 수 있습니다.', 'warning');
+    window.openAuthModal('login');
+    return;
+  }
+
+  const modal = document.getElementById('write-review-modal');
+  const form = document.getElementById('form-write-review');
+  const editIdInput = document.getElementById('rev-edit-id');
+  const titleHeader = document.getElementById('review-modal-title');
+  const submitBtn = document.getElementById('btn-submit-review');
+  const packageSelect = document.getElementById('rev-package-select');
+
+  if (form) form.reset();
+
+  // Populate Packages in dropdown
+  if (packageSelect) {
+    packageSelect.innerHTML = '<option value="">여행 상품을 선택해 주세요</option>';
+    try {
+      const res = await TourAPI.getPackages({ includeInactive: false });
+      const pkgs = (res && res.data) ? res.data : [];
+      pkgs.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `[${p.country || p.region || '인기'}] ${p.title}`;
+        opt.dataset.title = p.title;
+        packageSelect.appendChild(opt);
+      });
+    } catch {}
+  }
+
+  // Set default travel date to this month
+  const todayMonth = new Date().toISOString().slice(0, 7);
+  const travelDateEl = document.getElementById('rev-travel-date');
+  if (travelDateEl) travelDateEl.value = todayMonth;
+
+  window.setReviewStarRating(5);
+
+  if (editReviewId) {
+    if (titleHeader) titleHeader.textContent = '여행 후기 수정';
+    if (submitBtn) submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 여행 후기 수정 저장';
+    if (editIdInput) editIdInput.value = editReviewId;
+
+    // Load existing review data
+    try {
+      const res = await TourAPI.getReviewById(editReviewId);
+      if (res && res.data) {
+        const rev = res.data;
+        if (packageSelect && rev.packageId) packageSelect.value = rev.packageId;
+        if (travelDateEl && rev.travelDate) travelDateEl.value = rev.travelDate;
+        const titleEl = document.getElementById('rev-title');
+        const contentEl = document.getElementById('rev-content');
+        const imgEl = document.getElementById('rev-image-url');
+        if (titleEl) titleEl.value = rev.title || '';
+        if (contentEl) contentEl.value = rev.content || '';
+        if (imgEl) imgEl.value = rev.imageUrl || '';
+        window.setReviewStarRating(rev.rating || 5);
+      }
+    } catch {}
+  } else {
+    if (titleHeader) titleHeader.textContent = '여행 후기 작성';
+    if (submitBtn) submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 여행 후기 등록 완료';
+    if (editIdInput) editIdInput.value = '';
+    if (defaultPackageId && packageSelect) {
+      packageSelect.value = defaultPackageId;
+    }
+  }
+
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.closeWriteReviewModal = function() {
+  const modal = document.getElementById('write-review-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+};
+
+window.handleReviewSubmit = async function(e) {
+  e.preventDefault();
+  const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
+  if (!user) {
+    showToast('로그인이 필요합니다.', 'warning');
+    window.openAuthModal('login');
+    return;
+  }
+
+  const editId = document.getElementById('rev-edit-id')?.value;
+  const packageSelect = document.getElementById('rev-package-select');
+  const selectedOpt = packageSelect?.options[packageSelect.selectedIndex];
+  const packageId = packageSelect?.value;
+  const packageTitle = selectedOpt ? (selectedOpt.dataset.title || selectedOpt.textContent) : '투어이지 패키지';
+  const rating = Number(document.getElementById('rev-rating')?.value) || 5;
+  const travelDate = document.getElementById('rev-travel-date')?.value || new Date().toISOString().slice(0, 7);
+  const title = document.getElementById('rev-title')?.value.trim();
+  const content = document.getElementById('rev-content')?.value.trim();
+  const imageUrl = document.getElementById('rev-image-url')?.value.trim();
+  const submitBtn = document.getElementById('btn-submit-review');
+
+  if (!packageId) {
+    alert('여행 상품을 선택해 주세요.');
+    return;
+  }
+  if (!title) {
+    alert('후기 제목을 입력해 주세요.');
+    return;
+  }
+  if (!content) {
+    alert('후기 내용을 입력해 주세요.');
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 처리 중...</span>';
+  }
+
+  try {
+    let res;
+    if (editId) {
+      res = await TourAPI.updateReview(editId, {
+        packageId,
+        packageTitle,
+        rating,
+        travelDate,
+        title,
+        content,
+        imageUrl
+      });
+    } else {
+      res = await TourAPI.createReview({
+        packageId,
+        packageTitle,
+        rating,
+        travelDate,
+        title,
+        content,
+        imageUrl
+      });
+    }
+
+    if (res && res.success) {
+      showToast(editId ? '여행 후기가 성공적으로 수정되었습니다.' : '소중한 여행 후기가 등록되었습니다!', 'success');
+      window.closeWriteReviewModal();
+      // Reload lists if present
+      if (typeof window.loadMyReviewsList === 'function') window.loadMyReviewsList();
+      if (typeof window.loadAllReviewsPage === 'function') window.loadAllReviewsPage();
+      if (typeof window.loadPackageReviewsSection === 'function') window.loadPackageReviewsSection();
+    } else {
+      alert((res && res.message) || '후기 저장 중 문제가 발생했습니다.');
+    }
+  } catch (err) {
+    alert('서버 통신 오류가 발생했습니다.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 여행 후기 등록 완료';
+    }
   }
 };

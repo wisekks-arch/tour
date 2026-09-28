@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>생생 여행후기 - 투어이지(TourEasy)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen w-full overflow-x-hidden m-0 p-0 text-slate-800 antialiased">
+  
+  <!-- Global Navbar -->
+  <div id="navbar-root" class="w-full"></div>
+
+  <main class="flex-grow w-full overflow-x-hidden pb-16">
+    
+    <!-- Hero Section -->
+    <section class="relative min-h-[260px] sm:min-h-[300px] flex items-center bg-sky-950 overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <img 
+        src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=2400&q=85" 
+        alt="Travel Reviews Hero" 
+        class="absolute inset-0 w-full h-full object-cover object-center opacity-70 scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-sky-950/90 via-sky-900/60 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+
+      <div class="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+        <div class="max-w-xl text-left">
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-sky-100 border border-white/20 text-xs font-semibold uppercase tracking-wider mb-2.5 shadow-sm">
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-300 fill-amber-300"></i> 투어이지 회원 리얼 후기
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-snug mb-2 drop-shadow-md">
+            다녀오신 회원님들의<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-200 via-teal-200 to-amber-200">생생한 여행 스토리 & 꿀팁</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-sky-100 font-medium max-w-lg leading-relaxed">
+            실제 여행을 다녀오신 고객님들이 솔직하게 남겨주신 여행 후기를 확인하고, 나만의 특별한 여행 추억도 직접 작성해 보세요!
+          </p>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <button onclick="window.openWriteReviewModal()" class="px-5 py-3 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-black rounded-2xl shadow-xl hover:shadow-sky-500/25 text-xs sm:text-sm flex items-center gap-2 transition duration-200 cursor-pointer">
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+            <span>여행 후기 작성하기</span>
+          </button>
+          <button onclick="window.openMyPageReviewsTab()" class="px-4 py-3 bg-white/90 hover:bg-white text-slate-800 font-bold rounded-2xl shadow-md text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer border border-white/80">
+            <i data-lucide="user-check" class="w-4 h-4 text-sky-600"></i>
+            <span>내가 쓴 후기 관리</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Review Stats Bar -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+        <div class="flex items-center gap-3.5 pt-2 md:pt-0">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center shrink-0">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block">평균 고객 만족도</span>
+            <strong class="text-xl sm:text-2xl font-black text-slate-900 flex items-baseline gap-1">
+              4.93 <span class="text-xs font-normal text-slate-400">/ 5.0</span>
+            </strong>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3.5 pt-2 md:pt-0 pl-0 md:pl-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+            <i data-lucide="message-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block">누적 검증 후기</span>
+            <strong class="text-xl sm:text-2xl font-black text-slate-900" id="stat-total-reviews">1,820+</strong>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3.5 pt-2 md:pt-0 pl-0 md:pl-4">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+            <i data-lucide="smile" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block">재구매 & 추천 의향</span>
+            <strong class="text-xl sm:text-2xl font-black text-slate-900">98.7%</strong>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3.5 pt-2 md:pt-0 pl-0 md:pl-4">
+          <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-slate-400 block">100% 안심 리뷰</span>
+            <strong class="text-base sm:text-lg font-black text-slate-800">실제 예약자 인증</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Reviews Feed & Filters -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      
+      <!-- Filter Controls Bar -->
+      <div class="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-sm mb-6 flex flex-col lg:flex-row items-center justify-between gap-4">
+        
+        <!-- Left: Filters -->
+        <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
+          <!-- Package Select Filter -->
+          <div class="relative min-w-[180px]">
+            <select id="filter-package" onchange="window.handleFilterChange()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <option value="ALL">전체 여행상품</option>
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="relative">
+            <select id="filter-rating" onchange="window.handleFilterChange()" class="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <option value="ALL">전체 평점 (★)</option>
+              <option value="5">★★★★★ 5점 만점</option>
+              <option value="4">★★★★☆ 4점</option>
+              <option value="3">★★★☆☆ 3점</option>
+            </select>
+          </div>
+
+          <!-- Sort Filter -->
+          <div class="relative">
+            <select id="filter-sort" onchange="window.handleFilterChange()" class="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <option value="latest">최신 등록순</option>
+              <option value="rating_high">평점 높은순</option>
+              <option value="likes">추천 많은순</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Right: Search Input -->
+        <div class="w-full lg:w-72">
+          <div class="relative flex items-center">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5"></i>
+            <input 
+              type="text" 
+              id="filter-search" 
+              oninput="window.handleFilterChange()" 
+              placeholder="여행지, 키워드, 작성자 검색..." 
+              class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500 placeholder-slate-400"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Reviews Grid Feed -->
+      <div id="reviews-feed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <!-- Rendered dynamically -->
+        <div class="col-span-full p-12 text-center text-slate-400 text-xs">여행 후기 목록을 불러오는 중입니다...</div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <div id="footer-root" class="w-full"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderNavbar('reviews');
+      renderFooter();
+      await populatePackageFilter();
+      await loadAllReviewsPage();
+      lucide.createIcons();
+    });
+
+    async function populatePackageFilter() {
+      const selectEl = document.getElementById('filter-package');
+      if (!selectEl) return;
+      try {
+        const res = await TourAPI.getPackages({ includeInactive: false });
+        const pkgs = (res && res.data) ? res.data : [];
+        pkgs.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = `[${p.country || p.region || '인기'}] ${p.title}`;
+          selectEl.appendChild(opt);
+        });
+      } catch {}
+    }
+
+    async function loadAllReviewsPage() {
+      const grid = document.getElementById('reviews-feed-grid');
+      const statTotal = document.getElementById('stat-total-reviews');
+      if (!grid) return;
+
+      const pkgFilter = document.getElementById('filter-package')?.value || 'ALL';
+      const ratingFilter = document.getElementById('filter-rating')?.value || 'ALL';
+      const sortFilter = document.getElementById('filter-sort')?.value || 'latest';
+      const searchFilter = document.getElementById('filter-search')?.value.trim() || '';
+
+      const query = {
+        sort: sortFilter,
+        search: searchFilter
+      };
+      if (pkgFilter !== 'ALL') query.packageId = pkgFilter;
+      if (ratingFilter !== 'ALL') query.rating = ratingFilter;
+
+      try {
+        const res = await TourAPI.getReviews(query);
+        const reviews = (res && res.data) ? res.data : [];
+        if (statTotal) statTotal.textContent = `${reviews.length}개`;
+
+        if (reviews.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full p-12 text-center bg-white rounded-3xl border border-slate-200 shadow-sm space-y-3">
+              <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto">
+                <i data-lucide="message-square-dashed" class="w-7 h-7"></i>
+              </div>
+              <h3 class="text-sm font-bold text-slate-800">조건에 맞는 여행 후기가 없습니다.</h3>
+              <p class="text-xs text-slate-400 max-w-sm mx-auto">검색어를 변경하시거나, 새로운 여행 후기를 직접 등록해 보세요!</p>
+              <button onclick="window.openWriteReviewModal()" class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-sky-600 to-teal-600 text-white rounded-xl text-xs font-bold hover:from-sky-700 hover:to-teal-700 transition cursor-pointer shadow-xs">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> 후기 작성하기
+              </button>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        const currentUser = TourAPI.getCurrentUser();
+
+        grid.innerHTML = reviews.map(r => {
+          const stars = Array(5).fill(0).map((_, i) => `
+            <i data-lucide="star" class="w-3.5 h-3.5 ${i < (r.rating || 5) ? 'text-amber-400 fill-amber-400' : 'text-slate-200 fill-slate-200'}"></i>
+          `).join('');
+
+          const isOwner = currentUser && (String(currentUser.id) === String(r.userId) || (r.userEmail && currentUser.email && r.userEmail.toLowerCase() === currentUser.email.toLowerCase()));
+          const isAdmin = currentUser && (currentUser.role || '').toUpperCase() === 'ADMIN';
+
+          return `
+            <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-200 overflow-hidden flex flex-col justify-between p-5 sm:p-6">
+              <div class="space-y-3">
+                
+                <!-- Card Header -->
+                <div class="flex items-start justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-teal-400 text-white font-black flex items-center justify-center text-sm shadow-sm shrink-0">
+                      ${(r.userName || '회').slice(0, 1)}
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-bold text-slate-800 text-xs sm:text-sm">${r.userName || '여행자'}</span>
+                        <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full font-bold border border-emerald-200">인증회원</span>
+                      </div>
+                      <span class="text-[11px] text-slate-400">여행시기: ${r.travelDate || '-'}</span>
+                    </div>
+                  </div>
+
+                  <!-- Stars & Date -->
+                  <div class="text-right">
+                    <div class="flex items-center gap-0.5">
+                      ${stars}
+                    </div>
+                    <span class="text-[10px] text-slate-400 mt-0.5 block">${TourAPI.formatDate ? TourAPI.formatDate(r.createdAt) : (r.createdAt || '').slice(0, 10)}</span>
+                  </div>
+                </div>
+
+                <!-- Package Badge & Title -->
+                <div>
+                  <a href="package-detail.html?id=${encodeURIComponent(r.packageId || 'pkg-sea-01')}" class="inline-block px-2.5 py-1 rounded-lg text-[10px] font-extrabold bg-sky-50 text-sky-700 hover:bg-sky-100 transition border border-sky-100 max-w-full truncate mb-1">
+                    ✈ ${r.packageTitle || '투어이지 여행 상품'}
+                  </a>
+                  <h4 class="font-black text-slate-900 text-sm line-clamp-2 leading-snug">${r.title || ''}</h4>
+                </div>
+
+                <!-- Review Content -->
+                <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap line-clamp-4">${r.content || ''}</p>
+
+                <!-- Optional Image -->
+                ${r.imageUrl ? `
+                  <div class="w-full h-44 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 mt-2">
+                    <img src="${r.imageUrl}" alt="${r.title || '후기 사진'}" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'">
+                  </div>
+                ` : ''}
+
+              </div>
+
+              <!-- Card Footer -->
+              <div class="flex items-center justify-between pt-3 mt-4 border-t border-slate-100 text-xs">
+                <button onclick="window.likeReviewFeedAction('${r.id}', this)" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 rounded-xl border border-slate-200 transition cursor-pointer font-bold">
+                  <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500 fill-rose-500"></i>
+                  <span>도움돼요</span>
+                  <span class="feed-like-count font-black ml-0.5">${r.likes || 0}</span>
+                </button>
+
+                <!-- Edit / Delete for owner/admin -->
+                ${(isOwner || isAdmin) ? `
+                  <div class="flex items-center gap-1">
+                    <button onclick="window.openWriteReviewModal('${r.id}')" class="px-2.5 py-1 text-[11px] font-bold text-slate-600 hover:text-sky-600 bg-slate-50 rounded-lg border border-slate-200 transition cursor-pointer">
+                      수정
+                    </button>
+                    <button onclick="window.deleteFeedReview('${r.id}')" class="px-2.5 py-1 text-[11px] font-bold text-rose-500 hover:text-rose-700 bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer">
+                      삭제
+                    </button>
+                  </div>
+                ` : `
+                  <span class="text-[11px] text-slate-400">투어이지 안심 검증</span>
+                `}
+              </div>
+
+            </div>
+          `;
+        }).join('');
+
+        lucide.createIcons();
+      } catch (err) {
+        grid.innerHTML = '<div class="col-span-full p-12 text-center text-rose-500 text-xs font-bold">후기 목록을 불러오는 중 오류가 발생했습니다.</div>';
+      }
+    }
+
+    window.handleFilterChange = function() {
+      loadAllReviewsPage();
+    };
+
+    window.likeReviewFeedAction = async function(id, btn) {
+      if (typeof TourAPI !== 'undefined' && TourAPI.toggleLikeReview) {
+        const res = await TourAPI.toggleLikeReview(id);
+        if (res && res.success) {
+          const cnt = btn.querySelector('.feed-like-count');
+          if (cnt) cnt.textContent = res.likes;
+          showToast('후기를 추천해 주셨습니다.', 'success');
+        }
+      }
+    };
+
+    window.deleteFeedReview = async function(id) {
+      if (!confirm('정말로 이 여행 후기를 삭제하시겠습니까?')) return;
+      try {
+        const res = await TourAPI.deleteReview(id);
+        if (res && res.success) {
+          showToast('여행 후기가 안전하게 삭제되었습니다.', 'success');
+          loadAllReviewsPage();
+        } else {
+          alert((res && res.message) || '삭제 실패');
+        }
+      } catch {
+        alert('삭제 처리 중 오류가 발생했습니다.');
+      }
+    };
+
+    window.openMyPageReviewsTab = function() {
+      const user = TourAPI.getCurrentUser();
+      if (!user) {
+        showToast('로그인 후 이용 가능한 서비스입니다.', 'warning');
+        window.openAuthModal('login');
+        return;
+      }
+      window.openMyPageModal('reviews');
+    };
+  </script>
+</body>
+</html>
