@@ -1186,25 +1186,22 @@ const DEFAULT_HOTELS = [
     "reviewCount": 190,
     "pricePerNight": 410000,
     "originalPrice": 500000,
-    "thumbnail": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
+    "thumbnail": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[슈잔테이 조잔케이 삿포로] 홋카이도 설경 계곡 노천온천"
+            "url": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 조잔케이 계곡 설경 속 노천온천"
       },
       {
-        "url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[슈잔테이 조잔케이 삿포로] 노천탕 딸린 디럭스 화양실"
+            "url": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 프리미엄 다다미 화양실 & 프라이빗 온천"
       },
       {
-        "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[슈잔테이 조잔케이 삿포로] 홋카이도 게 요리 & 사케 라운지"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85",
-        "caption": "[슈잔테이 조잔케이 삿포로] 프라이빗 대절 온천 파빌리온"
+            "url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+            "caption": "[슈잔테이 클럽 조잔케이 삿포로] 홋카이도 제철 해산물 & 특선 가이세키 정찬"
       }
-    ],
+],
+    
     "amenities": [
       "설경 노천온천",
       "홋카이도 게 요리 특식",
