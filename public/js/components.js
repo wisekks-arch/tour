@@ -1892,6 +1892,70 @@ window.handleMyPageWithdrawSubmit = async function(e) {
 
 // --- Review Management Functions (MyPage & Global Modals) ---
 
+// Global State for Review Photos (Max 5 photos)
+window.attachedReviewPhotos = [];
+
+window.renderReviewImagesHtml = function(images, title = '여행 사진') {
+  const photoList = Array.isArray(images) ? images.filter(Boolean).slice(0, 5) : [];
+  if (photoList.length === 0) return '';
+
+  if (photoList.length === 1) {
+    return `
+      <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 mt-2 cursor-pointer group" onclick="window.openPhotoLightbox('${photoList[0]}')">
+        <img src="${photoList[0]}" alt="${title}" class="w-full h-40 object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'">
+      </div>
+    `;
+  }
+
+  // 2 ~ 5 Multi-photo grid
+  return `
+    <div class="pt-2">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-1.5">
+        ${photoList.map((imgUrl, idx) => `
+          <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 cursor-pointer group" onclick="window.openPhotoLightbox('${imgUrl}')">
+            <img src="${imgUrl}" alt="${title} (${idx + 1})" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.parentElement.style.display='none'">
+            <span class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-xs text-white text-[9px] px-1.5 py-0.5 rounded-md font-bold">${idx + 1}/${photoList.length}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+};
+
+window.openPhotoLightbox = function(imgUrl) {
+  if (!imgUrl) return;
+  let box = document.getElementById('photo-lightbox-modal');
+  if (!box) {
+    const html = `
+      <div id="photo-lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm transition-opacity hidden cursor-pointer" onclick="window.closePhotoLightbox()">
+        <div class="relative max-w-4xl max-h-[90vh] bg-transparent flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+          <button onclick="window.closePhotoLightbox()" class="absolute -top-10 right-0 text-white hover:text-rose-400 p-2 text-sm font-bold flex items-center gap-1 cursor-pointer">
+            <i data-lucide="x" class="w-6 h-6"></i> 닫기
+          </button>
+          <img id="lightbox-img" src="" alt="확대 사진" class="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain border border-white/20">
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', html);
+    box = document.getElementById('photo-lightbox-modal');
+  }
+  const imgEl = document.getElementById('lightbox-img');
+  if (imgEl) imgEl.src = imgUrl;
+  if (box) {
+    box.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.closePhotoLightbox = function() {
+  const box = document.getElementById('photo-lightbox-modal');
+  if (box) {
+    box.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+};
+
 window.loadMyReviewsList = async function() {
   const user = typeof TourAPI !== 'undefined' ? TourAPI.getCurrentUser() : null;
   const container = document.getElementById('mypage-reviews-list');
@@ -1927,6 +1991,8 @@ window.loadMyReviewsList = async function() {
         <i data-lucide="star" class="w-3.5 h-3.5 ${i < (r.rating || 5) ? 'text-amber-400 fill-amber-400' : 'text-slate-200 fill-slate-200'}"></i>
       `).join('');
 
+      const photos = (Array.isArray(r.images) && r.images.length > 0) ? r.images : (r.imageUrl ? [r.imageUrl] : []);
+
       return `
         <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-3 hover:border-sky-300 transition">
           <div class="flex items-start justify-between gap-3">
@@ -1934,6 +2000,7 @@ window.loadMyReviewsList = async function() {
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-sky-50 text-sky-700 border border-sky-200">${r.packageTitle || '투어이지 여행'}</span>
                 <span class="text-[11px] text-slate-400">여행시기: ${r.travelDate || '-'}</span>
+                ${photos.length > 0 ? `<span class="text-[10px] font-bold text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-100 flex items-center gap-1"><i data-lucide="camera" class="w-3 h-3"></i> 사진 ${photos.length}장</span>` : ''}
               </div>
               <h5 class="font-black text-slate-900 text-sm mt-1">${r.title || '여행후기'}</h5>
             </div>
@@ -1954,11 +2021,7 @@ window.loadMyReviewsList = async function() {
 
           <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">${r.content || ''}</p>
 
-          ${r.imageUrl ? `
-            <div class="w-full max-w-xs rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-              <img src="${r.imageUrl}" alt="${r.title || '후기 사진'}" class="w-full h-32 object-cover hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'">
-            </div>
-          ` : ''}
+          ${window.renderReviewImagesHtml(photos, r.title)}
 
           <div class="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-100">
             <span class="flex items-center gap-1"><i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-400"></i> 추천 ${r.likes || 0}</span>
@@ -1996,7 +2059,7 @@ window.renderWriteReviewModal = function() {
 
   const modalHtml = `
     <div id="write-review-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity hidden">
-      <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
+      <div class="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
         <!-- Header -->
         <div class="bg-gradient-to-r from-sky-600 via-sky-700 to-teal-700 p-5 text-white flex items-center justify-between shrink-0">
           <div class="flex items-center gap-2.5">
@@ -2005,7 +2068,7 @@ window.renderWriteReviewModal = function() {
             </div>
             <div>
               <h3 class="text-base font-black" id="review-modal-title">여행 후기 작성</h3>
-              <p class="text-[11px] text-sky-100">소중한 여행 경험과 생생한 팁을 나눠주세요.</p>
+              <p class="text-[11px] text-sky-100">소중한 여행 경험과 생생한 팁을 나눠주세요. (사진 최대 5장)</p>
             </div>
           </div>
           <button onclick="window.closeWriteReviewModal()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
@@ -2058,16 +2121,50 @@ window.renderWriteReviewModal = function() {
             <textarea id="rev-content" required rows="4" placeholder="숙소 컨디션, 가이드 만족도, 일정 구성 등 좋았던 점이나 다른 여행자들에게 전하고 싶은 팁을 자세히 적어주세요." class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500 leading-relaxed resize-none"></textarea>
           </div>
 
-          <!-- Image URL + Quick samples -->
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">여행 사진 URL (선택)</label>
-            <input type="url" id="rev-image-url" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500">
-            <div class="flex items-center gap-1.5 mt-1.5 text-[11px] text-slate-500 flex-wrap">
-              <span class="font-bold text-slate-400">추천 사진 샘플:</span>
-              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#다낭비치</button>
-              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#파리야경</button>
-              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#발리풀빌라</button>
-              <button type="button" onclick="document.getElementById('rev-image-url').value='https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80'" class="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-md transition cursor-pointer">#일본온천</button>
+          <!-- Photo Upload Section (PC Local Files max 5 + URL support) -->
+          <div class="space-y-2.5 pt-1">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <i data-lucide="camera" class="w-4 h-4 text-sky-600"></i>
+                <span>여행 사진 등록 <span class="text-slate-400 font-normal">(PC 사진 또는 URL)</span></span>
+              </label>
+              <span id="rev-photo-count-badge" class="text-[11px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">0 / 5장</span>
+            </div>
+
+            <!-- PC File Dropzone -->
+            <div onclick="document.getElementById('rev-file-input').click()" class="p-4 border-2 border-dashed border-sky-300 hover:border-sky-500 bg-sky-50/40 hover:bg-sky-50/80 rounded-2xl text-center cursor-pointer transition group">
+              <input type="file" id="rev-file-input" multiple accept="image/*" class="hidden" onchange="window.handleReviewFileSelect(event)">
+              <div class="flex flex-col items-center justify-center gap-1.5 pointer-events-none">
+                <div class="w-10 h-10 rounded-2xl bg-white shadow-xs text-sky-600 flex items-center justify-center group-hover:scale-110 transition">
+                  <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                </div>
+                <p class="text-xs font-bold text-slate-800">
+                  <span class="text-sky-600 underline">내 PC에서 사진 파일 선택하기</span> (최대 5장)
+                </p>
+                <p class="text-[11px] text-slate-400">JPG, PNG, WEBP 등 이미지 파일을 등록해 주세요.</p>
+              </div>
+            </div>
+
+            <!-- Photo Previews Grid (Max 5) -->
+            <div id="rev-photo-preview-grid" class="grid grid-cols-5 gap-2 pt-1 hidden">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- URL direct input option -->
+            <div class="pt-1 space-y-1.5">
+              <div class="flex items-center gap-1.5">
+                <input type="url" id="rev-image-url-input" placeholder="웹 이미지 URL 직접 추가 (https://...)" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-sky-500">
+                <button type="button" onclick="window.addPhotoUrlToAttached()" class="px-3 py-2 bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 font-bold text-xs rounded-xl border border-slate-200 shrink-0 transition cursor-pointer">
+                  URL 추가
+                </button>
+              </div>
+              <div class="flex items-center gap-1 text-[10px] text-slate-500 flex-wrap">
+                <span class="font-bold text-slate-400">추천 샘플:</span>
+                <button type="button" onclick="window.addQuickSamplePhoto('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80')" class="px-1.5 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded transition cursor-pointer">+다낭</button>
+                <button type="button" onclick="window.addQuickSamplePhoto('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80')" class="px-1.5 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded transition cursor-pointer">+파리</button>
+                <button type="button" onclick="window.addQuickSamplePhoto('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80')" class="px-1.5 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded transition cursor-pointer">+발리</button>
+                <button type="button" onclick="window.addQuickSamplePhoto('https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80')" class="px-1.5 py-0.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded transition cursor-pointer">+도쿄</button>
+              </div>
             </div>
           </div>
 
@@ -2084,6 +2181,103 @@ window.renderWriteReviewModal = function() {
 
   document.body.insertAdjacentHTML('beforeend', modalHtml);
   if (window.lucide) lucide.createIcons();
+};
+
+window.renderReviewPhotoPreviews = function() {
+  const grid = document.getElementById('rev-photo-preview-grid');
+  const countBadge = document.getElementById('rev-photo-count-badge');
+  if (!grid) return;
+
+  const photos = window.attachedReviewPhotos || [];
+  if (countBadge) countBadge.textContent = `${photos.length} / 5장`;
+
+  if (photos.length === 0) {
+    grid.classList.add('hidden');
+    grid.innerHTML = '';
+    return;
+  }
+
+  grid.classList.remove('hidden');
+  grid.innerHTML = photos.map((src, idx) => `
+    <div class="relative aspect-square rounded-xl overflow-hidden border border-slate-200 bg-slate-100 group shadow-xs">
+      <img src="${src}" alt="미리보기 ${idx + 1}" class="w-full h-full object-cover">
+      <button type="button" onclick="window.removeReviewPhoto(${idx})" class="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 hover:bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold transition cursor-pointer" title="삭제">
+        ✕
+      </button>
+      ${idx === 0 ? '<span class="absolute bottom-0 inset-x-0 bg-sky-600/90 text-white text-[9px] font-extrabold text-center py-0.5">대표</span>' : ''}
+    </div>
+  `).join('');
+
+  if (window.lucide) lucide.createIcons();
+};
+
+window.handleReviewFileSelect = function(e) {
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+
+  const currentCount = (window.attachedReviewPhotos || []).length;
+  const availableSlots = 5 - currentCount;
+
+  if (availableSlots <= 0) {
+    alert('사진은 최대 5장까지만 등록 가능합니다.');
+    e.target.value = '';
+    return;
+  }
+
+  const selected = files.slice(0, availableSlots);
+  if (files.length > availableSlots) {
+    alert(`최대 5장까지만 등록할 수 있어, ${availableSlots}장의 사진만 추가됩니다.`);
+  }
+
+  let loaded = 0;
+  selected.forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      if (window.attachedReviewPhotos.length < 5) {
+        window.attachedReviewPhotos.push(evt.target.result);
+      }
+      loaded++;
+      if (loaded === selected.length) {
+        window.renderReviewPhotoPreviews();
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  e.target.value = '';
+};
+
+window.removeReviewPhoto = function(idx) {
+  if (window.attachedReviewPhotos && window.attachedReviewPhotos[idx] !== undefined) {
+    window.attachedReviewPhotos.splice(idx, 1);
+    window.renderReviewPhotoPreviews();
+  }
+};
+
+window.addPhotoUrlToAttached = function() {
+  const input = document.getElementById('rev-image-url-input');
+  const url = input?.value?.trim();
+  if (!url) {
+    alert('추가할 이미지 URL을 입력해 주세요.');
+    return;
+  }
+  if ((window.attachedReviewPhotos || []).length >= 5) {
+    alert('사진은 최대 5장까지만 등록 가능합니다.');
+    return;
+  }
+  window.attachedReviewPhotos.push(url);
+  if (input) input.value = '';
+  window.renderReviewPhotoPreviews();
+};
+
+window.addQuickSamplePhoto = function(url) {
+  if ((window.attachedReviewPhotos || []).length >= 5) {
+    alert('사진은 최대 5장까지만 등록 가능합니다.');
+    return;
+  }
+  window.attachedReviewPhotos.push(url);
+  window.renderReviewPhotoPreviews();
 };
 
 window.setReviewStarRating = function(rating) {
@@ -2126,6 +2320,8 @@ window.openWriteReviewModal = async function(editReviewId = null, defaultPackage
   const packageSelect = document.getElementById('rev-package-select');
 
   if (form) form.reset();
+  window.attachedReviewPhotos = [];
+  window.renderReviewPhotoPreviews();
 
   // Populate Packages in dropdown
   if (packageSelect) {
@@ -2164,10 +2360,16 @@ window.openWriteReviewModal = async function(editReviewId = null, defaultPackage
         if (travelDateEl && rev.travelDate) travelDateEl.value = rev.travelDate;
         const titleEl = document.getElementById('rev-title');
         const contentEl = document.getElementById('rev-content');
-        const imgEl = document.getElementById('rev-image-url');
         if (titleEl) titleEl.value = rev.title || '';
         if (contentEl) contentEl.value = rev.content || '';
-        if (imgEl) imgEl.value = rev.imageUrl || '';
+
+        // Load existing photos
+        if (Array.isArray(rev.images) && rev.images.length > 0) {
+          window.attachedReviewPhotos = [...rev.images.slice(0, 5)];
+        } else if (rev.imageUrl) {
+          window.attachedReviewPhotos = [rev.imageUrl];
+        }
+        window.renderReviewPhotoPreviews();
         window.setReviewStarRating(rev.rating || 5);
       }
     } catch {}
@@ -2213,7 +2415,8 @@ window.handleReviewSubmit = async function(e) {
   const travelDate = document.getElementById('rev-travel-date')?.value || new Date().toISOString().slice(0, 7);
   const title = document.getElementById('rev-title')?.value.trim();
   const content = document.getElementById('rev-content')?.value.trim();
-  const imageUrl = document.getElementById('rev-image-url')?.value.trim();
+  const photos = Array.isArray(window.attachedReviewPhotos) ? window.attachedReviewPhotos.slice(0, 5) : [];
+  const primaryImageUrl = photos[0] || '';
   const submitBtn = document.getElementById('btn-submit-review');
 
   if (!packageId) {
@@ -2244,7 +2447,8 @@ window.handleReviewSubmit = async function(e) {
         travelDate,
         title,
         content,
-        imageUrl
+        imageUrl: primaryImageUrl,
+        images: photos
       });
     } else {
       res = await TourAPI.createReview({
@@ -2254,7 +2458,8 @@ window.handleReviewSubmit = async function(e) {
         travelDate,
         title,
         content,
-        imageUrl
+        imageUrl: primaryImageUrl,
+        images: photos
       });
     }
 

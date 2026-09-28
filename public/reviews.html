@@ -302,12 +302,8 @@
                 <!-- Review Content -->
                 <p class="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap line-clamp-4">${r.content || ''}</p>
 
-                <!-- Optional Image -->
-                ${r.imageUrl ? `
-                  <div class="w-full h-44 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 mt-2">
-                    <img src="${r.imageUrl}" alt="${r.title || '후기 사진'}" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.parentElement.style.display='none'">
-                  </div>
-                ` : ''}
+                <!-- Photos Gallery (Up to 5) -->
+                ${window.renderReviewImagesHtml ? window.renderReviewImagesHtml((Array.isArray(r.images) && r.images.length > 0) ? r.images : (r.imageUrl ? [r.imageUrl] : []), r.title) : (r.imageUrl ? `<img src="${r.imageUrl}" class="w-full h-40 object-cover rounded-xl mt-2">` : '')}
 
               </div>
 

@@ -5909,6 +5909,13 @@ const TourAPI = {
       return { success: false, message: '로그인이 필요한 서비스입니다.' };
     }
 
+    const rawImages = Array.isArray(reviewData.images) ? reviewData.images.filter(Boolean).slice(0, 5) : [];
+    if (reviewData.imageUrl && !rawImages.includes(reviewData.imageUrl)) {
+      rawImages.unshift(reviewData.imageUrl);
+    }
+    const finalImages = rawImages.slice(0, 5);
+    const primaryImg = finalImages[0] || (reviewData.imageUrl || '').trim();
+
     const newRev = {
       id: `rev-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
       userId: curUser ? curUser.id : (reviewData.userId || 'guest'),
@@ -5920,7 +5927,8 @@ const TourAPI = {
       title: (reviewData.title || '').trim(),
       content: (reviewData.content || '').trim(),
       travelDate: reviewData.travelDate || new Date().toISOString().slice(0, 7),
-      imageUrl: (reviewData.imageUrl || '').trim(),
+      imageUrl: primaryImg,
+      images: finalImages,
       likes: 0,
       createdAt: new Date().toISOString()
     };
@@ -5988,9 +5996,17 @@ const TourAPI = {
         return { success: false, message: '본인이 작성한 후기만 수정할 수 있습니다.' };
       }
 
+      let updatedImages = target.images || [];
+      if (Array.isArray(updateData.images)) {
+        updatedImages = updateData.images.filter(Boolean).slice(0, 5);
+      }
+      const updatedPrimaryImg = updatedImages[0] || updateData.imageUrl || target.imageUrl || '';
+
       list[idx] = {
         ...target,
         ...updateData,
+        images: updatedImages,
+        imageUrl: updatedPrimaryImg,
         updatedAt: new Date().toISOString()
       };
       localStorage.setItem('toureasy_reviews', JSON.stringify(list));
