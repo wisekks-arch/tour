@@ -173,20 +173,107 @@ $detailHtml = @'
         </table>
       </div>
 
-      <!-- Tab Content 3: Reviews -->
-      <div id="tab-content-reviews" class="p-8 sm:p-12 hidden space-y-8">
-        <div class="flex items-center justify-between pb-6 border-b border-slate-200">
+      <!-- Tab Content 3: Reviews (게시판형 UI & 평점 요약 보드) -->
+      <div id="tab-content-reviews" class="p-6 sm:p-10 hidden space-y-8">
+        
+        <!-- Header & Top Write Button -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
           <div>
-            <h3 class="text-lg font-bold text-slate-900">구매 고객 후기</h3>
-            <p class="text-xs text-slate-400 mt-1">실제 구매 고객이 작성한 솔직한 리뷰입니다.</p>
+            <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+              <span>구매 고객 후기</span>
+              <span id="review-total-badge" class="px-2.5 py-0.5 rounded-full text-xs font-black bg-indigo-50 text-indigo-600 border border-indigo-100">0개</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">이지샵에서 실제로 상품을 구매하신 고객님들의 100% 솔직한 리뷰입니다.</p>
           </div>
-          <button onclick="openReviewModal()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition">
-            리뷰 작성하기
+          <button onclick="openReviewModal()" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl text-xs font-bold hover:from-indigo-700 hover:to-purple-700 transition shadow-xs cursor-pointer shrink-0">
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+            <span>리뷰 작성하기</span>
           </button>
         </div>
-        <div id="review-list" class="space-y-4 divide-y divide-slate-100">
-          <!-- Reviews list -->
+
+        <!-- Rating Summary Board -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 bg-slate-50/80 p-6 sm:p-8 rounded-2xl border border-slate-200/80 items-center">
+          
+          <!-- Left: Average Score -->
+          <div class="md:col-span-4 text-center border-b md:border-b-0 md:border-r border-slate-200 pb-6 md:pb-0 md:pr-6">
+            <span class="text-xs font-bold text-slate-400 block mb-1">사용자 총 평점</span>
+            <div class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight flex items-center justify-center gap-1">
+              <span id="summary-avg-score">5.0</span>
+              <span class="text-lg text-slate-400 font-normal">/ 5.0</span>
+            </div>
+            <div id="summary-stars" class="flex justify-center text-amber-400 my-2 gap-0.5">
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold"><span id="summary-recom-rate">98</span>%의 고객이 이 상품을 추천합니다</span>
+          </div>
+
+          <!-- Right: Star Bars -->
+          <div class="md:col-span-8 space-y-2 text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-8 font-bold text-slate-600 text-right shrink-0">5점</span>
+              <div class="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="star-bar-5" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 85%;"></div>
+              </div>
+              <span id="star-count-5" class="w-8 text-right text-slate-400 shrink-0 font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 font-bold text-slate-600 text-right shrink-0">4점</span>
+              <div class="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="star-bar-4" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 15%;"></div>
+              </div>
+              <span id="star-count-4" class="w-8 text-right text-slate-400 shrink-0 font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 font-bold text-slate-600 text-right shrink-0">3점</span>
+              <div class="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="star-bar-3" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+              </div>
+              <span id="star-count-3" class="w-8 text-right text-slate-400 shrink-0 font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 font-bold text-slate-600 text-right shrink-0">2점</span>
+              <div class="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="star-bar-2" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+              </div>
+              <span id="star-count-2" class="w-8 text-right text-slate-400 shrink-0 font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 font-bold text-slate-600 text-right shrink-0">1점</span>
+              <div class="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="star-bar-1" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+              </div>
+              <span id="star-count-1" class="w-8 text-right text-slate-400 shrink-0 font-bold">0</span>
+            </div>
+          </div>
+
         </div>
+
+        <!-- Sort Filter Bar -->
+        <div class="flex items-center justify-between pt-4 pb-2 border-b border-slate-200 text-xs">
+          <div class="flex items-center gap-4 font-bold">
+            <button onclick="sortReviews('latest')" id="sort-btn-latest" class="text-indigo-600 font-black cursor-pointer hover:underline">최신 등록순</button>
+            <span class="text-slate-300">|</span>
+            <button onclick="sortReviews('rating')" id="sort-btn-rating" class="text-slate-500 hover:text-slate-900 cursor-pointer">평점 높은순</button>
+            <span class="text-slate-300">|</span>
+            <button onclick="sortReviews('likes')" id="sort-btn-likes" class="text-slate-500 hover:text-slate-900 cursor-pointer">추천 많은순</button>
+          </div>
+          <span class="text-slate-400">총 <strong id="current-review-count" class="text-slate-700">0</strong>건</span>
+        </div>
+
+        <!-- Reviews Board List -->
+        <div id="review-list" class="space-y-4 divide-y divide-slate-100">
+          <!-- Reviews list rendered dynamically -->
+        </div>
+
+        <!-- Reviews Pagination Controls -->
+        <div id="review-pagination" class="pt-6 flex items-center justify-center gap-1.5 flex-wrap">
+          <!-- Pagination buttons rendered dynamically -->
+        </div>
+
       </div>
 
       <!-- Tab Content 4: Q&A -->
@@ -209,6 +296,105 @@ $detailHtml = @'
 
   </main>
 
+  <!-- Review Write Modal (별점 선택 대화형 모달창) -->
+  <div id="review-write-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-5 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-indigo-100/60 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-slate-900">구매 고객 후기 작성</h3>
+            <p class="text-[11px] text-slate-500">상품에 대한 솔직한 만족도를 남겨주세요.</p>
+          </div>
+        </div>
+        <button onclick="closeReviewModal()" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-white rounded-xl transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <div class="p-6 space-y-5">
+        
+        <!-- Product Thumbnail & Name Preview -->
+        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
+          <img id="modal-product-thumb" src="" alt="상품" class="w-12 h-12 object-cover rounded-xl shrink-0" />
+          <div class="overflow-hidden">
+            <span id="modal-product-cat" class="text-[10px] font-bold text-indigo-600 block truncate">카테고리</span>
+            <h4 id="modal-product-name" class="text-xs font-bold text-slate-900 truncate">상품명</h4>
+          </div>
+        </div>
+
+        <!-- Interactive Star Rating Selector -->
+        <div class="text-center py-2 space-y-2">
+          <label class="text-xs font-bold text-slate-700 block">상품 만족도 별점 선택</label>
+          <div id="star-selector-container" class="flex justify-center items-center gap-2">
+            <button type="button" onclick="selectStarRating(1)" onmouseenter="previewStarRating(1)" onmouseleave="resetStarPreview()" class="star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer">
+              <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+            </button>
+            <button type="button" onclick="selectStarRating(2)" onmouseenter="previewStarRating(2)" onmouseleave="resetStarPreview()" class="star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer">
+              <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+            </button>
+            <button type="button" onclick="selectStarRating(3)" onmouseenter="previewStarRating(3)" onmouseleave="resetStarPreview()" class="star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer">
+              <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+            </button>
+            <button type="button" onclick="selectStarRating(4)" onmouseenter="previewStarRating(4)" onmouseleave="resetStarPreview()" class="star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer">
+              <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+            </button>
+            <button type="button" onclick="selectStarRating(5)" onmouseenter="previewStarRating(5)" onmouseleave="resetStarPreview()" class="star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer">
+              <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+            </button>
+          </div>
+          <span id="star-rating-text" class="inline-block text-xs font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+            ★★★★★ 아주 만족해요 (5점)
+          </span>
+        </div>
+
+        <!-- Author Name Input -->
+        <div class="space-y-1.5">
+          <label for="review-input-author" class="text-xs font-bold text-slate-700">작성자 닉네임</label>
+          <input 
+            type="text" 
+            id="review-input-author" 
+            placeholder="예: 김*현 (미입력 시 구매고객으로 표시)" 
+            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-600"
+          />
+        </div>
+
+        <!-- Review Content Textarea -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <label for="review-input-content" class="font-bold text-slate-700">상세 후기 내용 <span class="text-rose-500">*</span></label>
+            <span id="review-char-count" class="text-slate-400 font-semibold">0 / 500자</span>
+          </div>
+          <textarea 
+            id="review-input-content" 
+            rows="4" 
+            maxlength="500" 
+            oninput="handleReviewInput(this)"
+            placeholder="상품의 디자인, 원단/재질, 사용감, 배송 등에 대한 솔직한 경험을 10자 이상 작성해 주세요." 
+            class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-600 resize-none leading-relaxed placeholder-slate-400"
+          ></textarea>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
+        <button onclick="closeReviewModal()" class="px-4 py-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer">
+          취소
+        </button>
+        <button onclick="submitReviewAction()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs transition cursor-pointer">
+          후기 등록 완료
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Global Footer -->
   <div id="footer-root"></div>
 
@@ -218,6 +404,10 @@ $detailHtml = @'
   <script src="js/components.js"></script>
   <script>
     let currentProduct = null;
+    let selectedRating = 5;
+    let reviewSortType = 'latest';
+    let reviewCurrentPage = 1;
+    const REVIEW_PAGE_SIZE = 6;
 
     document.addEventListener('DOMContentLoaded', async () => {
       ShopUI.renderNavbar();
@@ -229,7 +419,7 @@ $detailHtml = @'
       currentProduct = await ShopAPI.getProductById(productId);
       if (!currentProduct) {
         alert('존재하지 않는 상품입니다.');
-        window.location.href = '/products.html';
+        window.location.href = 'products.html';
         return;
       }
 
@@ -239,7 +429,7 @@ $detailHtml = @'
     function renderProductDetails(p) {
       document.title = `${p.name} - EASYSHOP`;
       document.getElementById('breadcrumb-category').innerText = p.category;
-      document.getElementById('breadcrumb-category').href = `/products.html?category=${encodeURIComponent(p.category)}`;
+      document.getElementById('breadcrumb-category').href = `products.html?category=${encodeURIComponent(p.category)}`;
       document.getElementById('breadcrumb-title').innerText = p.name;
 
       document.getElementById('main-product-image').src = p.thumbnail;
@@ -247,8 +437,11 @@ $detailHtml = @'
       document.getElementById('product-title').innerText = p.name;
       document.getElementById('product-summary').innerText = p.summary || '';
       document.getElementById('product-rating').innerText = p.rating || 5.0;
-      document.getElementById('product-review-count').innerText = p.reviewCount || 0;
-      document.getElementById('tab-review-count').innerText = p.reviewCount || 0;
+      document.getElementById('product-review-count').innerText = p.reviewCount || (p.reviews ? p.reviews.length : 0);
+      document.getElementById('tab-review-count').innerText = p.reviewCount || (p.reviews ? p.reviews.length : 0);
+      if (document.getElementById('review-total-badge')) {
+        document.getElementById('review-total-badge').innerText = `${p.reviewCount || (p.reviews ? p.reviews.length : 0)}개`;
+      }
 
       if (p.discountRate) {
         document.getElementById('product-discount-rate').innerText = `${p.discountRate}%`;
@@ -293,14 +486,15 @@ $detailHtml = @'
       // Description HTML
       document.getElementById('product-html-description').innerHTML = p.description || p.summary;
 
-      // Reviews
-      renderReviews(p.reviews || []);
+      // Reviews Board Summary & List
+      renderReviewsBoard();
 
       // QNA
       renderQnas(p.qnas || []);
 
       updateCalculation();
       updateWishIcon();
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function setMainImage(url) {
@@ -331,6 +525,8 @@ $detailHtml = @'
 
       document.getElementById(`tab-content-${tab}`).classList.remove('hidden');
       document.getElementById(`tab-btn-${tab}`).className = 'flex-1 py-4 text-center border-b-2 border-indigo-600 text-indigo-600 bg-white';
+      if (tab === 'reviews') renderReviewsBoard();
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function addToCartAction() {
@@ -347,7 +543,7 @@ $detailHtml = @'
       const opt = document.getElementById('option-select').value;
       const qty = parseInt(document.getElementById('buy-qty').value) || 1;
       CartStore.addItem(currentProduct, opt, qty);
-      window.location.href = '/checkout.html';
+      window.location.href = 'checkout.html';
     }
 
     function toggleDetailWish() {
@@ -369,52 +565,262 @@ $detailHtml = @'
       }
     }
 
-    function renderReviews(reviews) {
-      const container = document.getElementById('review-list');
-      if (!container) return;
-      if (reviews.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-400 py-6 text-center">작성된 리뷰가 없습니다. 첫 리뷰를 작성해 보세요!</p>`;
-        return;
+    /* --- 구매 고객 후기 게시판 렌더링 로직 --- */
+    function renderReviewsBoard() {
+      if (!currentProduct) return;
+      const reviews = currentProduct.reviews || [];
+      const totalCount = reviews.length;
+
+      // 1. Calculate Summary Stats
+      let avgRating = 5.0;
+      const starCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+      if (totalCount > 0) {
+        let totalScore = 0;
+        reviews.forEach(r => {
+          const score = Math.round(r.rating || 5);
+          starCounts[score] = (starCounts[score] || 0) + 1;
+          totalScore += (r.rating || 5);
+        });
+        avgRating = (totalScore / totalCount).toFixed(1);
       }
-      container.innerHTML = reviews.map((r, i) => `
-        <div class="py-5 first:pt-0 border-b border-slate-100 last:border-0 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white font-black flex items-center justify-center text-xs shadow-xs">
-                ${(r.author || '고').slice(0, 1)}
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-slate-900 text-xs sm:text-sm">${r.author}</span>
-                  <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full font-bold border border-emerald-200">실구매 인증</span>
-                </div>
-                <div class="flex items-center gap-2 mt-0.5">
-                  <div class="flex text-amber-400">
-                    ${'<i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>'.repeat(r.rating || 5)}
-                  </div>
-                  <span class="text-[11px] text-slate-400">${r.date}</span>
-                </div>
-              </div>
+
+      if (document.getElementById('summary-avg-score')) document.getElementById('summary-avg-score').innerText = avgRating;
+      if (document.getElementById('current-review-count')) document.getElementById('current-review-count').innerText = totalCount;
+      if (document.getElementById('review-total-badge')) document.getElementById('review-total-badge').innerText = `${totalCount}개`;
+
+      // Star Distribution Bars
+      for (let s = 1; s <= 5; s++) {
+        const count = starCounts[s] || 0;
+        const pct = totalCount > 0 ? Math.round((count / totalCount) * 100) : 0;
+        const barEl = document.getElementById(`star-bar-${s}`);
+        const cntEl = document.getElementById(`star-count-${s}`);
+        if (barEl) barEl.style.width = `${pct}%`;
+        if (cntEl) cntEl.innerText = count;
+      }
+
+      // 2. Sort Reviews
+      const sorted = [...reviews];
+      if (reviewSortType === 'latest') {
+        sorted.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+      } else if (reviewSortType === 'rating') {
+        sorted.sort((a, b) => (b.rating || 5) - (a.rating || 5));
+      } else if (reviewSortType === 'likes') {
+        sorted.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+      }
+
+      // 3. Slice for Pagination
+      const totalPages = Math.ceil(sorted.length / REVIEW_PAGE_SIZE) || 1;
+      if (reviewCurrentPage > totalPages) reviewCurrentPage = totalPages;
+      if (reviewCurrentPage < 1) reviewCurrentPage = 1;
+
+      const startIdx = (reviewCurrentPage - 1) * REVIEW_PAGE_SIZE;
+      const pageList = sorted.slice(startIdx, startIdx + REVIEW_PAGE_SIZE);
+
+      // 4. Render Reviews List
+      const container = document.getElementById('review-list');
+      if (container) {
+        if (sorted.length === 0) {
+          container.innerHTML = `
+            <div class="py-12 text-center text-slate-400 space-y-2">
+              <i data-lucide="message-square" class="w-10 h-10 mx-auto text-slate-300 stroke-1"></i>
+              <p class="text-xs">아직 등록된 리뷰가 없습니다. 첫 구매 후기를 작성해 보세요!</p>
             </div>
-            <button onclick="likeReviewAction(${i}, this)" class="flex items-center gap-1.5 px-3 py-1 bg-slate-50 hover:bg-rose-50 text-slate-500 hover:text-rose-600 rounded-xl border border-slate-200 text-xs font-bold transition cursor-pointer">
-              <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
-              <span>도움돼요</span>
-              <span class="review-like-cnt ml-0.5 font-bold">${r.likes || 0}</span>
-            </button>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-wrap pl-12">${r.content}</p>
-        </div>
-      `).join('');
+          `;
+        } else {
+          container.innerHTML = pageList.map((r, i) => `
+            <div class="py-5 first:pt-2 border-b border-slate-100 last:border-0 space-y-3 bg-white hover:bg-slate-50/50 p-4 rounded-2xl transition">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white font-black flex items-center justify-center text-xs shadow-xs shrink-0">
+                    ${(r.author || '고').slice(0, 1)}
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-slate-900 text-xs sm:text-sm">${r.author}</span>
+                      <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold border border-emerald-200">실구매 인증</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <div class="flex text-amber-400">
+                        ${'<i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>'.repeat(r.rating || 5)}
+                      </div>
+                      <span class="text-[11px] text-slate-400">${r.date}</span>
+                    </div>
+                  </div>
+                </div>
+                <button onclick="likeReviewAction('${r.id}', this)" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 rounded-xl border border-slate-200 text-xs font-bold transition cursor-pointer">
+                  <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
+                  <span>도움돼요</span>
+                  <span class="review-like-cnt ml-0.5 font-bold">${r.likes || 0}</span>
+                </button>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-wrap pl-13">${r.content}</p>
+            </div>
+          `).join('');
+        }
+      }
+
+      // 5. Render Pagination Controls
+      renderPagination(totalPages);
       if (window.lucide) window.lucide.createIcons();
     }
 
-    function likeReviewAction(idx, btn) {
-      if (currentProduct && currentProduct.reviews && currentProduct.reviews[idx]) {
-        currentProduct.reviews[idx].likes = (currentProduct.reviews[idx].likes || 0) + 1;
-        const cntEl = btn.querySelector('.review-like-cnt');
-        if (cntEl) cntEl.innerText = currentProduct.reviews[idx].likes;
-        ShopUI.showToast('후기에 공감(도움돼요)을 표시했습니다.');
+    function renderPagination(totalPages) {
+      const pagContainer = document.getElementById('review-pagination');
+      if (!pagContainer) return;
+      if (totalPages <= 1) {
+        pagContainer.innerHTML = '';
+        return;
       }
+
+      let html = '';
+      html += `
+        <button onclick="changeReviewPage(${reviewCurrentPage - 1})" ${reviewCurrentPage === 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold ${reviewCurrentPage === 1 ? 'opacity-40 cursor-not-allowed text-slate-400 bg-slate-50' : 'text-slate-700 bg-white hover:bg-slate-100 cursor-pointer'} transition">
+          이전
+        </button>
+      `;
+
+      for (let p = 1; p <= totalPages; p++) {
+        if (p === reviewCurrentPage) {
+          html += `<button class="w-7 h-7 rounded-xl bg-indigo-600 text-white text-xs font-black shadow-xs cursor-default">${p}</button>`;
+        } else {
+          html += `<button onclick="changeReviewPage(${p})" class="w-7 h-7 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 cursor-pointer transition">${p}</button>`;
+        }
+      }
+
+      html += `
+        <button onclick="changeReviewPage(${reviewCurrentPage + 1})" ${reviewCurrentPage === totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold ${reviewCurrentPage === totalPages ? 'opacity-40 cursor-not-allowed text-slate-400 bg-slate-50' : 'text-slate-700 bg-white hover:bg-slate-100 cursor-pointer'} transition">
+          다음
+        </button>
+      `;
+
+      pagContainer.innerHTML = html;
+    }
+
+    function changeReviewPage(page) {
+      reviewCurrentPage = page;
+      renderReviewsBoard();
+      const tabEl = document.getElementById('tab-content-reviews');
+      if (tabEl) window.scrollTo({ top: tabEl.offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function sortReviews(type) {
+      reviewSortType = type;
+      ['latest', 'rating', 'likes'].forEach(t => {
+        const btn = document.getElementById(`sort-btn-${t}`);
+        if (btn) {
+          if (t === type) {
+            btn.className = 'text-indigo-600 font-black cursor-pointer hover:underline';
+          } else {
+            btn.className = 'text-slate-500 hover:text-slate-900 cursor-pointer';
+          }
+        }
+      });
+      reviewCurrentPage = 1;
+      renderReviewsBoard();
+    }
+
+    function likeReviewAction(reviewId, btn) {
+      if (currentProduct && currentProduct.reviews) {
+        const rev = currentProduct.reviews.find(r => r.id === reviewId);
+        if (rev) {
+          rev.likes = (rev.likes || 0) + 1;
+          const cntEl = btn.querySelector('.review-like-cnt');
+          if (cntEl) cntEl.innerText = rev.likes;
+          ShopUI.showToast('후기에 공감(도움돼요)을 표시했습니다 👍');
+        }
+      }
+    }
+
+    /* --- 별점 선택 대화형 모달 로직 --- */
+    const starDescriptions = {
+      5: '★★★★★ 아주 만족해요 (5점)',
+      4: '★★★★☆ 만족해요 (4점)',
+      3: '★★★☆☆ 보통이에요 (3점)',
+      2: '★★☆☆☆ 아쉬워요 (2점)',
+      1: '★☆☆☆☆ 별로예요 (1점)'
+    };
+
+    function openReviewModal() {
+      if (!currentProduct) return;
+      document.getElementById('modal-product-thumb').src = currentProduct.thumbnail;
+      document.getElementById('modal-product-cat').innerText = currentProduct.category;
+      document.getElementById('modal-product-name').innerText = currentProduct.name;
+      
+      selectStarRating(5);
+      document.getElementById('review-input-content').value = '';
+      document.getElementById('review-char-count').innerText = '0 / 500자';
+      
+      const modal = document.getElementById('review-write-modal');
+      modal.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeReviewModal() {
+      document.getElementById('review-write-modal').classList.add('hidden');
+    }
+
+    function selectStarRating(score) {
+      selectedRating = score;
+      updateStarIcons(score);
+      document.getElementById('star-rating-text').innerText = starDescriptions[score] || `${score}점`;
+    }
+
+    function previewStarRating(score) {
+      updateStarIcons(score);
+      document.getElementById('star-rating-text').innerText = starDescriptions[score] || `${score}점`;
+    }
+
+    function resetStarPreview() {
+      updateStarIcons(selectedRating);
+      document.getElementById('star-rating-text').innerText = starDescriptions[selectedRating] || `${selectedRating}점`;
+    }
+
+    function updateStarIcons(score) {
+      const container = document.getElementById('star-selector-container');
+      if (!container) return;
+      const btns = container.querySelectorAll('.star-btn');
+      btns.forEach((btn, idx) => {
+        if (idx < score) {
+          btn.className = 'star-btn p-1 text-amber-400 focus:outline-none transition transform hover:scale-125 cursor-pointer';
+        } else {
+          btn.className = 'star-btn p-1 text-slate-200 focus:outline-none transition transform hover:scale-125 cursor-pointer';
+        }
+      });
+    }
+
+    function handleReviewInput(el) {
+      const len = el.value.length;
+      document.getElementById('review-char-count').innerText = `${len} / 500자`;
+    }
+
+    function submitReviewAction() {
+      const content = document.getElementById('review-input-content').value.trim();
+      let author = document.getElementById('review-input-author').value.trim();
+      if (!author) author = '구매고객';
+
+      if (!content) {
+        alert('후기 내용을 입력해 주세요.');
+        return;
+      }
+      if (content.length < 5) {
+        alert('후기 내용을 최소 5자 이상 작성해 주세요.');
+        return;
+      }
+
+      currentProduct.reviews = currentProduct.reviews || [];
+      currentProduct.reviews.unshift({
+        id: 'rev-' + Date.now(),
+        author: author,
+        rating: selectedRating,
+        date: new Date().toISOString().slice(0, 10),
+        content: content,
+        likes: 0
+      });
+
+      currentProduct.reviewCount = currentProduct.reviews.length;
+      renderProductDetails(currentProduct);
+      closeReviewModal();
+      ShopUI.showToast('소중한 구매 후기가 등록되었습니다! ⭐');
     }
 
     function renderQnas(qnas) {
@@ -440,23 +846,6 @@ $detailHtml = @'
       `).join('');
     }
 
-    function openReviewModal() {
-      const content = prompt('리뷰 내용을 입력해 주세요:');
-      if (content) {
-        currentProduct.reviews = currentProduct.reviews || [];
-        currentProduct.reviews.unshift({
-          id: 'rev-' + Date.now(),
-          author: '구매고객',
-          rating: 5,
-          date: new Date().toISOString().slice(0, 10),
-          content: content
-        });
-        currentProduct.reviewCount = (currentProduct.reviewCount || 0) + 1;
-        renderProductDetails(currentProduct);
-        ShopUI.showToast('소중한 리뷰가 등록되었습니다!');
-      }
-    }
-
     function openQnaModal() {
       const question = prompt('상품 문의 내용을 입력해 주세요:');
       if (question) {
@@ -478,6 +867,8 @@ $detailHtml = @'
 '@
 
 [System.IO.File]::WriteAllText((Join-Path $publicDir 'product-detail.html'), $detailHtml, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText((Join-Path $shopDir 'product-detail.html'), $detailHtml, [System.Text.Encoding]::UTF8)
+Write-Host "Generated: product-detail.html (both public/ and root)" -ForegroundColor Green
 Write-Host "Generated: product-detail.html" -ForegroundColor Green
 
 # 2. cart.html
