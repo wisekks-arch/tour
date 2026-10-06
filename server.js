@@ -1108,7 +1108,10 @@ const server = http.createServer(async (req, res) => {
 
         if (target) {
           if (body.name) target.name = body.name.trim();
-          if (body.phone) target.phone = body.phone.trim();
+          if (body.phone !== undefined) target.phone = body.phone.trim();
+          if (body.postcode !== undefined) target.postcode = (body.postcode || '').trim();
+          if (body.address !== undefined) target.address = (body.address || '').trim();
+          if (body.addressDetail !== undefined) target.addressDetail = (body.addressDetail || '').trim();
           writeJson('users.json', users);
 
           const safeUser = { ...target };

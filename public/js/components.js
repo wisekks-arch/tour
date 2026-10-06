@@ -1409,6 +1409,36 @@ function renderMyPageModal() {
                   <input type="tel" id="mypage-profile-phone" required placeholder="010-1234-5678" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
                 </div>
 
+                <!-- 개인 집 주소 (선택 입력) -->
+                <div class="pt-3 border-t border-slate-100 space-y-2.5">
+                  <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                      <i data-lucide="home" class="w-3.5 h-3.5 text-sky-600"></i> 개인 집 주소 <span class="text-slate-400 font-normal text-[11px]">(선택)</span>
+                    </label>
+                    <span class="text-[10px] text-slate-400">여행 바우처 및 안내 우편물 수령지</span>
+                  </div>
+
+                  <!-- 우편번호 & 검색 버튼 -->
+                  <div class="flex gap-2">
+                    <div class="relative flex-1">
+                      <input type="text" id="mypage-profile-postcode" placeholder="우편번호 (5자리)" readonly class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+                    </div>
+                    <button type="button" onclick="window.searchUserAddress()" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 shadow-xs cursor-pointer">
+                      <i data-lucide="search" class="w-3.5 h-3.5"></i> 주소 찾기
+                    </button>
+                  </div>
+
+                  <!-- 기본 주소 -->
+                  <div>
+                    <input type="text" id="mypage-profile-address" placeholder="기본 주소 (도로명 / 지번 주소)" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
+                  </div>
+
+                  <!-- 상세 주소 -->
+                  <div>
+                    <input type="text" id="mypage-profile-address-detail" placeholder="상세 주소 (동, 호수, 층수 등 상세 입력)" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
+                  </div>
+                </div>
+
                 <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
                   <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <span class="text-slate-400 block text-[11px]">회원 등급</span>
@@ -1582,12 +1612,18 @@ window.openMyPageModal = async function(tab = 'profile') {
   const pEmail = document.getElementById('mypage-profile-email');
   const pName = document.getElementById('mypage-profile-name');
   const pPhone = document.getElementById('mypage-profile-phone');
+  const pPostcode = document.getElementById('mypage-profile-postcode');
+  const pAddress = document.getElementById('mypage-profile-address');
+  const pAddressDetail = document.getElementById('mypage-profile-address-detail');
   const pRole = document.getElementById('mypage-profile-role-txt');
   const pCreated = document.getElementById('mypage-profile-created-txt');
 
   if (pEmail) pEmail.value = user.email || '';
   if (pName) pName.value = user.name || '';
   if (pPhone) pPhone.value = user.phone || '';
+  if (pPostcode) pPostcode.value = user.postcode || '';
+  if (pAddress) pAddress.value = user.address || '';
+  if (pAddressDetail) pAddressDetail.value = user.addressDetail || '';
   if (pRole) pRole.textContent = (user.role || 'MEMBER').toUpperCase() === 'ADMIN' ? '관리자 (ADMIN)' : '일반회원 (MEMBER)';
   if (pCreated) pCreated.textContent = user.createdAt ? (TourAPI.formatDate ? TourAPI.formatDate(user.createdAt) : user.createdAt.slice(0, 10)) : '-';
 
@@ -1650,6 +1686,58 @@ window.switchMyPageTab = function(tabName) {
   if (window.lucide) lucide.createIcons();
 };
 
+// 다음/카카오 우편번호 검색 연동
+window.searchUserAddress = function() {
+  function execPostcode() {
+    new window.daum.Postcode({
+      oncomplete: function(data) {
+        let addr = '';
+        let extraAddr = '';
+
+        if (data.userSelectedType === 'R') {
+          addr = data.roadAddress;
+        } else {
+          addr = data.jibunAddress;
+        }
+
+        if (data.userSelectedType === 'R') {
+          if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+            extraAddr += data.bname;
+          }
+          if (data.buildingName !== '' && data.apartment === 'Y') {
+            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+          }
+          if (extraAddr !== '') {
+            extraAddr = ' (' + extraAddr + ')';
+          }
+        }
+
+        const postcodeEl = document.getElementById('mypage-profile-postcode');
+        const addressEl = document.getElementById('mypage-profile-address');
+        const detailEl = document.getElementById('mypage-profile-address-detail');
+
+        if (postcodeEl) postcodeEl.value = data.zonecode || '';
+        if (addressEl) addressEl.value = addr + extraAddr;
+        if (detailEl) detailEl.focus();
+      }
+    }).open();
+  }
+
+  if (window.daum && window.daum.Postcode) {
+    execPostcode();
+  } else {
+    const script = document.createElement('script');
+    script.src = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+    script.onload = execPostcode;
+    script.onerror = function() {
+      alert('주소 검색 서비스를 불러오지 못했습니다. 기본 주소를 직접 입력해 주세요.');
+      const addrEl = document.getElementById('mypage-profile-address');
+      if (addrEl) addrEl.focus();
+    };
+    document.head.appendChild(script);
+  }
+};
+
 window.handleMyPageProfileSubmit = async function(e) {
   e.preventDefault();
   const user = TourAPI.getCurrentUser();
@@ -1657,6 +1745,9 @@ window.handleMyPageProfileSubmit = async function(e) {
 
   const name = document.getElementById('mypage-profile-name')?.value.trim();
   const phone = document.getElementById('mypage-profile-phone')?.value.trim();
+  const postcode = document.getElementById('mypage-profile-postcode')?.value.trim() || '';
+  const address = document.getElementById('mypage-profile-address')?.value.trim() || '';
+  const addressDetail = document.getElementById('mypage-profile-address-detail')?.value.trim() || '';
   const msgEl = document.getElementById('mypage-profile-msg');
   const btn = document.getElementById('btn-mypage-save-profile');
 
@@ -1669,11 +1760,19 @@ window.handleMyPageProfileSubmit = async function(e) {
   btn.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 저장 중...</span>';
 
   try {
-    const res = await TourAPI.updateProfile({ id: user.id, email: user.email, name, phone });
+    const res = await TourAPI.updateProfile({
+      id: user.id,
+      email: user.email,
+      name,
+      phone,
+      postcode,
+      address,
+      addressDetail
+    });
     if (res.success) {
       showToast('회원 정보가 성공적으로 수정되었습니다.', 'success');
       msgEl.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 block';
-      msgEl.textContent = '✓ 회원 정보가 안전하게 저장되었습니다.';
+      msgEl.textContent = '✓ 회원 정보 및 주소가 안전하게 저장되었습니다.';
       renderNavbar();
       // Update header in modal
       const nameEl = document.getElementById('mypage-header-name');

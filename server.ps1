@@ -747,11 +747,75 @@ while ($listener.IsListening) {
                         email = $u.email
                         name = $u.name
                         phone = $u.phone
+                        postcode = (Get-ObjectProp $u 'postcode' '')
+                        address = (Get-ObjectProp $u 'address' '')
+                        addressDetail = (Get-ObjectProp $u 'addressDetail' '')
                         role = (Get-ObjectProp $u 'role' 'MEMBER')
                         createdAt = (Get-ObjectProp $u 'createdAt' '')
                     }
                 }
                 Send-JsonObjectResponse $res 200 @{ success = $true; count = $safeUsers.Count; data = $safeUsers }
+                continue
+            }
+
+            # 0-8. PUT/POST /api/auth/profile (회원 프로필 수정)
+            if ($path -eq '/api/auth/profile' -and ($method -eq 'PUT' -or $method -eq 'POST')) {
+                $bodyStr = Read-RequestBodyString $req
+                $body = @{}
+                try { $body = ConvertFrom-Json $bodyStr } catch {}
+                $email = (Get-ObjectProp $body 'email' '').Trim().ToLower()
+
+                if ([string]::IsNullOrWhiteSpace($email)) {
+                    Send-JsonObjectResponse $res 400 @{ success = $false; message = '이메일 정보가 누락되었습니다.' }
+                    continue
+                }
+
+                $users = Get-UsersList
+                $found = $null
+                foreach ($u in $users) {
+                    $uEmail = (Get-ObjectProp $u 'email' '').ToLower()
+                    if ($uEmail -eq $email) {
+                        $found = $u
+                        if ($body.PSObject.Properties['name']) {
+                            $u | Add-Member -NotePropertyName 'name' -NotePropertyValue ([string]$body.name).Trim() -Force
+                        }
+                        if ($body.PSObject.Properties['phone']) {
+                            $u | Add-Member -NotePropertyName 'phone' -NotePropertyValue ([string]$body.phone).Trim() -Force
+                        }
+                        if ($body.PSObject.Properties['postcode']) {
+                            $u | Add-Member -NotePropertyName 'postcode' -NotePropertyValue ([string]$body.postcode).Trim() -Force
+                        }
+                        if ($body.PSObject.Properties['address']) {
+                            $u | Add-Member -NotePropertyName 'address' -NotePropertyValue ([string]$body.address).Trim() -Force
+                        }
+                        if ($body.PSObject.Properties['addressDetail']) {
+                            $u | Add-Member -NotePropertyName 'addressDetail' -NotePropertyValue ([string]$body.addressDetail).Trim() -Force
+                        }
+                        break
+                    }
+                }
+
+                if ($null -ne $found) {
+                    $newJson = Convert-ToJsonArray $users
+                    Write-RawJsonFile 'users.json' $newJson | Out-Null
+                    Send-JsonObjectResponse $res 200 @{
+                        success = $true
+                        message = '프로필 정보가 안전하게 수정되었습니다.'
+                        user = @{
+                            id = $found.id
+                            email = $found.email
+                            name = $found.name
+                            phone = (Get-ObjectProp $found 'phone' '')
+                            postcode = (Get-ObjectProp $found 'postcode' '')
+                            address = (Get-ObjectProp $found 'address' '')
+                            addressDetail = (Get-ObjectProp $found 'addressDetail' '')
+                            role = (Get-ObjectProp $found 'role' 'MEMBER')
+                            createdAt = (Get-ObjectProp $found 'createdAt' '')
+                        }
+                    }
+                } else {
+                    Send-JsonObjectResponse $res 404 @{ success = $false; message = '사용자를 찾을 수 없습니다.' }
+                }
                 continue
             }
 

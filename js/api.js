@@ -7404,8 +7404,24 @@ const TourAPI = {
       const cur = this.getCurrentUser();
       if (cur) {
         cur.name = profileData.name || cur.name;
-        if (profileData.phone) cur.phone = profileData.phone;
+        if (profileData.phone !== undefined) cur.phone = profileData.phone;
+        if (profileData.postcode !== undefined) cur.postcode = profileData.postcode;
+        if (profileData.address !== undefined) cur.address = profileData.address;
+        if (profileData.addressDetail !== undefined) cur.addressDetail = profileData.addressDetail;
         localStorage.setItem('toureasy_current_user', JSON.stringify(cur));
+
+        try {
+          const raw = localStorage.getItem('toureasy_mock_users');
+          if (raw) {
+            const list = JSON.parse(raw);
+            const idx = list.findIndex(u => (u.email || '').toLowerCase() === (cur.email || '').toLowerCase());
+            if (idx >= 0) {
+              list[idx] = { ...list[idx], ...cur };
+              localStorage.setItem('toureasy_mock_users', JSON.stringify(list));
+            }
+          }
+        } catch {}
+
         return { success: true, message: '회원 정보가 성공적으로 수정되었습니다.', user: cur };
       }
     } catch {}
