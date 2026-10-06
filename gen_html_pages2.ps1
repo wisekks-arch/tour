@@ -376,21 +376,45 @@ $detailHtml = @'
         container.innerHTML = `<p class="text-xs text-slate-400 py-6 text-center">작성된 리뷰가 없습니다. 첫 리뷰를 작성해 보세요!</p>`;
         return;
       }
-      container.innerHTML = reviews.map(r => `
-        <div class="pt-4 first:pt-0 space-y-2">
-          <div class="flex items-center justify-between text-xs">
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-slate-900">${r.author}</span>
-              <div class="flex text-amber-400">
-                ${'<i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>'.repeat(r.rating)}
+      container.innerHTML = reviews.map((r, i) => `
+        <div class="py-5 first:pt-0 border-b border-slate-100 last:border-0 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white font-black flex items-center justify-center text-xs shadow-xs">
+                ${(r.author || '고').slice(0, 1)}
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-slate-900 text-xs sm:text-sm">${r.author}</span>
+                  <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full font-bold border border-emerald-200">실구매 인증</span>
+                </div>
+                <div class="flex items-center gap-2 mt-0.5">
+                  <div class="flex text-amber-400">
+                    ${'<i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>'.repeat(r.rating || 5)}
+                  </div>
+                  <span class="text-[11px] text-slate-400">${r.date}</span>
+                </div>
               </div>
             </div>
-            <span class="text-slate-400">${r.date}</span>
+            <button onclick="likeReviewAction(${i}, this)" class="flex items-center gap-1.5 px-3 py-1 bg-slate-50 hover:bg-rose-50 text-slate-500 hover:text-rose-600 rounded-xl border border-slate-200 text-xs font-bold transition cursor-pointer">
+              <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
+              <span>도움돼요</span>
+              <span class="review-like-cnt ml-0.5 font-bold">${r.likes || 0}</span>
+            </button>
           </div>
-          <p class="text-xs text-slate-700 leading-relaxed">${r.content}</p>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-wrap pl-12">${r.content}</p>
         </div>
       `).join('');
       if (window.lucide) window.lucide.createIcons();
+    }
+
+    function likeReviewAction(idx, btn) {
+      if (currentProduct && currentProduct.reviews && currentProduct.reviews[idx]) {
+        currentProduct.reviews[idx].likes = (currentProduct.reviews[idx].likes || 0) + 1;
+        const cntEl = btn.querySelector('.review-like-cnt');
+        if (cntEl) cntEl.innerText = currentProduct.reviews[idx].likes;
+        ShopUI.showToast('후기에 공감(도움돼요)을 표시했습니다.');
+      }
     }
 
     function renderQnas(qnas) {
