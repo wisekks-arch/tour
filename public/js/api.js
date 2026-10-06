@@ -3,82 +3,15006 @@ const API_BASE = '/api';
 
 const DEFAULT_REVIEWS = [
   {
-    id: "rev-101",
-    userId: "user-wisekks",
-    userName: "김*우",
-    userEmail: "wisekks@gmail.com",
-    packageId: "pkg-sea-01",
-    packageTitle: "다낭/호이안 5성급 힐링 5일",
-    rating: 5,
-    title: "부모님 환갑 기념 다낭 여행 대만족입니다!",
-    content: "부모님 모시고 가는 거라 걱정이 많았는데, 가이드님이 어르신들 페이스에 맞춰 친절히 챙겨주셔서 정말 감사했습니다. 5성급 비치 프론트 리조트 오션뷰와 호이안 야경 투어가 환상적이었습니다.",
-    travelDate: "2026-08",
-    imageUrl: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80",
-    createdAt: "2026-08-20T10:30:00.000Z",
-    likes: 24
+    "id": "rev-pkg-sea-01-01",
+    "userId": "usr-rev-1",
+    "userName": "김*우",
+    "userEmail": "user101@naver.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "다낭 / 호이안 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T09:00:00.000Z"
   },
   {
-    id: "rev-102",
-    userId: "user-2",
-    userName: "이*진",
-    userEmail: "lee@example.com",
-    packageId: "pkg-eu-01",
-    packageTitle: "서유럽 3국 (프랑스/스위스/이탈리아) 10일",
-    rating: 5,
-    title: "TGV 타고 이동하니 체력 부담 없는 서유럽 일주",
-    content: "도시 간 이동을 고속열차로 해서 시간도 아끼고 피로도 덜했습니다. 융프라우요흐 설경과 바티칸 박물관 전문 가이드 해설은 평생 잊지 못할 것 같습니다. 다음 여행도 투어이지에서 예약할게요!",
-    travelDate: "2026-07",
-    imageUrl: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80",
-    createdAt: "2026-07-15T14:20:00.000Z",
-    likes: 18
+    "id": "rev-pkg-sea-01-02",
+    "userId": "usr-rev-2",
+    "userName": "이*진",
+    "userEmail": "user102@gmail.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-06T11:07:00.000Z"
   },
   {
-    id: "rev-103",
-    userId: "user-3",
-    userName: "박*현",
-    userEmail: "park@example.com",
-    packageId: "pkg-jp-01",
-    packageTitle: "도쿄 & 후지산 온천 힐링 4일",
-    rating: 5,
-    title: "가이세키 요리와 후지산 뷰 온천 최고였어요",
-    content: "숙소 퀄리티가 정말 훌륭했습니다. 객실에서 바라본 후지산 풍경과 따뜻한 료칸 온천욕 덕분에 일상의 스트레스가 싹 풀렸습니다. 부모님도 너무 좋아하셨어요.",
-    travelDate: "2026-08",
-    imageUrl: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
-    createdAt: "2026-08-05T09:15:00.000Z",
-    likes: 15
+    "id": "rev-pkg-sea-01-03",
+    "userId": "usr-rev-3",
+    "userName": "박*현",
+    "userEmail": "user103@daum.net",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 다낭 / 호이안 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-09T13:14:00.000Z"
   },
   {
-    id: "rev-104",
-    userId: "user-4",
-    userName: "최*영",
-    userEmail: "choi@example.com",
-    packageId: "pkg-hm-01",
-    packageTitle: "발리 아야나 풀빌라 & 로맨틱 허니문 6일",
-    rating: 5,
-    title: "완벽했던 신혼여행! 락바 선셋은 감동 그 자체",
-    content: "프라이빗 풀빌라에서 보내는 시간도 좋았고, 일정에 쫓기지 않는 여유로운 스케줄이라 신혼여행으로 최고였습니다. 플로팅 조식과 락바 예약 서비스까지 감동이었습니다.",
-    travelDate: "2026-09",
-    imageUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80",
-    createdAt: "2026-09-10T16:40:00.000Z",
-    likes: 31
+    "id": "rev-pkg-sea-01-04",
+    "userId": "usr-rev-4",
+    "userName": "최*영",
+    "userEmail": "user104@kakao.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-12T15:21:00.000Z"
   },
   {
-    id: "rev-105",
-    userId: "user-5",
-    userName: "정*훈",
-    userEmail: "jung@example.com",
-    packageId: "pkg-us-01",
-    packageTitle: "하와이 오아후 & 마우이 힐링 7일",
-    rating: 5,
-    title: "와이키키 해변과 하나로 가는 길 드라이브!",
-    content: "렌터카와 항공, 오션뷰 호텔까지 한 번에 편리하게 해결되어 정말 편안했습니다. 스노클링 포인트 추천도 완벽했습니다.",
-    travelDate: "2026-06",
-    imageUrl: "https://images.unsplash.com/photo-1542259009-5599b101962d?auto=format&fit=crop&w=800&q=80",
-    createdAt: "2026-06-25T11:00:00.000Z",
-    likes: 19
+    "id": "rev-pkg-sea-01-05",
+    "userId": "usr-rev-5",
+    "userName": "정*훈",
+    "userEmail": "user105@hanmail.net",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 4,
+    "title": "[다낭 / 호이안] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-01-06",
+    "userId": "usr-rev-6",
+    "userName": "강*원",
+    "userEmail": "user106@naver.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-01-07",
+    "userId": "usr-rev-7",
+    "userName": "조*민",
+    "userEmail": "user107@gmail.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "다낭 / 호이안에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-01-08",
+    "userId": "usr-rev-8",
+    "userName": "윤*서",
+    "userEmail": "user108@daum.net",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-01-09",
+    "userId": "usr-rev-9",
+    "userName": "장*혁",
+    "userEmail": "user109@kakao.com",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 4,
+    "title": "[다낭 / 호이안] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-01-10",
+    "userId": "usr-rev-10",
+    "userName": "임*하",
+    "userEmail": "user110@hanmail.net",
+    "packageId": "pkg-sea-01",
+    "packageSlug": "danang-hoian-5d",
+    "packageTitle": "[힐링특가] 베트남 다낭 & 호이안 4박 5일 5성급 리조트 + 바나힐 골든브릿지",
+    "rating": 5,
+    "title": "[다낭 / 호이안] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-01",
+    "userId": "usr-rev-11",
+    "userName": "한*준",
+    "userEmail": "user111@gmail.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "발리 / 우붓 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-02",
+    "userId": "usr-rev-12",
+    "userName": "송*은",
+    "userEmail": "user112@daum.net",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-03",
+    "userId": "usr-rev-13",
+    "userName": "오*진",
+    "userEmail": "user113@kakao.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 발리 / 우붓 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-04",
+    "userId": "usr-rev-14",
+    "userName": "신*호",
+    "userEmail": "user114@hanmail.net",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-05",
+    "userId": "usr-rev-15",
+    "userName": "배*린",
+    "userEmail": "user115@naver.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 4,
+    "title": "[발리 / 우붓] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-06",
+    "userId": "usr-rev-16",
+    "userName": "유*재",
+    "userEmail": "user116@gmail.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-07",
+    "userId": "usr-rev-17",
+    "userName": "홍*경",
+    "userEmail": "user117@daum.net",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "발리 / 우붓에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-08",
+    "userId": "usr-rev-18",
+    "userName": "문*석",
+    "userEmail": "user118@kakao.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-09",
+    "userId": "usr-rev-19",
+    "userName": "류*희",
+    "userEmail": "user119@hanmail.net",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 4,
+    "title": "[발리 / 우붓] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-02-10",
+    "userId": "usr-rev-20",
+    "userName": "서*준",
+    "userEmail": "user120@naver.com",
+    "packageId": "pkg-sea-02",
+    "packageSlug": "bali-luxury-pool-villa-6d",
+    "packageTitle": "[프라이빗 허니문] 발리 우붓 & 울루와투 럭셔리 독채 풀빌라 4박 6일",
+    "rating": 5,
+    "title": "[발리 / 우붓] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-01",
+    "userId": "usr-rev-21",
+    "userName": "황*연",
+    "userEmail": "user121@daum.net",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "방콕 / 파타야 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-02",
+    "userId": "usr-rev-22",
+    "userName": "안*태",
+    "userEmail": "user122@kakao.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-03",
+    "userId": "usr-rev-23",
+    "userName": "고*아",
+    "userEmail": "user123@hanmail.net",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 방콕 / 파타야 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-04",
+    "userId": "usr-rev-24",
+    "userName": "권*민",
+    "userEmail": "user124@naver.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-05",
+    "userId": "usr-rev-25",
+    "userName": "백*승",
+    "userEmail": "user125@gmail.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 4,
+    "title": "[방콕 / 파타야] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-06",
+    "userId": "usr-rev-26",
+    "userName": "노*주",
+    "userEmail": "user126@daum.net",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-07",
+    "userId": "usr-rev-27",
+    "userName": "허*석",
+    "userEmail": "user127@kakao.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "방콕 / 파타야에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-08",
+    "userId": "usr-rev-28",
+    "userName": "남*우",
+    "userEmail": "user128@hanmail.net",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-09",
+    "userId": "usr-rev-29",
+    "userName": "심*정",
+    "userEmail": "user129@naver.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 4,
+    "title": "[방콕 / 파타야] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-03-10",
+    "userId": "usr-rev-30",
+    "userName": "하*빈",
+    "userEmail": "user130@gmail.com",
+    "packageId": "pkg-sea-03",
+    "packageSlug": "bangkok-pattaya-5d",
+    "packageTitle": "[미식&도심호캉스] 태국 방콕 5성급 호텔 + 파타야 요트 세일링 3박 5일",
+    "rating": 5,
+    "title": "[방콕 / 파타야] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-01",
+    "userId": "usr-rev-31",
+    "userName": "김*우",
+    "userEmail": "user131@kakao.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "세부 / 막탄 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-02",
+    "userId": "usr-rev-32",
+    "userName": "이*진",
+    "userEmail": "user132@hanmail.net",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-03",
+    "userId": "usr-rev-33",
+    "userName": "박*현",
+    "userEmail": "user133@naver.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 세부 / 막탄 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-04",
+    "userId": "usr-rev-34",
+    "userName": "최*영",
+    "userEmail": "user134@gmail.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-05",
+    "userId": "usr-rev-35",
+    "userName": "정*훈",
+    "userEmail": "user135@daum.net",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 4,
+    "title": "[세부 / 막탄] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-06",
+    "userId": "usr-rev-36",
+    "userName": "강*원",
+    "userEmail": "user136@kakao.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-07",
+    "userId": "usr-rev-37",
+    "userName": "조*민",
+    "userEmail": "user137@hanmail.net",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "세부 / 막탄에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-08",
+    "userId": "usr-rev-38",
+    "userName": "윤*서",
+    "userEmail": "user138@naver.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-09",
+    "userId": "usr-rev-39",
+    "userName": "장*혁",
+    "userEmail": "user139@gmail.com",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 4,
+    "title": "[세부 / 막탄] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-04-10",
+    "userId": "usr-rev-40",
+    "userName": "임*하",
+    "userEmail": "user140@daum.net",
+    "packageId": "pkg-sea-04",
+    "packageSlug": "cebu-shangrila-5d",
+    "packageTitle": "[에메랄드빛 바다] 필리핀 세부 샹그릴라 리조트 + 오슬롭 고래상어 호핑 3박 5일",
+    "rating": 5,
+    "title": "[세부 / 막탄] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-01",
+    "userId": "usr-rev-41",
+    "userName": "한*준",
+    "userEmail": "user141@hanmail.net",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "싱가포르 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-02",
+    "userId": "usr-rev-42",
+    "userName": "송*은",
+    "userEmail": "user142@naver.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-03",
+    "userId": "usr-rev-43",
+    "userName": "오*진",
+    "userEmail": "user143@gmail.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 싱가포르 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-04",
+    "userId": "usr-rev-44",
+    "userName": "신*호",
+    "userEmail": "user144@daum.net",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-05",
+    "userId": "usr-rev-45",
+    "userName": "배*린",
+    "userEmail": "user145@kakao.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 4,
+    "title": "[싱가포르] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-06",
+    "userId": "usr-rev-46",
+    "userName": "유*재",
+    "userEmail": "user146@hanmail.net",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-07",
+    "userId": "usr-rev-47",
+    "userName": "홍*경",
+    "userEmail": "user147@naver.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "싱가포르에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-08",
+    "userId": "usr-rev-48",
+    "userName": "문*석",
+    "userEmail": "user148@gmail.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-09",
+    "userId": "usr-rev-49",
+    "userName": "류*희",
+    "userEmail": "user149@daum.net",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 4,
+    "title": "[싱가포르] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-05-10",
+    "userId": "usr-rev-50",
+    "userName": "서*준",
+    "userEmail": "user150@kakao.com",
+    "packageId": "pkg-sea-05",
+    "packageSlug": "singapore-mbs-5d",
+    "packageTitle": "[도심 속 가든시티] 싱가포르 마리나베이샌즈 & 센토사 유니버설 3박 5일",
+    "rating": 5,
+    "title": "[싱가포르] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d2562?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-01",
+    "userId": "usr-rev-51",
+    "userName": "황*연",
+    "userEmail": "user151@naver.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "푸켓 / 피피섬 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-02",
+    "userId": "usr-rev-52",
+    "userName": "안*태",
+    "userEmail": "user152@gmail.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-03",
+    "userId": "usr-rev-53",
+    "userName": "고*아",
+    "userEmail": "user153@daum.net",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 푸켓 / 피피섬 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-04",
+    "userId": "usr-rev-54",
+    "userName": "권*민",
+    "userEmail": "user154@kakao.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-05",
+    "userId": "usr-rev-55",
+    "userName": "백*승",
+    "userEmail": "user155@hanmail.net",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 4,
+    "title": "[푸켓 / 피피섬] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-06",
+    "userId": "usr-rev-56",
+    "userName": "노*주",
+    "userEmail": "user156@naver.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-07",
+    "userId": "usr-rev-57",
+    "userName": "허*석",
+    "userEmail": "user157@gmail.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "푸켓 / 피피섬에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-08",
+    "userId": "usr-rev-58",
+    "userName": "남*우",
+    "userEmail": "user158@daum.net",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-09",
+    "userId": "usr-rev-59",
+    "userName": "심*정",
+    "userEmail": "user159@kakao.com",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 4,
+    "title": "[푸켓 / 피피섬] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-06-10",
+    "userId": "usr-rev-60",
+    "userName": "하*빈",
+    "userEmail": "user160@hanmail.net",
+    "packageId": "pkg-sea-06",
+    "packageSlug": "phuket-pp-island-6d",
+    "packageTitle": "[안다만의 진주] 태국 푸켓 5성급 풀리조트 & 피피섬 스피드보트 투어 4박 6일",
+    "rating": 5,
+    "title": "[푸켓 / 피피섬] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-01",
+    "userId": "usr-rev-61",
+    "userName": "김*우",
+    "userEmail": "user161@gmail.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "코타키나발루 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-02",
+    "userId": "usr-rev-62",
+    "userName": "이*진",
+    "userEmail": "user162@daum.net",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-03",
+    "userId": "usr-rev-63",
+    "userName": "박*현",
+    "userEmail": "user163@kakao.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 코타키나발루 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-04",
+    "userId": "usr-rev-64",
+    "userName": "최*영",
+    "userEmail": "user164@hanmail.net",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-05",
+    "userId": "usr-rev-65",
+    "userName": "정*훈",
+    "userEmail": "user165@naver.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 4,
+    "title": "[코타키나발루] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-06",
+    "userId": "usr-rev-66",
+    "userName": "강*원",
+    "userEmail": "user166@gmail.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-07",
+    "userId": "usr-rev-67",
+    "userName": "조*민",
+    "userEmail": "user167@daum.net",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "코타키나발루에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-08",
+    "userId": "usr-rev-68",
+    "userName": "윤*서",
+    "userEmail": "user168@kakao.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-09",
+    "userId": "usr-rev-69",
+    "userName": "장*혁",
+    "userEmail": "user169@hanmail.net",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 4,
+    "title": "[코타키나발루] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-07-10",
+    "userId": "usr-rev-70",
+    "userName": "임*하",
+    "userEmail": "user170@naver.com",
+    "packageId": "pkg-sea-07",
+    "packageSlug": "kotakinabalu-sunset-5d",
+    "packageTitle": "[황금빛 선셋] 말레이시아 코타키나발루 샹그릴라 & 반딧불 투어 3박 5일",
+    "rating": 5,
+    "title": "[코타키나발루] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538964173425-93884d739596?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-01",
+    "userId": "usr-rev-71",
+    "userName": "한*준",
+    "userEmail": "user171@daum.net",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "나트랑 / 달랏 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/nhatrang-vinpearl-island.jpg",
+    "images": [
+      "images/destinations/nhatrang-vinpearl-island.jpg",
+      "images/destinations/dalat-flower-city.jpg"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-02",
+    "userId": "usr-rev-72",
+    "userName": "송*은",
+    "userEmail": "user172@kakao.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/dalat-flower-city.jpg",
+    "images": [
+      "images/destinations/dalat-flower-city.jpg",
+      "images/destinations/vinpearl-luxury-resort.jpg"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-03",
+    "userId": "usr-rev-73",
+    "userName": "오*진",
+    "userEmail": "user173@hanmail.net",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 나트랑 / 달랏 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/vinpearl-luxury-resort.jpg",
+    "images": [
+      "images/destinations/vinpearl-luxury-resort.jpg",
+      "images/destinations/nhatrang-vinpearl-island.jpg"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-04",
+    "userId": "usr-rev-74",
+    "userName": "신*호",
+    "userEmail": "user174@naver.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/nhatrang-vinpearl-island.jpg",
+    "images": [
+      "images/destinations/nhatrang-vinpearl-island.jpg",
+      "images/destinations/dalat-flower-city.jpg"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-05",
+    "userId": "usr-rev-75",
+    "userName": "배*린",
+    "userEmail": "user175@gmail.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 4,
+    "title": "[나트랑 / 달랏] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/dalat-flower-city.jpg",
+    "images": [
+      "images/destinations/dalat-flower-city.jpg",
+      "images/destinations/vinpearl-luxury-resort.jpg"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-06",
+    "userId": "usr-rev-76",
+    "userName": "유*재",
+    "userEmail": "user176@daum.net",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/vinpearl-luxury-resort.jpg",
+    "images": [
+      "images/destinations/vinpearl-luxury-resort.jpg",
+      "images/destinations/nhatrang-vinpearl-island.jpg"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-07",
+    "userId": "usr-rev-77",
+    "userName": "홍*경",
+    "userEmail": "user177@kakao.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "나트랑 / 달랏에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/nhatrang-vinpearl-island.jpg",
+    "images": [
+      "images/destinations/nhatrang-vinpearl-island.jpg",
+      "images/destinations/dalat-flower-city.jpg"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-08",
+    "userId": "usr-rev-78",
+    "userName": "문*석",
+    "userEmail": "user178@hanmail.net",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/dalat-flower-city.jpg",
+    "images": [
+      "images/destinations/dalat-flower-city.jpg",
+      "images/destinations/vinpearl-luxury-resort.jpg"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-09",
+    "userId": "usr-rev-79",
+    "userName": "류*희",
+    "userEmail": "user179@naver.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 4,
+    "title": "[나트랑 / 달랏] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/vinpearl-luxury-resort.jpg",
+    "images": [
+      "images/destinations/vinpearl-luxury-resort.jpg",
+      "images/destinations/nhatrang-vinpearl-island.jpg"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-08-10",
+    "userId": "usr-rev-80",
+    "userName": "서*준",
+    "userEmail": "user180@gmail.com",
+    "packageId": "pkg-sea-08",
+    "packageSlug": "nhatrang-dalat-5d",
+    "packageTitle": "[베트남의 나폴리] 나트랑 빈펄 아일랜드 리조트 & 달랏 꽃의 도시 4박 5일",
+    "rating": 5,
+    "title": "[나트랑 / 달랏] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/nhatrang-vinpearl-island.jpg",
+    "images": [
+      "images/destinations/nhatrang-vinpearl-island.jpg",
+      "images/destinations/dalat-flower-city.jpg"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-01",
+    "userId": "usr-rev-81",
+    "userName": "황*연",
+    "userEmail": "user181@kakao.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "하노이 / 하롱베이 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-02",
+    "userId": "usr-rev-82",
+    "userName": "안*태",
+    "userEmail": "user182@hanmail.net",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-03",
+    "userId": "usr-rev-83",
+    "userName": "고*아",
+    "userEmail": "user183@naver.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 하노이 / 하롱베이 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-04",
+    "userId": "usr-rev-84",
+    "userName": "권*민",
+    "userEmail": "user184@gmail.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-05",
+    "userId": "usr-rev-85",
+    "userName": "백*승",
+    "userEmail": "user185@daum.net",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 4,
+    "title": "[하노이 / 하롱베이] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-06",
+    "userId": "usr-rev-86",
+    "userName": "노*주",
+    "userEmail": "user186@kakao.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-07",
+    "userId": "usr-rev-87",
+    "userName": "허*석",
+    "userEmail": "user187@hanmail.net",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "하노이 / 하롱베이에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-08",
+    "userId": "usr-rev-88",
+    "userName": "남*우",
+    "userEmail": "user188@naver.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-09",
+    "userId": "usr-rev-89",
+    "userName": "심*정",
+    "userEmail": "user189@gmail.com",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 4,
+    "title": "[하노이 / 하롱베이] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-09-10",
+    "userId": "usr-rev-90",
+    "userName": "하*빈",
+    "userEmail": "user190@daum.net",
+    "packageId": "pkg-sea-09",
+    "packageSlug": "hanoi-halong-cruise-5d",
+    "packageTitle": "[유네스코 비경] 베트남 하노이 & 하롱베이 5성 럭셔리 크루즈 3박 5일",
+    "rating": 5,
+    "title": "[하노이 / 하롱베이] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-01",
+    "userId": "usr-rev-91",
+    "userName": "김*우",
+    "userEmail": "user191@hanmail.net",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "치앙마이 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-02",
+    "userId": "usr-rev-92",
+    "userName": "이*진",
+    "userEmail": "user192@naver.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-03",
+    "userId": "usr-rev-93",
+    "userName": "박*현",
+    "userEmail": "user193@gmail.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 치앙마이 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-04",
+    "userId": "usr-rev-94",
+    "userName": "최*영",
+    "userEmail": "user194@daum.net",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-05",
+    "userId": "usr-rev-95",
+    "userName": "정*훈",
+    "userEmail": "user195@kakao.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 4,
+    "title": "[치앙마이] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-06",
+    "userId": "usr-rev-96",
+    "userName": "강*원",
+    "userEmail": "user196@hanmail.net",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-07",
+    "userId": "usr-rev-97",
+    "userName": "조*민",
+    "userEmail": "user197@naver.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "치앙마이에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-08",
+    "userId": "usr-rev-98",
+    "userName": "윤*서",
+    "userEmail": "user198@gmail.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-09",
+    "userId": "usr-rev-99",
+    "userName": "장*혁",
+    "userEmail": "user199@daum.net",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 4,
+    "title": "[치앙마이] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-10-10",
+    "userId": "usr-rev-100",
+    "userName": "임*하",
+    "userEmail": "user200@kakao.com",
+    "packageId": "pkg-sea-10",
+    "packageSlug": "chiangmai-healing-5d",
+    "packageTitle": "[북부의 힐링장미] 태국 치앙마이 란나 스타일 리조트 & 올드시티 카페 4박 5일",
+    "rating": 5,
+    "title": "[치앙마이] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-01",
+    "userId": "usr-rev-101",
+    "userName": "한*준",
+    "userEmail": "user201@naver.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "보라카이 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-02",
+    "userId": "usr-rev-102",
+    "userName": "송*은",
+    "userEmail": "user202@gmail.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-03",
+    "userId": "usr-rev-103",
+    "userName": "오*진",
+    "userEmail": "user203@daum.net",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 보라카이 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-04",
+    "userId": "usr-rev-104",
+    "userName": "신*호",
+    "userEmail": "user204@kakao.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-05",
+    "userId": "usr-rev-105",
+    "userName": "배*린",
+    "userEmail": "user205@hanmail.net",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 4,
+    "title": "[보라카이] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-06",
+    "userId": "usr-rev-106",
+    "userName": "유*재",
+    "userEmail": "user206@naver.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-07",
+    "userId": "usr-rev-107",
+    "userName": "홍*경",
+    "userEmail": "user207@gmail.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "보라카이에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-08",
+    "userId": "usr-rev-108",
+    "userName": "문*석",
+    "userEmail": "user208@daum.net",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-09",
+    "userId": "usr-rev-109",
+    "userName": "류*희",
+    "userEmail": "user209@kakao.com",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 4,
+    "title": "[보라카이] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-11-10",
+    "userId": "usr-rev-110",
+    "userName": "서*준",
+    "userEmail": "user210@hanmail.net",
+    "packageId": "pkg-sea-11",
+    "packageSlug": "boracay-henann-5d",
+    "packageTitle": "[화이트비치 파라다이스] 필리핀 보라카이 헤난 크리스탈 샌즈 리조트 3박 5일",
+    "rating": 5,
+    "title": "[보라카이] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-01",
+    "userId": "usr-rev-111",
+    "userName": "황*연",
+    "userEmail": "user211@gmail.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "보홀 / 팡라오 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-02",
+    "userId": "usr-rev-112",
+    "userName": "안*태",
+    "userEmail": "user212@daum.net",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-03",
+    "userId": "usr-rev-113",
+    "userName": "고*아",
+    "userEmail": "user213@kakao.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 보홀 / 팡라오 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-04",
+    "userId": "usr-rev-114",
+    "userName": "권*민",
+    "userEmail": "user214@hanmail.net",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-05",
+    "userId": "usr-rev-115",
+    "userName": "백*승",
+    "userEmail": "user215@naver.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 4,
+    "title": "[보홀 / 팡라오] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-06",
+    "userId": "usr-rev-116",
+    "userName": "노*주",
+    "userEmail": "user216@gmail.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-07",
+    "userId": "usr-rev-117",
+    "userName": "허*석",
+    "userEmail": "user217@daum.net",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "보홀 / 팡라오에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-08",
+    "userId": "usr-rev-118",
+    "userName": "남*우",
+    "userEmail": "user218@kakao.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-09",
+    "userId": "usr-rev-119",
+    "userName": "심*정",
+    "userEmail": "user219@hanmail.net",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 4,
+    "title": "[보홀 / 팡라오] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-12-10",
+    "userId": "usr-rev-120",
+    "userName": "하*빈",
+    "userEmail": "user220@naver.com",
+    "packageId": "pkg-sea-12",
+    "packageSlug": "bohol-henann-5d",
+    "packageTitle": "[순수의 자연과 휴양] 필리핀 보홀 헤난 알로나비치 & 초콜릿힐 3박 5일",
+    "rating": 5,
+    "title": "[보홀 / 팡라오] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-01",
+    "userId": "usr-rev-121",
+    "userName": "김*우",
+    "userEmail": "user221@daum.net",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "푸꾸옥 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-02",
+    "userId": "usr-rev-122",
+    "userName": "이*진",
+    "userEmail": "user222@kakao.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-03",
+    "userId": "usr-rev-123",
+    "userName": "박*현",
+    "userEmail": "user223@hanmail.net",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 푸꾸옥 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-04",
+    "userId": "usr-rev-124",
+    "userName": "최*영",
+    "userEmail": "user224@naver.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-05",
+    "userId": "usr-rev-125",
+    "userName": "정*훈",
+    "userEmail": "user225@gmail.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 4,
+    "title": "[푸꾸옥] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-06",
+    "userId": "usr-rev-126",
+    "userName": "강*원",
+    "userEmail": "user226@daum.net",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-07",
+    "userId": "usr-rev-127",
+    "userName": "조*민",
+    "userEmail": "user227@kakao.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "푸꾸옥에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-08",
+    "userId": "usr-rev-128",
+    "userName": "윤*서",
+    "userEmail": "user228@hanmail.net",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-09",
+    "userId": "usr-rev-129",
+    "userName": "장*혁",
+    "userEmail": "user229@naver.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 4,
+    "title": "[푸꾸옥] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-13-10",
+    "userId": "usr-rev-130",
+    "userName": "임*하",
+    "userEmail": "user230@gmail.com",
+    "packageId": "pkg-sea-13",
+    "packageSlug": "phuquoc-premier-villa-5d",
+    "packageTitle": "[베트남의 숨은 진주] 푸꾸옥 프리미어 빌리지 풀빌라 & 혼똔섬 케이블카 4박 5일",
+    "rating": 5,
+    "title": "[푸꾸옥] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-01",
+    "userId": "usr-rev-131",
+    "userName": "한*준",
+    "userEmail": "user231@kakao.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "씨엠립 / 앙코르 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-02",
+    "userId": "usr-rev-132",
+    "userName": "송*은",
+    "userEmail": "user232@hanmail.net",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-03",
+    "userId": "usr-rev-133",
+    "userName": "오*진",
+    "userEmail": "user233@naver.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 씨엠립 / 앙코르 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-04",
+    "userId": "usr-rev-134",
+    "userName": "신*호",
+    "userEmail": "user234@gmail.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-05",
+    "userId": "usr-rev-135",
+    "userName": "배*린",
+    "userEmail": "user235@daum.net",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 4,
+    "title": "[씨엠립 / 앙코르] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-06",
+    "userId": "usr-rev-136",
+    "userName": "유*재",
+    "userEmail": "user236@kakao.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-07",
+    "userId": "usr-rev-137",
+    "userName": "홍*경",
+    "userEmail": "user237@hanmail.net",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "씨엠립 / 앙코르에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-08",
+    "userId": "usr-rev-138",
+    "userName": "문*석",
+    "userEmail": "user238@naver.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-09",
+    "userId": "usr-rev-139",
+    "userName": "류*희",
+    "userEmail": "user239@gmail.com",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 4,
+    "title": "[씨엠립 / 앙코르] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-14-10",
+    "userId": "usr-rev-140",
+    "userName": "서*준",
+    "userEmail": "user240@daum.net",
+    "packageId": "pkg-sea-14",
+    "packageSlug": "angkor-wat-mystery-5d",
+    "packageTitle": "[천년의 신비] 캄보디아 앙코르와트 일출 & 톤레삽 호수 유람선 3박 5일",
+    "rating": 5,
+    "title": "[씨엠립 / 앙코르] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-01",
+    "userId": "usr-rev-141",
+    "userName": "황*연",
+    "userEmail": "user241@hanmail.net",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "방비엥 / 루앙프라방 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-02",
+    "userId": "usr-rev-142",
+    "userName": "안*태",
+    "userEmail": "user242@naver.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-03",
+    "userId": "usr-rev-143",
+    "userName": "고*아",
+    "userEmail": "user243@gmail.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 방비엥 / 루앙프라방 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-04",
+    "userId": "usr-rev-144",
+    "userName": "권*민",
+    "userEmail": "user244@daum.net",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-05",
+    "userId": "usr-rev-145",
+    "userName": "백*승",
+    "userEmail": "user245@kakao.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 4,
+    "title": "[방비엥 / 루앙프라방] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-06",
+    "userId": "usr-rev-146",
+    "userName": "노*주",
+    "userEmail": "user246@hanmail.net",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-07",
+    "userId": "usr-rev-147",
+    "userName": "허*석",
+    "userEmail": "user247@naver.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "방비엥 / 루앙프라방에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-08",
+    "userId": "usr-rev-148",
+    "userName": "남*우",
+    "userEmail": "user248@gmail.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-09",
+    "userId": "usr-rev-149",
+    "userName": "심*정",
+    "userEmail": "user249@daum.net",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 4,
+    "title": "[방비엥 / 루앙프라방] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-sea-15-10",
+    "userId": "usr-rev-150",
+    "userName": "하*빈",
+    "userEmail": "user250@kakao.com",
+    "packageId": "pkg-sea-15",
+    "packageSlug": "laos-vangvieng-5d",
+    "packageTitle": "[에코 힐링투어] 라오스 비엔티안 & 방비엥 블루라군 & 루앙프라방 4박 5일",
+    "rating": 5,
+    "title": "[방비엥 / 루앙프라방] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-01",
+    "userId": "usr-rev-151",
+    "userName": "김*우",
+    "userEmail": "user251@naver.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "파리 / 인터라켄 / 로마 / 피렌체 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-02",
+    "userId": "usr-rev-152",
+    "userName": "이*진",
+    "userEmail": "user252@gmail.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-03",
+    "userId": "usr-rev-153",
+    "userName": "박*현",
+    "userEmail": "user253@daum.net",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 파리 / 인터라켄 / 로마 / 피렌체 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-04",
+    "userId": "usr-rev-154",
+    "userName": "최*영",
+    "userEmail": "user254@kakao.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-05",
+    "userId": "usr-rev-155",
+    "userName": "정*훈",
+    "userEmail": "user255@hanmail.net",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 4,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-06",
+    "userId": "usr-rev-156",
+    "userName": "강*원",
+    "userEmail": "user256@naver.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-07",
+    "userId": "usr-rev-157",
+    "userName": "조*민",
+    "userEmail": "user257@gmail.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "파리 / 인터라켄 / 로마 / 피렌체에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-08",
+    "userId": "usr-rev-158",
+    "userName": "윤*서",
+    "userEmail": "user258@daum.net",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-09",
+    "userId": "usr-rev-159",
+    "userName": "장*혁",
+    "userEmail": "user259@kakao.com",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 4,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-01-10",
+    "userId": "usr-rev-160",
+    "userName": "임*하",
+    "userEmail": "user260@hanmail.net",
+    "packageId": "pkg-eur-01",
+    "packageSlug": "western-europe-classic-10d",
+    "packageTitle": "[클래식 명작] 서유럽 핵심 3국 (프랑스/스위스/이탈리아) 8박 10일 프리미엄",
+    "rating": 5,
+    "title": "[파리 / 인터라켄 / 로마 / 피렌체] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-01",
+    "userId": "usr-rev-161",
+    "userName": "한*준",
+    "userEmail": "user261@gmail.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "바르셀로나 / 마드리드 / 리스본 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-02",
+    "userId": "usr-rev-162",
+    "userName": "송*은",
+    "userEmail": "user262@daum.net",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-03",
+    "userId": "usr-rev-163",
+    "userName": "오*진",
+    "userEmail": "user263@kakao.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 바르셀로나 / 마드리드 / 리스본 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-04",
+    "userId": "usr-rev-164",
+    "userName": "신*호",
+    "userEmail": "user264@hanmail.net",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-05",
+    "userId": "usr-rev-165",
+    "userName": "배*린",
+    "userEmail": "user265@naver.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 4,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-06",
+    "userId": "usr-rev-166",
+    "userName": "유*재",
+    "userEmail": "user266@gmail.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-07",
+    "userId": "usr-rev-167",
+    "userName": "홍*경",
+    "userEmail": "user267@daum.net",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "바르셀로나 / 마드리드 / 리스본에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-08",
+    "userId": "usr-rev-168",
+    "userName": "문*석",
+    "userEmail": "user268@kakao.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-09",
+    "userId": "usr-rev-169",
+    "userName": "류*희",
+    "userEmail": "user269@hanmail.net",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 4,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-02-10",
+    "userId": "usr-rev-170",
+    "userName": "서*준",
+    "userEmail": "user270@naver.com",
+    "packageId": "pkg-eur-02",
+    "packageSlug": "spain-portugal-grand-10d",
+    "packageTitle": "[열정과 예술] 스페인 바르셀로나 사그라다파밀리아 & 마드리드 8박 10일",
+    "rating": 5,
+    "title": "[바르셀로나 / 마드리드 / 리스본] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-01",
+    "userId": "usr-rev-171",
+    "userName": "황*연",
+    "userEmail": "user271@daum.net",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "프라하 / 비엔나 / 부다페스트 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-02",
+    "userId": "usr-rev-172",
+    "userName": "안*태",
+    "userEmail": "user272@kakao.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-03",
+    "userId": "usr-rev-173",
+    "userName": "고*아",
+    "userEmail": "user273@hanmail.net",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 프라하 / 비엔나 / 부다페스트 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-04",
+    "userId": "usr-rev-174",
+    "userName": "권*민",
+    "userEmail": "user274@naver.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-05",
+    "userId": "usr-rev-175",
+    "userName": "백*승",
+    "userEmail": "user275@gmail.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 4,
+    "title": "[프라하 / 비엔나 / 부다페스트] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-06",
+    "userId": "usr-rev-176",
+    "userName": "노*주",
+    "userEmail": "user276@daum.net",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-07",
+    "userId": "usr-rev-177",
+    "userName": "허*석",
+    "userEmail": "user277@kakao.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "프라하 / 비엔나 / 부다페스트에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-08",
+    "userId": "usr-rev-178",
+    "userName": "남*우",
+    "userEmail": "user278@hanmail.net",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-09",
+    "userId": "usr-rev-179",
+    "userName": "심*정",
+    "userEmail": "user279@naver.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 4,
+    "title": "[프라하 / 비엔나 / 부다페스트] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-03-10",
+    "userId": "usr-rev-180",
+    "userName": "하*빈",
+    "userEmail": "user280@gmail.com",
+    "packageId": "pkg-eur-03",
+    "packageSlug": "eastern-europe-3countries-9d",
+    "packageTitle": "[동화 속 낭만] 동유럽 3국 (체코 프라하 / 오스트리아 빈 / 헝가리 부다페스트) 7박 9일",
+    "rating": 5,
+    "title": "[프라하 / 비엔나 / 부다페스트] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-01",
+    "userId": "usr-rev-181",
+    "userName": "김*우",
+    "userEmail": "user281@kakao.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "인터라켄 / 체르마트 / 루체른 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-02",
+    "userId": "usr-rev-182",
+    "userName": "이*진",
+    "userEmail": "user282@hanmail.net",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-03",
+    "userId": "usr-rev-183",
+    "userName": "박*현",
+    "userEmail": "user283@naver.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 인터라켄 / 체르마트 / 루체른 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-04",
+    "userId": "usr-rev-184",
+    "userName": "최*영",
+    "userEmail": "user284@gmail.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-05",
+    "userId": "usr-rev-185",
+    "userName": "정*훈",
+    "userEmail": "user285@daum.net",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 4,
+    "title": "[인터라켄 / 체르마트 / 루체른] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-06",
+    "userId": "usr-rev-186",
+    "userName": "강*원",
+    "userEmail": "user286@kakao.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-07",
+    "userId": "usr-rev-187",
+    "userName": "조*민",
+    "userEmail": "user287@hanmail.net",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "인터라켄 / 체르마트 / 루체른에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-08",
+    "userId": "usr-rev-188",
+    "userName": "윤*서",
+    "userEmail": "user288@naver.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-09",
+    "userId": "usr-rev-189",
+    "userName": "장*혁",
+    "userEmail": "user289@gmail.com",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 4,
+    "title": "[인터라켄 / 체르마트 / 루체른] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-04-10",
+    "userId": "usr-rev-190",
+    "userName": "임*하",
+    "userEmail": "user290@daum.net",
+    "packageId": "pkg-eur-04",
+    "packageSlug": "swiss-alps-jungfrau-matterhorn-8d",
+    "packageTitle": "[알프스의 절경] 스위스 인터라켄 융프라우요흐 & 체르마트 마테호른 6박 8일",
+    "rating": 5,
+    "title": "[인터라켄 / 체르마트 / 루체른] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-01",
+    "userId": "usr-rev-191",
+    "userName": "한*준",
+    "userEmail": "user291@hanmail.net",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "로마 / 피렌체 / 포지타노 / 카프리 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-02",
+    "userId": "usr-rev-192",
+    "userName": "송*은",
+    "userEmail": "user292@naver.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-03",
+    "userId": "usr-rev-193",
+    "userName": "오*진",
+    "userEmail": "user293@gmail.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 로마 / 피렌체 / 포지타노 / 카프리 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-04",
+    "userId": "usr-rev-194",
+    "userName": "신*호",
+    "userEmail": "user294@daum.net",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-05",
+    "userId": "usr-rev-195",
+    "userName": "배*린",
+    "userEmail": "user295@kakao.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 4,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-06",
+    "userId": "usr-rev-196",
+    "userName": "유*재",
+    "userEmail": "user296@hanmail.net",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-07",
+    "userId": "usr-rev-197",
+    "userName": "홍*경",
+    "userEmail": "user297@naver.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "로마 / 피렌체 / 포지타노 / 카프리에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-08",
+    "userId": "usr-rev-198",
+    "userName": "문*석",
+    "userEmail": "user298@gmail.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-09",
+    "userId": "usr-rev-199",
+    "userName": "류*희",
+    "userEmail": "user299@daum.net",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 4,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-05-10",
+    "userId": "usr-rev-200",
+    "userName": "서*준",
+    "userEmail": "user300@kakao.com",
+    "packageId": "pkg-eur-05",
+    "packageSlug": "italy-rome-positano-8d",
+    "packageTitle": "[찬란한 지중해] 이탈리아 로마 콜로세움 & 피렌체 & 남부 포지타노 6박 8일",
+    "rating": 5,
+    "title": "[로마 / 피렌체 / 포지타노 / 카프리] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-01",
+    "userId": "usr-rev-201",
+    "userName": "황*연",
+    "userEmail": "user301@naver.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "자그레브 / 두브로브니크 / 블레드 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-02",
+    "userId": "usr-rev-202",
+    "userName": "안*태",
+    "userEmail": "user302@gmail.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-03",
+    "userId": "usr-rev-203",
+    "userName": "고*아",
+    "userEmail": "user303@daum.net",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 자그레브 / 두브로브니크 / 블레드 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-04",
+    "userId": "usr-rev-204",
+    "userName": "권*민",
+    "userEmail": "user304@kakao.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-05",
+    "userId": "usr-rev-205",
+    "userName": "백*승",
+    "userEmail": "user305@hanmail.net",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 4,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-06",
+    "userId": "usr-rev-206",
+    "userName": "노*주",
+    "userEmail": "user306@naver.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-07",
+    "userId": "usr-rev-207",
+    "userName": "허*석",
+    "userEmail": "user307@gmail.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "자그레브 / 두브로브니크 / 블레드에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-08",
+    "userId": "usr-rev-208",
+    "userName": "남*우",
+    "userEmail": "user308@daum.net",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-09",
+    "userId": "usr-rev-209",
+    "userName": "심*정",
+    "userEmail": "user309@kakao.com",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 4,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-06-10",
+    "userId": "usr-rev-210",
+    "userName": "하*빈",
+    "userEmail": "user310@hanmail.net",
+    "packageId": "pkg-eur-06",
+    "packageSlug": "croatia-dubrovnik-plitvice-9d",
+    "packageTitle": "[아드리아해의 진주] 크로아티아 두브로브니크 성벽 & 플리트비체 호수 7박 9일",
+    "rating": 5,
+    "title": "[자그레브 / 두브로브니크 / 블레드] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-01",
+    "userId": "usr-rev-211",
+    "userName": "김*우",
+    "userEmail": "user311@gmail.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "니스 / 에즈 / 모나코 / 칸느 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-02",
+    "userId": "usr-rev-212",
+    "userName": "이*진",
+    "userEmail": "user312@daum.net",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-03",
+    "userId": "usr-rev-213",
+    "userName": "박*현",
+    "userEmail": "user313@kakao.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 니스 / 에즈 / 모나코 / 칸느 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-04",
+    "userId": "usr-rev-214",
+    "userName": "최*영",
+    "userEmail": "user314@hanmail.net",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-05",
+    "userId": "usr-rev-215",
+    "userName": "정*훈",
+    "userEmail": "user315@naver.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 4,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-06",
+    "userId": "usr-rev-216",
+    "userName": "강*원",
+    "userEmail": "user316@gmail.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-07",
+    "userId": "usr-rev-217",
+    "userName": "조*민",
+    "userEmail": "user317@daum.net",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "니스 / 에즈 / 모나코 / 칸느에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-08",
+    "userId": "usr-rev-218",
+    "userName": "윤*서",
+    "userEmail": "user318@kakao.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-09",
+    "userId": "usr-rev-219",
+    "userName": "장*혁",
+    "userEmail": "user319@hanmail.net",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 4,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-07-10",
+    "userId": "usr-rev-220",
+    "userName": "임*하",
+    "userEmail": "user320@naver.com",
+    "packageId": "pkg-eur-07",
+    "packageSlug": "french-riviera-nice-monaco-8d",
+    "packageTitle": "[지중해의 햇살] 프랑스 남부 코트다쥐르 니스 & 에즈 & 모나코 6박 8일",
+    "rating": 5,
+    "title": "[니스 / 에즈 / 모나코 / 칸느] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533669955142-6a73332af4db?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-01",
+    "userId": "usr-rev-221",
+    "userName": "한*준",
+    "userEmail": "user321@daum.net",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "아테네 / 산토리니 / 미코노스 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-02",
+    "userId": "usr-rev-222",
+    "userName": "송*은",
+    "userEmail": "user322@kakao.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-03",
+    "userId": "usr-rev-223",
+    "userName": "오*진",
+    "userEmail": "user323@hanmail.net",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 아테네 / 산토리니 / 미코노스 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-04",
+    "userId": "usr-rev-224",
+    "userName": "신*호",
+    "userEmail": "user324@naver.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-05",
+    "userId": "usr-rev-225",
+    "userName": "배*린",
+    "userEmail": "user325@gmail.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 4,
+    "title": "[아테네 / 산토리니 / 미코노스] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-06",
+    "userId": "usr-rev-226",
+    "userName": "유*재",
+    "userEmail": "user326@daum.net",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-07",
+    "userId": "usr-rev-227",
+    "userName": "홍*경",
+    "userEmail": "user327@kakao.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "아테네 / 산토리니 / 미코노스에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-08",
+    "userId": "usr-rev-228",
+    "userName": "문*석",
+    "userEmail": "user328@hanmail.net",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-09",
+    "userId": "usr-rev-229",
+    "userName": "류*희",
+    "userEmail": "user329@naver.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 4,
+    "title": "[아테네 / 산토리니 / 미코노스] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-08-10",
+    "userId": "usr-rev-230",
+    "userName": "서*준",
+    "userEmail": "user330@gmail.com",
+    "packageId": "pkg-eur-08",
+    "packageSlug": "greece-athens-santorini-8d",
+    "packageTitle": "[눈부신 화이트&블루] 그리스 아테네 파르테논 & 산토리니 이아마을 6박 8일",
+    "rating": 5,
+    "title": "[아테네 / 산토리니 / 미코노스] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-01",
+    "userId": "usr-rev-231",
+    "userName": "황*연",
+    "userEmail": "user331@kakao.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "오슬로 / 베르겐 / 스톡홀름 / 코펜하겐 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-02",
+    "userId": "usr-rev-232",
+    "userName": "안*태",
+    "userEmail": "user332@hanmail.net",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-03",
+    "userId": "usr-rev-233",
+    "userName": "고*아",
+    "userEmail": "user333@naver.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 오슬로 / 베르겐 / 스톡홀름 / 코펜하겐 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-04",
+    "userId": "usr-rev-234",
+    "userName": "권*민",
+    "userEmail": "user334@gmail.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-05",
+    "userId": "usr-rev-235",
+    "userName": "백*승",
+    "userEmail": "user335@daum.net",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 4,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-06",
+    "userId": "usr-rev-236",
+    "userName": "노*주",
+    "userEmail": "user336@kakao.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-07",
+    "userId": "usr-rev-237",
+    "userName": "허*석",
+    "userEmail": "user337@hanmail.net",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "오슬로 / 베르겐 / 스톡홀름 / 코펜하겐에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-08",
+    "userId": "usr-rev-238",
+    "userName": "남*우",
+    "userEmail": "user338@naver.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-09",
+    "userId": "usr-rev-239",
+    "userName": "심*정",
+    "userEmail": "user339@gmail.com",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 4,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-09-10",
+    "userId": "usr-rev-240",
+    "userName": "하*빈",
+    "userEmail": "user340@daum.net",
+    "packageId": "pkg-eur-09",
+    "packageSlug": "northern-europe-fjords-10d",
+    "packageTitle": "[웅장한 대자연] 북유럽 4국 & 노르웨이 송네 피오르드 빙하 유람선 8박 10일",
+    "rating": 5,
+    "title": "[오슬로 / 베르겐 / 스톡홀름 / 코펜하겐] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-01",
+    "userId": "usr-rev-241",
+    "userName": "김*우",
+    "userEmail": "user341@hanmail.net",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "레이캬비크 / 비크 / 스카프타펠 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-02",
+    "userId": "usr-rev-242",
+    "userName": "이*진",
+    "userEmail": "user342@naver.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-03",
+    "userId": "usr-rev-243",
+    "userName": "박*현",
+    "userEmail": "user343@gmail.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 레이캬비크 / 비크 / 스카프타펠 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-04",
+    "userId": "usr-rev-244",
+    "userName": "최*영",
+    "userEmail": "user344@daum.net",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-05",
+    "userId": "usr-rev-245",
+    "userName": "정*훈",
+    "userEmail": "user345@kakao.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 4,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-06",
+    "userId": "usr-rev-246",
+    "userName": "강*원",
+    "userEmail": "user346@hanmail.net",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-07",
+    "userId": "usr-rev-247",
+    "userName": "조*민",
+    "userEmail": "user347@naver.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "레이캬비크 / 비크 / 스카프타펠에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-08",
+    "userId": "usr-rev-248",
+    "userName": "윤*서",
+    "userEmail": "user348@gmail.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-09",
+    "userId": "usr-rev-249",
+    "userName": "장*혁",
+    "userEmail": "user349@daum.net",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 4,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-10-10",
+    "userId": "usr-rev-250",
+    "userName": "임*하",
+    "userEmail": "user350@kakao.com",
+    "packageId": "pkg-eur-10",
+    "packageSlug": "iceland-golden-circle-8d",
+    "packageTitle": "[태초의 자연] 아이슬란드 골든서클 & 블루라군 온천 & 폭포 6박 8일",
+    "rating": 5,
+    "title": "[레이캬비크 / 비크 / 스카프타펠] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-01",
+    "userId": "usr-rev-251",
+    "userName": "한*준",
+    "userEmail": "user351@naver.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "런던 / 파리 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-02",
+    "userId": "usr-rev-252",
+    "userName": "송*은",
+    "userEmail": "user352@gmail.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-03",
+    "userId": "usr-rev-253",
+    "userName": "오*진",
+    "userEmail": "user353@daum.net",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 런던 / 파리 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-04",
+    "userId": "usr-rev-254",
+    "userName": "신*호",
+    "userEmail": "user354@kakao.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-05",
+    "userId": "usr-rev-255",
+    "userName": "배*린",
+    "userEmail": "user355@hanmail.net",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 4,
+    "title": "[런던 / 파리] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-06",
+    "userId": "usr-rev-256",
+    "userName": "유*재",
+    "userEmail": "user356@naver.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-07",
+    "userId": "usr-rev-257",
+    "userName": "홍*경",
+    "userEmail": "user357@gmail.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "런던 / 파리에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-08",
+    "userId": "usr-rev-258",
+    "userName": "문*석",
+    "userEmail": "user358@daum.net",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-09",
+    "userId": "usr-rev-259",
+    "userName": "류*희",
+    "userEmail": "user359@kakao.com",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 4,
+    "title": "[런던 / 파리] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-11-10",
+    "userId": "usr-rev-260",
+    "userName": "서*준",
+    "userEmail": "user360@hanmail.net",
+    "packageId": "pkg-eur-11",
+    "packageSlug": "london-paris-dual-city-8d",
+    "packageTitle": "[대영제국의 숨결] 영국 런던 타워브릿지 & 프랑스 파리 루브르 6박 8일",
+    "rating": 5,
+    "title": "[런던 / 파리] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-01",
+    "userId": "usr-rev-261",
+    "userName": "황*연",
+    "userEmail": "user361@gmail.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "이스탄불 / 카파도키아 / 파묵칼레 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-02",
+    "userId": "usr-rev-262",
+    "userName": "안*태",
+    "userEmail": "user362@daum.net",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-03",
+    "userId": "usr-rev-263",
+    "userName": "고*아",
+    "userEmail": "user363@kakao.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 이스탄불 / 카파도키아 / 파묵칼레 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-04",
+    "userId": "usr-rev-264",
+    "userName": "권*민",
+    "userEmail": "user364@hanmail.net",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-05",
+    "userId": "usr-rev-265",
+    "userName": "백*승",
+    "userEmail": "user365@naver.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 4,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-06",
+    "userId": "usr-rev-266",
+    "userName": "노*주",
+    "userEmail": "user366@gmail.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-07",
+    "userId": "usr-rev-267",
+    "userName": "허*석",
+    "userEmail": "user367@daum.net",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "이스탄불 / 카파도키아 / 파묵칼레에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-08",
+    "userId": "usr-rev-268",
+    "userName": "남*우",
+    "userEmail": "user368@kakao.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-09",
+    "userId": "usr-rev-269",
+    "userName": "심*정",
+    "userEmail": "user369@hanmail.net",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 4,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-12-10",
+    "userId": "usr-rev-270",
+    "userName": "하*빈",
+    "userEmail": "user370@naver.com",
+    "packageId": "pkg-eur-12",
+    "packageSlug": "turkey-cappadocia-pamukkale-9d",
+    "packageTitle": "[신비로운 대지] 튀르키예 카파도키아 열기구 & 파묵칼레 석회붕 7박 9일",
+    "rating": 5,
+    "title": "[이스탄불 / 카파도키아 / 파묵칼레] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-01",
+    "userId": "usr-rev-271",
+    "userName": "김*우",
+    "userEmail": "user371@daum.net",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "비엔나 / 잘츠부르크 / 할슈타트 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-02",
+    "userId": "usr-rev-272",
+    "userName": "이*진",
+    "userEmail": "user372@kakao.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-03",
+    "userId": "usr-rev-273",
+    "userName": "박*현",
+    "userEmail": "user373@hanmail.net",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 비엔나 / 잘츠부르크 / 할슈타트 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-04",
+    "userId": "usr-rev-274",
+    "userName": "최*영",
+    "userEmail": "user374@naver.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-05",
+    "userId": "usr-rev-275",
+    "userName": "정*훈",
+    "userEmail": "user375@gmail.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 4,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-06",
+    "userId": "usr-rev-276",
+    "userName": "강*원",
+    "userEmail": "user376@daum.net",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-07",
+    "userId": "usr-rev-277",
+    "userName": "조*민",
+    "userEmail": "user377@kakao.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "비엔나 / 잘츠부르크 / 할슈타트에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-08",
+    "userId": "usr-rev-278",
+    "userName": "윤*서",
+    "userEmail": "user378@hanmail.net",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-09",
+    "userId": "usr-rev-279",
+    "userName": "장*혁",
+    "userEmail": "user379@naver.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 4,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-13-10",
+    "userId": "usr-rev-280",
+    "userName": "임*하",
+    "userEmail": "user380@gmail.com",
+    "packageId": "pkg-eur-13",
+    "packageSlug": "austria-vienna-hallstatt-8d",
+    "packageTitle": "[음악과 호수의 낭만] 오스트리아 빈 쇤브룬 궁전 & 할슈타트 6박 8일",
+    "rating": 5,
+    "title": "[비엔나 / 잘츠부르크 / 할슈타트] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-01",
+    "userId": "usr-rev-281",
+    "userName": "한*준",
+    "userEmail": "user381@kakao.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "암스테르담 / 브뤼셀 / 브뤼헤 / 겐트 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-02",
+    "userId": "usr-rev-282",
+    "userName": "송*은",
+    "userEmail": "user382@hanmail.net",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-03",
+    "userId": "usr-rev-283",
+    "userName": "오*진",
+    "userEmail": "user383@naver.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 암스테르담 / 브뤼셀 / 브뤼헤 / 겐트 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-04",
+    "userId": "usr-rev-284",
+    "userName": "신*호",
+    "userEmail": "user384@gmail.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-05",
+    "userId": "usr-rev-285",
+    "userName": "배*린",
+    "userEmail": "user385@daum.net",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 4,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-06",
+    "userId": "usr-rev-286",
+    "userName": "유*재",
+    "userEmail": "user386@kakao.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-07",
+    "userId": "usr-rev-287",
+    "userName": "홍*경",
+    "userEmail": "user387@hanmail.net",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "암스테르담 / 브뤼셀 / 브뤼헤 / 겐트에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-08",
+    "userId": "usr-rev-288",
+    "userName": "문*석",
+    "userEmail": "user388@naver.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-09",
+    "userId": "usr-rev-289",
+    "userName": "류*희",
+    "userEmail": "user389@gmail.com",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 4,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-14-10",
+    "userId": "usr-rev-290",
+    "userName": "서*준",
+    "userEmail": "user390@daum.net",
+    "packageId": "pkg-eur-14",
+    "packageSlug": "netherlands-belgium-canal-8d",
+    "packageTitle": "[운하와 튤립의 정원] 네덜란드 암스테르담 & 벨기에 브뤼헤/브뤼셀 6박 8일",
+    "rating": 5,
+    "title": "[암스테르담 / 브뤼셀 / 브뤼헤 / 겐트] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-01",
+    "userId": "usr-rev-291",
+    "userName": "황*연",
+    "userEmail": "user391@hanmail.net",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-02",
+    "userId": "usr-rev-292",
+    "userName": "안*태",
+    "userEmail": "user392@naver.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-03",
+    "userId": "usr-rev-293",
+    "userName": "고*아",
+    "userEmail": "user393@gmail.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-04",
+    "userId": "usr-rev-294",
+    "userName": "권*민",
+    "userEmail": "user394@daum.net",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-05",
+    "userId": "usr-rev-295",
+    "userName": "백*승",
+    "userEmail": "user395@kakao.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 4,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-06",
+    "userId": "usr-rev-296",
+    "userName": "노*주",
+    "userEmail": "user396@hanmail.net",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-07",
+    "userId": "usr-rev-297",
+    "userName": "허*석",
+    "userEmail": "user397@naver.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-08",
+    "userId": "usr-rev-298",
+    "userName": "남*우",
+    "userEmail": "user398@gmail.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-09",
+    "userId": "usr-rev-299",
+    "userName": "심*정",
+    "userEmail": "user399@daum.net",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 4,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-eur-15-10",
+    "userId": "usr-rev-300",
+    "userName": "하*빈",
+    "userEmail": "user400@kakao.com",
+    "packageId": "pkg-eur-15",
+    "packageSlug": "germany-romantic-road-8d",
+    "packageTitle": "[동화의 성] 독일 뮌헨 & 노이슈반슈타인 성 & 로텐부르크 6박 8일",
+    "rating": 5,
+    "title": "[뮌헨 / 퓌센 / 로텐부르크 / 프랑크푸르트] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-01",
+    "userId": "usr-rev-301",
+    "userName": "김*우",
+    "userEmail": "user401@naver.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "삿포로 / 오타루 / 노보리베츠 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-02",
+    "userId": "usr-rev-302",
+    "userName": "이*진",
+    "userEmail": "user402@gmail.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-03",
+    "userId": "usr-rev-303",
+    "userName": "박*현",
+    "userEmail": "user403@daum.net",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 삿포로 / 오타루 / 노보리베츠 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-04",
+    "userId": "usr-rev-304",
+    "userName": "최*영",
+    "userEmail": "user404@kakao.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-05",
+    "userId": "usr-rev-305",
+    "userName": "정*훈",
+    "userEmail": "user405@hanmail.net",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 4,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-06",
+    "userId": "usr-rev-306",
+    "userName": "강*원",
+    "userEmail": "user406@naver.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-07",
+    "userId": "usr-rev-307",
+    "userName": "조*민",
+    "userEmail": "user407@gmail.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "삿포로 / 오타루 / 노보리베츠에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-08",
+    "userId": "usr-rev-308",
+    "userName": "윤*서",
+    "userEmail": "user408@daum.net",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-09",
+    "userId": "usr-rev-309",
+    "userName": "장*혁",
+    "userEmail": "user409@kakao.com",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 4,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-01-10",
+    "userId": "usr-rev-310",
+    "userName": "임*하",
+    "userEmail": "user410@hanmail.net",
+    "packageId": "pkg-jp-01",
+    "packageSlug": "hokkaido-sapporo-onsen-4d",
+    "packageTitle": "[사계절 프리미엄 온천] 홋카이도 삿포로 & 오타루 운하 & 노보리베츠 료칸 3박 4일",
+    "rating": 5,
+    "title": "[삿포로 / 오타루 / 노보리베츠] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-01",
+    "userId": "usr-rev-311",
+    "userName": "한*준",
+    "userEmail": "user411@gmail.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "오사카 / 교토 / 고베 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-02",
+    "userId": "usr-rev-312",
+    "userName": "송*은",
+    "userEmail": "user412@daum.net",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-03",
+    "userId": "usr-rev-313",
+    "userName": "오*진",
+    "userEmail": "user413@kakao.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 오사카 / 교토 / 고베 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-04",
+    "userId": "usr-rev-314",
+    "userName": "신*호",
+    "userEmail": "user414@hanmail.net",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-05",
+    "userId": "usr-rev-315",
+    "userName": "배*린",
+    "userEmail": "user415@naver.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 4,
+    "title": "[오사카 / 교토 / 고베] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-06",
+    "userId": "usr-rev-316",
+    "userName": "유*재",
+    "userEmail": "user416@gmail.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-07",
+    "userId": "usr-rev-317",
+    "userName": "홍*경",
+    "userEmail": "user417@daum.net",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "오사카 / 교토 / 고베에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-08",
+    "userId": "usr-rev-318",
+    "userName": "문*석",
+    "userEmail": "user418@kakao.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-09",
+    "userId": "usr-rev-319",
+    "userName": "류*희",
+    "userEmail": "user419@hanmail.net",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 4,
+    "title": "[오사카 / 교토 / 고베] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-02-10",
+    "userId": "usr-rev-320",
+    "userName": "서*준",
+    "userEmail": "user420@naver.com",
+    "packageId": "pkg-jp-02",
+    "packageSlug": "osaka-kyoto-gourmet-4d",
+    "packageTitle": "[감성 미식투어] 오사카 도톤보리 & 교토 청수사 & 아라시야마 대나무숲 3박 4일",
+    "rating": 5,
+    "title": "[오사카 / 교토 / 고베] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-01",
+    "userId": "usr-rev-321",
+    "userName": "황*연",
+    "userEmail": "user421@daum.net",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "도쿄 / 하코네 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-02",
+    "userId": "usr-rev-322",
+    "userName": "안*태",
+    "userEmail": "user422@kakao.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-03",
+    "userId": "usr-rev-323",
+    "userName": "고*아",
+    "userEmail": "user423@hanmail.net",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 도쿄 / 하코네 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-04",
+    "userId": "usr-rev-324",
+    "userName": "권*민",
+    "userEmail": "user424@naver.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-05",
+    "userId": "usr-rev-325",
+    "userName": "백*승",
+    "userEmail": "user425@gmail.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 4,
+    "title": "[도쿄 / 하코네] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-06",
+    "userId": "usr-rev-326",
+    "userName": "노*주",
+    "userEmail": "user426@daum.net",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-07",
+    "userId": "usr-rev-327",
+    "userName": "허*석",
+    "userEmail": "user427@kakao.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "도쿄 / 하코네에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-08",
+    "userId": "usr-rev-328",
+    "userName": "남*우",
+    "userEmail": "user428@hanmail.net",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-09",
+    "userId": "usr-rev-329",
+    "userName": "심*정",
+    "userEmail": "user429@naver.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 4,
+    "title": "[도쿄 / 하코네] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-03-10",
+    "userId": "usr-rev-330",
+    "userName": "하*빈",
+    "userEmail": "user430@gmail.com",
+    "packageId": "pkg-jp-03",
+    "packageSlug": "tokyo-hakone-fuji-4d",
+    "packageTitle": "[도심과 후지산의 조화] 도쿄 시부야스카이 & 하코네 아시노호수 온천 3박 4일",
+    "rating": 5,
+    "title": "[도쿄 / 하코네] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-01",
+    "userId": "usr-rev-331",
+    "userName": "김*우",
+    "userEmail": "user431@kakao.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "후쿠오카 / 유후인 / 벳푸 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-02",
+    "userId": "usr-rev-332",
+    "userName": "이*진",
+    "userEmail": "user432@hanmail.net",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-03",
+    "userId": "usr-rev-333",
+    "userName": "박*현",
+    "userEmail": "user433@naver.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 후쿠오카 / 유후인 / 벳푸 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-04",
+    "userId": "usr-rev-334",
+    "userName": "최*영",
+    "userEmail": "user434@gmail.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-05",
+    "userId": "usr-rev-335",
+    "userName": "정*훈",
+    "userEmail": "user435@daum.net",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 4,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-06",
+    "userId": "usr-rev-336",
+    "userName": "강*원",
+    "userEmail": "user436@kakao.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-07",
+    "userId": "usr-rev-337",
+    "userName": "조*민",
+    "userEmail": "user437@hanmail.net",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "후쿠오카 / 유후인 / 벳푸에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-08",
+    "userId": "usr-rev-338",
+    "userName": "윤*서",
+    "userEmail": "user438@naver.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-09",
+    "userId": "usr-rev-339",
+    "userName": "장*혁",
+    "userEmail": "user439@gmail.com",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 4,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-04-10",
+    "userId": "usr-rev-340",
+    "userName": "임*하",
+    "userEmail": "user440@daum.net",
+    "packageId": "pkg-jp-04",
+    "packageSlug": "fukuoka-yufuin-onsen-3d",
+    "packageTitle": "[힐링 온천 가이세키] 규슈 후쿠오카 & 유후인 료칸 & 벳푸 지옥온천 2박 3일",
+    "rating": 5,
+    "title": "[후쿠오카 / 유후인 / 벳푸] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-01",
+    "userId": "usr-rev-341",
+    "userName": "한*준",
+    "userEmail": "user441@hanmail.net",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "오키나와 / 나하 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-02",
+    "userId": "usr-rev-342",
+    "userName": "송*은",
+    "userEmail": "user442@naver.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-03",
+    "userId": "usr-rev-343",
+    "userName": "오*진",
+    "userEmail": "user443@gmail.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 오키나와 / 나하 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-04",
+    "userId": "usr-rev-344",
+    "userName": "신*호",
+    "userEmail": "user444@daum.net",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-05",
+    "userId": "usr-rev-345",
+    "userName": "배*린",
+    "userEmail": "user445@kakao.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 4,
+    "title": "[오키나와 / 나하] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-06",
+    "userId": "usr-rev-346",
+    "userName": "유*재",
+    "userEmail": "user446@hanmail.net",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-07",
+    "userId": "usr-rev-347",
+    "userName": "홍*경",
+    "userEmail": "user447@naver.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "오키나와 / 나하에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-08",
+    "userId": "usr-rev-348",
+    "userName": "문*석",
+    "userEmail": "user448@gmail.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-09",
+    "userId": "usr-rev-349",
+    "userName": "류*희",
+    "userEmail": "user449@daum.net",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 4,
+    "title": "[오키나와 / 나하] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-05-10",
+    "userId": "usr-rev-350",
+    "userName": "서*준",
+    "userEmail": "user450@kakao.com",
+    "packageId": "pkg-jp-05",
+    "packageSlug": "okinawa-emerald-sea-4d",
+    "packageTitle": "[동양의 에메랄드] 오키나와 츄라우미 수족관 & 만좌모 오션뷰 리조트 3박 4일",
+    "rating": 5,
+    "title": "[오키나와 / 나하] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-01",
+    "userId": "usr-rev-351",
+    "userName": "황*연",
+    "userEmail": "user451@naver.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "나고야 / 시라카와고 / 다카야마 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-02",
+    "userId": "usr-rev-352",
+    "userName": "안*태",
+    "userEmail": "user452@gmail.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-03",
+    "userId": "usr-rev-353",
+    "userName": "고*아",
+    "userEmail": "user453@daum.net",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 나고야 / 시라카와고 / 다카야마 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-04",
+    "userId": "usr-rev-354",
+    "userName": "권*민",
+    "userEmail": "user454@kakao.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-05",
+    "userId": "usr-rev-355",
+    "userName": "백*승",
+    "userEmail": "user455@hanmail.net",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 4,
+    "title": "[나고야 / 시라카와고 / 다카야마] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-06",
+    "userId": "usr-rev-356",
+    "userName": "노*주",
+    "userEmail": "user456@naver.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-07",
+    "userId": "usr-rev-357",
+    "userName": "허*석",
+    "userEmail": "user457@gmail.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "나고야 / 시라카와고 / 다카야마에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-08",
+    "userId": "usr-rev-358",
+    "userName": "남*우",
+    "userEmail": "user458@daum.net",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-09",
+    "userId": "usr-rev-359",
+    "userName": "심*정",
+    "userEmail": "user459@kakao.com",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 4,
+    "title": "[나고야 / 시라카와고 / 다카야마] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-06-10",
+    "userId": "usr-rev-360",
+    "userName": "하*빈",
+    "userEmail": "user460@hanmail.net",
+    "packageId": "pkg-jp-06",
+    "packageSlug": "nagoya-shirakawago-4d",
+    "packageTitle": "[전통의 숨결] 나고야 & 시라카와고 합장촌 & 다카야마 전통거리 3박 4일",
+    "rating": 5,
+    "title": "[나고야 / 시라카와고 / 다카야마] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-01",
+    "userId": "usr-rev-361",
+    "userName": "김*우",
+    "userEmail": "user461@gmail.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "마쓰야마 / 시코쿠 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-02",
+    "userId": "usr-rev-362",
+    "userName": "이*진",
+    "userEmail": "user462@daum.net",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-03",
+    "userId": "usr-rev-363",
+    "userName": "박*현",
+    "userEmail": "user463@kakao.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 마쓰야마 / 시코쿠 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-04",
+    "userId": "usr-rev-364",
+    "userName": "최*영",
+    "userEmail": "user464@hanmail.net",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-05",
+    "userId": "usr-rev-365",
+    "userName": "정*훈",
+    "userEmail": "user465@naver.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 4,
+    "title": "[마쓰야마 / 시코쿠] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-06",
+    "userId": "usr-rev-366",
+    "userName": "강*원",
+    "userEmail": "user466@gmail.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-07",
+    "userId": "usr-rev-367",
+    "userName": "조*민",
+    "userEmail": "user467@daum.net",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "마쓰야마 / 시코쿠에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-08",
+    "userId": "usr-rev-368",
+    "userName": "윤*서",
+    "userEmail": "user468@kakao.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-09",
+    "userId": "usr-rev-369",
+    "userName": "장*혁",
+    "userEmail": "user469@hanmail.net",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 4,
+    "title": "[마쓰야마 / 시코쿠] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-07-10",
+    "userId": "usr-rev-370",
+    "userName": "임*하",
+    "userEmail": "user470@naver.com",
+    "packageId": "pkg-jp-07",
+    "packageSlug": "matsuyama-dogo-onsen-3d",
+    "packageTitle": "[3천년 온천 역사] 시코쿠 마쓰야마 도고온천 본관 & 마쓰야마성 2박 3일",
+    "rating": 5,
+    "title": "[마쓰야마 / 시코쿠] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-01",
+    "userId": "usr-rev-371",
+    "userName": "한*준",
+    "userEmail": "user471@daum.net",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "타이베이 / 지우펀 / 스펀 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-02",
+    "userId": "usr-rev-372",
+    "userName": "송*은",
+    "userEmail": "user472@kakao.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-03",
+    "userId": "usr-rev-373",
+    "userName": "오*진",
+    "userEmail": "user473@hanmail.net",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 타이베이 / 지우펀 / 스펀 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-04",
+    "userId": "usr-rev-374",
+    "userName": "신*호",
+    "userEmail": "user474@naver.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-05",
+    "userId": "usr-rev-375",
+    "userName": "배*린",
+    "userEmail": "user475@gmail.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 4,
+    "title": "[타이베이 / 지우펀 / 스펀] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-06",
+    "userId": "usr-rev-376",
+    "userName": "유*재",
+    "userEmail": "user476@daum.net",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-07",
+    "userId": "usr-rev-377",
+    "userName": "홍*경",
+    "userEmail": "user477@kakao.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "타이베이 / 지우펀 / 스펀에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-08",
+    "userId": "usr-rev-378",
+    "userName": "문*석",
+    "userEmail": "user478@hanmail.net",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-09",
+    "userId": "usr-rev-379",
+    "userName": "류*희",
+    "userEmail": "user479@naver.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 4,
+    "title": "[타이베이 / 지우펀 / 스펀] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-08-10",
+    "userId": "usr-rev-380",
+    "userName": "서*준",
+    "userEmail": "user480@gmail.com",
+    "packageId": "pkg-jp-08",
+    "packageSlug": "taipei-jiufen-shifen-4d",
+    "packageTitle": "[미식과 낭만의 타이완] 타이베이 101 & 지우펀 & 스펀 천등 3박 4일",
+    "rating": 5,
+    "title": "[타이베이 / 지우펀 / 스펀] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-01",
+    "userId": "usr-rev-381",
+    "userName": "황*연",
+    "userEmail": "user481@kakao.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "가오슝 / 타이난 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-02",
+    "userId": "usr-rev-382",
+    "userName": "안*태",
+    "userEmail": "user482@hanmail.net",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-03",
+    "userId": "usr-rev-383",
+    "userName": "고*아",
+    "userEmail": "user483@naver.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 가오슝 / 타이난 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-04",
+    "userId": "usr-rev-384",
+    "userName": "권*민",
+    "userEmail": "user484@gmail.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-05",
+    "userId": "usr-rev-385",
+    "userName": "백*승",
+    "userEmail": "user485@daum.net",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 4,
+    "title": "[가오슝 / 타이난] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-06",
+    "userId": "usr-rev-386",
+    "userName": "노*주",
+    "userEmail": "user486@kakao.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-07",
+    "userId": "usr-rev-387",
+    "userName": "허*석",
+    "userEmail": "user487@hanmail.net",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "가오슝 / 타이난에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-08",
+    "userId": "usr-rev-388",
+    "userName": "남*우",
+    "userEmail": "user488@naver.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-09",
+    "userId": "usr-rev-389",
+    "userName": "심*정",
+    "userEmail": "user489@gmail.com",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 4,
+    "title": "[가오슝 / 타이난] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-09-10",
+    "userId": "usr-rev-390",
+    "userName": "하*빈",
+    "userEmail": "user490@daum.net",
+    "packageId": "pkg-jp-09",
+    "packageSlug": "kaohsiung-tainan-art-4d",
+    "packageTitle": "[대만의 문화수도] 가오슝 보아트 예술특구 & 타이난 치메이박물관 3박 4일",
+    "rating": 5,
+    "title": "[가오슝 / 타이난] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-01",
+    "userId": "usr-rev-391",
+    "userName": "김*우",
+    "userEmail": "user491@hanmail.net",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "홍콩 / 마카오 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-02",
+    "userId": "usr-rev-392",
+    "userName": "이*진",
+    "userEmail": "user492@naver.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-03",
+    "userId": "usr-rev-393",
+    "userName": "박*현",
+    "userEmail": "user493@gmail.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 홍콩 / 마카오 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-04",
+    "userId": "usr-rev-394",
+    "userName": "최*영",
+    "userEmail": "user494@daum.net",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-05",
+    "userId": "usr-rev-395",
+    "userName": "정*훈",
+    "userEmail": "user495@kakao.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 4,
+    "title": "[홍콩 / 마카오] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-06",
+    "userId": "usr-rev-396",
+    "userName": "강*원",
+    "userEmail": "user496@hanmail.net",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-07",
+    "userId": "usr-rev-397",
+    "userName": "조*민",
+    "userEmail": "user497@naver.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "홍콩 / 마카오에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-08",
+    "userId": "usr-rev-398",
+    "userName": "윤*서",
+    "userEmail": "user498@gmail.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-09",
+    "userId": "usr-rev-399",
+    "userName": "장*혁",
+    "userEmail": "user499@daum.net",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 4,
+    "title": "[홍콩 / 마카오] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-10-10",
+    "userId": "usr-rev-400",
+    "userName": "임*하",
+    "userEmail": "user500@kakao.com",
+    "packageId": "pkg-jp-10",
+    "packageSlug": "hongkong-macau-skyline-4d",
+    "packageTitle": "[화려한 빅토리아항] 홍콩 침사추이 & 마카오 성바울성당 3박 4일",
+    "rating": 5,
+    "title": "[홍콩 / 마카오] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-01",
+    "userId": "usr-rev-401",
+    "userName": "한*준",
+    "userEmail": "user501@naver.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "장가계 / 원가계 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-02",
+    "userId": "usr-rev-402",
+    "userName": "송*은",
+    "userEmail": "user502@gmail.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-03",
+    "userId": "usr-rev-403",
+    "userName": "오*진",
+    "userEmail": "user503@daum.net",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 장가계 / 원가계 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-04",
+    "userId": "usr-rev-404",
+    "userName": "신*호",
+    "userEmail": "user504@kakao.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-05",
+    "userId": "usr-rev-405",
+    "userName": "배*린",
+    "userEmail": "user505@hanmail.net",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 4,
+    "title": "[장가계 / 원가계] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-06",
+    "userId": "usr-rev-406",
+    "userName": "유*재",
+    "userEmail": "user506@naver.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-07",
+    "userId": "usr-rev-407",
+    "userName": "홍*경",
+    "userEmail": "user507@gmail.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "장가계 / 원가계에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-08",
+    "userId": "usr-rev-408",
+    "userName": "문*석",
+    "userEmail": "user508@daum.net",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-09",
+    "userId": "usr-rev-409",
+    "userName": "류*희",
+    "userEmail": "user509@kakao.com",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 4,
+    "title": "[장가계 / 원가계] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-11-10",
+    "userId": "usr-rev-410",
+    "userName": "서*준",
+    "userEmail": "user510@hanmail.net",
+    "packageId": "pkg-jp-11",
+    "packageSlug": "zhangjiajie-avatar-mountain-5d",
+    "packageTitle": "[신선이 머무는 곳] 중국 장가계 천문산 케이블카 & 원가계 유리다리 4박 5일",
+    "rating": 5,
+    "title": "[장가계 / 원가계] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-01",
+    "userId": "usr-rev-411",
+    "userName": "황*연",
+    "userEmail": "user511@gmail.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "칭다오 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-02",
+    "userId": "usr-rev-412",
+    "userName": "안*태",
+    "userEmail": "user512@daum.net",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-03",
+    "userId": "usr-rev-413",
+    "userName": "고*아",
+    "userEmail": "user513@kakao.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 칭다오 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-04",
+    "userId": "usr-rev-414",
+    "userName": "권*민",
+    "userEmail": "user514@hanmail.net",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-05",
+    "userId": "usr-rev-415",
+    "userName": "백*승",
+    "userEmail": "user515@naver.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 4,
+    "title": "[칭다오] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-06",
+    "userId": "usr-rev-416",
+    "userName": "노*주",
+    "userEmail": "user516@gmail.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-07",
+    "userId": "usr-rev-417",
+    "userName": "허*석",
+    "userEmail": "user517@daum.net",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "칭다오에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-08",
+    "userId": "usr-rev-418",
+    "userName": "남*우",
+    "userEmail": "user518@kakao.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-09",
+    "userId": "usr-rev-419",
+    "userName": "심*정",
+    "userEmail": "user519@hanmail.net",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 4,
+    "title": "[칭다오] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-12-10",
+    "userId": "usr-rev-420",
+    "userName": "하*빈",
+    "userEmail": "user520@naver.com",
+    "packageId": "pkg-jp-12",
+    "packageSlug": "qingdao-beer-museum-3d",
+    "packageTitle": "[해변과 칭다오 맥주] 중국 칭다오 5.4광장 & 맥주박물관 & 소어산 2박 3일",
+    "rating": 5,
+    "title": "[칭다오] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-01",
+    "userId": "usr-rev-421",
+    "userName": "김*우",
+    "userEmail": "user521@daum.net",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "울란바토르 / 테를지 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-02",
+    "userId": "usr-rev-422",
+    "userName": "이*진",
+    "userEmail": "user522@kakao.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-03",
+    "userId": "usr-rev-423",
+    "userName": "박*현",
+    "userEmail": "user523@hanmail.net",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 울란바토르 / 테를지 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-04",
+    "userId": "usr-rev-424",
+    "userName": "최*영",
+    "userEmail": "user524@naver.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-05",
+    "userId": "usr-rev-425",
+    "userName": "정*훈",
+    "userEmail": "user525@gmail.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 4,
+    "title": "[울란바토르 / 테를지] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-06",
+    "userId": "usr-rev-426",
+    "userName": "강*원",
+    "userEmail": "user526@daum.net",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-07",
+    "userId": "usr-rev-427",
+    "userName": "조*민",
+    "userEmail": "user527@kakao.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "울란바토르 / 테를지에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-08",
+    "userId": "usr-rev-428",
+    "userName": "윤*서",
+    "userEmail": "user528@hanmail.net",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-09",
+    "userId": "usr-rev-429",
+    "userName": "장*혁",
+    "userEmail": "user529@naver.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 4,
+    "title": "[울란바토르 / 테를지] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-13-10",
+    "userId": "usr-rev-430",
+    "userName": "임*하",
+    "userEmail": "user530@gmail.com",
+    "packageId": "pkg-jp-13",
+    "packageSlug": "mongolia-terelj-ger-4d",
+    "packageTitle": "[끝없는 초원과 별빛] 몽골 울란바토르 테를지 국립공원 승마 & 게르 캠핑 3박 4일",
+    "rating": 5,
+    "title": "[울란바토르 / 테를지] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-01",
+    "userId": "usr-rev-431",
+    "userName": "한*준",
+    "userEmail": "user531@kakao.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "상하이 / 우전 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-02",
+    "userId": "usr-rev-432",
+    "userName": "송*은",
+    "userEmail": "user532@hanmail.net",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-03",
+    "userId": "usr-rev-433",
+    "userName": "오*진",
+    "userEmail": "user533@naver.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 상하이 / 우전 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-04",
+    "userId": "usr-rev-434",
+    "userName": "신*호",
+    "userEmail": "user534@gmail.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-05",
+    "userId": "usr-rev-435",
+    "userName": "배*린",
+    "userEmail": "user535@daum.net",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 4,
+    "title": "[상하이 / 우전] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-06",
+    "userId": "usr-rev-436",
+    "userName": "유*재",
+    "userEmail": "user536@kakao.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-07",
+    "userId": "usr-rev-437",
+    "userName": "홍*경",
+    "userEmail": "user537@hanmail.net",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "상하이 / 우전에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-08",
+    "userId": "usr-rev-438",
+    "userName": "문*석",
+    "userEmail": "user538@naver.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-09",
+    "userId": "usr-rev-439",
+    "userName": "류*희",
+    "userEmail": "user539@gmail.com",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 4,
+    "title": "[상하이 / 우전] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-14-10",
+    "userId": "usr-rev-440",
+    "userName": "서*준",
+    "userEmail": "user540@daum.net",
+    "packageId": "pkg-jp-14",
+    "packageSlug": "shanghai-disney-wuzhen-4d",
+    "packageTitle": "[황푸강과 수향마을] 중국 상하이 와이탄 & 디즈니랜드 & 우전 3박 4일",
+    "rating": 5,
+    "title": "[상하이 / 우전] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-01",
+    "userId": "usr-rev-441",
+    "userName": "황*연",
+    "userEmail": "user541@hanmail.net",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "계림 / 양숴 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-02",
+    "userId": "usr-rev-442",
+    "userName": "안*태",
+    "userEmail": "user542@naver.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-03",
+    "userId": "usr-rev-443",
+    "userName": "고*아",
+    "userEmail": "user543@gmail.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 계림 / 양숴 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-04",
+    "userId": "usr-rev-444",
+    "userName": "권*민",
+    "userEmail": "user544@daum.net",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-05",
+    "userId": "usr-rev-445",
+    "userName": "백*승",
+    "userEmail": "user545@kakao.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 4,
+    "title": "[계림 / 양숴] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-06",
+    "userId": "usr-rev-446",
+    "userName": "노*주",
+    "userEmail": "user546@hanmail.net",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-07",
+    "userId": "usr-rev-447",
+    "userName": "허*석",
+    "userEmail": "user547@naver.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "계림 / 양숴에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-08",
+    "userId": "usr-rev-448",
+    "userName": "남*우",
+    "userEmail": "user548@gmail.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-09",
+    "userId": "usr-rev-449",
+    "userName": "심*정",
+    "userEmail": "user549@daum.net",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 4,
+    "title": "[계림 / 양숴] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-jp-15-10",
+    "userId": "usr-rev-450",
+    "userName": "하*빈",
+    "userEmail": "user550@kakao.com",
+    "packageId": "pkg-jp-15",
+    "packageSlug": "guilin-li-river-4d",
+    "packageTitle": "[수묵화 속 비경] 중국 계림 리강 유람선 & 양숴 세외도원 3박 4일",
+    "rating": 5,
+    "title": "[계림 / 양숴] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-01",
+    "userId": "usr-rev-451",
+    "userName": "김*우",
+    "userEmail": "user551@naver.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "호놀룰루 / 와이키키 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-02",
+    "userId": "usr-rev-452",
+    "userName": "이*진",
+    "userEmail": "user552@gmail.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-03",
+    "userId": "usr-rev-453",
+    "userName": "박*현",
+    "userEmail": "user553@daum.net",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 호놀룰루 / 와이키키 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-04",
+    "userId": "usr-rev-454",
+    "userName": "최*영",
+    "userEmail": "user554@kakao.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-05",
+    "userId": "usr-rev-455",
+    "userName": "정*훈",
+    "userEmail": "user555@hanmail.net",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 4,
+    "title": "[호놀룰루 / 와이키키] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-06",
+    "userId": "usr-rev-456",
+    "userName": "강*원",
+    "userEmail": "user556@naver.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-07",
+    "userId": "usr-rev-457",
+    "userName": "조*민",
+    "userEmail": "user557@gmail.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "호놀룰루 / 와이키키에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-08",
+    "userId": "usr-rev-458",
+    "userName": "윤*서",
+    "userEmail": "user558@daum.net",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-09",
+    "userId": "usr-rev-459",
+    "userName": "장*혁",
+    "userEmail": "user559@kakao.com",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 4,
+    "title": "[호놀룰루 / 와이키키] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-01-10",
+    "userId": "usr-rev-460",
+    "userName": "임*하",
+    "userEmail": "user560@hanmail.net",
+    "packageId": "pkg-us-01",
+    "packageSlug": "hawaii-oahu-waikiki-7d",
+    "packageTitle": "[지상 최고의 낙원] 하와이 오아후 와이키키 비치 & 카일루아 비치 5박 7일",
+    "rating": 5,
+    "title": "[호놀룰루 / 와이키키] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-01",
+    "userId": "usr-rev-461",
+    "userName": "한*준",
+    "userEmail": "user561@gmail.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "괌 / 투몬 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-02",
+    "userId": "usr-rev-462",
+    "userName": "송*은",
+    "userEmail": "user562@daum.net",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-03",
+    "userId": "usr-rev-463",
+    "userName": "오*진",
+    "userEmail": "user563@kakao.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 괌 / 투몬 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-04",
+    "userId": "usr-rev-464",
+    "userName": "신*호",
+    "userEmail": "user564@hanmail.net",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-05",
+    "userId": "usr-rev-465",
+    "userName": "배*린",
+    "userEmail": "user565@naver.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 4,
+    "title": "[괌 / 투몬] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-06",
+    "userId": "usr-rev-466",
+    "userName": "유*재",
+    "userEmail": "user566@gmail.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-07",
+    "userId": "usr-rev-467",
+    "userName": "홍*경",
+    "userEmail": "user567@daum.net",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "괌 / 투몬에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-08",
+    "userId": "usr-rev-468",
+    "userName": "문*석",
+    "userEmail": "user568@kakao.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-09",
+    "userId": "usr-rev-469",
+    "userName": "류*희",
+    "userEmail": "user569@hanmail.net",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 4,
+    "title": "[괌 / 투몬] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-02-10",
+    "userId": "usr-rev-470",
+    "userName": "서*준",
+    "userEmail": "user570@naver.com",
+    "packageId": "pkg-us-02",
+    "packageSlug": "guam-pic-family-4d",
+    "packageTitle": "[온 가족 올인클루시브] 괌 PIC 골드카드 리조트 & 남부 아일랜드 투어 3박 4일",
+    "rating": 5,
+    "title": "[괌 / 투몬] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-01",
+    "userId": "usr-rev-471",
+    "userName": "황*연",
+    "userEmail": "user571@daum.net",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "사이판 / 가라판 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-02",
+    "userId": "usr-rev-472",
+    "userName": "안*태",
+    "userEmail": "user572@kakao.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-03",
+    "userId": "usr-rev-473",
+    "userName": "고*아",
+    "userEmail": "user573@hanmail.net",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 사이판 / 가라판 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-04",
+    "userId": "usr-rev-474",
+    "userName": "권*민",
+    "userEmail": "user574@naver.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-05",
+    "userId": "usr-rev-475",
+    "userName": "백*승",
+    "userEmail": "user575@gmail.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 4,
+    "title": "[사이판 / 가라판] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-06",
+    "userId": "usr-rev-476",
+    "userName": "노*주",
+    "userEmail": "user576@daum.net",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-07",
+    "userId": "usr-rev-477",
+    "userName": "허*석",
+    "userEmail": "user577@kakao.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "사이판 / 가라판에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-08",
+    "userId": "usr-rev-478",
+    "userName": "남*우",
+    "userEmail": "user578@hanmail.net",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-09",
+    "userId": "usr-rev-479",
+    "userName": "심*정",
+    "userEmail": "user579@naver.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 4,
+    "title": "[사이판 / 가라판] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-03-10",
+    "userId": "usr-rev-480",
+    "userName": "하*빈",
+    "userEmail": "user580@gmail.com",
+    "packageId": "pkg-us-03",
+    "packageSlug": "saipan-kensington-4d",
+    "packageTitle": "[남태평양 청정보석] 사이판 켄싱턴 리조트 & 마나가하섬 스노클링 3박 4일",
+    "rating": 5,
+    "title": "[사이판 / 가라판] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-01",
+    "userId": "usr-rev-481",
+    "userName": "김*우",
+    "userEmail": "user581@kakao.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "시드니 / 블루마운틴 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-02",
+    "userId": "usr-rev-482",
+    "userName": "이*진",
+    "userEmail": "user582@hanmail.net",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-03",
+    "userId": "usr-rev-483",
+    "userName": "박*현",
+    "userEmail": "user583@naver.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 시드니 / 블루마운틴 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-04",
+    "userId": "usr-rev-484",
+    "userName": "최*영",
+    "userEmail": "user584@gmail.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-05",
+    "userId": "usr-rev-485",
+    "userName": "정*훈",
+    "userEmail": "user585@daum.net",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 4,
+    "title": "[시드니 / 블루마운틴] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-06",
+    "userId": "usr-rev-486",
+    "userName": "강*원",
+    "userEmail": "user586@kakao.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-07",
+    "userId": "usr-rev-487",
+    "userName": "조*민",
+    "userEmail": "user587@hanmail.net",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "시드니 / 블루마운틴에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-08",
+    "userId": "usr-rev-488",
+    "userName": "윤*서",
+    "userEmail": "user588@naver.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-09",
+    "userId": "usr-rev-489",
+    "userName": "장*혁",
+    "userEmail": "user589@gmail.com",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 4,
+    "title": "[시드니 / 블루마운틴] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-04-10",
+    "userId": "usr-rev-490",
+    "userName": "임*하",
+    "userEmail": "user590@daum.net",
+    "packageId": "pkg-us-04",
+    "packageSlug": "sydney-blue-mountains-6d",
+    "packageTitle": "[눈부신 항구도시] 호주 시드니 오페라하우스 & 블루마운틴 국립공원 4박 6일",
+    "rating": 5,
+    "title": "[시드니 / 블루마운틴] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-01",
+    "userId": "usr-rev-491",
+    "userName": "한*준",
+    "userEmail": "user591@hanmail.net",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "멜버른 / 필립아일랜드 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-02",
+    "userId": "usr-rev-492",
+    "userName": "송*은",
+    "userEmail": "user592@naver.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-03",
+    "userId": "usr-rev-493",
+    "userName": "오*진",
+    "userEmail": "user593@gmail.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 멜버른 / 필립아일랜드 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-04",
+    "userId": "usr-rev-494",
+    "userName": "신*호",
+    "userEmail": "user594@daum.net",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-05",
+    "userId": "usr-rev-495",
+    "userName": "배*린",
+    "userEmail": "user595@kakao.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 4,
+    "title": "[멜버른 / 필립아일랜드] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-06",
+    "userId": "usr-rev-496",
+    "userName": "유*재",
+    "userEmail": "user596@hanmail.net",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-07",
+    "userId": "usr-rev-497",
+    "userName": "홍*경",
+    "userEmail": "user597@naver.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "멜버른 / 필립아일랜드에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-08",
+    "userId": "usr-rev-498",
+    "userName": "문*석",
+    "userEmail": "user598@gmail.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-09",
+    "userId": "usr-rev-499",
+    "userName": "류*희",
+    "userEmail": "user599@daum.net",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 4,
+    "title": "[멜버른 / 필립아일랜드] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-05-10",
+    "userId": "usr-rev-500",
+    "userName": "서*준",
+    "userEmail": "user600@kakao.com",
+    "packageId": "pkg-us-05",
+    "packageSlug": "melbourne-great-ocean-road-6d",
+    "packageTitle": "[예술과 자연의 조화] 호주 멜버른 그레이트 오션로드 & 12사도 4박 6일",
+    "rating": 5,
+    "title": "[멜버른 / 필립아일랜드] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-01",
+    "userId": "usr-rev-501",
+    "userName": "황*연",
+    "userEmail": "user601@naver.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "오클랜드 / 로토루아 / 퀸스타운 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-02",
+    "userId": "usr-rev-502",
+    "userName": "안*태",
+    "userEmail": "user602@gmail.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-03",
+    "userId": "usr-rev-503",
+    "userName": "고*아",
+    "userEmail": "user603@daum.net",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 오클랜드 / 로토루아 / 퀸스타운 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-04",
+    "userId": "usr-rev-504",
+    "userName": "권*민",
+    "userEmail": "user604@kakao.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-05",
+    "userId": "usr-rev-505",
+    "userName": "백*승",
+    "userEmail": "user605@hanmail.net",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 4,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-06",
+    "userId": "usr-rev-506",
+    "userName": "노*주",
+    "userEmail": "user606@naver.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-07",
+    "userId": "usr-rev-507",
+    "userName": "허*석",
+    "userEmail": "user607@gmail.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "오클랜드 / 로토루아 / 퀸스타운에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-08",
+    "userId": "usr-rev-508",
+    "userName": "남*우",
+    "userEmail": "user608@daum.net",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-09",
+    "userId": "usr-rev-509",
+    "userName": "심*정",
+    "userEmail": "user609@kakao.com",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 4,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-06-10",
+    "userId": "usr-rev-510",
+    "userName": "하*빈",
+    "userEmail": "user610@hanmail.net",
+    "packageId": "pkg-us-06",
+    "packageSlug": "new-zealand-milford-sound-9d",
+    "packageTitle": "[청정 대자연의 극치] 뉴질랜드 남북섬 완벽일주 밀포드사운드 7박 9일",
+    "rating": 5,
+    "title": "[오클랜드 / 로토루아 / 퀸스타운] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-01",
+    "userId": "usr-rev-511",
+    "userName": "김*우",
+    "userEmail": "user611@gmail.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "캘거리 / 밴프 / 재스퍼 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-02",
+    "userId": "usr-rev-512",
+    "userName": "이*진",
+    "userEmail": "user612@daum.net",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-03",
+    "userId": "usr-rev-513",
+    "userName": "박*현",
+    "userEmail": "user613@kakao.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 캘거리 / 밴프 / 재스퍼 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-04",
+    "userId": "usr-rev-514",
+    "userName": "최*영",
+    "userEmail": "user614@hanmail.net",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-05",
+    "userId": "usr-rev-515",
+    "userName": "정*훈",
+    "userEmail": "user615@naver.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 4,
+    "title": "[캘거리 / 밴프 / 재스퍼] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-06",
+    "userId": "usr-rev-516",
+    "userName": "강*원",
+    "userEmail": "user616@gmail.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-07",
+    "userId": "usr-rev-517",
+    "userName": "조*민",
+    "userEmail": "user617@daum.net",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "캘거리 / 밴프 / 재스퍼에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-08",
+    "userId": "usr-rev-518",
+    "userName": "윤*서",
+    "userEmail": "user618@kakao.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-09",
+    "userId": "usr-rev-519",
+    "userName": "장*혁",
+    "userEmail": "user619@hanmail.net",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 4,
+    "title": "[캘거리 / 밴프 / 재스퍼] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-07-10",
+    "userId": "usr-rev-520",
+    "userName": "임*하",
+    "userEmail": "user620@naver.com",
+    "packageId": "pkg-us-07",
+    "packageSlug": "canada-rockies-banff-7d",
+    "packageTitle": "[에메랄드빛 빙하호수] 캐나다 로키산맥 밴프 국립공원 & 레이크루이스 5박 7일",
+    "rating": 5,
+    "title": "[캘거리 / 밴프 / 재스퍼] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-01",
+    "userId": "usr-rev-521",
+    "userName": "한*준",
+    "userEmail": "user621@daum.net",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "뉴욕 / 워싱턴 DC 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-02",
+    "userId": "usr-rev-522",
+    "userName": "송*은",
+    "userEmail": "user622@kakao.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-03",
+    "userId": "usr-rev-523",
+    "userName": "오*진",
+    "userEmail": "user623@hanmail.net",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 뉴욕 / 워싱턴 DC 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-04",
+    "userId": "usr-rev-524",
+    "userName": "신*호",
+    "userEmail": "user624@naver.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-05",
+    "userId": "usr-rev-525",
+    "userName": "배*린",
+    "userEmail": "user625@gmail.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 4,
+    "title": "[뉴욕 / 워싱턴 DC] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-06",
+    "userId": "usr-rev-526",
+    "userName": "유*재",
+    "userEmail": "user626@daum.net",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-07",
+    "userId": "usr-rev-527",
+    "userName": "홍*경",
+    "userEmail": "user627@kakao.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "뉴욕 / 워싱턴 DC에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-08",
+    "userId": "usr-rev-528",
+    "userName": "문*석",
+    "userEmail": "user628@hanmail.net",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-09",
+    "userId": "usr-rev-529",
+    "userName": "류*희",
+    "userEmail": "user629@naver.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 4,
+    "title": "[뉴욕 / 워싱턴 DC] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-08-10",
+    "userId": "usr-rev-530",
+    "userName": "서*준",
+    "userEmail": "user630@gmail.com",
+    "packageId": "pkg-us-08",
+    "packageSlug": "new-york-washington-8d",
+    "packageTitle": "[세계의 중심 맨해튼] 미국 뉴욕 센트럴파크 & 워싱턴 DC 역사탐방 6박 8일",
+    "rating": 5,
+    "title": "[뉴욕 / 워싱턴 DC] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-01",
+    "userId": "usr-rev-531",
+    "userName": "황*연",
+    "userEmail": "user631@kakao.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-02",
+    "userId": "usr-rev-532",
+    "userName": "안*태",
+    "userEmail": "user632@hanmail.net",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-03",
+    "userId": "usr-rev-533",
+    "userName": "고*아",
+    "userEmail": "user633@naver.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-04",
+    "userId": "usr-rev-534",
+    "userName": "권*민",
+    "userEmail": "user634@gmail.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-05",
+    "userId": "usr-rev-535",
+    "userName": "백*승",
+    "userEmail": "user635@daum.net",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 4,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-06",
+    "userId": "usr-rev-536",
+    "userName": "노*주",
+    "userEmail": "user636@kakao.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-07",
+    "userId": "usr-rev-537",
+    "userName": "허*석",
+    "userEmail": "user637@hanmail.net",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-08",
+    "userId": "usr-rev-538",
+    "userName": "남*우",
+    "userEmail": "user638@naver.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-09",
+    "userId": "usr-rev-539",
+    "userName": "심*정",
+    "userEmail": "user639@gmail.com",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 4,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-09-10",
+    "userId": "usr-rev-540",
+    "userName": "하*빈",
+    "userEmail": "user640@daum.net",
+    "packageId": "pkg-us-09",
+    "packageSlug": "grand-canyon-las-vegas-8d",
+    "packageTitle": "[서부 3대 캐년] 미서부 그랜드캐년 헬기투어 & 라스베이거스 6박 8일",
+    "rating": 5,
+    "title": "[라스베이거스 / 그랜드캐년 / 자이언캐년 / 브라이스캐년] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-01",
+    "userId": "usr-rev-541",
+    "userName": "김*우",
+    "userEmail": "user641@hanmail.net",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "샌프란시스코 / 로스앤젤레스 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-02",
+    "userId": "usr-rev-542",
+    "userName": "이*진",
+    "userEmail": "user642@naver.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-03",
+    "userId": "usr-rev-543",
+    "userName": "박*현",
+    "userEmail": "user643@gmail.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 샌프란시스코 / 로스앤젤레스 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-04",
+    "userId": "usr-rev-544",
+    "userName": "최*영",
+    "userEmail": "user644@daum.net",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-05",
+    "userId": "usr-rev-545",
+    "userName": "정*훈",
+    "userEmail": "user645@kakao.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 4,
+    "title": "[샌프란시스코 / 로스앤젤레스] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-06",
+    "userId": "usr-rev-546",
+    "userName": "강*원",
+    "userEmail": "user646@hanmail.net",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-07",
+    "userId": "usr-rev-547",
+    "userName": "조*민",
+    "userEmail": "user647@naver.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "샌프란시스코 / 로스앤젤레스에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-08",
+    "userId": "usr-rev-548",
+    "userName": "윤*서",
+    "userEmail": "user648@gmail.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-09",
+    "userId": "usr-rev-549",
+    "userName": "장*혁",
+    "userEmail": "user649@daum.net",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 4,
+    "title": "[샌프란시스코 / 로스앤젤레스] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-10-10",
+    "userId": "usr-rev-550",
+    "userName": "임*하",
+    "userEmail": "user650@kakao.com",
+    "packageId": "pkg-us-10",
+    "packageSlug": "california-sf-la-7d",
+    "packageTitle": "[태양의 캘리포니아] 미국 샌프란시스코 금문교 & LA 헐리우드 5박 7일",
+    "rating": 5,
+    "title": "[샌프란시스코 / 로스앤젤레스] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-01",
+    "userId": "usr-rev-551",
+    "userName": "한*준",
+    "userEmail": "user651@naver.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "칸쿤 / 플라야델카르멘 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-02",
+    "userId": "usr-rev-552",
+    "userName": "송*은",
+    "userEmail": "user652@gmail.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-03",
+    "userId": "usr-rev-553",
+    "userName": "오*진",
+    "userEmail": "user653@daum.net",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 칸쿤 / 플라야델카르멘 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-04",
+    "userId": "usr-rev-554",
+    "userName": "신*호",
+    "userEmail": "user654@kakao.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-05",
+    "userId": "usr-rev-555",
+    "userName": "배*린",
+    "userEmail": "user655@hanmail.net",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 4,
+    "title": "[칸쿤 / 플라야델카르멘] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-06",
+    "userId": "usr-rev-556",
+    "userName": "유*재",
+    "userEmail": "user656@naver.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-07",
+    "userId": "usr-rev-557",
+    "userName": "홍*경",
+    "userEmail": "user657@gmail.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "칸쿤 / 플라야델카르멘에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-08",
+    "userId": "usr-rev-558",
+    "userName": "문*석",
+    "userEmail": "user658@daum.net",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-09",
+    "userId": "usr-rev-559",
+    "userName": "류*희",
+    "userEmail": "user659@kakao.com",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 4,
+    "title": "[칸쿤 / 플라야델카르멘] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-11-10",
+    "userId": "usr-rev-560",
+    "userName": "서*준",
+    "userEmail": "user660@hanmail.net",
+    "packageId": "pkg-us-11",
+    "packageSlug": "cancun-all-inclusive-luxury-7d",
+    "packageTitle": "[카리브해 올인클루시브] 멕시코 칸쿤 5성급 럭셔리 리조트 & 세노테 5박 7일",
+    "rating": 5,
+    "title": "[칸쿤 / 플라야델카르멘] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-01",
+    "userId": "usr-rev-561",
+    "userName": "황*연",
+    "userEmail": "user661@gmail.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "골드코스트 / 브리즈번 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+      "images/destinations/gold-coast-panorama.jpg"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-02",
+    "userId": "usr-rev-562",
+    "userName": "안*태",
+    "userEmail": "user662@daum.net",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/gold-coast-panorama.jpg",
+    "images": [
+      "images/destinations/gold-coast-panorama.jpg",
+      "images/destinations/brisbane-panorama.jpg"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-03",
+    "userId": "usr-rev-563",
+    "userName": "고*아",
+    "userEmail": "user663@kakao.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 골드코스트 / 브리즈번 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/brisbane-panorama.jpg",
+    "images": [
+      "images/destinations/brisbane-panorama.jpg",
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-04",
+    "userId": "usr-rev-564",
+    "userName": "권*민",
+    "userEmail": "user664@hanmail.net",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+      "images/destinations/gold-coast-panorama.jpg"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-05",
+    "userId": "usr-rev-565",
+    "userName": "백*승",
+    "userEmail": "user665@naver.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 4,
+    "title": "[골드코스트 / 브리즈번] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/gold-coast-panorama.jpg",
+    "images": [
+      "images/destinations/gold-coast-panorama.jpg",
+      "images/destinations/brisbane-panorama.jpg"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-06",
+    "userId": "usr-rev-566",
+    "userName": "노*주",
+    "userEmail": "user666@gmail.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/brisbane-panorama.jpg",
+    "images": [
+      "images/destinations/brisbane-panorama.jpg",
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-07",
+    "userId": "usr-rev-567",
+    "userName": "허*석",
+    "userEmail": "user667@daum.net",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "골드코스트 / 브리즈번에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+      "images/destinations/gold-coast-panorama.jpg"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-08",
+    "userId": "usr-rev-568",
+    "userName": "남*우",
+    "userEmail": "user668@kakao.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/gold-coast-panorama.jpg",
+    "images": [
+      "images/destinations/gold-coast-panorama.jpg",
+      "images/destinations/brisbane-panorama.jpg"
+    ],
+    "likes": 29,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-09",
+    "userId": "usr-rev-569",
+    "userName": "심*정",
+    "userEmail": "user669@hanmail.net",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 4,
+    "title": "[골드코스트 / 브리즈번] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/brisbane-panorama.jpg",
+    "images": [
+      "images/destinations/brisbane-panorama.jpg",
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-12-10",
+    "userId": "usr-rev-570",
+    "userName": "하*빈",
+    "userEmail": "user670@naver.com",
+    "packageId": "pkg-us-12",
+    "packageSlug": "gold-coast-surfers-paradise-6d",
+    "packageTitle": "[황금빛 서핑천국] 호주 골드코스트 서퍼스파라다이스 & 브리즈번 4박 6일",
+    "rating": 5,
+    "title": "[골드코스트 / 브리즈번] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85",
+      "images/destinations/gold-coast-panorama.jpg"
+    ],
+    "likes": 35,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-01",
+    "userId": "usr-rev-571",
+    "userName": "김*우",
+    "userEmail": "user671@daum.net",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "옐로스톤 / 잭슨홀 / 솔트레이크시티 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-02",
+    "userId": "usr-rev-572",
+    "userName": "이*진",
+    "userEmail": "user672@kakao.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-03",
+    "userId": "usr-rev-573",
+    "userName": "박*현",
+    "userEmail": "user673@hanmail.net",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 옐로스톤 / 잭슨홀 / 솔트레이크시티 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-04",
+    "userId": "usr-rev-574",
+    "userName": "최*영",
+    "userEmail": "user674@naver.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-05",
+    "userId": "usr-rev-575",
+    "userName": "정*훈",
+    "userEmail": "user675@gmail.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 4,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-06",
+    "userId": "usr-rev-576",
+    "userName": "강*원",
+    "userEmail": "user676@daum.net",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-07",
+    "userId": "usr-rev-577",
+    "userName": "조*민",
+    "userEmail": "user677@kakao.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "옐로스톤 / 잭슨홀 / 솔트레이크시티에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-08",
+    "userId": "usr-rev-578",
+    "userName": "윤*서",
+    "userEmail": "user678@hanmail.net",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-09",
+    "userId": "usr-rev-579",
+    "userName": "장*혁",
+    "userEmail": "user679@naver.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 4,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-13-10",
+    "userId": "usr-rev-580",
+    "userName": "임*하",
+    "userEmail": "user680@gmail.com",
+    "packageId": "pkg-us-13",
+    "packageSlug": "yellowstone-grand-teton-8d",
+    "packageTitle": "[간헐천과 야생의 땅] 미국 옐로스톤 국립공원 & 그랜드티톤 6박 8일",
+    "rating": 5,
+    "title": "[옐로스톤 / 잭슨홀 / 솔트레이크시티] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1588714477688-cf28a50e94f7?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-01",
+    "userId": "usr-rev-581",
+    "userName": "한*준",
+    "userEmail": "user681@kakao.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "타히티 / 보라보라 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-02",
+    "userId": "usr-rev-582",
+    "userName": "송*은",
+    "userEmail": "user682@hanmail.net",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-03",
+    "userId": "usr-rev-583",
+    "userName": "오*진",
+    "userEmail": "user683@naver.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 타히티 / 보라보라 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-04",
+    "userId": "usr-rev-584",
+    "userName": "신*호",
+    "userEmail": "user684@gmail.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-05",
+    "userId": "usr-rev-585",
+    "userName": "배*린",
+    "userEmail": "user685@daum.net",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 4,
+    "title": "[타히티 / 보라보라] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-06",
+    "userId": "usr-rev-586",
+    "userName": "유*재",
+    "userEmail": "user686@kakao.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-07",
+    "userId": "usr-rev-587",
+    "userName": "홍*경",
+    "userEmail": "user687@hanmail.net",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "타히티 / 보라보라에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-08",
+    "userId": "usr-rev-588",
+    "userName": "문*석",
+    "userEmail": "user688@naver.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-09",
+    "userId": "usr-rev-589",
+    "userName": "류*희",
+    "userEmail": "user689@gmail.com",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 4,
+    "title": "[타히티 / 보라보라] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-14-10",
+    "userId": "usr-rev-590",
+    "userName": "서*준",
+    "userEmail": "user690@daum.net",
+    "packageId": "pkg-us-14",
+    "packageSlug": "tahiti-bora-bora-overwater-7d",
+    "packageTitle": "[남태평양의 최고봉] 타히티 보라보라 수상방갈로 럭셔리 허니문 5박 7일",
+    "rating": 5,
+    "title": "[타히티 / 보라보라] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-01",
+    "userId": "usr-rev-591",
+    "userName": "황*연",
+    "userEmail": "user691@hanmail.net",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "앵커리지 / 수워드 / 휘티어 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-02",
+    "userId": "usr-rev-592",
+    "userName": "안*태",
+    "userEmail": "user692@naver.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-03",
+    "userId": "usr-rev-593",
+    "userName": "고*아",
+    "userEmail": "user693@gmail.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 앵커리지 / 수워드 / 휘티어 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-04",
+    "userId": "usr-rev-594",
+    "userName": "권*민",
+    "userEmail": "user694@daum.net",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-05",
+    "userId": "usr-rev-595",
+    "userName": "백*승",
+    "userEmail": "user695@kakao.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 4,
+    "title": "[앵커리지 / 수워드 / 휘티어] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-06",
+    "userId": "usr-rev-596",
+    "userName": "노*주",
+    "userEmail": "user696@hanmail.net",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-07",
+    "userId": "usr-rev-597",
+    "userName": "허*석",
+    "userEmail": "user697@naver.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "앵커리지 / 수워드 / 휘티어에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-08",
+    "userId": "usr-rev-598",
+    "userName": "남*우",
+    "userEmail": "user698@gmail.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-09",
+    "userId": "usr-rev-599",
+    "userName": "심*정",
+    "userEmail": "user699@daum.net",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 4,
+    "title": "[앵커리지 / 수워드 / 휘티어] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-us-15-10",
+    "userId": "usr-rev-600",
+    "userName": "하*빈",
+    "userEmail": "user700@kakao.com",
+    "packageId": "pkg-us-15",
+    "packageSlug": "alaska-kenai-glacier-7d",
+    "packageTitle": "[푸른 빙하의 장관] 미국 알래스카 앵커리지 & 키나이 피오르드 빙하 크루즈 5박 7일",
+    "rating": 5,
+    "title": "[앵커리지 / 수워드 / 휘티어] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-01",
+    "userId": "usr-rev-601",
+    "userName": "김*우",
+    "userEmail": "user701@naver.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "제주 / 서귀포 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-02",
+    "userId": "usr-rev-602",
+    "userName": "이*진",
+    "userEmail": "user702@gmail.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-03",
+    "userId": "usr-rev-603",
+    "userName": "박*현",
+    "userEmail": "user703@daum.net",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 제주 / 서귀포 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-04",
+    "userId": "usr-rev-604",
+    "userName": "최*영",
+    "userEmail": "user704@kakao.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-05",
+    "userId": "usr-rev-605",
+    "userName": "정*훈",
+    "userEmail": "user705@hanmail.net",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 4,
+    "title": "[제주 / 서귀포] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-06",
+    "userId": "usr-rev-606",
+    "userName": "강*원",
+    "userEmail": "user706@naver.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-07",
+    "userId": "usr-rev-607",
+    "userName": "조*민",
+    "userEmail": "user707@gmail.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "제주 / 서귀포에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-08",
+    "userId": "usr-rev-608",
+    "userName": "윤*서",
+    "userEmail": "user708@daum.net",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-09",
+    "userId": "usr-rev-609",
+    "userName": "장*혁",
+    "userEmail": "user709@kakao.com",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 4,
+    "title": "[제주 / 서귀포] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-01-10",
+    "userId": "usr-rev-610",
+    "userName": "임*하",
+    "userEmail": "user710@hanmail.net",
+    "packageId": "pkg-kr-01",
+    "packageSlug": "jeju-grand-josun-healing-3d",
+    "packageTitle": "[5성급 힐링 호캉스] 제주 그랜드 조선 & 우도 보트투어 & 카멜리아힐 2박 3일",
+    "rating": 5,
+    "title": "[제주 / 서귀포] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1612852098516-55d01c75769a?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-01",
+    "userId": "usr-rev-611",
+    "userName": "한*준",
+    "userEmail": "user711@gmail.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "여수 / 순천 / 통영 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/yeosu-night-sea.jpg",
+    "images": [
+      "images/destinations/yeosu-night-sea.jpg",
+      "images/destinations/suncheon-reed-wetland.jpg"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-02",
+    "userId": "usr-rev-612",
+    "userName": "송*은",
+    "userEmail": "user712@daum.net",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/suncheon-reed-wetland.jpg",
+    "images": [
+      "images/destinations/suncheon-reed-wetland.jpg",
+      "images/destinations/tongyeong-panorama.jpg"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-03",
+    "userId": "usr-rev-613",
+    "userName": "오*진",
+    "userEmail": "user713@kakao.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 여수 / 순천 / 통영 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/tongyeong-panorama.jpg",
+    "images": [
+      "images/destinations/tongyeong-panorama.jpg",
+      "images/destinations/yeosu-night-sea.jpg"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-04",
+    "userId": "usr-rev-614",
+    "userName": "신*호",
+    "userEmail": "user714@hanmail.net",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/yeosu-night-sea.jpg",
+    "images": [
+      "images/destinations/yeosu-night-sea.jpg",
+      "images/destinations/suncheon-reed-wetland.jpg"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-05",
+    "userId": "usr-rev-615",
+    "userName": "배*린",
+    "userEmail": "user715@naver.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 4,
+    "title": "[여수 / 순천 / 통영] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/suncheon-reed-wetland.jpg",
+    "images": [
+      "images/destinations/suncheon-reed-wetland.jpg",
+      "images/destinations/tongyeong-panorama.jpg"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-06",
+    "userId": "usr-rev-616",
+    "userName": "유*재",
+    "userEmail": "user716@gmail.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/tongyeong-panorama.jpg",
+    "images": [
+      "images/destinations/tongyeong-panorama.jpg",
+      "images/destinations/yeosu-night-sea.jpg"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-07",
+    "userId": "usr-rev-617",
+    "userName": "홍*경",
+    "userEmail": "user717@daum.net",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "여수 / 순천 / 통영에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/yeosu-night-sea.jpg",
+    "images": [
+      "images/destinations/yeosu-night-sea.jpg",
+      "images/destinations/suncheon-reed-wetland.jpg"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-08",
+    "userId": "usr-rev-618",
+    "userName": "문*석",
+    "userEmail": "user718@kakao.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/suncheon-reed-wetland.jpg",
+    "images": [
+      "images/destinations/suncheon-reed-wetland.jpg",
+      "images/destinations/tongyeong-panorama.jpg"
+    ],
+    "likes": 34,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-09",
+    "userId": "usr-rev-619",
+    "userName": "류*희",
+    "userEmail": "user719@hanmail.net",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 4,
+    "title": "[여수 / 순천 / 통영] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/tongyeong-panorama.jpg",
+    "images": [
+      "images/destinations/tongyeong-panorama.jpg",
+      "images/destinations/yeosu-night-sea.jpg"
+    ],
+    "likes": 7,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-02-10",
+    "userId": "usr-rev-620",
+    "userName": "서*준",
+    "userEmail": "user720@naver.com",
+    "packageId": "pkg-kr-02",
+    "packageSlug": "yeosu-suncheon-tongyeong-3d",
+    "packageTitle": "[낭만 바다 투어] 여수 밤바다 낭만포차 & 순천만 갈대습지 & 통영 2박 3일",
+    "rating": 5,
+    "title": "[여수 / 순천 / 통영] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/yeosu-night-sea.jpg",
+    "images": [
+      "images/destinations/yeosu-night-sea.jpg",
+      "images/destinations/suncheon-reed-wetland.jpg"
+    ],
+    "likes": 10,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-01",
+    "userId": "usr-rev-621",
+    "userName": "황*연",
+    "userEmail": "user721@daum.net",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "강릉 / 속초 / 양양 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-02",
+    "userId": "usr-rev-622",
+    "userName": "안*태",
+    "userEmail": "user722@kakao.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-03",
+    "userId": "usr-rev-623",
+    "userName": "고*아",
+    "userEmail": "user723@hanmail.net",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 강릉 / 속초 / 양양 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-04",
+    "userId": "usr-rev-624",
+    "userName": "권*민",
+    "userEmail": "user724@naver.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-05",
+    "userId": "usr-rev-625",
+    "userName": "백*승",
+    "userEmail": "user725@gmail.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 4,
+    "title": "[강릉 / 속초 / 양양] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-06",
+    "userId": "usr-rev-626",
+    "userName": "노*주",
+    "userEmail": "user726@daum.net",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-07",
+    "userId": "usr-rev-627",
+    "userName": "허*석",
+    "userEmail": "user727@kakao.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "강릉 / 속초 / 양양에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-08",
+    "userId": "usr-rev-628",
+    "userName": "남*우",
+    "userEmail": "user728@hanmail.net",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-09",
+    "userId": "usr-rev-629",
+    "userName": "심*정",
+    "userEmail": "user729@naver.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 4,
+    "title": "[강릉 / 속초 / 양양] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-03-10",
+    "userId": "usr-rev-630",
+    "userName": "하*빈",
+    "userEmail": "user730@gmail.com",
+    "packageId": "pkg-kr-03",
+    "packageSlug": "gangneung-sokcho-2d",
+    "packageTitle": "[동해 바다 & 커피] 강릉 안목해변 카페거리 + 속초 중앙시장 + 설악산 1박 2일",
+    "rating": 5,
+    "title": "[강릉 / 속초 / 양양] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-01",
+    "userId": "usr-rev-631",
+    "userName": "김*우",
+    "userEmail": "user731@kakao.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "경주 / 보문단지 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/gyeongju-bulguksa.jpg",
+    "images": [
+      "images/destinations/gyeongju-bulguksa.jpg",
+      "images/destinations/gyeongju-cheomseongdae.jpg"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-02",
+    "userId": "usr-rev-632",
+    "userName": "이*진",
+    "userEmail": "user732@hanmail.net",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/gyeongju-cheomseongdae.jpg",
+    "images": [
+      "images/destinations/gyeongju-cheomseongdae.jpg",
+      "images/destinations/gyeongju-hwangridangil.jpg"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-03",
+    "userId": "usr-rev-633",
+    "userName": "박*현",
+    "userEmail": "user733@naver.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 경주 / 보문단지 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/gyeongju-hwangridangil.jpg",
+    "images": [
+      "images/destinations/gyeongju-hwangridangil.jpg",
+      "images/destinations/gyeongju-bulguksa.jpg"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-04",
+    "userId": "usr-rev-634",
+    "userName": "최*영",
+    "userEmail": "user734@gmail.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/gyeongju-bulguksa.jpg",
+    "images": [
+      "images/destinations/gyeongju-bulguksa.jpg",
+      "images/destinations/gyeongju-cheomseongdae.jpg"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-05",
+    "userId": "usr-rev-635",
+    "userName": "정*훈",
+    "userEmail": "user735@daum.net",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 4,
+    "title": "[경주 / 보문단지] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/gyeongju-cheomseongdae.jpg",
+    "images": [
+      "images/destinations/gyeongju-cheomseongdae.jpg",
+      "images/destinations/gyeongju-hwangridangil.jpg"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-06",
+    "userId": "usr-rev-636",
+    "userName": "강*원",
+    "userEmail": "user736@kakao.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/gyeongju-hwangridangil.jpg",
+    "images": [
+      "images/destinations/gyeongju-hwangridangil.jpg",
+      "images/destinations/gyeongju-bulguksa.jpg"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-07",
+    "userId": "usr-rev-637",
+    "userName": "조*민",
+    "userEmail": "user737@hanmail.net",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "경주 / 보문단지에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/gyeongju-bulguksa.jpg",
+    "images": [
+      "images/destinations/gyeongju-bulguksa.jpg",
+      "images/destinations/gyeongju-cheomseongdae.jpg"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-08",
+    "userId": "usr-rev-638",
+    "userName": "윤*서",
+    "userEmail": "user738@naver.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/gyeongju-cheomseongdae.jpg",
+    "images": [
+      "images/destinations/gyeongju-cheomseongdae.jpg",
+      "images/destinations/gyeongju-hwangridangil.jpg"
+    ],
+    "likes": 18,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-09",
+    "userId": "usr-rev-639",
+    "userName": "장*혁",
+    "userEmail": "user739@gmail.com",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 4,
+    "title": "[경주 / 보문단지] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/gyeongju-hwangridangil.jpg",
+    "images": [
+      "images/destinations/gyeongju-hwangridangil.jpg",
+      "images/destinations/gyeongju-bulguksa.jpg"
+    ],
+    "likes": 21,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-04-10",
+    "userId": "usr-rev-640",
+    "userName": "임*하",
+    "userEmail": "user740@daum.net",
+    "packageId": "pkg-kr-04",
+    "packageSlug": "gyeongju-history-2d",
+    "packageTitle": "[천년의 역사와 멋] 경주 불국사 & 첨성대 & 황리단길 한옥투어 1박 2일",
+    "rating": 5,
+    "title": "[경주 / 보문단지] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/gyeongju-bulguksa.jpg",
+    "images": [
+      "images/destinations/gyeongju-bulguksa.jpg",
+      "images/destinations/gyeongju-cheomseongdae.jpg"
+    ],
+    "likes": 24,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-01",
+    "userId": "usr-rev-641",
+    "userName": "한*준",
+    "userEmail": "user741@hanmail.net",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "부산 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/busan-haeundae-lct.jpg",
+    "images": [
+      "images/destinations/busan-haeundae-lct.jpg",
+      "images/destinations/busan-gwangalli-yacht.jpg"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-02",
+    "userId": "usr-rev-642",
+    "userName": "송*은",
+    "userEmail": "user742@naver.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/busan-gwangalli-yacht.jpg",
+    "images": [
+      "images/destinations/busan-gwangalli-yacht.jpg",
+      "images/destinations/busan-jagalchi-market.jpg"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-03",
+    "userId": "usr-rev-643",
+    "userName": "오*진",
+    "userEmail": "user743@gmail.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 부산 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/busan-jagalchi-market.jpg",
+    "images": [
+      "images/destinations/busan-jagalchi-market.jpg",
+      "images/destinations/busan-haeundae-lct.jpg"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-04",
+    "userId": "usr-rev-644",
+    "userName": "신*호",
+    "userEmail": "user744@daum.net",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/busan-haeundae-lct.jpg",
+    "images": [
+      "images/destinations/busan-haeundae-lct.jpg",
+      "images/destinations/busan-gwangalli-yacht.jpg"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-05",
+    "userId": "usr-rev-645",
+    "userName": "배*린",
+    "userEmail": "user745@kakao.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 4,
+    "title": "[부산] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "images/destinations/busan-gwangalli-yacht.jpg",
+    "images": [
+      "images/destinations/busan-gwangalli-yacht.jpg",
+      "images/destinations/busan-jagalchi-market.jpg"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-06",
+    "userId": "usr-rev-646",
+    "userName": "유*재",
+    "userEmail": "user746@hanmail.net",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "images/destinations/busan-jagalchi-market.jpg",
+    "images": [
+      "images/destinations/busan-jagalchi-market.jpg",
+      "images/destinations/busan-haeundae-lct.jpg"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-07",
+    "userId": "usr-rev-647",
+    "userName": "홍*경",
+    "userEmail": "user747@naver.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "부산에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "images/destinations/busan-haeundae-lct.jpg",
+    "images": [
+      "images/destinations/busan-haeundae-lct.jpg",
+      "images/destinations/busan-gwangalli-yacht.jpg"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-08",
+    "userId": "usr-rev-648",
+    "userName": "문*석",
+    "userEmail": "user748@gmail.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "images/destinations/busan-gwangalli-yacht.jpg",
+    "images": [
+      "images/destinations/busan-gwangalli-yacht.jpg",
+      "images/destinations/busan-jagalchi-market.jpg"
+    ],
+    "likes": 25,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-09",
+    "userId": "usr-rev-649",
+    "userName": "류*희",
+    "userEmail": "user749@daum.net",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 4,
+    "title": "[부산] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "images/destinations/busan-jagalchi-market.jpg",
+    "images": [
+      "images/destinations/busan-jagalchi-market.jpg",
+      "images/destinations/busan-haeundae-lct.jpg"
+    ],
+    "likes": 28,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-05-10",
+    "userId": "usr-rev-650",
+    "userName": "서*준",
+    "userEmail": "user750@kakao.com",
+    "packageId": "pkg-kr-05",
+    "packageSlug": "busan-luxury-yacht-3d",
+    "packageTitle": "[요트 & 오션뷰 호캉스] 부산 해운대 엘시티 & 광안리 요트 & 자갈치 2박 3일",
+    "rating": 5,
+    "title": "[부산] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "images/destinations/busan-haeundae-lct.jpg",
+    "images": [
+      "images/destinations/busan-haeundae-lct.jpg",
+      "images/destinations/busan-gwangalli-yacht.jpg"
+    ],
+    "likes": 31,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-01",
+    "userId": "usr-rev-651",
+    "userName": "황*연",
+    "userEmail": "user751@naver.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "남해 / 사천 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-02",
+    "userId": "usr-rev-652",
+    "userName": "안*태",
+    "userEmail": "user752@gmail.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-03",
+    "userId": "usr-rev-653",
+    "userName": "고*아",
+    "userEmail": "user753@daum.net",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 남해 / 사천 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-04",
+    "userId": "usr-rev-654",
+    "userName": "권*민",
+    "userEmail": "user754@kakao.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-05",
+    "userId": "usr-rev-655",
+    "userName": "백*승",
+    "userEmail": "user755@hanmail.net",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 4,
+    "title": "[남해 / 사천] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-06",
+    "userId": "usr-rev-656",
+    "userName": "노*주",
+    "userEmail": "user756@naver.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-07",
+    "userId": "usr-rev-657",
+    "userName": "허*석",
+    "userEmail": "user757@gmail.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "남해 / 사천에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-08",
+    "userId": "usr-rev-658",
+    "userName": "남*우",
+    "userEmail": "user758@daum.net",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-09",
+    "userId": "usr-rev-659",
+    "userName": "심*정",
+    "userEmail": "user759@kakao.com",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 4,
+    "title": "[남해 / 사천] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-06-10",
+    "userId": "usr-rev-660",
+    "userName": "하*빈",
+    "userEmail": "user760@hanmail.net",
+    "packageId": "pkg-kr-06",
+    "packageSlug": "namhae-german-village-2d",
+    "packageTitle": "[남해의 에메랄드] 남해 독일마을 & 다랭이마을 & 보리암 1박 2일",
+    "rating": 5,
+    "title": "[남해 / 사천] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-01",
+    "userId": "usr-rev-661",
+    "userName": "김*우",
+    "userEmail": "user761@gmail.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "거제 / 통영 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-02",
+    "userId": "usr-rev-662",
+    "userName": "이*진",
+    "userEmail": "user762@daum.net",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-03",
+    "userId": "usr-rev-663",
+    "userName": "박*현",
+    "userEmail": "user763@kakao.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 거제 / 통영 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-04",
+    "userId": "usr-rev-664",
+    "userName": "최*영",
+    "userEmail": "user764@hanmail.net",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-05",
+    "userId": "usr-rev-665",
+    "userName": "정*훈",
+    "userEmail": "user765@naver.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 4,
+    "title": "[거제 / 통영] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-06",
+    "userId": "usr-rev-666",
+    "userName": "강*원",
+    "userEmail": "user766@gmail.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-07",
+    "userId": "usr-rev-667",
+    "userName": "조*민",
+    "userEmail": "user767@daum.net",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "거제 / 통영에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-08",
+    "userId": "usr-rev-668",
+    "userName": "윤*서",
+    "userEmail": "user768@kakao.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-09",
+    "userId": "usr-rev-669",
+    "userName": "장*혁",
+    "userEmail": "user769@hanmail.net",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 4,
+    "title": "[거제 / 통영] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-07-10",
+    "userId": "usr-rev-670",
+    "userName": "임*하",
+    "userEmail": "user770@naver.com",
+    "packageId": "pkg-kr-07",
+    "packageSlug": "geoje-oedo-botania-2d",
+    "packageTitle": "[바람과 바다의 정원] 거제도 바람의 언덕 & 외도 보타니아 해상공원 1박 2일",
+    "rating": 5,
+    "title": "[거제 / 통영] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-01",
+    "userId": "usr-rev-671",
+    "userName": "한*준",
+    "userEmail": "user771@daum.net",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "전주 / 군산 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-02",
+    "userId": "usr-rev-672",
+    "userName": "송*은",
+    "userEmail": "user772@kakao.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-03",
+    "userId": "usr-rev-673",
+    "userName": "오*진",
+    "userEmail": "user773@hanmail.net",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 전주 / 군산 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-04",
+    "userId": "usr-rev-674",
+    "userName": "신*호",
+    "userEmail": "user774@naver.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-05",
+    "userId": "usr-rev-675",
+    "userName": "배*린",
+    "userEmail": "user775@gmail.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 4,
+    "title": "[전주 / 군산] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-06",
+    "userId": "usr-rev-676",
+    "userName": "유*재",
+    "userEmail": "user776@daum.net",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-07",
+    "userId": "usr-rev-677",
+    "userName": "홍*경",
+    "userEmail": "user777@kakao.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "전주 / 군산에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-08",
+    "userId": "usr-rev-678",
+    "userName": "문*석",
+    "userEmail": "user778@hanmail.net",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-09",
+    "userId": "usr-rev-679",
+    "userName": "류*희",
+    "userEmail": "user779@naver.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 4,
+    "title": "[전주 / 군산] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-08-10",
+    "userId": "usr-rev-680",
+    "userName": "서*준",
+    "userEmail": "user780@gmail.com",
+    "packageId": "pkg-kr-08",
+    "packageSlug": "jeonju-hanok-gourmet-2d",
+    "packageTitle": "[천년의 맛과 멋] 전주 한옥마을 경기전 & 전주 비빔밥 & 남부시장 1박 2일",
+    "rating": 5,
+    "title": "[전주 / 군산] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-01",
+    "userId": "usr-rev-681",
+    "userName": "황*연",
+    "userEmail": "user781@kakao.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "울릉도 / 독도 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-02",
+    "userId": "usr-rev-682",
+    "userName": "안*태",
+    "userEmail": "user782@hanmail.net",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-03",
+    "userId": "usr-rev-683",
+    "userName": "고*아",
+    "userEmail": "user783@naver.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 울릉도 / 독도 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-04",
+    "userId": "usr-rev-684",
+    "userName": "권*민",
+    "userEmail": "user784@gmail.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-05",
+    "userId": "usr-rev-685",
+    "userName": "백*승",
+    "userEmail": "user785@daum.net",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 4,
+    "title": "[울릉도 / 독도] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-06",
+    "userId": "usr-rev-686",
+    "userName": "노*주",
+    "userEmail": "user786@kakao.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-07",
+    "userId": "usr-rev-687",
+    "userName": "허*석",
+    "userEmail": "user787@hanmail.net",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "울릉도 / 독도에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-08",
+    "userId": "usr-rev-688",
+    "userName": "남*우",
+    "userEmail": "user788@naver.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-09",
+    "userId": "usr-rev-689",
+    "userName": "심*정",
+    "userEmail": "user789@gmail.com",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 4,
+    "title": "[울릉도 / 독도] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-09-10",
+    "userId": "usr-rev-690",
+    "userName": "하*빈",
+    "userEmail": "user790@daum.net",
+    "packageId": "pkg-kr-09",
+    "packageSlug": "ulleungdo-dokdo-cruise-3d",
+    "packageTitle": "[신비의 화산섬] 울릉도 독도 수호탐방 & 나리분지 & 관음도 2박 3일",
+    "rating": 5,
+    "title": "[울릉도 / 독도] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-09-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-01",
+    "userId": "usr-rev-691",
+    "userName": "김*우",
+    "userEmail": "user791@hanmail.net",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "평창 / 정선 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-02",
+    "userId": "usr-rev-692",
+    "userName": "이*진",
+    "userEmail": "user792@naver.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-03",
+    "userId": "usr-rev-693",
+    "userName": "박*현",
+    "userEmail": "user793@gmail.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 평창 / 정선 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-04",
+    "userId": "usr-rev-694",
+    "userName": "최*영",
+    "userEmail": "user794@daum.net",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-05",
+    "userId": "usr-rev-695",
+    "userName": "정*훈",
+    "userEmail": "user795@kakao.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 4,
+    "title": "[평창 / 정선] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-06",
+    "userId": "usr-rev-696",
+    "userName": "강*원",
+    "userEmail": "user796@hanmail.net",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-07",
+    "userId": "usr-rev-697",
+    "userName": "조*민",
+    "userEmail": "user797@naver.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "평창 / 정선에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-08",
+    "userId": "usr-rev-698",
+    "userName": "윤*서",
+    "userEmail": "user798@gmail.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-08-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-09",
+    "userId": "usr-rev-699",
+    "userName": "장*혁",
+    "userEmail": "user799@daum.net",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 4,
+    "title": "[평창 / 정선] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1546853020-ca4909aef454?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-09-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-10-10",
+    "userId": "usr-rev-700",
+    "userName": "임*하",
+    "userEmail": "user800@kakao.com",
+    "packageId": "pkg-kr-10",
+    "packageSlug": "pyeongchang-daegwallyeong-2d",
+    "packageTitle": "[푸른 초원의 힐링] 평창 대관령 양떼목장 & 정선 하이원 리조트 1박 2일",
+    "rating": 5,
+    "title": "[평창 / 정선] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-04-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-01",
+    "userId": "usr-rev-701",
+    "userName": "한*준",
+    "userEmail": "user801@naver.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "포항 / 영덕 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-02",
+    "userId": "usr-rev-702",
+    "userName": "송*은",
+    "userEmail": "user802@gmail.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-03",
+    "userId": "usr-rev-703",
+    "userName": "오*진",
+    "userEmail": "user803@daum.net",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 포항 / 영덕 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-04",
+    "userId": "usr-rev-704",
+    "userName": "신*호",
+    "userEmail": "user804@kakao.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-05",
+    "userId": "usr-rev-705",
+    "userName": "배*린",
+    "userEmail": "user805@hanmail.net",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 4,
+    "title": "[포항 / 영덕] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-06",
+    "userId": "usr-rev-706",
+    "userName": "유*재",
+    "userEmail": "user806@naver.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-07",
+    "userId": "usr-rev-707",
+    "userName": "홍*경",
+    "userEmail": "user807@gmail.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "포항 / 영덕에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-08",
+    "userId": "usr-rev-708",
+    "userName": "문*석",
+    "userEmail": "user808@daum.net",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-09-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-09",
+    "userId": "usr-rev-709",
+    "userName": "류*희",
+    "userEmail": "user809@kakao.com",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 4,
+    "title": "[포항 / 영덕] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-04-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-11-10",
+    "userId": "usr-rev-710",
+    "userName": "서*준",
+    "userEmail": "user810@hanmail.net",
+    "packageId": "pkg-kr-11",
+    "packageSlug": "pohang-space-walk-2d",
+    "packageTitle": "[동해의 일출과 예술] 포항 호미곶 일출 & 스페이스워크 & 영일대 1박 2일",
+    "rating": 5,
+    "title": "[포항 / 영덕] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-05-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-01",
+    "userId": "usr-rev-711",
+    "userName": "황*연",
+    "userEmail": "user811@gmail.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "안동 / 영주 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-02",
+    "userId": "usr-rev-712",
+    "userName": "안*태",
+    "userEmail": "user812@daum.net",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-03",
+    "userId": "usr-rev-713",
+    "userName": "고*아",
+    "userEmail": "user813@kakao.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 안동 / 영주 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-04",
+    "userId": "usr-rev-714",
+    "userName": "권*민",
+    "userEmail": "user814@hanmail.net",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-05",
+    "userId": "usr-rev-715",
+    "userName": "백*승",
+    "userEmail": "user815@naver.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 4,
+    "title": "[안동 / 영주] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-06",
+    "userId": "usr-rev-716",
+    "userName": "노*주",
+    "userEmail": "user816@gmail.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-07",
+    "userId": "usr-rev-717",
+    "userName": "허*석",
+    "userEmail": "user817@daum.net",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "안동 / 영주에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-08",
+    "userId": "usr-rev-718",
+    "userName": "남*우",
+    "userEmail": "user818@kakao.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-04-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-09",
+    "userId": "usr-rev-719",
+    "userName": "심*정",
+    "userEmail": "user819@hanmail.net",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 4,
+    "title": "[안동 / 영주] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-05-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-12-10",
+    "userId": "usr-rev-720",
+    "userName": "하*빈",
+    "userEmail": "user820@naver.com",
+    "packageId": "pkg-kr-12",
+    "packageSlug": "andong-hahoe-village-2d",
+    "packageTitle": "[선비의 숨결] 안동 하회마을 부용대 & 도산서원 & 찜닭 1박 2일",
+    "rating": 5,
+    "title": "[안동 / 영주] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-06-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-01",
+    "userId": "usr-rev-721",
+    "userName": "김*우",
+    "userEmail": "user821@daum.net",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "완도 / 청산도 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 30,
+    "createdAt": "2026-04-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-02",
+    "userId": "usr-rev-722",
+    "userName": "이*진",
+    "userEmail": "user822@kakao.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 33,
+    "createdAt": "2026-05-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-03",
+    "userId": "usr-rev-723",
+    "userName": "박*현",
+    "userEmail": "user823@hanmail.net",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 완도 / 청산도 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 6,
+    "createdAt": "2026-06-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-04",
+    "userId": "usr-rev-724",
+    "userName": "최*영",
+    "userEmail": "user824@naver.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 9,
+    "createdAt": "2026-07-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-05",
+    "userId": "usr-rev-725",
+    "userName": "정*훈",
+    "userEmail": "user825@gmail.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 4,
+    "title": "[완도 / 청산도] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 12,
+    "createdAt": "2026-08-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-06",
+    "userId": "usr-rev-726",
+    "userName": "강*원",
+    "userEmail": "user826@daum.net",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 15,
+    "createdAt": "2026-09-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-07",
+    "userId": "usr-rev-727",
+    "userName": "조*민",
+    "userEmail": "user827@kakao.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "완도 / 청산도에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 18,
+    "createdAt": "2026-04-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-08",
+    "userId": "usr-rev-728",
+    "userName": "윤*서",
+    "userEmail": "user828@hanmail.net",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 21,
+    "createdAt": "2026-05-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-09",
+    "userId": "usr-rev-729",
+    "userName": "장*혁",
+    "userEmail": "user829@naver.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 4,
+    "title": "[완도 / 청산도] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 24,
+    "createdAt": "2026-06-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-13-10",
+    "userId": "usr-rev-730",
+    "userName": "임*하",
+    "userEmail": "user830@gmail.com",
+    "packageId": "pkg-kr-13",
+    "packageSlug": "wando-cheongsando-slow-3d",
+    "packageTitle": "[아시아 최초 슬로시티] 완도 타워 & 청산도 유채꽃길 & 신지명사십리 2박 3일",
+    "rating": 5,
+    "title": "[완도 / 청산도] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 27,
+    "createdAt": "2026-07-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-01",
+    "userId": "usr-rev-731",
+    "userName": "한*준",
+    "userEmail": "user831@kakao.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "제천 / 단양 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 7,
+    "createdAt": "2026-05-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-02",
+    "userId": "usr-rev-732",
+    "userName": "송*은",
+    "userEmail": "user832@hanmail.net",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 10,
+    "createdAt": "2026-06-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-03",
+    "userId": "usr-rev-733",
+    "userName": "오*진",
+    "userEmail": "user833@naver.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 제천 / 단양 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 13,
+    "createdAt": "2026-07-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-04",
+    "userId": "usr-rev-734",
+    "userName": "신*호",
+    "userEmail": "user834@gmail.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 16,
+    "createdAt": "2026-08-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-05",
+    "userId": "usr-rev-735",
+    "userName": "배*린",
+    "userEmail": "user835@daum.net",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 4,
+    "title": "[제천 / 단양] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 19,
+    "createdAt": "2026-09-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-06",
+    "userId": "usr-rev-736",
+    "userName": "유*재",
+    "userEmail": "user836@kakao.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 22,
+    "createdAt": "2026-04-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-07",
+    "userId": "usr-rev-737",
+    "userName": "홍*경",
+    "userEmail": "user837@hanmail.net",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "제천 / 단양에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 25,
+    "createdAt": "2026-05-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-08",
+    "userId": "usr-rev-738",
+    "userName": "문*석",
+    "userEmail": "user838@naver.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 28,
+    "createdAt": "2026-06-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-09",
+    "userId": "usr-rev-739",
+    "userName": "류*희",
+    "userEmail": "user839@gmail.com",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 4,
+    "title": "[제천 / 단양] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 31,
+    "createdAt": "2026-07-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-14-10",
+    "userId": "usr-rev-740",
+    "userName": "서*준",
+    "userEmail": "user840@daum.net",
+    "packageId": "pkg-kr-14",
+    "packageSlug": "jecheon-danyang-scenic-2d",
+    "packageTitle": "[호수와 기암괴석] 제천 청풍호반 케이블카 & 단양 도담삼봉 1박 2일",
+    "rating": 5,
+    "title": "[제천 / 단양] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 34,
+    "createdAt": "2026-08-03T15:03:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-01",
+    "userId": "usr-rev-741",
+    "userName": "황*연",
+    "userEmail": "user841@hanmail.net",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 가족 여행으로 다녀왔는데 모두가 극찬했습니다!",
+    "content": "태안 / 안면도 여행을 부모님 모시고 다녀왔는데 코스 구성이 정말 완벽했습니다. 전용 차량으로 이동해서 피로감도 전혀 없었고, 배정된 호텔 룸 컨디션과 조식도 기대 이상이었습니다. 가이드님이 친절하게 하나하나 챙겨주셔서 온 가족이 평생 기억에 남을 행복한 추억 만들고 갑니다!",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 14,
+    "createdAt": "2026-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-02",
+    "userId": "usr-rev-742",
+    "userName": "안*태",
+    "userEmail": "user842@naver.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 일정부터 숙소, 식사까지 흠잡을 데 없는 완벽한 힐링",
+    "content": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일 상품으로 다녀온 후기 남깁니다. 패키지 특유의 빡빡함 없이 자유시간도 넉넉해서 여유롭게 현지 분위기를 만끽할 수 있었어요. 특히 현지 특식과 일정에 포함된 스팟들의 뷰가 환상적이었습니다. 다음에도 투어이지에서 예약할 예정입니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 17,
+    "createdAt": "2026-07-06T11:07:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-03",
+    "userId": "usr-rev-743",
+    "userName": "고*아",
+    "userEmail": "user843@gmail.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 친구들과 잊지 못할 인생 여행 만들고 왔어요",
+    "content": "친구 3명과 함께 떠난 태안 / 안면도 여행이었는데, 사진 찍기 좋은 명소들도 알차게 포함되어 있고 인생샷 수백 장 건졌습니다! 가이드님의 센스 넘치는 맛집 추천 덕분에 먹는 즐거움도 최고였네요. 투어이지 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 20,
+    "createdAt": "2026-08-09T13:14:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-04",
+    "userId": "usr-rev-744",
+    "userName": "권*민",
+    "userEmail": "user844@daum.net",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 부부 기념일 여행 대만족! 럭셔리함의 끝판왕",
+    "content": "결혼기념일 기념으로 다녀왔는데 기대했던 것보다 훨씬 더 고급스럽고 만족스러운 일정이었습니다. 숙소 뷰도 예술이었고, 프라이빗하게 진행되어 오롯이 둘만의 소중한 시간을 보낼 수 있었습니다. 꼼꼼한 케어에 진심으로 감사드립니다.",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 23,
+    "createdAt": "2026-09-12T15:21:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-05",
+    "userId": "usr-rev-745",
+    "userName": "백*승",
+    "userEmail": "user845@kakao.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 4,
+    "title": "[태안 / 안면도] 가성비와 가심비 모두 잡은 최고의 여행 패키지",
+    "content": "가격 대비 포함 내역이 너무 알차서 깜짝 놀랐습니다. 항공, 호텔, 식사, 주요 관광지 입장권까지 하나하나 신경 쓴 게 느껴졌어요. 현지 이동도 너무 쾌적했고 일정 내내 스트레스 없이 온전히 힐링하고 왔습니다.",
+    "travelDate": "2026-04",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 26,
+    "createdAt": "2026-04-15T17:28:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-06",
+    "userId": "usr-rev-746",
+    "userName": "노*주",
+    "userEmail": "user846@hanmail.net",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 가이드님의 전문적인 인솔 덕분에 100배 더 즐거웠습니다",
+    "content": "여행지 역사와 숨겨진 포인트를 쉽고 재미있게 설명해 주셔서 여행의 깊이가 달라졌습니다. 질문에도 친절히 답해주시고 이동 중에도 편안하게 배려해주셔서 정말 든든했습니다. 최고의 인솔자님 덕분에 최고의 여행이었습니다!",
+    "travelDate": "2026-05",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 29,
+    "createdAt": "2026-05-18T19:35:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-07",
+    "userId": "usr-rev-747",
+    "userName": "허*석",
+    "userEmail": "user847@naver.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 숙소 퀄리티와 전망이 압도적으로 훌륭했습니다",
+    "content": "태안 / 안면도에서 묵은 호텔 퀄리티가 정말 대박이었습니다. 창밖으로 펼쳐지는 멋진 전망과 침구류의 안락함 덕분에 여행 피로가 싹 풀렸어요. 위치도 좋아서 저녁에 주변 산책하기도 딱이었습니다.",
+    "travelDate": "2026-06",
+    "imageUrl": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 32,
+    "createdAt": "2026-06-21T09:42:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-08",
+    "userId": "usr-rev-748",
+    "userName": "남*우",
+    "userEmail": "user848@gmail.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 처음 가본 여행지였는데 완벽한 일정 덕분에 반했습니다",
+    "content": "처음 방문하는 곳이라 걱정이 앞섰는데 핵심 명소만 쏙쏙 골라 담은 일정 덕분에 알차게 둘러봤습니다. 현지 특색을 살린 미식 체험도 잊을 수 없네요. 주변 지인들에게도 꼭 가보라고 추천하고 있습니다.",
+    "travelDate": "2026-07",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 35,
+    "createdAt": "2026-07-24T11:49:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-09",
+    "userId": "usr-rev-749",
+    "userName": "심*정",
+    "userEmail": "user849@daum.net",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 4,
+    "title": "[태안 / 안면도] 아이들과 함께한 여행, 아이도 어른도 대만족!",
+    "content": "아이와 함께하는 여행이라 신경 쓸 게 많았는데, 이동 동선도 배려 깊고 아이가 좋아할 만한 프로그램이 포함되어 있어 수월하게 다녀왔습니다. 호텔 수영장과 부대시설도 최고였어요. 가족 여행지로 강력 추천합니다.",
+    "travelDate": "2026-08",
+    "imageUrl": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 8,
+    "createdAt": "2026-08-27T13:56:00.000Z"
+  },
+  {
+    "id": "rev-pkg-kr-15-10",
+    "userId": "usr-rev-750",
+    "userName": "하*빈",
+    "userEmail": "user850@kakao.com",
+    "packageId": "pkg-kr-15",
+    "packageSlug": "taean-anmyeondo-sunset-2d",
+    "packageTitle": "[서해안 황금빛 노을] 태안 안면도 꽃지해변 & 자연휴양림 1박 2일",
+    "rating": 5,
+    "title": "[태안 / 안면도] 재방문 의사 200%! 믿고 떠나는 투어이지 패키지",
+    "content": "예약 과정부터 현지 인솔, 귀국까지 물 흐르듯 매끄러웠습니다. 세심한 일정 배치와 넉넉한 휴식 시간이 패키지 여행의 편견을 완전히 깨주었습니다. 매년 휴가는 투어이지와 함께하기로 마음먹었습니다!",
+    "travelDate": "2026-09",
+    "imageUrl": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "likes": 11,
+    "createdAt": "2026-09-03T15:03:00.000Z"
   }
 ];
-
 
 const DEFAULT_HOTELS = [
   {

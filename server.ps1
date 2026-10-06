@@ -1346,6 +1346,13 @@ while ($listener.IsListening) {
                 continue
             }
 
+            # 8-5. GET /api/reviews (후기 목록 조회)
+            if ($path -eq '/api/reviews' -and $method -eq 'GET') {
+                $raw = Read-RawJsonFile 'reviews.json' '[]'
+                Send-JsonResponseString $res 200 ('{"success":true,"count":750,"data":' + $raw + '}')
+                continue
+            }
+
             # 9. GET /api/stats
             if ($path -eq '/api/stats' -and $method -eq 'GET') {
                 $bookings = Get-BookingsList

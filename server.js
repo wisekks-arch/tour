@@ -1724,6 +1724,82 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
+      // 10-1. GET /api/reviews (후기 목록 조회)
+      if (pathname === '/api/reviews' && method === 'GET') {
+        const reviews = readJson('reviews.json', []);
+        const query = parsedUrl.query;
+        let filtered = [...reviews];
+
+        if (query.packageId && query.packageId !== 'ALL') {
+          filtered = filtered.filter(r => r.packageId === query.packageId || r.packageSlug === query.packageId);
+        }
+        if (query.userId) {
+          filtered = filtered.filter(r => String(r.userId) === String(query.userId) || (r.userEmail && query.userEmail && r.userEmail.toLowerCase() === query.userEmail.toLowerCase()));
+        }
+        if (query.rating && Number(query.rating) > 0) {
+          filtered = filtered.filter(r => Number(r.rating) === Number(query.rating));
+        }
+        if (query.search) {
+          const q = query.search.toLowerCase();
+          filtered = filtered.filter(r => 
+            (r.title && r.title.toLowerCase().includes(q)) ||
+            (r.content && r.content.toLowerCase().includes(q)) ||
+            (r.packageTitle && r.packageTitle.toLowerCase().includes(q)) ||
+            (r.userName && r.userName.toLowerCase().includes(q))
+          );
+        }
+
+        if (query.sort === 'rating_high') {
+          filtered.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0) || new Date(b.createdAt) - new Date(a.createdAt));
+        } else if (query.sort === 'rating_low') {
+          filtered.sort((a, b) => (Number(a.rating) || 0) - (Number(b.rating) || 0) || new Date(b.createdAt) - new Date(a.createdAt));
+        } else if (query.sort === 'likes') {
+          filtered.sort((a, b) => (Number(b.likes) || 0) - (Number(a.likes) || 0) || new Date(b.createdAt) - new Date(a.createdAt));
+        } else {
+          filtered.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        }
+
+        return sendJson(res, 200, { success: true, count: filtered.length, data: filtered });
+      }
+
+      // 10-2. POST /api/reviews (후기 작성)
+      if (pathname === '/api/reviews' && method === 'POST') {
+        const body = await parseRequestBody(req);
+        const reviews = readJson('reviews.json', []);
+        const newRev = {
+          id: `rev-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+          userId: body.userId || 'guest',
+          userName: body.userName || '여행자',
+          userEmail: body.userEmail || '',
+          packageId: body.packageId || '',
+          packageTitle: body.packageTitle || '',
+          rating: Number(body.rating) || 5,
+          title: (body.title || '').trim(),
+          content: (body.content || '').trim(),
+          travelDate: body.travelDate || new Date().toISOString().slice(0, 7),
+          imageUrl: body.imageUrl || '',
+          images: Array.isArray(body.images) ? body.images : (body.imageUrl ? [body.imageUrl] : []),
+          likes: 0,
+          createdAt: new Date().toISOString()
+        };
+        reviews.unshift(newRev);
+        writeJson('reviews.json', reviews);
+        return sendJson(res, 201, { success: true, message: '구매 후기가 성공적으로 등록되었습니다.', data: newRev });
+      }
+
+      // 10-3. POST /api/reviews/:id/like (후기 좋아요)
+      if (pathname.startsWith('/api/reviews/') && pathname.endsWith('/like') && method === 'POST') {
+        const id = pathname.replace('/api/reviews/', '').replace('/like', '');
+        const reviews = readJson('reviews.json', []);
+        const target = reviews.find(r => r.id === id);
+        if (target) {
+          target.likes = (target.likes || 0) + 1;
+          writeJson('reviews.json', reviews);
+          return sendJson(res, 200, { success: true, likes: target.likes });
+        }
+        return sendJson(res, 404, { success: false, message: '후기를 찾을 수 없습니다.' });
+      }
+
       // 11. GET /api/stats
       if (pathname === '/api/stats' && method === 'GET') {
         const packages = readJson('packages.json', []);
