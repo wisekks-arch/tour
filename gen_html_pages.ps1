@@ -242,6 +242,7 @@ $indexHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     let allProducts = [];
@@ -594,6 +595,7 @@ $productsHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     let rawProducts = [];

@@ -15,7 +15,7 @@ $checkoutHtml = @'
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261006_v16">
 </head>
 <body class="bg-slate-50 flex flex-col min-h-screen">
 
@@ -179,9 +179,10 @@ $checkoutHtml = @'
   <div id="footer-root"></div>
 
   <!-- Scripts -->
-  <script src="js/cart-store.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/components.js"></script>
+  <script src="js/cart-store.js?v=20261006_v16"></script>
+  <script src="js/api.js?v=20261006_v16"></script>
+  <script src="js/auth-store.js"></script>
+  <script src="js/components.js?v=20261006_v16"></script>
   <script>
     let couponDiscount = 0;
     let summary = null;
@@ -190,13 +191,30 @@ $checkoutHtml = @'
       ShopUI.renderNavbar();
       ShopUI.renderFooter();
 
+      // Pre-fill member information if logged in
+      try {
+        const authUserRaw = localStorage.getItem('easyshop_auth_user');
+        if (authUserRaw) {
+          const authUser = JSON.parse(authUserRaw);
+          if (authUser.name && document.getElementById('order-name')) document.getElementById('order-name').value = authUser.name;
+          if (authUser.phone && document.getElementById('order-phone')) document.getElementById('order-phone').value = authUser.phone;
+          if (authUser.email && document.getElementById('order-email')) document.getElementById('order-email').value = authUser.email;
+          if (authUser.name && document.getElementById('ship-name')) document.getElementById('ship-name').value = authUser.name;
+          if (authUser.phone && document.getElementById('ship-phone')) document.getElementById('ship-phone').value = authUser.phone;
+          if (authUser.address && document.getElementById('ship-address')) document.getElementById('ship-address').value = authUser.address;
+          if (authUser.addressDetail && document.getElementById('ship-address-detail')) document.getElementById('ship-address-detail').value = authUser.addressDetail;
+        }
+      } catch (e) {
+        console.error('Member prefill error:', e);
+      }
+
       const urlParams = new URLSearchParams(window.location.search);
       couponDiscount = parseInt(urlParams.get('coupon')) || 0;
 
       summary = CartStore.getSummary(couponDiscount);
       if (summary.selectedItems.length === 0) {
         alert('주문할 상품이 없습니다.');
-        window.location.href = '/cart.html';
+        window.location.href = 'cart.html';
         return;
       }
 
@@ -244,9 +262,30 @@ $checkoutHtml = @'
       try {
         const result = await ShopAPI.createOrder(orderData);
         CartStore.removeSelected();
-        const orderId = result.order ? result.order.orderId : ('ORD-' + Date.now().toString().slice(-8));
-        sessionStorage.setItem('latest_order', JSON.stringify(result.order || orderData));
-        window.location.href = `/order-complete.html?orderId=${encodeURIComponent(orderId)}`;
+
+        // Update member order stats if logged in
+        try {
+          const authUserRaw = localStorage.getItem('easyshop_auth_user');
+          if (authUserRaw) {
+            const authUser = JSON.parse(authUserRaw);
+            const usersRaw = localStorage.getItem('easyshop_users_v3');
+            if (usersRaw) {
+              const users = JSON.parse(usersRaw);
+              const uIdx = users.findIndex(u => u.email === authUser.email || u.id === authUser.id);
+              if (uIdx >= 0) {
+                users[uIdx].orderCount = (users[uIdx].orderCount || 0) + 1;
+                users[uIdx].totalSpent = (users[uIdx].totalSpent || 0) + summary.finalAmount;
+                localStorage.setItem('easyshop_users_v3', JSON.stringify(users));
+              }
+            }
+          }
+        } catch (ue) {
+          console.error('User stat update error:', ue);
+        }
+
+        const orderId = (result && result.order) ? result.order.orderId : (result && result.orderId ? result.orderId : ('ORD-' + Date.now().toString().slice(-8)));
+        sessionStorage.setItem('latest_order', JSON.stringify((result && result.order) || orderData));
+        window.location.href = `order-complete.html?orderId=${encodeURIComponent(orderId)}`;
       } catch (err) {
         alert('주문 처리 중 오류가 발생했습니다.');
         console.error(err);
@@ -337,6 +376,7 @@ $completeHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -474,6 +514,7 @@ $lookupHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {

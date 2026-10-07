@@ -401,6 +401,7 @@ $detailHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     let currentProduct = null;
@@ -1019,6 +1020,7 @@ $cartHtml = @'
   <!-- Scripts -->
   <script src="js/cart-store.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth-store.js"></script>
   <script src="js/components.js"></script>
   <script>
     let couponDiscount = 0;

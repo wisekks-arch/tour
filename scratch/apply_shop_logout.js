@@ -1,492 +1,15 @@
-$ErrorActionPreference = 'Stop'
-$shopDir = 'd:\92.SW\shop'
-$cssDir = Join-Path $shopDir 'public\css'
-$jsDir = Join-Path $shopDir 'public\js'
+const fs = require('fs');
+const path = require('path');
 
-# 1. CSS
-$cssContent = @'
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+const tourDir = 'd:/92.SW/tour';
+const shopDir = 'd:/92.SW/shop';
+const publicDir = path.join(shopDir, 'public');
 
-:root {
-  --font-primary: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
-  --font-heading: 'Outfit', 'Pretendard', sans-serif;
-}
+// 1. Read existing components.js
+let compCode = fs.readFileSync(path.join(shopDir, 'js', 'components.js'), 'utf8');
 
-body {
-  font-family: var(--font-primary);
-  letter-spacing: -0.015em;
-  color: #1e293b;
-  background-color: #f8fafc;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, .font-heading {
-  font-family: var(--font-heading);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Glassmorphism */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.glass-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Card Hover Animation */
-.product-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-}
-
-/* Image Zoom */
-.zoom-container {
-  overflow: hidden;
-}
-.zoom-container img {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.product-card:hover .zoom-container img {
-  transform: scale(1.06);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-  50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.pulse-badge {
-  animation: pulseGlow 2s infinite;
-}
-
-/* Line Clamp */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.line-clamp-1 {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Number Spinner Hide */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-'@
-
-[System.IO.File]::WriteAllText((Join-Path $cssDir 'style.css'), $cssContent, [System.Text.Encoding]::UTF8)
-Write-Host "Generated: style.css" -ForegroundColor Green
-
-# 2. Cart & Wishlist Store (cart-store.js)
-$cartStoreJs = @'
-/**
- * EasyShop Cart & Wishlist Store
- * LocalStorage 기반 반응형 상태 관리
- */
-const CartStore = {
-  CART_KEY: 'easyshop_cart',
-  WISHLIST_KEY: 'easyshop_wishlist',
-  listeners: [],
-
-  // Subscribe to changes
-  subscribe(fn) {
-    this.listeners.push(fn);
-  },
-
-  notify() {
-    this.listeners.forEach(fn => {
-      try { fn(this.getItems(), this.getWishlist()); } catch(e) { console.error(e); }
-    });
-    // Dispatch custom DOM event
-    window.dispatchEvent(new CustomEvent('cart-updated', {
-      detail: { cart: this.getItems(), count: this.getTotalCount() }
-    }));
-  },
-
-  // Cart Methods
-  getItems() {
-    try {
-      const data = localStorage.getItem(this.CART_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch (e) {
-      return [];
-    }
-  },
-
-  addItem(product, optionName = '', quantity = 1) {
-    const items = this.getItems();
-    const existingIndex = items.findIndex(
-      item => item.id === product.id && item.selectedOption === optionName
-    );
-
-    if (existingIndex > -1) {
-      items[existingIndex].quantity += quantity;
-    } else {
-      items.push({
-        id: product.id,
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        originalPrice: product.originalPrice || product.price,
-        thumbnail: product.thumbnail || (product.images && product.images[0]) || '',
-        selectedOption: optionName,
-        quantity: Math.max(1, quantity),
-        selected: true
-      });
-    }
-
-    localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-    this.notify();
-    return true;
-  },
-
-  updateQuantity(id, optionName, quantity) {
-    let items = this.getItems();
-    const target = items.find(item => item.id === id && item.selectedOption === optionName);
-    if (target) {
-      target.quantity = Math.max(1, quantity);
-      localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-      this.notify();
-    }
-  },
-
-  toggleSelect(id, optionName) {
-    let items = this.getItems();
-    const target = items.find(item => item.id === id && item.selectedOption === optionName);
-    if (target) {
-      target.selected = !target.selected;
-      localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-      this.notify();
-    }
-  },
-
-  toggleSelectAll(selectAll) {
-    let items = this.getItems();
-    items.forEach(i => i.selected = selectAll);
-    localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-    this.notify();
-  },
-
-  removeItem(id, optionName) {
-    let items = this.getItems();
-    items = items.filter(item => !(item.id === id && item.selectedOption === optionName));
-    localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-    this.notify();
-  },
-
-  removeSelected() {
-    let items = this.getItems();
-    items = items.filter(item => !item.selected);
-    localStorage.setItem(this.CART_KEY, JSON.stringify(items));
-    this.notify();
-  },
-
-  clearCart() {
-    localStorage.removeItem(this.CART_KEY);
-    this.notify();
-  },
-
-  getTotalCount() {
-    const items = this.getItems();
-    return items.reduce((acc, item) => acc + item.quantity, 0);
-  },
-
-  getSummary(couponDiscount = 0) {
-    const items = this.getItems();
-    const selectedItems = items.filter(item => item.selected !== false);
-    
-    const productTotal = selectedItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    const originalTotal = selectedItems.reduce((acc, item) => acc + (item.originalPrice * item.quantity), 0);
-    const totalSavings = originalTotal - productTotal;
-
-    // 50,000원 이상 무료배송 (미만 시 3,000원)
-    const freeShippingThreshold = 50000;
-    const shippingFee = (productTotal >= freeShippingThreshold || productTotal === 0) ? 0 : 3000;
-    const finalAmount = Math.max(0, productTotal + shippingFee - couponDiscount);
-
-    return {
-      totalCount: selectedItems.reduce((acc, item) => acc + item.quantity, 0),
-      productTotal,
-      originalTotal,
-      totalSavings,
-      shippingFee,
-      freeShippingThreshold,
-      remainingForFreeShipping: Math.max(0, freeShippingThreshold - productTotal),
-      couponDiscount,
-      finalAmount,
-      selectedItems
-    };
-  },
-
-  // Wishlist Methods
-  getWishlist() {
-    try {
-      const data = localStorage.getItem(this.WISHLIST_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch (e) {
-      return [];
-    }
-  },
-
-  toggleWishlist(product) {
-    let wishlist = this.getWishlist();
-    const index = wishlist.findIndex(item => item.id === product.id);
-    let isAdded = false;
-
-    if (index > -1) {
-      wishlist.splice(index, 1);
-      isAdded = false;
-    } else {
-      wishlist.push({
-        id: product.id,
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        thumbnail: product.thumbnail || (product.images && product.images[0]) || ''
-      });
-      isAdded = true;
-    }
-
-    localStorage.setItem(this.WISHLIST_KEY, JSON.stringify(wishlist));
-    this.notify();
-    return isAdded;
-  },
-
-  isWishlisted(productId) {
-    const wishlist = this.getWishlist();
-    return wishlist.some(item => item.id === productId);
-  }
-};
-'@
-
-[System.IO.File]::WriteAllText((Join-Path $jsDir 'cart-store.js'), $cartStoreJs, [System.Text.Encoding]::UTF8)
-Write-Host "Generated: cart-store.js" -ForegroundColor Green
-
-# 3. API Module (api.js)
-$apiJs = @'
-/**
- * EasyShop REST API Client Module
- */
-const ShopAPI = {
-  BASE_URL: window.location.origin,
-
-  async request(endpoint, options = {}) {
-    const defaultHeaders = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    try {
-      const response = await fetch(`${this.BASE_URL}${endpoint}`, {
-        ...options,
-        headers: {
-          ...defaultHeaders,
-          ...options.headers
-        }
-      });
-
-      if (!response.ok) {
-        const errorBody = await response.text();
-        throw new Error(`HTTP ${response.status}: ${errorBody || response.statusText}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.warn(`API fetch failed on ${endpoint}:`, error.message);
-      // Fallback: If server is offline, return local mock from data folder if available
-      return this.fallback(endpoint, options);
-    }
-  },
-
-  async fallback(endpoint, options) {
-    try {
-      if (endpoint.startsWith('/api/categories')) {
-        const res = await fetch('/data/categories.json');
-        return await res.json();
-      }
-      if (endpoint.startsWith('/api/products')) {
-        const res = await fetch('/data/products.json');
-        const list = await res.json();
-        const urlObj = new URL('http://dummy.com' + endpoint);
-        const id = urlObj.searchParams.get('id');
-        if (id) {
-          const item = list.find(p => p.id === id);
-          if (item) return item;
-        }
-        return list;
-      }
-      if (endpoint.startsWith('/api/orders')) {
-        const res = await fetch('/data/orders.json');
-        return await res.json();
-      }
-      if (endpoint.startsWith('/api/inquiries')) {
-        const res = await fetch('/data/inquiries.json');
-        return await res.json();
-      }
-    } catch (e) {
-      console.error('Fallback failed:', e);
-    }
-    return [];
-  },
-
-  // Categories
-  async getCategories() {
-    return await this.request('/api/categories');
-  },
-
-  // Products
-  async getProducts(params = {}) {
-    const query = new URLSearchParams();
-    if (params.category && params.category !== '전체') query.append('category', params.category);
-    if (params.search) query.append('search', params.search);
-    if (params.sort) query.append('sort', params.sort);
-    if (params.minPrice) query.append('minPrice', params.minPrice);
-    if (params.maxPrice) query.append('maxPrice', params.maxPrice);
-    if (params.isBest) query.append('isBest', 'true');
-    if (params.isNew) query.append('isNew', 'true');
-    if (params.isSale) query.append('isSale', 'true');
-    if (params.isFreeShipping) query.append('isFreeShipping', 'true');
-
-    const qs = query.toString() ? `?${query.toString()}` : '';
-    return await this.request(`/api/products${qs}`);
-  },
-
-  async getProductById(id) {
-    return await this.request(`/api/products?id=${encodeURIComponent(id)}`);
-  },
-
-  async createProduct(productData) {
-    return await this.request('/api/products', {
-      method: 'POST',
-      body: JSON.stringify(productData)
-    });
-  },
-
-  async updateProduct(id, productData) {
-    return await this.request(`/api/products?id=${encodeURIComponent(id)}`, {
-      method: 'PUT',
-      body: JSON.stringify(productData)
-    });
-  },
-
-  async deleteProduct(id) {
-    return await this.request(`/api/products?id=${encodeURIComponent(id)}`, {
-      method: 'DELETE'
-    });
-  },
-
-  // Orders
-  async getOrders(params = {}) {
-    const query = new URLSearchParams();
-    if (params.status && params.status !== '전체') query.append('status', params.status);
-    if (params.search) query.append('search', params.search);
-    const qs = query.toString() ? `?${query.toString()}` : '';
-    return await this.request(`/api/orders${qs}`);
-  },
-
-  async getOrderById(orderId) {
-    return await this.request(`/api/orders?orderId=${encodeURIComponent(orderId)}`);
-  },
-
-  async createOrder(orderData) {
-    return await this.request('/api/orders', {
-      method: 'POST',
-      body: JSON.stringify(orderData)
-    });
-  },
-
-  async updateOrderStatus(orderId, status, trackingNumber = '') {
-    return await this.request(`/api/orders?orderId=${encodeURIComponent(orderId)}`, {
-      method: 'PUT',
-      body: JSON.stringify({ status, trackingNumber })
-    });
-  },
-
-  // Inquiries
-  async getInquiries() {
-    return await this.request('/api/inquiries');
-  },
-
-  async createInquiry(inquiryData) {
-    return await this.request('/api/inquiries', {
-      method: 'POST',
-      body: JSON.stringify(inquiryData)
-    });
-  },
-
-  async answerInquiry(id, answer) {
-    return await this.request(`/api/inquiries?id=${encodeURIComponent(id)}`, {
-      method: 'PUT',
-      body: JSON.stringify({ answer, status: '답변완료', answeredAt: new Date().toISOString().replace('T', ' ').substring(0, 16) })
-    });
-  },
-
-  // Admin Stats
-  async getStats() {
-    return await this.request('/api/stats');
-  }
-};
-'@
-
-[System.IO.File]::WriteAllText((Join-Path $jsDir 'api.js'), $apiJs, [System.Text.Encoding]::UTF8)
-Write-Host "Generated: api.js" -ForegroundColor Green
-
-# 4. Global Components (components.js)
-$componentsJs = @'
-/**
+// Build the updated components.js
+const updatedShopComponents = `/**
  * EasyShop Global UI Components (v8 Auth & Logout Integrated)
  * Header, Footer, Cart Drawer, Toast System
  */
@@ -506,19 +29,19 @@ const ShopUI = {
     const currentUser = typeof AuthStore !== 'undefined' ? AuthStore.getCurrentUser() : null;
 
     // Top Utility Auth Buttons
-    const topAuthHtml = currentUser ? `
+    const topAuthHtml = currentUser ? \`
       <div class="flex items-center gap-2">
         <span class="text-emerald-300 font-bold flex items-center gap-1">
           <i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>${currentUser.name} 님</span>
-          <span class="text-[10px] bg-emerald-950/80 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30">${(currentUser.points || 0).toLocaleString()}P</span>
+          <span>\${currentUser.name} 님</span>
+          <span class="text-[10px] bg-emerald-950/80 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30">\${(currentUser.points || 0).toLocaleString()}P</span>
         </span>
         <span class="text-slate-600">|</span>
         <button type="button" onclick="ShopUI.handleLogout()" class="hover:text-rose-300 text-slate-300 transition flex items-center gap-1 cursor-pointer font-medium">
           <i data-lucide="log-out" class="w-3.5 h-3.5 text-rose-400"></i> 로그아웃
         </button>
       </div>
-    ` : `
+    \` : \`
       <div class="flex items-center gap-2.5">
         <a href="login.html" class="hover:text-white text-slate-200 transition flex items-center gap-1 font-semibold">
           <i data-lucide="log-in" class="w-3.5 h-3.5 text-indigo-400"></i> 로그인
@@ -528,46 +51,46 @@ const ShopUI = {
           <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> 회원가입
         </a>
       </div>
-    `;
+    \`;
 
     // Main Header Auth Button (Desktop)
-    const desktopAuthHtml = currentUser ? `
+    const desktopAuthHtml = currentUser ? \`
       <div class="hidden md:flex items-center gap-2">
         <div class="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-bold text-indigo-900">
           <i data-lucide="user" class="w-3.5 h-3.5 text-indigo-600"></i>
-          <span>${currentUser.name} 님</span>
+          <span>\${currentUser.name} 님</span>
         </div>
         <button type="button" onclick="ShopUI.handleLogout()" class="px-3 py-1.5 rounded-full border border-slate-200 hover:border-rose-300 hover:bg-rose-50 text-slate-600 hover:text-rose-600 text-xs font-semibold transition flex items-center gap-1 cursor-pointer" title="로그아웃">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
           <span>로그아웃</span>
         </button>
       </div>
-    ` : `
+    \` : \`
       <div class="hidden md:flex items-center gap-2">
         <a href="login.html" class="px-3.5 py-1.5 rounded-full border border-slate-200 hover:border-indigo-500 hover:text-indigo-600 text-slate-700 text-xs font-bold transition flex items-center gap-1">
           <i data-lucide="log-in" class="w-3.5 h-3.5 text-indigo-600"></i>
           <span>로그인</span>
         </a>
       </div>
-    `;
+    \`;
 
     // Mobile Drawer Auth Section
-    const mobileAuthHtml = currentUser ? `
+    const mobileAuthHtml = currentUser ? \`
       <div class="p-3 bg-indigo-50/90 rounded-xl flex items-center justify-between border border-indigo-100 mb-2">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">
-            ${currentUser.name ? currentUser.name.slice(0, 1) : 'U'}
+            \${currentUser.name ? currentUser.name.slice(0, 1) : 'U'}
           </div>
           <div>
-            <p class="text-xs font-bold text-slate-900">${currentUser.name} 님</p>
-            <p class="text-[10px] text-indigo-600 font-semibold">${(currentUser.points || 0).toLocaleString()}P 보유</p>
+            <p class="text-xs font-bold text-slate-900">\${currentUser.name} 님</p>
+            <p class="text-[10px] text-indigo-600 font-semibold">\${(currentUser.points || 0).toLocaleString()}P 보유</p>
           </div>
         </div>
         <button type="button" onclick="ShopUI.handleLogout()" class="px-2.5 py-1 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition">
           로그아웃
         </button>
       </div>
-    ` : `
+    \` : \`
       <div class="grid grid-cols-2 gap-2 pt-2 pb-2">
         <a href="login.html" class="py-2.5 px-3 bg-indigo-600 text-white font-bold text-xs rounded-xl text-center shadow-xs">
           로그인
@@ -576,9 +99,9 @@ const ShopUI = {
           회원가입
         </a>
       </div>
-    `;
+    \`;
 
-    root.innerHTML = `
+    root.innerHTML = \`
       <!-- Top Promotion Banner Bar -->
       <div class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-900 text-white text-xs py-2 px-4 border-b border-indigo-900/40">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -588,7 +111,7 @@ const ShopUI = {
             <span class="text-slate-300 sm:hidden">5만원 이상 무료배송 혜택</span>
           </div>
           <div class="flex items-center gap-3 sm:gap-4 text-slate-300 text-[11px]">
-            ${topAuthHtml}
+            \${topAuthHtml}
             <span class="text-slate-600 hidden sm:inline">|</span>
             <a href="order-lookup.html" class="hover:text-white transition hidden sm:flex items-center gap-1">
               <i data-lucide="truck" class="w-3.5 h-3.5 text-indigo-400"></i> 주문/배송 조회
@@ -644,13 +167,13 @@ const ShopUI = {
               <!-- Wishlist -->
               <a href="products.html?filter=wishlist" class="p-2.5 text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-full transition relative group" title="위시리스트">
                 <i data-lucide="heart" class="w-5 h-5"></i>
-                <span id="nav-wishlist-badge" class="absolute top-1 right-1 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center ${wishlistCount > 0 ? '' : 'hidden'}">
-                  ${wishlistCount}
+                <span id="nav-wishlist-badge" class="absolute top-1 right-1 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center \${wishlistCount > 0 ? '' : 'hidden'}">
+                  \${wishlistCount}
                 </span>
               </a>
 
               <!-- Desktop Auth Button (Login / User + Logout) -->
-              ${desktopAuthHtml}
+              \${desktopAuthHtml}
 
               <!-- Cart Drawer Trigger Button -->
               <button 
@@ -661,7 +184,7 @@ const ShopUI = {
                 <div class="relative">
                   <i data-lucide="shopping-cart" class="w-4 h-4"></i>
                   <span id="nav-cart-badge" class="absolute -top-2 -right-2.5 px-1.5 py-0.2 bg-amber-400 text-slate-950 text-[10px] font-black rounded-full shadow-xs">
-                    ${cartCount}
+                    \${cartCount}
                   </span>
                 </div>
                 <span class="hidden sm:inline">장바구니</span>
@@ -677,14 +200,14 @@ const ShopUI = {
 
           <!-- Secondary Category Nav -->
           <nav class="hidden lg:flex items-center gap-8 py-3 text-sm font-medium border-t border-slate-100">
-            <a href="products.html" class="flex items-center gap-2 text-slate-900 font-bold hover:text-indigo-600 transition ${active === 'all' ? 'text-indigo-600' : ''}">
+            <a href="products.html" class="flex items-center gap-2 text-slate-900 font-bold hover:text-indigo-600 transition \${active === 'all' ? 'text-indigo-600' : ''}">
               <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-500"></i> 전체 카테고리
             </a>
-            <a href="products.html?category=패션 / 의류" class="text-slate-600 hover:text-indigo-600 transition ${active === 'fashion' ? 'text-indigo-600 font-bold' : ''}">패션 / 의류</a>
-            <a href="products.html?category=디지털 / 가전" class="text-slate-600 hover:text-indigo-600 transition ${active === 'digital' ? 'text-indigo-600 font-bold' : ''}">디지털 / 가전</a>
-            <a href="products.html?category=뷰티 / 케어" class="text-slate-600 hover:text-indigo-600 transition ${active === 'beauty' ? 'text-indigo-600 font-bold' : ''}">뷰티 / 케어</a>
-            <a href="products.html?category=리빙 / 인테리어" class="text-slate-600 hover:text-indigo-600 transition ${active === 'living' ? 'text-indigo-600 font-bold' : ''}">리빙 / 인테리어</a>
-            <a href="products.html?category=푸드 / 키친" class="text-slate-600 hover:text-indigo-600 transition ${active === 'food' ? 'text-indigo-600 font-bold' : ''}">푸드 / 키친</a>
+            <a href="products.html?category=패션 / 의류" class="text-slate-600 hover:text-indigo-600 transition \${active === 'fashion' ? 'text-indigo-600 font-bold' : ''}">패션 / 의류</a>
+            <a href="products.html?category=디지털 / 가전" class="text-slate-600 hover:text-indigo-600 transition \${active === 'digital' ? 'text-indigo-600 font-bold' : ''}">디지털 / 가전</a>
+            <a href="products.html?category=뷰티 / 케어" class="text-slate-600 hover:text-indigo-600 transition \${active === 'beauty' ? 'text-indigo-600 font-bold' : ''}">뷰티 / 케어</a>
+            <a href="products.html?category=리빙 / 인테리어" class="text-slate-600 hover:text-indigo-600 transition \${active === 'living' ? 'text-indigo-600 font-bold' : ''}">리빙 / 인테리어</a>
+            <a href="products.html?category=푸드 / 키친" class="text-slate-600 hover:text-indigo-600 transition \${active === 'food' ? 'text-indigo-600 font-bold' : ''}">푸드 / 키친</a>
             <div class="ml-auto flex items-center gap-4">
               <a href="products.html?isBest=true" class="text-amber-600 font-bold flex items-center gap-1 hover:text-amber-700 transition">
                 <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i> 베스트 랭킹
@@ -698,7 +221,7 @@ const ShopUI = {
 
         <!-- Mobile Drawer Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-2">
-          ${mobileAuthHtml}
+          \${mobileAuthHtml}
           <a href="products.html" class="block py-2 text-slate-800 font-bold">전체 상품 탐색</a>
           <a href="products.html?category=패션 / 의류" class="block py-2 text-slate-600">패션 / 의류</a>
           <a href="products.html?category=디지털 / 가전" class="block py-2 text-slate-600">디지털 / 가전</a>
@@ -774,7 +297,7 @@ const ShopUI = {
           </div>
         </div>
       </div>
-    `;
+    \`;
 
     // Mobile menu toggle
     const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -883,13 +406,13 @@ const ShopUI = {
     const meterText = document.getElementById('drawer-shipping-text');
     const meterBadge = document.getElementById('drawer-shipping-badge');
 
-    if (meterBar) meterBar.style.width = `${progress}%`;
+    if (meterBar) meterBar.style.width = \`\${progress}%\`;
     if (meterText) {
       if (summary.remainingForFreeShipping > 0) {
-        meterText.innerHTML = `<strong>${ShopUI.formatPrice(summary.remainingForFreeShipping)}</strong> 더 담으면 무료배송!`;
+        meterText.innerHTML = \`<strong>\${ShopUI.formatPrice(summary.remainingForFreeShipping)}</strong> 더 담으면 무료배송!\`;
         if (meterBadge) meterBadge.innerText = '배송비 3,000원';
       } else {
-        meterText.innerHTML = `<span class="text-emerald-600 font-bold">🎉 무료배송 혜택 적용 완료!</span>`;
+        meterText.innerHTML = \`<span class="text-emerald-600 font-bold">🎉 무료배송 혜택 적용 완료!</span>\`;
         if (meterBadge) meterBadge.innerText = '무료';
       }
     }
@@ -904,7 +427,7 @@ const ShopUI = {
     if (fAmount) fAmount.innerText = ShopUI.formatPrice(summary.finalAmount);
 
     if (items.length === 0) {
-      container.innerHTML = `
+      container.innerHTML = \`
         <div class="py-16 text-center text-slate-400">
           <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto stroke-1 mb-3 text-slate-300"></i>
           <p class="font-medium text-slate-600">장바구니가 비어 있습니다.</p>
@@ -913,31 +436,31 @@ const ShopUI = {
             상품 둘러보기
           </a>
         </div>
-      `;
+      \`;
       if (window.lucide) window.lucide.createIcons();
       return;
     }
 
-    container.innerHTML = items.map((item, index) => `
+    container.innerHTML = items.map((item, index) => \`
       <div class="flex gap-3 pt-3 first:pt-0">
-        <img src="${item.thumbnail}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0" />
+        <img src="\${item.thumbnail}" alt="\${item.name}" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0" />
         <div class="flex-1 min-w-0">
-          <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${item.name}</h4>
-          ${item.selectedOption ? `<p class="text-[11px] text-slate-400 mt-0.5">${item.selectedOption}</p>` : ''}
+          <h4 class="text-xs font-bold text-slate-800 line-clamp-1">\${item.name}</h4>
+          \${item.selectedOption ? \`<p class="text-[11px] text-slate-400 mt-0.5">\${item.selectedOption}</p>\` : ''}
           <div class="flex items-center justify-between mt-2">
-            <span class="text-xs font-black text-indigo-600">${ShopUI.formatPrice(item.price)}</span>
+            <span class="text-xs font-black text-indigo-600">\${ShopUI.formatPrice(item.price)}</span>
             <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
-              <button onclick="CartStore.updateQuantity('${item.id}', '${item.selectedOption}', ${item.quantity - 1})" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100">-</button>
-              <span class="px-2 text-xs font-bold">${item.quantity}</span>
-              <button onclick="CartStore.updateQuantity('${item.id}', '${item.selectedOption}', ${item.quantity + 1})" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100">+</button>
+              <button onclick="CartStore.updateQuantity('\${item.id}', '\${item.selectedOption}', \${item.quantity - 1})" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100">-</button>
+              <span class="px-2 text-xs font-bold">\${item.quantity}</span>
+              <button onclick="CartStore.updateQuantity('\${item.id}', '\${item.selectedOption}', \${item.quantity + 1})" class="px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-100">+</button>
             </div>
-            <button onclick="CartStore.removeItem('${item.id}', '${item.selectedOption}')" class="text-slate-400 hover:text-rose-500 p-1">
+            <button onclick="CartStore.removeItem('\${item.id}', '\${item.selectedOption}')" class="text-slate-400 hover:text-rose-500 p-1">
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
       </div>
-    `).join('');
+    \`).join('');
 
     if (window.lucide) window.lucide.createIcons();
   },
@@ -947,7 +470,7 @@ const ShopUI = {
     const root = document.getElementById('footer-root');
     if (!root) return;
 
-    root.innerHTML = `
+    root.innerHTML = \`
       <footer class="bg-slate-900 text-slate-400 text-sm mt-20 border-t border-slate-800">
         <!-- Trust badge bar -->
         <div class="border-b border-slate-800/80 py-8 bg-slate-950/40">
@@ -1038,7 +561,7 @@ const ShopUI = {
           </div>
         </div>
       </footer>
-    `;
+    \`;
 
     if (window.lucide) {
       window.lucide.createIcons();
@@ -1062,11 +585,11 @@ const ShopUI = {
     
     const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'alert-triangle' : 'info';
 
-    toast.className = `${bgClass} border shadow-2xl px-4 py-3 rounded-2xl flex items-center gap-3 pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 text-sm font-semibold max-w-sm`;
-    toast.innerHTML = `
-      <i data-lucide="${icon}" class="w-5 h-5 shrink-0"></i>
-      <span>${message}</span>
-    `;
+    toast.className = \`\${bgClass} border shadow-2xl px-4 py-3 rounded-2xl flex items-center gap-3 pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 text-sm font-semibold max-w-sm\`;
+    toast.innerHTML = \`
+      <i data-lucide="\${icon}" class="w-5 h-5 shrink-0"></i>
+      <span>\${message}</span>
+    \`;
 
     container.appendChild(toast);
     if (window.lucide) window.lucide.createIcons();
@@ -1081,8 +604,73 @@ const ShopUI = {
     }, 3000);
   }
 };
+`;
 
-'@
+// Save to shop/js/components.js and shop/public/js/components.js
+fs.writeFileSync(path.join(shopDir, 'js', 'components.js'), updatedShopComponents, 'utf8');
+fs.writeFileSync(path.join(publicDir, 'js', 'components.js'), updatedShopComponents, 'utf8');
+console.log('Saved updated components.js in shop/js and shop/public/js');
 
-[System.IO.File]::WriteAllText((Join-Path $jsDir 'components.js'), $componentsJs, [System.Text.Encoding]::UTF8)
-Write-Host "Generated: components.js" -ForegroundColor Green
+// 2. Update HTML pages to ensure <script src="js/auth-store.js"></script> is included before components.js
+const htmlFiles = fs.readdirSync(shopDir).filter(f => f.endsWith('.html'));
+
+htmlFiles.forEach(file => {
+  const filePath = path.join(shopDir, file);
+  let html = fs.readFileSync(filePath, 'utf8');
+  let changed = false;
+
+  if (!html.includes('auth-store.js')) {
+    if (html.includes('<script src="js/components.js">') || html.includes("<script src='js/components.js'>")) {
+      html = html.replace(/(<script\s+src=["']js\/components\.js["'])/i, '<script src="js/auth-store.js"></script>\n  $1');
+      changed = true;
+    } else if (html.includes('</body>')) {
+      html = html.replace('</body>', '  <script src="js/auth-store.js"></script>\n</body>');
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    fs.writeFileSync(filePath, html, 'utf8');
+    const pubPath = path.join(publicDir, file);
+    if (fs.existsSync(pubPath)) {
+      fs.writeFileSync(pubPath, html, 'utf8');
+    }
+    console.log(`Injected auth-store.js into ${file}`);
+  }
+});
+
+// Also check publicDir for any html files that might need it
+const pubHtmlFiles = fs.readdirSync(publicDir).filter(f => f.endsWith('.html'));
+pubHtmlFiles.forEach(file => {
+  const pubPath = path.join(publicDir, file);
+  let html = fs.readFileSync(pubPath, 'utf8');
+  if (!html.includes('auth-store.js')) {
+    if (html.includes('<script src="js/components.js">') || html.includes("<script src='js/components.js'>")) {
+      html = html.replace(/(<script\s+src=["']js\/components\.js["'])/i, '<script src="js/auth-store.js"></script>\n  $1');
+      fs.writeFileSync(pubPath, html, 'utf8');
+      console.log(`Injected auth-store.js into public/${file}`);
+    }
+  }
+});
+
+// 3. Update gen_static_assets.ps1 with updated componentsJs
+const genStaticPath = path.join(tourDir, 'gen_static_assets.ps1');
+let genStaticContent = fs.readFileSync(genStaticPath, 'utf8');
+
+const startMarker = `$componentsJs = @'\r\n`;
+const altStartMarker = `$componentsJs = @'\n`;
+const actStart = genStaticContent.includes(startMarker) ? startMarker : altStartMarker;
+const endMarker = '\r\n\'@';
+const altEndMarker = '\n\'@';
+
+const sIdx = genStaticContent.indexOf(actStart);
+if (sIdx !== -1) {
+  const eIdx = genStaticContent.indexOf(genStaticContent.includes(endMarker) ? endMarker : altEndMarker, sIdx + actStart.length);
+  if (eIdx !== -1) {
+    genStaticContent = genStaticContent.slice(0, sIdx + actStart.length) + updatedShopComponents + genStaticContent.slice(eIdx);
+    fs.writeFileSync(genStaticPath, genStaticContent, 'utf8');
+    console.log('Updated gen_static_assets.ps1 with new componentsJs');
+  }
+}
+
+console.log('Shop Logout and Auth UI integration completed successfully!');
