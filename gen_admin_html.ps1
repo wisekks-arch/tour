@@ -99,8 +99,9 @@ $adminHtml = @'
             </div>
           </div>
 
-          <button onclick="handleAdminLogout()" title="로그아웃" class="p-2 text-rose-400 hover:text-rose-300 rounded-xl hover:bg-rose-950/40 transition">
-            <i data-lucide="log-out" class="w-4 h-4"></i>
+          <button onclick="handleAdminLogout()" class="px-3.5 py-2 bg-rose-500/15 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 rounded-xl font-bold text-xs transition flex items-center gap-1.5 shadow-xs cursor-pointer" title="관리자 로그아웃">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+            <span>로그아웃</span>
           </button>
         </div>
 
@@ -127,6 +128,10 @@ $adminHtml = @'
         <button onclick="switchAdminTab('inquiries')" id="nav-m-btn-inquiries" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 font-bold flex items-center gap-1.5 text-xs shrink-0">
           <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
           <span>고객 문의</span>
+        </button>
+        <button onclick="handleAdminLogout()" id="nav-m-btn-logout" class="px-3 py-1.5 rounded-lg text-rose-400 hover:text-white hover:bg-rose-600/80 font-bold flex items-center gap-1.5 text-xs shrink-0 border border-rose-500/30">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span>로그아웃</span>
         </button>
       </nav>
 
@@ -865,11 +870,24 @@ $adminHtml = @'
   </div>
 
   <!-- Scripts -->
-  <script src="js/cart-store.js?v=20261006_v16"></script>
-  <script src="js/api.js?v=20261006_v16"></script>
-  <script src="js/auth-store.js"></script>
-  <script src="js/components.js?v=20261006_v16"></script>
+  <script src="js/cart-store.js?v=20261007_auth"></script>
+  <script src="js/api.js?v=20261007_auth"></script>
+  <script src="js/components.js?v=20261007_auth"></script>
   <script>
+    function handleAdminLogout() {
+      if (confirm('관리자 세션을 종료하고 로그아웃하시겠습니까?')) {
+        if (typeof AuthStore !== 'undefined') {
+          AuthStore.logout();
+        }
+        try {
+          localStorage.removeItem('easyshop_admin_session');
+          localStorage.removeItem('easyshop_session_v3');
+        } catch (e) {}
+        alert('관리자 계정에서 안전하게 로그아웃되었습니다.');
+        window.location.href = 'index.html';
+      }
+    }
+
     let adminProducts = [];
     let adminOrders = [];
     let adminInquiries = [];
@@ -2828,6 +2846,7 @@ $adminHtml = @'
     </div>
   </div>
 
+  <script src="js/auth-store.js?v=20261007_auth"></script>
 </body>
 </html>
 '@
