@@ -508,11 +508,15 @@ const ShopUI = {
     // Top Utility Auth Buttons
     const topAuthHtml = currentUser ? `
       <div class="flex items-center gap-2">
-        <span class="text-emerald-300 font-bold flex items-center gap-1">
+        <a href="profile.html" class="text-emerald-300 hover:text-emerald-200 font-bold flex items-center gap-1 transition" title="회원정보 관리">
           <i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-400"></i>
           <span>${currentUser.name} 님</span>
           <span class="text-[10px] bg-emerald-950/80 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30">${(currentUser.points || 0).toLocaleString()}P</span>
-        </span>
+        </a>
+        <span class="text-slate-600">|</span>
+        <a href="profile.html" class="text-indigo-300 hover:text-white transition flex items-center gap-1 text-[11px] font-medium">
+          <i data-lucide="settings" class="w-3 h-3"></i> 정보수정
+        </a>
         <span class="text-slate-600">|</span>
         <button type="button" onclick="ShopUI.handleLogout()" class="hover:text-rose-300 text-slate-300 transition flex items-center gap-1 cursor-pointer font-medium">
           <i data-lucide="log-out" class="w-3.5 h-3.5 text-rose-400"></i> 로그아웃
@@ -533,10 +537,10 @@ const ShopUI = {
     // Main Header Auth Button (Desktop)
     const desktopAuthHtml = currentUser ? `
       <div class="hidden md:flex items-center gap-2">
-        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-bold text-indigo-900">
+        <a href="profile.html" class="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 rounded-full text-xs font-bold text-indigo-900 transition" title="마이페이지/회원정보수정">
           <i data-lucide="user" class="w-3.5 h-3.5 text-indigo-600"></i>
           <span>${currentUser.name} 님</span>
-        </div>
+        </a>
         <button type="button" onclick="ShopUI.handleLogout()" class="px-3 py-1.5 rounded-full border border-slate-200 hover:border-rose-300 hover:bg-rose-50 text-slate-600 hover:text-rose-600 text-xs font-semibold transition flex items-center gap-1 cursor-pointer" title="로그아웃">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
           <span>로그아웃</span>
@@ -554,15 +558,15 @@ const ShopUI = {
     // Mobile Drawer Auth Section
     const mobileAuthHtml = currentUser ? `
       <div class="p-3 bg-indigo-50/90 rounded-xl flex items-center justify-between border border-indigo-100 mb-2">
-        <div class="flex items-center gap-2.5">
+        <a href="profile.html" class="flex items-center gap-2.5 hover:opacity-80 transition">
           <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">
             ${currentUser.name ? currentUser.name.slice(0, 1) : 'U'}
           </div>
           <div>
-            <p class="text-xs font-bold text-slate-900">${currentUser.name} 님</p>
-            <p class="text-[10px] text-indigo-600 font-semibold">${(currentUser.points || 0).toLocaleString()}P 보유</p>
+            <p class="text-xs font-bold text-slate-900 flex items-center gap-1">${currentUser.name} 님 <i data-lucide="chevron-right" class="w-3 h-3 text-slate-400"></i></p>
+            <p class="text-[10px] text-indigo-600 font-semibold">${(currentUser.points || 0).toLocaleString()}P (정보수정)</p>
           </div>
-        </div>
+        </a>
         <button type="button" onclick="ShopUI.handleLogout()" class="px-2.5 py-1 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition">
           로그아웃
         </button>
