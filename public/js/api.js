@@ -21929,74 +21929,92 @@ const TourAPI = {
 
   // Helper: Generate User Attached Email Screenshot 1:1 Exact HTML Template
   generateTempPasswordEmailHtml(tempPassword, email, userName) {
-    const cleanEmail = (email || '').trim();
-    const cleanName = (userName || email.split('@')[0] || '고객').trim();
-    const now = new Date();
-    const kstHours = now.getHours();
-    const ampm = kstHours >= 12 ? '오후' : '오전';
-    const hour12 = kstHours % 12 || 12;
-    const formattedDate = `${now.getFullYear()}. ${now.getMonth() + 1}. ${now.getDate()}. ${ampm} ${hour12}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+  const cleanEmail = (typeof escapeHtml === 'function' ? escapeHtml(email) : (email || '')).trim();
+  const cleanName = (typeof escapeHtml === 'function' ? escapeHtml(userName || email.split('@')[0] || '고객') : (userName || email.split('@')[0] || '고객')).trim();
+  const now = new Date();
+  const kstHours = now.getHours();
+  const ampm = kstHours >= 12 ? '오후' : '오전';
+  const hour12 = kstHours % 12 || 12;
+  const formattedDate = `${now.getFullYear()}. ${now.getMonth() + 1}. ${now.getDate()}. ${ampm} ${hour12}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>투어이지 임시 비밀번호 발급 안내</title>
 </head>
-<body style="margin:0;padding:32px 16px;background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
-  <div style="max-width:580px;margin:0 auto;background-color:#ffffff;border-radius:24px;padding:36px 28px;box-shadow:0 4px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
-    <!-- Logo & Header -->
-    <div style="text-align:center;margin-bottom:28px;">
-      <div style="font-size:24px;font-weight:900;color:#0284c7;letter-spacing:-0.5px;margin-bottom:6px;">
-        ✈️ 투어이지 (TourEasy)
-      </div>
-      <div style="font-size:13.5px;color:#64748b;font-weight:500;">
-        임시 비밀번호 발급 안내
-      </div>
-    </div>
+<body style="margin:0;padding:40px 16px;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#334155;line-height:1.6;">
+  <div style="max-width:540px;margin:0 auto;background-color:#ffffff;border-radius:24px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,0.07);border:1px solid #e2e8f0;">
+    
+    <!-- Top Gradient Accent Bar (두 번째 이미지 상단 바 100% 매칭) -->
+    <div style="height:6px;background:linear-gradient(90deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);"></div>
 
-    <!-- Inner Card Container -->
-    <div style="background-color:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:26px 22px;">
-      <!-- Greeting -->
-      <div style="font-size:14.5px;color:#1e293b;margin-bottom:8px;font-weight:bold;">
-        안녕하세요, <span style="font-weight:800;color:#0f172a;">${cleanName}</span>님.
-      </div>
-      <div style="font-size:13.5px;color:#475569;margin-bottom:22px;line-height:1.6;">
-        투어이지 계정의 새로운 임시 비밀번호가 안전하게 발급되었습니다.
+    <div style="padding:40px 32px 36px 32px;">
+      
+      <!-- Brand & Title Header -->
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-0.5px;margin-bottom:6px;">
+          계정 정보 찾기
+        </div>
+        <div style="font-size:13px;color:#64748b;font-weight:500;">
+          투어이지 가입 시 등록하신 정보로 임시 비밀번호가 안전하게 발급되었습니다.
+        </div>
       </div>
 
-      <!-- Dashed Blue Temp Password Box (100% Matches Attached Image) -->
-      <div style="background-color:#ffffff;border:2px dashed #0284c7;border-radius:14px;padding:22px 16px;text-align:center;margin-bottom:24px;box-shadow:0 2px 6px rgba(2,132,199,0.04);">
-        <div style="font-size:12.5px;color:#64748b;font-weight:600;margin-bottom:8px;">
+      <!-- Welcome Banner -->
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:22px;margin-bottom:24px;">
+        <div style="font-size:14.5px;color:#1e293b;margin-bottom:6px;font-weight:bold;">
+          안녕하세요, <span style="font-weight:800;color:#4f46e5;">${cleanName}</span>님!
+        </div>
+        <div style="font-size:13px;color:#475569;line-height:1.6;">
+          요청하신 투어이지 계정의 새로운 임시 비밀번호를 안내해 드립니다.<br>
+          아래의 임시 비밀번호로 로그인하신 후 원하시는 비밀번호로 꼭 변경해 주세요.
+        </div>
+      </div>
+
+      <!-- Temp Password Display Box (두 번째 이미지 모던 버튼/인풋 스타일 접목) -->
+      <div style="background:linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);border:2px dashed #8b5cf6;border-radius:18px;padding:26px 20px;text-align:center;margin-bottom:26px;">
+        <div style="font-size:12px;color:#6d28d9;font-weight:700;margin-bottom:8px;letter-spacing:0.5px;">
           발급된 임시 비밀번호
         </div>
-        <div style="font-size:26px;font-weight:900;color:#0284c7;font-family:Consolas, 'Courier New', monospace;letter-spacing:2px;">
+        <div style="font-size:30px;font-weight:900;color:#4f46e5;font-family:Consolas, 'Courier New', monospace;letter-spacing:3px;">
           ${tempPassword}
         </div>
       </div>
 
-      <!-- Bullet Info List -->
-      <div style="font-size:13px;color:#475569;line-height:1.8;">
+      <!-- Account Info List -->
+      <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 22px;margin-bottom:28px;font-size:13px;color:#475569;line-height:1.8;">
         <div style="margin-bottom:6px;">
           • 가입 아이디(이메일): <strong style="color:#0f172a;">${cleanEmail}</strong>
         </div>
         <div style="margin-bottom:6px;">
-          • 임시 비밀번호로 로그인하신 후, [마이페이지]에서 원하시는 비밀번호로 꼭 변경해주세요.
+          • 발송 일시: <span style="color:#64748b;">${formattedDate}</span>
         </div>
         <div>
-          • 발송 일시: ${formattedDate}
+          • 임시 비밀번호로 로그인하신 후, [마이페이지]에서 원하시는 비밀번호로 꼭 변경해주세요.
         </div>
       </div>
+
+      <!-- Login CTA Button (두 번째 이미지 메인 버튼 양식) -->
+      <div style="text-align:center;margin-bottom:8px;">
+        <a href="https://wisekks-arch.github.io/tour/index.html" target="_blank" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:14px;font-weight:800;text-decoration:none;padding:15px 36px;border-radius:16px;box-shadow:0 4px 14px rgba(79,70,229,0.3);letter-spacing:0.3px;">
+          투어이지 로그인하러 가기 →
+        </a>
+      </div>
+
     </div>
 
     <!-- Outer Footer -->
-    <div style="text-align:center;margin-top:24px;font-size:12px;color:#94a3b8;line-height:1.6;">
-      본 메일은 투어이지 웹사이트에서 요청하신 비밀번호 찾기 서비스에 따라 발송되었습니다.
+    <div style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px;text-align:center;font-size:11.5px;color:#94a3b8;line-height:1.6;">
+      본 메일은 투어이지 웹사이트에서 요청하신 비밀번호 찾기 서비스에 따라 발송되었습니다.<br>
+      © 투어이지. All rights reserved.
     </div>
+
   </div>
 </body>
 </html>`;
   },
+
 
   // Helper: Send Real Email Dispatch (Admin Backup Notification)
   async dispatchRealEmail(toEmail, subject, textContent, htmlContent) {
