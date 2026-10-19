@@ -1060,10 +1060,11 @@ const server = http.createServer(async (req, res) => {
         let smtpErrorMsg = '';
 
         try {
-          const htmlContent = generateTempPasswordEmailHtml(tempPassword, email, target.name);
+          const brandName = body.brandName || '투어이지';
+        const htmlContent = generateTempPasswordEmailHtml(tempPassword, email, target.name).replace(/투어이지 \(TourEasy\)/g, brandName).replace(/투어이지/g, brandName.split(' ')[0]);
           await sendReliableEmail({
             toEmail: email,
-            subject: '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
+            subject: body.subject || '[투어이지] 요청하신 임시 비밀번호가 발급되었습니다.',
             html: htmlContent,
             text: `[투어이지] 임시 비밀번호는 [${tempPassword}] 입니다. 로그인 후 변경해주세요.`
           });
