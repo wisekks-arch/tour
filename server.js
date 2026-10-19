@@ -246,12 +246,12 @@ async function sendReliableEmail(emailOptions) {
   const accounts = smtpCfg.accounts || {};
 
   const primaryOpts = {
-    host: smtpCfg.host || 'smtp.naver.com',
+    host: smtpCfg.host || 'smtp.daum.net',
     port: smtpCfg.port || 465,
-    user: smtpCfg.user || 'kmagick',
-    password: smtpCfg.password || 'HZGQF6H25BSF',
-    fromEmail: smtpCfg.fromEmail || 'kmagick@naver.com',
-    fromName: smtpCfg.fromName || '투어이지(TourEasy)',
+    user: smtpCfg.user || 'kwangsoo-kim@daum.net',
+    password: smtpCfg.password || 'tyyxtfcjjtuyyhbl',
+    fromEmail: smtpCfg.fromEmail || 'kwangsoo-kim@daum.net',
+    fromName: smtpCfg.fromName || '투어이지(TourEasy) 맞춤여행팀',
     ...emailOptions
   };
 

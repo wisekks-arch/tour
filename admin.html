@@ -2492,7 +2492,7 @@
         const d = (res && res.success && (res.data || res.config)) ? (res.data || res.config) : null;
         if (d) {
           savedSmtpAccounts = d.accounts || {};
-          currentSmtpProvider = d.provider || 'naver';
+          currentSmtpProvider = d.provider || 'daum';
           selectSmtpPreset(currentSmtpProvider, false);
           if (d.host) document.getElementById('smtp-host').value = d.host;
           if (d.port) document.getElementById('smtp-port').value = d.port;

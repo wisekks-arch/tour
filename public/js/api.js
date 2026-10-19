@@ -22641,7 +22641,7 @@ const TourAPI = {
           port: 465,
           enableSsl: true,
           user: 'kwangsoo-kim@daum.net',
-          password: 'culsppnqwxwvvdko',
+          password: 'tyyxtfcjjtuyyhbl',
           fromEmail: 'kwangsoo-kim@daum.net',
           fromName: '투어이지(TourEasy)',
           hasPassword: true
