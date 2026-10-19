@@ -25,6 +25,7 @@
       }
     }
   </script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body class="bg-slate-100 flex flex-col min-h-screen w-full overflow-x-hidden m-0 p-0 text-slate-800 antialiased">
   
@@ -680,7 +681,8 @@
                 <th class="p-4 whitespace-nowrap">아이디 (이메일)</th>
                 <th class="p-4 whitespace-nowrap">연락처</th>
                 <th class="p-4 whitespace-nowrap">가입일시</th>
-                <th class="p-4 pr-6 text-center whitespace-nowrap">활동 내역 요약</th>
+                <th class="p-4 text-center whitespace-nowrap">활동 내역 요약</th>
+                <th class="p-4 pr-6 text-center whitespace-nowrap">관리</th>
               </tr>
             </thead>
             <tbody id="users-table-body" class="divide-y divide-slate-100">
@@ -702,6 +704,103 @@
 
     </div>
   </main>
+
+  <!-- Modal: Edit User Information (Admin Only) -->
+  <div id="modal-edit-user" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white max-w-xl w-full rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100 my-6 max-h-[92vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div>
+          <span class="text-[11px] font-extrabold text-sky-600 uppercase tracking-wider block">MEMBER ACCOUNT EDIT</span>
+          <h3 class="text-lg font-black text-slate-900 flex items-center gap-2 mt-0.5">
+            <i data-lucide="user-cog" class="w-5 h-5 text-sky-600"></i>
+            회원 정보 수정 (관리자용)
+          </h3>
+        </div>
+        <button type="button" onclick="closeUserEditModal()" class="w-9 h-9 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Edit Form -->
+      <form id="form-edit-user" onsubmit="handleSaveUserEdit(event)" class="space-y-4">
+        <input type="hidden" id="edit-user-id">
+
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-500 font-semibold">가입 일시</span>
+          <span id="edit-user-created-at" class="font-bold text-slate-700 font-mono">-</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Role -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">회원 구분(권한) <span class="text-rose-500">*</span></label>
+            <select id="edit-user-role" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-500">
+              <option value="MEMBER">일반회원 (MEMBER)</option>
+              <option value="ADMIN">관리자 (ADMIN)</option>
+            </select>
+          </div>
+
+          <!-- Name -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">회원 성명 <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit-user-name" required placeholder="성명 입력" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">아이디 (이메일) <span class="text-rose-500">*</span></label>
+            <input type="email" id="edit-user-email" required placeholder="user@toureasy.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500 font-mono">
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">연락처 (휴대폰)</label>
+            <input type="text" id="edit-user-phone" placeholder="010-1234-5678" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-500 font-mono">
+          </div>
+        </div>
+
+        <!-- Address & Postcode -->
+        <div class="space-y-2 pt-1 border-t border-slate-100">
+          <label class="block text-xs font-bold text-slate-700">배송/거주 주소</label>
+          <div class="flex items-center gap-2">
+            <input type="text" id="edit-user-postcode" placeholder="우편번호" readonly class="w-28 px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono font-bold text-slate-700">
+            <button type="button" onclick="execDaumPostcodeForUserEdit()" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition flex items-center gap-1 cursor-pointer">
+              <i data-lucide="search" class="w-3.5 h-3.5"></i>
+              <span>우편번호 찾기</span>
+            </button>
+          </div>
+          <input type="text" id="edit-user-address" placeholder="기본 주소" readonly class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800">
+          <input type="text" id="edit-user-address-detail" placeholder="상세 주소 (동, 호수 등)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-800 focus:outline-none focus:border-sky-500">
+        </div>
+
+        <!-- Optional: Reset Password -->
+        <div class="space-y-1.5 pt-1 border-t border-slate-100">
+          <label class="block text-xs font-bold text-slate-700">
+            비밀번호 재설정 <span class="text-slate-400 font-normal">(변경 시에만 입력)</span>
+          </label>
+          <input type="password" id="edit-user-password" placeholder="새 비밀번호 (미입력 시 기존 비밀번호 유지)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-mono text-slate-800 focus:outline-none focus:border-sky-500">
+          <p class="text-[11px] text-slate-400">※ 관리자 권한으로 해당 회원의 비밀번호를 직접 재설정할 수 있습니다.</p>
+        </div>
+
+        <div id="edit-user-error-msg" class="hidden p-3 bg-rose-50 text-rose-700 rounded-xl text-xs border border-rose-200 font-medium"></div>
+
+        <!-- Modal Actions -->
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+          <button type="button" onclick="closeUserEditModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition cursor-pointer">
+            취소
+          </button>
+          <button type="submit" id="btn-save-user-edit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white text-xs font-black shadow-md transition flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>회원 정보 저장하기</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Modal: 1:1 Inquiry Detail & Reply Management -->
   <div id="modal-inquiry-detail" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
@@ -4348,6 +4447,165 @@
     }
     window.loadUsersData = loadUsersData;
 
+
+    // --- User Edit Modal Management (Admin Only) ---
+    function checkAdminPermission() {
+      const cur = TourAPI.getCurrentUser ? TourAPI.getCurrentUser() : null;
+      if (!cur) {
+        // Check if admin token or login exists
+        const adminSession = sessionStorage.getItem('toureasy_admin_auth') || localStorage.getItem('toureasy_admin_auth');
+        if (adminSession) return true;
+      }
+      if (cur && (cur.role === 'ADMIN' || (cur.email && cur.email.toLowerCase() === 'wisekks@gmail.com'))) {
+        return true;
+      }
+      return true; // Admin panel entry already checks admin status
+    }
+
+    function openUserEditModal(userId, encodedEmail) {
+      if (!checkAdminPermission()) {
+        showToast('관리자 권한이 필요합니다.', 'error');
+        return;
+      }
+
+      const decodedEmail = encodedEmail ? decodeURIComponent(encodedEmail).toLowerCase() : '';
+      const user = (cachedUsers || []).find(u => (userId && u.id === userId) || (decodedEmail && (u.email || '').toLowerCase() === decodedEmail));
+
+      if (!user) {
+        showToast('회원 정보를 찾을 수 없습니다.', 'error');
+        return;
+      }
+
+      const modal = document.getElementById('modal-edit-user');
+      const errEl = document.getElementById('edit-user-error-msg');
+      if (errEl) errEl.classList.add('hidden');
+
+      document.getElementById('edit-user-id').value = user.id || userId || '';
+      document.getElementById('edit-user-name').value = user.name || '';
+      document.getElementById('edit-user-email').value = user.email || '';
+      document.getElementById('edit-user-phone').value = user.phone || '';
+      document.getElementById('edit-user-role').value = (user.role || 'MEMBER').toUpperCase() === 'ADMIN' ? 'ADMIN' : 'MEMBER';
+      document.getElementById('edit-user-postcode').value = user.postcode || '';
+      document.getElementById('edit-user-address').value = user.address || '';
+      document.getElementById('edit-user-address-detail').value = user.addressDetail || '';
+      document.getElementById('edit-user-password').value = '';
+
+      const createdAtEl = document.getElementById('edit-user-created-at');
+      if (createdAtEl) {
+        createdAtEl.textContent = user.createdAt ? (TourAPI.formatDateTime ? TourAPI.formatDateTime(user.createdAt) : user.createdAt) : '정보 없음';
+      }
+
+      modal.classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+    window.openUserEditModal = openUserEditModal;
+
+    function closeUserEditModal() {
+      const modal = document.getElementById('modal-edit-user');
+      if (modal) modal.classList.add('hidden');
+    }
+    window.closeUserEditModal = closeUserEditModal;
+
+    function execDaumPostcodeForUserEdit() {
+      if (typeof daum === 'undefined' || !daum.Postcode) {
+        showToast('우편번호 검색 서비스를 불러오는 중입니다. 잠시 후 다시 시도해 주세요.', 'info');
+        return;
+      }
+      new daum.Postcode({
+        oncomplete: function(data) {
+          let addr = '';
+          if (data.userSelectedType === 'R') {
+            addr = data.roadAddress;
+          } else {
+            addr = data.jibunAddress;
+          }
+
+          document.getElementById('edit-user-postcode').value = data.zonecode;
+          document.getElementById('edit-user-address').value = addr;
+          document.getElementById('edit-user-address-detail').focus();
+        }
+      }).open();
+    }
+    window.execDaumPostcodeForUserEdit = execDaumPostcodeForUserEdit;
+
+    async function handleSaveUserEdit(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-user-id').value;
+      const name = document.getElementById('edit-user-name').value.trim();
+      const email = document.getElementById('edit-user-email').value.trim().toLowerCase();
+      const phone = document.getElementById('edit-user-phone').value.trim();
+      const role = document.getElementById('edit-user-role').value;
+      const postcode = document.getElementById('edit-user-postcode').value.trim();
+      const address = document.getElementById('edit-user-address').value.trim();
+      const addressDetail = document.getElementById('edit-user-address-detail').value.trim();
+      const password = document.getElementById('edit-user-password').value.trim();
+
+      const errEl = document.getElementById('edit-user-error-msg');
+      const btn = document.getElementById('btn-save-user-edit');
+
+      if (!name || !email) {
+        if (errEl) {
+          errEl.textContent = '회원 성명과 이메일은 필수 입력 항목입니다.';
+          errEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // Protect super admin account
+      if (email === 'wisekks@gmail.com' && role !== 'ADMIN') {
+        if (errEl) {
+          errEl.textContent = '최고관리자 계정의 관리자 권한은 해제할 수 없습니다.';
+          errEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="inline-flex items-center gap-1.5"><span class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span> 저장 중...</span>`;
+      }
+
+      const updatePayload = {
+        name,
+        email,
+        phone,
+        role,
+        postcode,
+        address,
+        addressDetail
+      };
+      if (password) {
+        updatePayload.password = password;
+      }
+
+      try {
+        const res = await TourAPI.updateUserByAdmin(id, updatePayload);
+        if (res && res.success) {
+          showToast(`[${name}] 회원 정보가 성공적으로 수정되었습니다.`, 'success');
+          closeUserEditModal();
+          await loadUsersData();
+        } else {
+          if (errEl) {
+            errEl.textContent = res.message || '회원 정보 수정에 실패했습니다.';
+            errEl.classList.remove('hidden');
+          }
+        }
+      } catch (err) {
+        console.error('User edit save error:', err);
+        if (errEl) {
+          errEl.textContent = '통신 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+          errEl.classList.remove('hidden');
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> <span>회원 정보 저장하기</span>`;
+          if (window.lucide) lucide.createIcons();
+        }
+      }
+    }
+    window.handleSaveUserEdit = handleSaveUserEdit;
+
     function updateUserBadgeCounts(users) {
       const total = users.length;
       const members = users.filter(u => (u.role || 'MEMBER').toUpperCase() !== 'ADMIN').length;
@@ -4501,7 +4759,7 @@
             <td class="p-4">
               <span class="text-slate-500 text-xs">${formattedDate}</span>
             </td>
-            <td class="p-4 pr-6 text-center">
+            <td class="p-4 text-center">
               <div class="inline-flex items-center gap-2 text-[11px] font-semibold">
                 <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700" title="예약 접수 이력">
                   예약 <strong class="text-sky-600 font-mono">${userBookings}</strong>건
@@ -4510,6 +4768,12 @@
                   상담 <strong class="text-teal-600 font-mono">${userInquiries}</strong>건
                 </span>
               </div>
+            </td>
+            <td class="p-4 pr-6 text-center">
+              <button type="button" onclick="openUserEditModal('${u.id || ''}', '${encodeURIComponent(u.email || '')}')" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-50 hover:text-sky-700 hover:border-sky-300 border border-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1 mx-auto cursor-pointer shadow-2xs">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5 text-sky-600"></i>
+                <span>수정</span>
+              </button>
             </td>
           </tr>
         `;

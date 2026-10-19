@@ -1192,10 +1192,13 @@ const server = http.createServer(async (req, res) => {
         }
 
         if (body.name) target.name = body.name.trim();
-        if (body.phone) target.phone = body.phone.trim();
+        if (body.phone !== undefined) target.phone = body.phone ? body.phone.trim() : '';
         if (body.role) target.role = body.role.trim();
         if (body.email) target.email = body.email.trim().toLowerCase();
         if (body.password) target.password = body.password;
+        if (body.postcode !== undefined) target.postcode = body.postcode ? body.postcode.trim() : '';
+        if (body.address !== undefined) target.address = body.address ? body.address.trim() : '';
+        if (body.addressDetail !== undefined) target.addressDetail = body.addressDetail ? body.addressDetail.trim() : '';
 
         writeJson('users.json', users);
 

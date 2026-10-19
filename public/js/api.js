@@ -22475,6 +22475,8 @@ const TourAPI = {
   },
 
   async updateUserByAdmin(id, userData) {
+    let serverSuccess = false;
+    let updatedUser = null;
     try {
       if (window.location.protocol !== 'file:') {
         const res = await fetch(`${API_BASE}/auth/users/${encodeURIComponent(id)}`, {
@@ -22482,11 +22484,49 @@ const TourAPI = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(userData)
         });
-        return await res.json();
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.success) {
+            serverSuccess = true;
+            updatedUser = json.user;
+          }
+        }
       }
     } catch (e) {
-      console.warn('updateUserByAdmin error:', e);
+      console.warn('updateUserByAdmin server call failed, using local fallback:', e);
     }
+
+    // LocalStorage fallback and synchronization
+    try {
+      const raw = localStorage.getItem('toureasy_mock_users');
+      let list = raw ? JSON.parse(raw) : (typeof DEFAULT_USERS !== 'undefined' ? JSON.parse(JSON.stringify(DEFAULT_USERS)) : []);
+      const idx = list.findIndex(u => u.id === id || (u.email && userData.email && u.email.toLowerCase() === userData.email.toLowerCase()));
+      if (idx >= 0) {
+        list[idx] = {
+          ...list[idx],
+          ...userData,
+          id: list[idx].id || id
+        };
+        updatedUser = list[idx];
+        localStorage.setItem('toureasy_mock_users', JSON.stringify(list));
+
+        // If current logged-in user is updated, sync session
+        const cur = this.getCurrentUser();
+        if (cur && (cur.id === id || (cur.email && cur.email.toLowerCase() === (userData.email || '').toLowerCase()))) {
+          const newCur = { ...cur, ...userData };
+          localStorage.setItem('toureasy_current_user', JSON.stringify(newCur));
+        }
+
+        return { success: true, message: '회원 정보가 성공적으로 수정되었습니다.', data: updatedUser, user: updatedUser };
+      }
+    } catch (err) {
+      console.error('LocalStorage update error in updateUserByAdmin:', err);
+    }
+
+    if (serverSuccess && updatedUser) {
+      return { success: true, message: '회원 정보가 수정되었습니다.', data: updatedUser, user: updatedUser };
+    }
+
     return { success: false, message: '회원 수정 요청에 실패했습니다.' };
   },
 
