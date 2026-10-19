@@ -808,26 +808,43 @@ function renderAuthModal() {
             </button>
           </form>
 
-          <!-- Success Info Box (Hidden by default) -->
+          <!-- Success Info Box (Supports Real Email Dispatch & Instant Safe Copy) -->
           <div id="reset-success-box" class="hidden p-5 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-3.5 text-center animate-in fade-in zoom-in-95">
             <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600 shadow-sm">
               <i data-lucide="check-circle-2" class="w-7 h-7"></i>
             </div>
             <div>
-              <h4 class="text-base font-black text-slate-900">임시 비밀번호 발송 완료!</h4>
-              <p class="text-xs text-slate-600 leading-relaxed font-medium mt-1">
+              <h4 id="reset-success-title" class="text-base font-black text-slate-900">임시 비밀번호 발송 완료!</h4>
+              <p id="reset-success-desc" class="text-xs text-slate-600 leading-relaxed font-medium mt-1">
                 <strong id="reset-sent-email-label" class="text-emerald-700 font-bold"></strong> 회원님의 메일함으로<br>
                 새로운 임시 비밀번호가 안전하게 발송되었습니다.
               </p>
             </div>
 
-            <div class="p-3 bg-white rounded-xl border border-emerald-100 text-left space-y-1.5 shadow-xs">
+            <!-- Instant Safe Temp Password Display Box (When Server is Offline or Backup) -->
+            <div id="reset-temp-password-container" class="hidden p-3.5 bg-white rounded-xl border-2 border-dashed border-sky-400 text-center space-y-2 shadow-xs">
+              <div class="text-[11px] font-bold text-sky-700 flex items-center justify-center gap-1">
+                <i data-lucide="key" class="w-3.5 h-3.5 text-sky-600"></i>
+                <span>발급된 임시 비밀번호</span>
+              </div>
+              <div class="flex items-center justify-center gap-2">
+                <code id="reset-temp-password-val" class="px-3 py-1.5 bg-sky-50 border border-sky-200 text-sky-900 font-mono text-base font-black rounded-lg tracking-wider select-all"></code>
+                <button type="button" onclick="window.copyResetTempPassword()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-xs cursor-pointer">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  <span>복사</span>
+                </button>
+              </div>
+              <p class="text-[10.5px] text-slate-500 font-medium">※ 복사 버튼을 누르시면 클립보드에 복사되며 로그인창에 자동 입력됩니다.</p>
+            </div>
+
+            <!-- Security Notice for Online Mail Dispatch -->
+            <div id="reset-security-notice" class="p-3 bg-white rounded-xl border border-emerald-100 text-left space-y-1.5 shadow-xs">
               <div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
                 <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
                 <span>보안 안내</span>
               </div>
               <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
-                개인정보 보호를 위해 화면에는 비밀번호가 노출되지 않습니다. 수신된 <strong>이메일(스팸함 포함)을 확인</strong>하신 후 발급받은 비밀번호로 로그인해 주시기 바랍니다.
+                회원님의 실제 이메일(스팸함 포함)로 임시 비밀번호가 전송되었습니다. 메일을 확인하신 후 로그인해 주시기 바랍니다.
               </p>
             </div>
 
@@ -1068,14 +1085,41 @@ function setupAuthModalListeners() {
       try {
         const res = await TourAPI.issueTemporaryPasswordToEmail(email);
         if (res.success) {
-          showToast(`✉️ ${email} 회원님의 메일함으로 임시 비밀번호가 발송되었습니다!`, 'success');
           resetForm.classList.add('hidden');
           if (emailLabel) emailLabel.textContent = email;
+
+          const titleEl = document.getElementById('reset-success-title');
+          const descEl = document.getElementById('reset-success-desc');
+          const tempPwdContainer = document.getElementById('reset-temp-password-container');
+          const tempPwdVal = document.getElementById('reset-temp-password-val');
+          const secNotice = document.getElementById('reset-security-notice');
+
+          if (res.emailSent) {
+            showToast(`✉️ ${email} 회원님의 메일함으로 임시 비밀번호가 실시간 발송되었습니다!`, 'success');
+            if (titleEl) titleEl.textContent = '임시 비밀번호 메일 발송 완료! ✉️';
+            if (descEl) descEl.innerHTML = `<strong class="text-emerald-700 font-bold">${email}</strong> 회원님의 메일함으로<br>새로운 임시 비밀번호가 안전하게 발송되었습니다.`;
+            if (tempPwdContainer) tempPwdContainer.classList.add('hidden');
+            if (secNotice) secNotice.classList.remove('hidden');
+          } else {
+            showToast(`🔑 새 임시 비밀번호가 발급되었습니다. (화면에서 확인 및 복사)`, 'info');
+            if (titleEl) titleEl.textContent = '임시 비밀번호 발급 완료 🔑';
+            if (descEl) descEl.innerHTML = `<strong class="text-sky-700 font-bold">${email}</strong> 계정의 임시 비밀번호가 발급되었습니다.<br><span class="text-[11px] text-amber-700 font-semibold">※ 메일 서버 오프라인으로 화면에 즉시 표시되었습니다.</span>`;
+            if (tempPwdContainer) {
+              tempPwdContainer.classList.remove('hidden');
+              if (tempPwdVal) tempPwdVal.textContent = res.tempPassword || '';
+            }
+            if (secNotice) secNotice.classList.add('hidden');
+          }
+
           if (successBox) successBox.classList.remove('hidden');
 
-          // Pre-fill only the email field in login form (password remains empty for security)
+          // Pre-fill email and temp password into login form
           const loginEmailEl = document.getElementById('login-email');
           if (loginEmailEl) loginEmailEl.value = email;
+          if (res.tempPassword) {
+            const loginPwdEl = document.getElementById('login-password');
+            if (loginPwdEl) loginPwdEl.value = res.tempPassword;
+          }
 
           if (window.lucide) lucide.createIcons();
         } else {
@@ -2898,3 +2942,24 @@ window.handleHotelBookingSubmit = async function(e) {
   }
 };
 
+
+
+// Global helper for one-click temp password copy
+window.copyResetTempPassword = function() {
+  const el = document.getElementById('reset-temp-password-val');
+  if (!el || !el.textContent) return;
+  const pwd = el.textContent.trim();
+  navigator.clipboard.writeText(pwd).then(() => {
+    if (typeof showToast === 'function') {
+      showToast('📋 임시 비밀번호가 클립보드에 복사되었습니다!', 'success');
+    } else {
+      alert('임시 비밀번호가 복사되었습니다: ' + pwd);
+    }
+    const loginPwdEl = document.getElementById('login-password');
+    if (loginPwdEl) loginPwdEl.value = pwd;
+  }).catch(() => {
+    const loginPwdEl = document.getElementById('login-password');
+    if (loginPwdEl) loginPwdEl.value = pwd;
+    if (typeof showToast === 'function') showToast('비밀번호가 로그인창에 자동 입력되었습니다.', 'info');
+  });
+};

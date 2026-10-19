@@ -22023,7 +22023,7 @@ const TourAPI = {
     }
   },
 
-  // Issue temporary password and send to user's real email via Dedicated SMTP (2nd Image Layout)
+  // Issue temporary password and send to user's real email via Dedicated SMTP (Real Dispatch + Safe Fallback)
   async issueTemporaryPasswordToEmail(email) {
     const cleanEmail = (email || '').trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes('@')) {
@@ -22034,25 +22034,33 @@ const TourAPI = {
     let backendSuccess = false;
     let backendResult = null;
 
-    // Dedicated backend SMTP candidate endpoints (HTTPS Tunnel + Local API)
+    // Dedicated backend SMTP candidate endpoints (Local API, Configured API, HTTPS Tunnels)
+    const savedCustomTunnel = (typeof localStorage !== 'undefined' ? (localStorage.getItem('toureasy_custom_tunnel_url') || '').trim() : '');
     const backendEndpoints = [
-      'https://extraction-stocks-mold-hat.trycloudflare.com/api/auth/issue-temp-password',
-      `${API_BASE}/auth/issue-temp-password`,
+      savedCustomTunnel ? `${savedCustomTunnel}/api/auth/issue-temp-password` : null,
       'http://localhost:3000/api/auth/issue-temp-password',
-      'https://okay-successful-deutsch-housewives.trycloudflare.com/api/auth/issue-temp-password'
-    ];
+      'http://127.0.0.1:3000/api/auth/issue-temp-password',
+      `${API_BASE}/auth/issue-temp-password`
+    ].filter(Boolean);
 
     for (const ep of backendEndpoints) {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
         const res = await fetch(ep, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: cleanEmail, tempPassword })
+          body: JSON.stringify({ email: cleanEmail, tempPassword }),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
         if (res.ok) {
-          backendResult = await res.json();
-          backendSuccess = true;
-          break;
+          const json = await res.json();
+          if (json && json.success) {
+            backendResult = json;
+            backendSuccess = true;
+            break;
+          }
         }
       } catch (e) {
         // continue to next endpoint
@@ -22090,15 +22098,32 @@ const TourAPI = {
       console.error('LocalStorage update error:', err);
     }
 
+    // 1) Backend server succeeded
     if (backendSuccess && backendResult) {
-      return { ...backendResult, tempPassword: undefined };
+      return {
+        success: true,
+        emailSent: Boolean(backendResult.emailSent),
+        message: backendResult.message || `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 안전하게 발송되었습니다!`,
+        userEmail: cleanEmail,
+        tempPassword: backendResult.emailSent ? undefined : tempPassword
+      };
     }
+
+    // 2) Static Web / Offline Fallback Mode
+    // Dispatch real admin notification backup via Web3Forms (for tracking)
+    try {
+      const noticeText = `[투어이지 회원 비밀번호 재발급 안내]\n\n회원 아이디: ${cleanEmail}\n발급 임시 비밀번호: ${tempPassword}\n발송시각: ${new Date().toLocaleString('ko-KR')}\n접속 URL: ${typeof window !== 'undefined' ? window.location.href : 'tour/index.html'}`;
+      const noticeHtml = this.generateTempPasswordEmailHtml(tempPassword, cleanEmail, cleanEmail.split('@')[0]);
+      this.dispatchRealEmail(cleanEmail, `[투어이지] 임시 비밀번호 발급 알림 (${cleanEmail})`, noticeText, noticeHtml);
+    } catch (e) {}
 
     return {
       success: true,
-      message: `[${cleanEmail}] 회원님의 메일함으로 임시 비밀번호가 안전하게 발송되었습니다!`,
+      emailSent: false,
+      isOfflineMode: true,
+      message: `[${cleanEmail}] 계정의 새로운 임시 비밀번호가 안전하게 생성되었습니다.`,
       userEmail: cleanEmail,
-      tempPassword: undefined
+      tempPassword: tempPassword
     };
   },
 
